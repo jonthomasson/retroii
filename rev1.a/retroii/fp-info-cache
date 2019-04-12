@@ -1,4 +1,4 @@
--9202840372522867014
+20536329546173763
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79905,6 +79905,20 @@ retroii_footprints
 11
 11
 retroii_footprints
+Amphenol_DSUB9_D09S33E6GV00LF
+
+
+0
+11
+9
+retroii_footprints
+Amphenol_DSUB9_D15S33E4GV00LF
+
+
+0
+17
+15
+retroii_footprints
 Barrel_Jack_PJ002A
 
 
@@ -79974,6 +79988,13 @@ Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W le
 0
 2
 2
+retroii_footprints
+TE_5530841-5
+
+
+0
+1
+1
 retroii_footprints
 WP1503CB_LED
 
