@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP IDT7008_Dual_Port_RAM
+D 512kbit 64Kb dual port sram
+K IDT 7008 Dual Port
+F https://www.mouser.com/datasheet/2/464/IDT_7008_DST_20180322-1485473.pdf
+$ENDCMP
+#
+#End Doc Library

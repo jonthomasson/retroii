@@ -1,0 +1,1426 @@
+EESchema Schematic File Version 4
+LIBS:retroii-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 5 8
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 74xx:74LS74 J13
+U 1 1 5C8AF4E0
+P 8145 5840
+F 0 "J13" H 8000 5600 50  0000 C CNN
+F 1 "74LS74" H 8295 6080 50  0000 C CNN
+F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 8145 5840 50  0001 C CNN
+F 3 "74xx/74hc_hct74.pdf" H 8145 5840 50  0001 C CNN
+	1    8145 5840
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74LS74 J13
+U 2 1 5C8AF673
+P 8145 4710
+F 0 "J13" H 8005 4465 50  0000 C CNN
+F 1 "74LS74" H 8300 4950 50  0000 C CNN
+F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 8145 4710 50  0001 C CNN
+F 3 "74xx/74hc_hct74.pdf" H 8145 4710 50  0001 C CNN
+	2    8145 4710
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Speaker LS1
+U 1 1 5C8B0058
+P 10340 4770
+F 0 "LS1" H 10510 4766 50  0000 L CNN
+F 1 "Speaker" H 10270 4970 50  0000 L CNN
+F 2 "" H 10340 4570 50  0001 C CNN
+F 3 "~" H 10330 4720 50  0001 C CNN
+	1    10340 4770
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NPN_Darlington_BCE Q4
+U 1 1 5C8B01BD
+P 10040 5740
+F 0 "Q4" H 10231 5786 50  0000 L CNN
+F 1 "MPSA13" H 9790 5910 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 10240 5840 50  0001 C CNN
+F 3 "~" H 10040 5740 50  0001 C CNN
+	1    10040 5740
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:AudioJack2 J8
+U 1 1 5C8B0BBB
+P 9455 4810
+F 0 "J8" H 9275 4793 50  0000 R CNN
+F 1 "Cassette Out" H 9605 4640 50  0000 R CNN
+F 2 "" H 9455 4810 50  0001 C CNN
+F 3 "~" H 9455 4810 50  0001 C CNN
+	1    9455 4810
+	-1   0    0    1   
+$EndComp
+$Comp
+L Amplifier_Operational:LM741 K13
+U 1 1 5C8B31DF
+P 8160 3295
+F 0 "K13" H 8110 3460 50  0000 L CNN
+F 1 "LM741" H 8300 3155 50  0000 L CNN
+F 2 "retroii_footprints:DIP-8_W7.62mm_Socket_LongPads" H 8210 3345 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lm741.pdf" H 8310 3445 50  0001 C CNN
+	1    8160 3295
+	1    0    0    -1  
+$EndComp
+$Comp
+L retroii:558_Quad_Timer H13
+U 1 1 5C8B3D29
+P 4740 5325
+F 0 "H13" H 3780 3880 50  0000 C CNN
+F 1 "558_Quad_Timer" H 5015 6830 50  0000 C CNN
+F 2 "retroii_footprints:DIP-16_W7.62mm_Socket_LongPads" H 5190 5875 50  0001 C CNN
+F 3 "" H 5190 5875 50  0001 C CNN
+	1    4740 5325
+	1    0    0    -1  
+$EndComp
+$Comp
+L retroii:74LS251 H14
+U 1 1 5C8B7066
+P 9770 2345
+F 0 "H14" H 9485 1210 50  0000 C CNN
+F 1 "74LS251" H 10090 3330 50  0000 C CNN
+F 2 "retroii_footprints:DIP-16_W7.62mm_Socket_LongPads" H 9420 2195 50  0001 C CNN
+F 3 "" H 9420 2195 50  0001 C CNN
+	1    9770 2345
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:AudioJack2 J7
+U 1 1 5C8B71E8
+P 6760 3395
+F 0 "J7" H 6675 3590 50  0000 C CNN
+F 1 "Cassette In" H 6760 3260 50  0000 C CNN
+F 2 "" H 6760 3395 50  0001 C CNN
+F 3 "~" H 6760 3395 50  0001 C CNN
+	1    6760 3395
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:DB9_Female J2
+U 1 1 5C8B8977
+P 915 1365
+F 0 "J2" H 1050 1850 50  0000 C CNN
+F 1 "Joystick 1" H 835 764 50  0000 C CNN
+F 2 "retroii_footprints:Amphenol_DSUB9_D09S33E6GV00LF" H 915 1365 50  0001 C CNN
+F 3 " ~" H 915 1365 50  0001 C CNN
+	1    915  1365
+	-1   0    0    1   
+$EndComp
+$Comp
+L Diode:1N914 CR1
+U 1 1 5C8B942A
+P 9595 5970
+F 0 "CR1" V 9550 5775 50  0000 L CNN
+F 1 "1N914" V 9625 5640 50  0000 L CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal" H 9595 5795 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/85622/1n914.pdf" H 9595 5970 50  0001 C CNN
+	1    9595 5970
+	0    1    1    0   
+$EndComp
+$Comp
+L 6502:R R25
+U 1 1 5C8BABA0
+P 10140 5330
+F 0 "R25" H 10190 5380 50  0000 L CNN
+F 1 "27" V 10140 5280 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 10070 5330 30  0001 C CNN
+F 3 "" H 10140 5330 30  0000 C CNN
+	1    10140 5330
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10140 5480 10140 5540
+$Comp
+L Device:C_Small C12
+U 1 1 5C8BAECA
+P 10515 5510
+F 0 "C12" H 10540 5580 50  0000 L CNN
+F 1 ".1uF" H 10550 5440 50  0000 L CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 10515 5510 50  0001 C CNN
+F 3 "~" H 10515 5510 50  0001 C CNN
+	1    10515 5510
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR051
+U 1 1 5C8BB082
+P 10140 6255
+F 0 "#PWR051" H 10140 6005 50  0001 C CNN
+F 1 "GND" H 10145 6082 50  0000 C CNN
+F 2 "" H 10140 6255 60  0000 C CNN
+F 3 "" H 10140 6255 60  0000 C CNN
+	1    10140 6255
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10515 5410 10515 5110
+Wire Wire Line
+	10515 5110 10140 5110
+Connection ~ 10140 5110
+Wire Wire Line
+	10140 5110 10140 5180
+Wire Wire Line
+	10140 4870 10140 5110
+Wire Wire Line
+	9595 6120 9595 6215
+Wire Wire Line
+	9595 6215 10140 6215
+Wire Wire Line
+	10515 5610 10515 6215
+Wire Wire Line
+	10140 5940 10140 6215
+Connection ~ 10140 6215
+Wire Wire Line
+	10140 6215 10515 6215
+Wire Wire Line
+	10140 6215 10140 6255
+$Comp
+L 6502:R R24
+U 1 1 5C8BC269
+P 9370 5740
+F 0 "R24" V 9290 5700 50  0000 L CNN
+F 1 "47K" V 9370 5670 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 9300 5740 30  0001 C CNN
+F 3 "" H 9370 5740 30  0000 C CNN
+	1    9370 5740
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9840 5740 9595 5740
+Wire Wire Line
+	9595 5820 9595 5740
+Connection ~ 9595 5740
+Wire Wire Line
+	9595 5740 9520 5740
+$Comp
+L 6502Bootstrapper-cache:GND #PWR049
+U 1 1 5C8BD3CB
+P 8950 5250
+F 0 "#PWR049" H 8950 5000 50  0001 C CNN
+F 1 "GND" H 8955 5077 50  0000 C CNN
+F 2 "" H 8950 5250 60  0000 C CNN
+F 3 "" H 8950 5250 60  0000 C CNN
+	1    8950 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502:R R18
+U 1 1 5C8BD3F4
+P 8950 5040
+F 0 "R18" V 8870 5000 50  0000 L CNN
+F 1 "100" V 8950 4970 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8880 5040 30  0001 C CNN
+F 3 "" H 8950 5040 30  0000 C CNN
+	1    8950 5040
+	-1   0    0    1   
+$EndComp
+$Comp
+L 6502:R R19
+U 1 1 5C8BD581
+P 8760 4810
+F 0 "R19" V 8680 4770 50  0000 L CNN
+F 1 "12K" V 8760 4740 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8690 4810 30  0001 C CNN
+F 3 "" H 8760 4810 30  0000 C CNN
+	1    8760 4810
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	9255 4910 9160 4910
+Wire Wire Line
+	9160 4910 9160 5220
+Wire Wire Line
+	9160 5220 8950 5220
+Wire Wire Line
+	8950 5220 8950 5250
+Wire Wire Line
+	8950 5190 8950 5220
+Connection ~ 8950 5220
+Wire Wire Line
+	9255 4810 8950 4810
+Wire Wire Line
+	8950 4890 8950 4810
+Connection ~ 8950 4810
+Wire Wire Line
+	8950 4810 8910 4810
+Wire Wire Line
+	8610 4810 8540 4810
+Wire Wire Line
+	8145 5010 8145 5210
+$Comp
+L Device:C_Small C38
+U 1 1 5C8C34C6
+P 8870 5740
+F 0 "C38" V 8905 5565 50  0000 L CNN
+F 1 ".1uF" V 8825 5545 50  0000 L CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 8870 5740 50  0001 C CNN
+F 3 "~" H 8870 5740 50  0001 C CNN
+	1    8870 5740
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8970 5740 9220 5740
+Wire Wire Line
+	8770 5740 8445 5740
+Wire Wire Line
+	8445 5940 8540 5940
+Wire Wire Line
+	8540 5940 8540 5430
+Wire Wire Line
+	8540 5430 7745 5430
+Wire Wire Line
+	7745 5430 7745 5740
+Wire Wire Line
+	7745 5740 7845 5740
+NoConn ~ 8445 4610
+Wire Wire Line
+	8540 4810 8540 4225
+Wire Wire Line
+	8540 4225 7705 4225
+Wire Wire Line
+	7705 4225 7705 4610
+Wire Wire Line
+	7705 4610 7845 4610
+Connection ~ 8540 4810
+Wire Wire Line
+	8540 4810 8445 4810
+Text Label 10525 4425 2    50   ~ 0
++5V
+$Comp
+L retroii:Game_IO_Socket J14
+U 1 1 5C8CC541
+P 3195 2145
+F 0 "J14" H 2770 1610 50  0000 C CNN
+F 1 "Game_IO_Socket" H 3165 2685 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket_LongPads" H 3195 1995 50  0001 C CNN
+F 3 "" H 3195 1995 50  0001 C CNN
+	1    3195 2145
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502:R R29
+U 1 1 5C8CE730
+P 8815 3295
+F 0 "R29" V 8735 3255 50  0000 L CNN
+F 1 "12K" V 8815 3225 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8745 3295 30  0001 C CNN
+F 3 "" H 8815 3295 30  0000 C CNN
+	1    8815 3295
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	9920 1195 9920 1090
+Text Label 9920 925  3    50   ~ 0
++5V
+NoConn ~ 10370 2245
+Wire Wire Line
+	8965 3295 9220 3295
+Wire Wire Line
+	8460 3295 8575 3295
+$Comp
+L 6502:R R15
+U 1 1 5C8D753F
+P 8295 2665
+F 0 "R15" V 8215 2625 50  0000 L CNN
+F 1 "1M" V 8295 2610 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8225 2665 30  0001 C CNN
+F 3 "" H 8295 2665 30  0000 C CNN
+	1    8295 2665
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 6502:R R16
+U 1 1 5C8D7627
+P 7580 2665
+F 0 "R16" V 7500 2625 50  0000 L CNN
+F 1 "12K" V 7580 2595 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7510 2665 30  0001 C CNN
+F 3 "" H 7580 2665 30  0000 C CNN
+	1    7580 2665
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8060 2995 8060 2795
+Text Label 8060 2795 3    50   ~ 0
++5V
+Wire Wire Line
+	8445 2665 8575 2665
+Wire Wire Line
+	8575 2665 8575 3295
+Connection ~ 8575 3295
+Wire Wire Line
+	8575 3295 8665 3295
+Wire Wire Line
+	8145 2665 7810 2665
+Wire Wire Line
+	7860 3195 7810 3195
+Wire Wire Line
+	7810 3195 7810 2665
+Connection ~ 7810 2665
+Wire Wire Line
+	7810 2665 7730 2665
+$Comp
+L 6502:R R30
+U 1 1 5C8DD0B7
+P 7615 3395
+F 0 "R30" V 7535 3355 50  0000 L CNN
+F 1 "12K" V 7615 3325 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7545 3395 30  0001 C CNN
+F 3 "" H 7615 3395 30  0000 C CNN
+	1    7615 3395
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 6502:R R17
+U 1 1 5C8DD219
+P 7810 3675
+F 0 "R17" V 7730 3635 50  0000 L CNN
+F 1 "12K" V 7810 3605 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 7740 3675 30  0001 C CNN
+F 3 "" H 7810 3675 30  0000 C CNN
+	1    7810 3675
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7860 3395 7810 3395
+Wire Wire Line
+	7810 3525 7810 3395
+Connection ~ 7810 3395
+Wire Wire Line
+	7810 3395 7765 3395
+Wire Wire Line
+	7810 3825 7810 3900
+$Comp
+L 6502Bootstrapper-cache:GND #PWR048
+U 1 1 5C8E0370
+P 7810 3900
+F 0 "#PWR048" H 7810 3650 50  0001 C CNN
+F 1 "GND" H 7815 3727 50  0000 C CNN
+F 2 "" H 7810 3900 60  0000 C CNN
+F 3 "" H 7810 3900 60  0000 C CNN
+	1    7810 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7430 2665 7335 2665
+Wire Wire Line
+	7335 2665 7335 2745
+$Comp
+L 6502Bootstrapper-cache:GND #PWR047
+U 1 1 5C8E169D
+P 7335 2745
+F 0 "#PWR047" H 7335 2495 50  0001 C CNN
+F 1 "GND" H 7340 2572 50  0000 C CNN
+F 2 "" H 7335 2745 60  0000 C CNN
+F 3 "" H 7335 2745 60  0000 C CNN
+	1    7335 2745
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6960 3495 7025 3495
+Wire Wire Line
+	7025 3495 7025 3595
+$Comp
+L 6502Bootstrapper-cache:GND #PWR046
+U 1 1 5C8E3F73
+P 7025 3595
+F 0 "#PWR046" H 7025 3345 50  0001 C CNN
+F 1 "GND" H 7030 3422 50  0000 C CNN
+F 2 "" H 7025 3595 60  0000 C CNN
+F 3 "" H 7025 3595 60  0000 C CNN
+	1    7025 3595
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7295 3395 7465 3395
+Wire Wire Line
+	9220 2045 6105 2045
+Wire Wire Line
+	6105 2045 6105 4625
+Wire Wire Line
+	6105 4625 5940 4625
+Wire Wire Line
+	6205 5225 6205 2145
+Wire Wire Line
+	6205 2145 9220 2145
+Wire Wire Line
+	5940 5225 6205 5225
+Wire Wire Line
+	5940 5825 6305 5825
+Wire Wire Line
+	6305 5825 6305 2245
+Wire Wire Line
+	6305 2245 9220 2245
+Wire Wire Line
+	5940 6425 6405 6425
+Wire Wire Line
+	6405 6425 6405 2345
+Wire Wire Line
+	6405 2345 9220 2345
+$Comp
+L Device:C_Small C10
+U 1 1 5C8F1C97
+P 7195 3395
+F 0 "C10" V 7235 3425 50  0000 L CNN
+F 1 ".1uF" V 7150 3430 50  0000 L CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 7195 3395 50  0001 C CNN
+F 3 "~" H 7195 3395 50  0001 C CNN
+	1    7195 3395
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7095 3395 6960 3395
+Wire Wire Line
+	4690 3675 4690 3505
+Wire Wire Line
+	4690 2045 4865 2045
+Wire Wire Line
+	4865 2045 4865 2150
+Connection ~ 4690 2045
+$Comp
+L 6502Bootstrapper-cache:GND #PWR045
+U 1 1 5C904AD5
+P 4865 2150
+F 0 "#PWR045" H 4865 1900 50  0001 C CNN
+F 1 "GND" H 4870 1977 50  0000 C CNN
+F 2 "" H 4865 2150 60  0000 C CNN
+F 3 "" H 4865 2150 60  0000 C CNN
+	1    4865 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C9
+U 1 1 5C904BBF
+P 4485 3505
+F 0 "C9" V 4525 3535 50  0000 L CNN
+F 1 ".1uF" V 4440 3540 50  0000 L CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 4485 3505 50  0001 C CNN
+F 3 "~" H 4485 3505 50  0001 C CNN
+	1    4485 3505
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4385 3505 4290 3505
+Wire Wire Line
+	4290 3505 4290 3675
+Wire Wire Line
+	4585 3505 4690 3505
+Connection ~ 4690 3505
+Wire Wire Line
+	4690 3505 4690 2045
+$Comp
+L 6502:R R20
+U 1 1 5C90DB52
+P 3370 4210
+F 0 "R20" V 3290 4130 50  0000 L CNN
+F 1 "100" V 3370 4140 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3300 4210 30  0001 C CNN
+F 3 "" H 3370 4210 30  0000 C CNN
+	1    3370 4210
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3795 1745 9220 1745
+Wire Wire Line
+	3795 1845 9220 1845
+Wire Wire Line
+	3795 1945 9220 1945
+Wire Wire Line
+	3890 2145 3795 2145
+Wire Wire Line
+	3890 2145 3890 3675
+Wire Wire Line
+	3795 2045 4690 2045
+Wire Wire Line
+	3890 2145 4060 2145
+Connection ~ 3890 2145
+Text Label 4060 2145 2    50   ~ 0
++5V
+$Comp
+L Device:C_Small C8
+U 1 1 5C928AC3
+P 3370 4655
+F 0 "C8" H 3375 4715 50  0000 L CNN
+F 1 ".022uF" V 3315 4680 50  0000 L CNN
+F 2 "" H 3370 4655 50  0001 C CNN
+F 3 "~" H 3370 4655 50  0001 C CNN
+	1    3370 4655
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5390 3675 5390 3385
+Text Label 5390 3385 3    50   ~ 0
++5V
+$Comp
+L 6502Bootstrapper-cache:GND #PWR044
+U 1 1 5C9357BB
+P 3370 4835
+F 0 "#PWR044" H 3370 4585 50  0001 C CNN
+F 1 "GND" V 3325 4870 50  0000 C CNN
+F 2 "" H 3370 4835 60  0000 C CNN
+F 3 "" H 3370 4835 60  0000 C CNN
+	1    3370 4835
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3370 4475 3370 4360
+Connection ~ 3370 4475
+Wire Wire Line
+	3540 4375 3485 4375
+Wire Wire Line
+	3485 4375 3485 5025
+Wire Wire Line
+	3485 6225 3540 6225
+Wire Wire Line
+	3485 5625 3540 5625
+Connection ~ 3485 5625
+Wire Wire Line
+	3485 5625 3485 6225
+Wire Wire Line
+	3485 5025 3540 5025
+Connection ~ 3485 5025
+Wire Wire Line
+	3485 5025 3485 5625
+Wire Wire Line
+	3370 4475 3540 4475
+Wire Wire Line
+	3370 4060 3370 2845
+Wire Wire Line
+	3370 4475 3370 4555
+Wire Wire Line
+	3370 4755 3370 4835
+$Comp
+L 6502:R R21
+U 1 1 5C969172
+P 3230 4860
+F 0 "R21" V 3150 4780 50  0000 L CNN
+F 1 "100" V 3230 4790 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3160 4860 30  0001 C CNN
+F 3 "" H 3230 4860 30  0000 C CNN
+	1    3230 4860
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C5
+U 1 1 5C969179
+P 3230 5305
+F 0 "C5" H 3235 5365 50  0000 L CNN
+F 1 ".022uF" V 3175 5330 50  0000 L CNN
+F 2 "" H 3230 5305 50  0001 C CNN
+F 3 "~" H 3230 5305 50  0001 C CNN
+	1    3230 5305
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR043
+U 1 1 5C969180
+P 3230 5485
+F 0 "#PWR043" H 3230 5235 50  0001 C CNN
+F 1 "GND" V 3185 5520 50  0000 C CNN
+F 2 "" H 3230 5485 60  0000 C CNN
+F 3 "" H 3230 5485 60  0000 C CNN
+	1    3230 5485
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3230 5125 3230 5010
+Connection ~ 3230 5125
+Wire Wire Line
+	3230 5125 3230 5205
+Wire Wire Line
+	3230 5405 3230 5485
+Wire Wire Line
+	3230 5125 3540 5125
+Wire Wire Line
+	3230 4710 3230 2845
+$Comp
+L 6502:R R22
+U 1 1 5C982536
+P 3090 5460
+F 0 "R22" V 3010 5380 50  0000 L CNN
+F 1 "100" V 3090 5390 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 3020 5460 30  0001 C CNN
+F 3 "" H 3090 5460 30  0000 C CNN
+	1    3090 5460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C6
+U 1 1 5C98253D
+P 3090 5905
+F 0 "C6" H 3095 5965 50  0000 L CNN
+F 1 ".022uF" V 3035 5930 50  0000 L CNN
+F 2 "" H 3090 5905 50  0001 C CNN
+F 3 "~" H 3090 5905 50  0001 C CNN
+	1    3090 5905
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR041
+U 1 1 5C982544
+P 3090 6085
+F 0 "#PWR041" H 3090 5835 50  0001 C CNN
+F 1 "GND" V 3045 6120 50  0000 C CNN
+F 2 "" H 3090 6085 60  0000 C CNN
+F 3 "" H 3090 6085 60  0000 C CNN
+	1    3090 6085
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3090 5725 3090 5610
+Connection ~ 3090 5725
+Wire Wire Line
+	3090 5725 3090 5805
+Wire Wire Line
+	3090 6005 3090 6085
+Wire Wire Line
+	3090 5725 3540 5725
+Wire Wire Line
+	3090 5310 3090 2845
+$Comp
+L 6502:R R23
+U 1 1 5C995428
+P 2950 6060
+F 0 "R23" V 2870 5980 50  0000 L CNN
+F 1 "100" V 2950 5990 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 2880 6060 30  0001 C CNN
+F 3 "" H 2950 6060 30  0000 C CNN
+	1    2950 6060
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C7
+U 1 1 5C99542F
+P 2950 6505
+F 0 "C7" H 2955 6565 50  0000 L CNN
+F 1 ".022uF" V 2895 6530 50  0000 L CNN
+F 2 "" H 2950 6505 50  0001 C CNN
+F 3 "~" H 2950 6505 50  0001 C CNN
+	1    2950 6505
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR040
+U 1 1 5C995436
+P 2950 6685
+F 0 "#PWR040" H 2950 6435 50  0001 C CNN
+F 1 "GND" V 2905 6720 50  0000 C CNN
+F 2 "" H 2950 6685 60  0000 C CNN
+F 3 "" H 2950 6685 60  0000 C CNN
+	1    2950 6685
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 6325 2950 6210
+Connection ~ 2950 6325
+Wire Wire Line
+	2950 6325 2950 6405
+Wire Wire Line
+	2950 6605 2950 6685
+Wire Wire Line
+	2950 6325 3540 6325
+Wire Wire Line
+	2950 5910 2950 2845
+Wire Wire Line
+	3485 6225 3485 7080
+Connection ~ 3485 6225
+$Comp
+L Connector:DB9_Female J3
+U 1 1 5C9DF024
+P 915 2620
+F 0 "J3" H 1040 3100 50  0000 C CNN
+F 1 "Joystick 2" H 835 2019 50  0000 C CNN
+F 2 "retroii_footprints:Amphenol_DSUB9_D09S33E6GV00LF" H 915 2620 50  0001 C CNN
+F 3 " ~" H 915 2620 50  0001 C CNN
+	1    915  2620
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:DB15_Female J4
+U 1 1 5C9E068F
+P 915 4235
+F 0 "J4" H 1020 5030 50  0000 C CNN
+F 1 "PC Port 1" H 822 3334 50  0000 C CNN
+F 2 "retroii_footprints:Amphenol_DSUB9_D15S33E4GV00LF" H 915 4235 50  0001 C CNN
+F 3 " ~" H 915 4235 50  0001 C CNN
+	1    915  4235
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:DB15_Female J5
+U 1 1 5C9E084B
+P 915 6090
+F 0 "J5" H 1015 6890 50  0000 C CNN
+F 1 "PC Port 2" H 822 5189 50  0000 C CNN
+F 2 "retroii_footprints:Amphenol_DSUB9_D15S33E4GV00LF" H 915 6090 50  0001 C CNN
+F 3 " ~" H 915 6090 50  0001 C CNN
+	1    915  6090
+	-1   0    0    1   
+$EndComp
+NoConn ~ 2545 2245
+NoConn ~ 2545 2345
+$Comp
+L Device:R_POT RV1
+U 1 1 5C9EC141
+P 10140 4425
+F 0 "RV1" H 10070 4471 50  0000 R CNN
+F 1 "Volume" H 10275 4630 50  0000 R CNN
+F 2 "" H 10140 4425 50  0001 C CNN
+F 3 "~" H 10140 4425 50  0001 C CNN
+	1    10140 4425
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10140 4575 10140 4770
+Wire Wire Line
+	10290 4425 10525 4425
+Text Label 3370 3020 1    50   ~ 0
+PDL0
+Text Label 3230 3025 1    50   ~ 0
+PDL1
+Text Label 3090 3025 1    50   ~ 0
+PDL2
+Text Label 2950 3025 1    50   ~ 0
+PDL3
+Text Label 3830 1745 0    50   ~ 0
+PB2
+Text Label 3830 1845 0    50   ~ 0
+PB1
+Text Label 3830 1945 0    50   ~ 0
+PB0
+Wire Wire Line
+	1215 1565 1510 1565
+Text Label 1510 1565 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 1365 1510 1365
+Wire Wire Line
+	1215 1265 1510 1265
+Wire Wire Line
+	1215 1165 1510 1165
+Wire Wire Line
+	1215 1065 1510 1065
+Wire Wire Line
+	1215 965  1510 965 
+Wire Wire Line
+	1215 1465 1510 1465
+Wire Wire Line
+	1215 1665 1510 1665
+Wire Wire Line
+	1215 1765 1510 1765
+$Comp
+L 6502Bootstrapper-cache:GND #PWR032
+U 1 1 5CA34055
+P 1510 1365
+F 0 "#PWR032" H 1510 1115 50  0001 C CNN
+F 1 "GND" V 1515 1237 50  0000 R CNN
+F 2 "" H 1510 1365 60  0000 C CNN
+F 3 "" H 1510 1365 60  0000 C CNN
+	1    1510 1365
+	0    -1   -1   0   
+$EndComp
+Text Label 1510 1765 2    50   ~ 0
+PB1
+Text Label 1510 965  2    50   ~ 0
+PDL0
+Wire Wire Line
+	1215 2820 1510 2820
+Wire Wire Line
+	1215 2620 1510 2620
+Wire Wire Line
+	1215 2520 1510 2520
+Wire Wire Line
+	1215 2220 1510 2220
+Wire Wire Line
+	1215 2720 1510 2720
+Text Label 1510 2820 2    50   ~ 0
++5V
+$Comp
+L 6502Bootstrapper-cache:GND #PWR033
+U 1 1 5CA3C27D
+P 1510 2620
+F 0 "#PWR033" H 1510 2370 50  0001 C CNN
+F 1 "GND" V 1515 2492 50  0000 R CNN
+F 2 "" H 1510 2620 60  0000 C CNN
+F 3 "" H 1510 2620 60  0000 C CNN
+	1    1510 2620
+	0    -1   -1   0   
+$EndComp
+Text Label 1510 2220 2    50   ~ 0
+PDL2
+Text Label 1510 1465 2    50   ~ 0
+PB0
+Text Label 1510 1265 2    50   ~ 0
+PDL1
+Text Label 1510 2720 2    50   ~ 0
+PB2
+Text Label 1510 2520 2    50   ~ 0
+PDL3
+NoConn ~ 1215 3020
+NoConn ~ 1215 2920
+NoConn ~ 1215 2320
+NoConn ~ 1215 2420
+$Comp
+L Device:Jumper_NO_Small JP9
+U 1 1 5CA5894F
+P 1610 1065
+F 0 "JP9" H 1630 1115 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 1610 1159 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1610 1065 50  0001 C CNN
+F 3 "~" H 1610 1065 50  0001 C CNN
+	1    1610 1065
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1710 1065 1950 1065
+Text Label 1950 1065 2    50   ~ 0
+PDL3
+$Comp
+L Device:Jumper_NO_Small JP10
+U 1 1 5CA5F452
+P 1610 1165
+F 0 "JP10" H 1635 1215 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 1610 1259 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1610 1165 50  0001 C CNN
+F 3 "~" H 1610 1165 50  0001 C CNN
+	1    1610 1165
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1710 1165 1950 1165
+Text Label 1950 1165 2    50   ~ 0
+PDL2
+$Comp
+L Device:Jumper_NO_Small JP11
+U 1 1 5CA65D3F
+P 1610 1665
+F 0 "JP11" H 1625 1725 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 1610 1759 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1610 1665 50  0001 C CNN
+F 3 "~" H 1610 1665 50  0001 C CNN
+	1    1610 1665
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1710 1665 1950 1665
+Text Label 1950 1665 2    50   ~ 0
+PB2
+Wire Wire Line
+	1215 3535 1510 3535
+Text Label 1510 3535 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 3635 1510 3635
+Text Label 1510 3635 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 4935 1510 4935
+Text Label 1510 4935 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 4835 1510 4835
+Text Label 1510 4835 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 4135 1510 4135
+$Comp
+L 6502Bootstrapper-cache:GND #PWR034
+U 1 1 5CA8894A
+P 1510 4135
+F 0 "#PWR034" H 1510 3885 50  0001 C CNN
+F 1 "GND" V 1515 4007 50  0000 R CNN
+F 2 "" H 1510 4135 60  0000 C CNN
+F 3 "" H 1510 4135 60  0000 C CNN
+	1    1510 4135
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1215 4235 1510 4235
+$Comp
+L 6502Bootstrapper-cache:GND #PWR035
+U 1 1 5CA8F8B7
+P 1510 4235
+F 0 "#PWR035" H 1510 3985 50  0001 C CNN
+F 1 "GND" V 1515 4107 50  0000 R CNN
+F 2 "" H 1510 4235 60  0000 C CNN
+F 3 "" H 1510 4235 60  0000 C CNN
+	1    1510 4235
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1215 4335 1510 4335
+$Comp
+L 6502Bootstrapper-cache:GND #PWR036
+U 1 1 5CA96A7D
+P 1510 4335
+F 0 "#PWR036" H 1510 4085 50  0001 C CNN
+F 1 "GND" V 1515 4207 50  0000 R CNN
+F 2 "" H 1510 4335 60  0000 C CNN
+F 3 "" H 1510 4335 60  0000 C CNN
+	1    1510 4335
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1215 5390 1510 5390
+Text Label 1510 5390 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 5490 1510 5490
+Text Label 1510 5490 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 6790 1510 6790
+Text Label 1510 6790 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 6690 1510 6690
+Text Label 1510 6690 2    50   ~ 0
++5V
+Wire Wire Line
+	1215 5990 1510 5990
+$Comp
+L 6502Bootstrapper-cache:GND #PWR037
+U 1 1 5CA9DFD9
+P 1510 5990
+F 0 "#PWR037" H 1510 5740 50  0001 C CNN
+F 1 "GND" V 1515 5862 50  0000 R CNN
+F 2 "" H 1510 5990 60  0000 C CNN
+F 3 "" H 1510 5990 60  0000 C CNN
+	1    1510 5990
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1215 6090 1510 6090
+$Comp
+L 6502Bootstrapper-cache:GND #PWR038
+U 1 1 5CA9DFE0
+P 1510 6090
+F 0 "#PWR038" H 1510 5840 50  0001 C CNN
+F 1 "GND" V 1515 5962 50  0000 R CNN
+F 2 "" H 1510 6090 60  0000 C CNN
+F 3 "" H 1510 6090 60  0000 C CNN
+	1    1510 6090
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1215 6190 1510 6190
+$Comp
+L 6502Bootstrapper-cache:GND #PWR039
+U 1 1 5CA9DFE7
+P 1510 6190
+F 0 "#PWR039" H 1510 5940 50  0001 C CNN
+F 1 "GND" V 1515 6062 50  0000 R CNN
+F 2 "" H 1510 6190 60  0000 C CNN
+F 3 "" H 1510 6190 60  0000 C CNN
+	1    1510 6190
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	1215 3735 1510 3735
+Wire Wire Line
+	1215 3935 1510 3935
+Wire Wire Line
+	1215 4035 1510 4035
+Wire Wire Line
+	1215 4435 1510 4435
+Wire Wire Line
+	1215 4535 1510 4535
+Wire Wire Line
+	1215 4635 1510 4635
+Wire Wire Line
+	1215 4735 1510 4735
+Text Label 1510 3735 2    50   ~ 0
+PB1
+Text Label 1510 3935 2    50   ~ 0
+PDL1
+Text Label 1510 4535 2    50   ~ 0
+PDL0
+Text Label 1510 4735 2    50   ~ 0
+PB0
+$Comp
+L Device:Jumper_NO_Small JP12
+U 1 1 5CACD094
+P 1610 4035
+F 0 "JP12" H 1625 4095 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 1610 4129 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1610 4035 50  0001 C CNN
+F 3 "~" H 1610 4035 50  0001 C CNN
+	1    1610 4035
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1710 4035 1950 4035
+$Comp
+L Device:Jumper_NO_Small JP13
+U 1 1 5CADF4C0
+P 1610 4435
+F 0 "JP13" H 1625 4495 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 1610 4529 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1610 4435 50  0001 C CNN
+F 3 "~" H 1610 4435 50  0001 C CNN
+	1    1610 4435
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1710 4435 1950 4435
+$Comp
+L Device:Jumper_NO_Small JP14
+U 1 1 5CAE8AF9
+P 1610 4635
+F 0 "JP14" H 1625 4695 50  0000 C CNN
+F 1 "Jumper_NO_Small" H 1610 4729 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 1610 4635 50  0001 C CNN
+F 3 "~" H 1610 4635 50  0001 C CNN
+	1    1610 4635
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1710 4635 1950 4635
+Text Label 1950 4035 2    50   ~ 0
+PDL3
+Text Label 1950 4435 2    50   ~ 0
+PDL2
+Text Label 1950 4635 2    50   ~ 0
+PB2
+NoConn ~ 1215 3835
+Text Label 1510 5790 2    50   ~ 0
+PDL3
+Wire Wire Line
+	1215 5790 1510 5790
+Text Label 1510 6390 2    50   ~ 0
+PDL2
+Wire Wire Line
+	1215 6390 1510 6390
+Wire Wire Line
+	1215 6590 1510 6590
+Text Label 1510 6590 2    50   ~ 0
+PB2
+NoConn ~ 1215 5590
+NoConn ~ 1215 5690
+NoConn ~ 1215 5890
+NoConn ~ 1215 6290
+NoConn ~ 1215 6490
+Text HLabel 9920 925  1    50   Input ~ 0
++5V
+Text HLabel 8060 3655 3    50   Input ~ 0
+-5V
+Wire Wire Line
+	8060 3655 8060 3595
+Text HLabel 7800 4710 0    50   Input ~ 0
+C02X_Cassette
+Wire Wire Line
+	7800 4710 7845 4710
+Text HLabel 7820 5840 0    50   Input ~ 0
+C03X_Speaker
+Wire Wire Line
+	7820 5840 7845 5840
+Text HLabel 3485 7080 0    50   Input ~ 0
+C07X_Timer_Trigger
+Text HLabel 9570 1185 0    50   Input ~ 0
+C06X_Serial
+Wire Wire Line
+	9570 1185 9570 1195
+Wire Wire Line
+	10370 3295 10590 3295
+Text Label 10590 3295 2    50   ~ 0
+A2
+Text Label 10590 3095 2    50   ~ 0
+A1
+Text Label 10590 2895 2    50   ~ 0
+A0
+Entry Wire Line
+	10590 3295 10690 3195
+Entry Wire Line
+	10590 3095 10690 2995
+Entry Wire Line
+	10590 2895 10690 2795
+Wire Bus Line
+	10690 2755 10845 2755
+Text HLabel 10845 2755 2    50   Input ~ 0
+A[0..15]
+Text HLabel 10750 1795 2    50   Output ~ 0
+D[0..7]
+Text HLabel 2545 1745 0    50   Input ~ 0
+SS_AN0_OFF_ON
+Text HLabel 2545 1845 0    50   Input ~ 0
+SS_AN1_OFF_ON
+Text HLabel 2545 1945 0    50   Input ~ 0
+SS_AN2_OFF_ON
+Text HLabel 2545 2045 0    50   Input ~ 0
+SS_AN3_OFF_ON
+Text HLabel 2545 2145 0    50   Input ~ 0
+C040_Strobe
+$Comp
+L Connector_Generic:Conn_02x07_Counter_Clockwise J6
+U 1 1 5C9C9388
+P 3320 1000
+F 0 "J6" H 3290 600 50  0000 C CNN
+F 1 "Edge mounted connector" H 3370 1426 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x07_P2.54mm_Horizontal" H 3320 1000 50  0001 C CNN
+F 3 "~" H 3320 1000 50  0001 C CNN
+	1    3320 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9870 3645 9870 3665
+$Comp
+L 6502Bootstrapper-cache:GND #PWR050
+U 1 1 5C9D3E73
+P 9870 3665
+F 0 "#PWR050" H 9870 3415 50  0001 C CNN
+F 1 "GND" H 9875 3492 50  0000 C CNN
+F 2 "" H 9870 3665 60  0000 C CNN
+F 3 "" H 9870 3665 60  0000 C CNN
+	1    9870 3665
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3620 700  3785 700 
+Text Label 3785 700  2    50   ~ 0
+PB2
+Wire Wire Line
+	3620 800  3785 800 
+Wire Wire Line
+	3620 900  3785 900 
+Wire Wire Line
+	3620 1000 3785 1000
+Wire Wire Line
+	3620 1100 3785 1100
+Wire Wire Line
+	3620 1200 3785 1200
+Wire Wire Line
+	3620 1300 3785 1300
+Text Label 3785 800  2    50   ~ 0
+PB1
+Text Label 3785 900  2    50   ~ 0
+PB0
+Wire Wire Line
+	2955 700  3120 700 
+Text Label 2955 700  0    50   ~ 0
++5V
+Text Label 3785 1000 2    50   ~ 0
+PDL0
+Text Label 3785 1100 2    50   ~ 0
+PDL1
+Text Label 3785 1200 2    50   ~ 0
+PDL2
+Text Label 3785 1300 2    50   ~ 0
+PDL3
+Text HLabel 3120 800  0    50   Input ~ 0
+SS_AN0_OFF_ON
+Text HLabel 3120 900  0    50   Input ~ 0
+SS_AN1_OFF_ON
+Text HLabel 3120 1000 0    50   Input ~ 0
+SS_AN2_OFF_ON
+Text HLabel 3120 1100 0    50   Input ~ 0
+SS_AN3_OFF_ON
+Text HLabel 3120 1200 0    50   Input ~ 0
+C040_Strobe
+$Comp
+L 6502Bootstrapper-cache:GND #PWR042
+U 1 1 5CA140F0
+P 3120 1300
+F 0 "#PWR042" H 3120 1050 50  0001 C CNN
+F 1 "GND" H 3120 1165 50  0000 C CNN
+F 2 "" H 3120 1300 60  0000 C CNN
+F 3 "" H 3120 1300 60  0000 C CNN
+	1    3120 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J9
+U 1 1 5CA152D2
+P 9940 4870
+F 0 "J9" H 9860 4545 50  0000 C CNN
+F 1 "Speaker Jack" H 10000 4970 50  0000 C CNN
+F 2 "" H 9940 4870 50  0001 C CNN
+F 3 "~" H 9940 4870 50  0001 C CNN
+	1    9940 4870
+	-1   0    0    1   
+$EndComp
+Connection ~ 10140 4870
+Connection ~ 10140 4770
+NoConn ~ 8160 3595
+NoConn ~ 8260 3595
+Wire Wire Line
+	10370 1895 10500 1895
+Text Label 10500 1895 2    50   ~ 0
+D7
+Entry Wire Line
+	10500 1895 10600 1795
+Wire Bus Line
+	10600 1795 10750 1795
+Wire Wire Line
+	10590 2895 10370 2895
+Wire Wire Line
+	10590 3095 10370 3095
+NoConn ~ 10140 4275
+$Comp
+L 6502:R R56
+U 1 1 5CCAFCB4
+P 8375 4100
+F 0 "R56" V 8450 4050 50  0000 L CNN
+F 1 "1K" V 8370 4050 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8305 4100 30  0001 C CNN
+F 3 "" H 8375 4100 30  0000 C CNN
+	1    8375 4100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8525 4100 8730 4100
+Text Label 8730 4100 2    50   ~ 0
++5V
+Wire Wire Line
+	8145 4410 8145 4100
+Wire Wire Line
+	8145 4100 8225 4100
+$Comp
+L 6502:R R57
+U 1 1 5CCC6EE7
+P 8380 6200
+F 0 "R57" V 8455 6150 50  0000 L CNN
+F 1 "1K" V 8375 6150 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8310 6200 30  0001 C CNN
+F 3 "" H 8380 6200 30  0000 C CNN
+	1    8380 6200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8530 6200 8735 6200
+Text Label 8735 6200 2    50   ~ 0
++5V
+Wire Wire Line
+	8230 6200 8145 6200
+Wire Wire Line
+	8145 6200 8145 6140
+$Comp
+L 74xx:74LS74 J13
+U 3 1 5CD2FA67
+P 6095 7200
+F 0 "J13" V 6330 6895 50  0000 L CNN
+F 1 "74LS74" V 5845 7240 50  0000 L CNN
+F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 6095 7200 50  0001 C CNN
+F 3 "74xx/74hc_hct74.pdf" H 6095 7200 50  0001 C CNN
+	3    6095 7200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C43
+U 1 1 5CD40A91
+P 10105 1090
+F 0 "C43" V 10145 1120 50  0000 L CNN
+F 1 ".1uF" V 10060 1125 50  0000 L CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 10105 1090 50  0001 C CNN
+F 3 "~" H 10105 1090 50  0001 C CNN
+	1    10105 1090
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	10205 1090 10290 1090
+Wire Wire Line
+	10290 1090 10290 1130
+$Comp
+L 6502Bootstrapper-cache:GND #PWR0106
+U 1 1 5CD4D2D2
+P 10290 1130
+F 0 "#PWR0106" H 10290 880 50  0001 C CNN
+F 1 "GND" H 10295 957 50  0000 C CNN
+F 2 "" H 10290 1130 60  0000 C CNN
+F 3 "" H 10290 1130 60  0000 C CNN
+	1    10290 1130
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10005 1090 9920 1090
+Connection ~ 9920 1090
+Wire Wire Line
+	9920 1090 9920 925 
+Wire Wire Line
+	5695 7200 5615 7200
+Wire Wire Line
+	5615 7200 5615 7280
+$Comp
+L 6502Bootstrapper-cache:GND #PWR0107
+U 1 1 5CD67231
+P 5615 7280
+F 0 "#PWR0107" H 5615 7030 50  0001 C CNN
+F 1 "GND" H 5620 7107 50  0000 C CNN
+F 2 "" H 5615 7280 60  0000 C CNN
+F 3 "" H 5615 7280 60  0000 C CNN
+	1    5615 7280
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6495 7200 6585 7200
+Text Label 6775 7200 2    50   ~ 0
++5V
+$Comp
+L Device:C_Small C42
+U 1 1 5CD73631
+P 6585 7410
+F 0 "C42" V 6620 7235 50  0000 L CNN
+F 1 ".1uF" V 6540 7215 50  0000 L CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 6585 7410 50  0001 C CNN
+F 3 "~" H 6585 7410 50  0001 C CNN
+	1    6585 7410
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6585 7510 6585 7535
+$Comp
+L 6502Bootstrapper-cache:GND #PWR0108
+U 1 1 5CD80C4C
+P 6585 7535
+F 0 "#PWR0108" H 6585 7285 50  0001 C CNN
+F 1 "GND" H 6590 7362 50  0000 C CNN
+F 2 "" H 6585 7535 60  0000 C CNN
+F 3 "" H 6585 7535 60  0000 C CNN
+	1    6585 7535
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6585 7310 6585 7200
+Connection ~ 6585 7200
+Wire Wire Line
+	6585 7200 6775 7200
+$Comp
+L 6502:R R67
+U 1 1 5CE48ADE
+P 8360 5210
+F 0 "R67" V 8435 5160 50  0000 L CNN
+F 1 "1K" V 8355 5160 50  0000 L CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8290 5210 30  0001 C CNN
+F 3 "" H 8360 5210 30  0000 C CNN
+	1    8360 5210
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8510 5210 8715 5210
+Text Label 8715 5210 2    50   ~ 0
++5V
+Wire Wire Line
+	8210 5210 8145 5210
+Connection ~ 8145 5210
+Wire Wire Line
+	8145 5210 8145 5540
+Wire Bus Line
+	10690 2755 10690 3195
+$EndSCHEMATC

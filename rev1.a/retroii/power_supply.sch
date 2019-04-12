@@ -1,0 +1,1030 @@
+EESchema Schematic File Version 4
+LIBS:retroii-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 6 8
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 6502Computer-rescue:LED-RESCUE-6502Computer LED1
+U 1 1 5C8AD97F
+P 8160 4865
+AR Path="/5C8AA2BF/5C8AD97F" Ref="LED1"  Part="1" 
+AR Path="/5C8AABED/5C8AD97F" Ref="LED?"  Part="1" 
+F 0 "LED1" H 8160 4965 50  0000 C CNN
+F 1 "LED" H 8160 4765 50  0000 C CNN
+F 2 "retroii_footprints:WP1503CB_LED" H 8160 4865 60  0001 C CNN
+F 3 "" H 8160 4865 60  0000 C CNN
+	1    8160 4865
+	0    -1   -1   0   
+$EndComp
+$Comp
+L device:R R49
+U 1 1 56D512BD
+P 8160 5215
+AR Path="/5C8AA2BF/56D512BD" Ref="R49"  Part="1" 
+AR Path="/5C8AABED/56D512BD" Ref="R?"  Part="1" 
+F 0 "R49" V 8240 5215 50  0000 C CNN
+F 1 "330" V 8160 5215 50  0000 C CNN
+F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8090 5215 30  0001 C CNN
+F 3 "" H 8160 5215 30  0000 C CNN
+	1    8160 5215
+	1    0    0    -1  
+$EndComp
+$Comp
+L power1:GND #PWR060
+U 1 1 56D512BE
+P 8160 5540
+AR Path="/5C8AA2BF/56D512BE" Ref="#PWR060"  Part="1" 
+AR Path="/5C8AABED/56D512BE" Ref="#PWR?"  Part="1" 
+F 0 "#PWR060" H 8160 5290 50  0001 C CNN
+F 1 "GND" H 8160 5390 50  0000 C CNN
+F 2 "" H 8160 5540 60  0000 C CNN
+F 3 "" H 8160 5540 60  0000 C CNN
+	1    8160 5540
+	1    0    0    -1  
+$EndComp
+$Comp
+L power1:GND #PWR052
+U 1 1 5C8AD982
+P 1715 1380
+AR Path="/5C8AA2BF/5C8AD982" Ref="#PWR052"  Part="1" 
+AR Path="/5C8AABED/5C8AD982" Ref="#PWR?"  Part="1" 
+F 0 "#PWR052" H 1715 1130 50  0001 C CNN
+F 1 "GND" H 1715 1230 50  0000 C CNN
+F 2 "" H 1715 1380 60  0000 C CNN
+F 3 "" H 1715 1380 60  0000 C CNN
+	1    1715 1380
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8160 5540 8160 5365
+Text Notes 1075 955  0    60   ~ 0
+12 volts input
+Text Notes 7360 7510 0    60   ~ 0
+POWER SUPPLY, ADDRESS DECODING
+Text Notes 8185 7645 0    60   ~ 0
+3/22/2016
+Text Notes 10575 7640 0    60   ~ 0
+1.A
+$Comp
+L 6502:SPST2 SW2
+U 1 1 5C8ADA13
+P 2215 1180
+AR Path="/5C8AA2BF/5C8ADA13" Ref="SW2"  Part="1" 
+AR Path="/5C8AABED/5C8ADA13" Ref="SW?"  Part="1" 
+F 0 "SW2" H 2215 1280 50  0000 C CNN
+F 1 "SPST2" H 2215 1080 50  0000 C CNN
+F 2 "6502Library:SW_Micro_Right_Angle_SPST" H 2215 1180 50  0001 C CNN
+F 3 "" H 2215 1180 50  0000 C CNN
+	1    2215 1180
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8160 4480 8160 4665
+Text Label 8160 4480 3    50   ~ 0
++5V
+$Comp
+L Regulator_Switching:LM2575-12BT U11
+U 1 1 5CA26C25
+P 2945 2215
+F 0 "U11" H 2580 1975 50  0000 C CNN
+F 1 "LM2576-12" H 2945 2491 50  0000 C CNN
+F 2 "Package_TO_SOT_THT:TO-220-5_Vertical" H 2945 1965 50  0001 L CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/lm2575.pdf" H 2945 2215 50  0001 C CNN
+	1    2945 2215
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502:BARREL_JACK_NEW J10
+U 1 1 5C8AD983
+P 1415 1280
+AR Path="/5C8AA2BF/5C8AD983" Ref="J10"  Part="1" 
+AR Path="/5C8AABED/5C8AD983" Ref="J?"  Part="1" 
+F 0 "J10" H 1415 1530 60  0000 C CNN
+F 1 "BARREL_JACK" H 1415 1080 60  0000 C CNN
+F 2 "retroii_footprints:Barrel_Jack_PJ002A" H 1415 1280 60  0001 C CNN
+F 3 "" H 1415 1280 60  0000 C CNN
+	1    1415 1280
+	1    0    0    -1  
+$EndComp
+NoConn ~ 1715 1280
+$Comp
+L Diode:1N5819 D1
+U 1 1 5C99DD0A
+P 3505 2590
+F 0 "D1" V 3459 2669 50  0000 L CNN
+F 1 "1N5822" V 3550 2669 50  0000 L CNN
+F 2 "Diode_THT:D_DO-201AD_P15.24mm_Horizontal" H 3505 2415 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88525/1n5817.pdf" H 3505 2590 50  0001 C CNN
+	1    3505 2590
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C22
+U 1 1 5C99EC4A
+P 4020 2545
+F 0 "C22" H 4111 2591 50  0000 L CNN
+F 1 "2200uF" H 4111 2500 50  0000 L CNN
+F 2 "" H 4058 2395 50  0001 C CNN
+F 3 "~" H 4020 2545 50  0001 C CNN
+	1    4020 2545
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L1
+U 1 1 5C99F662
+P 3770 2315
+F 0 "L1" V 3835 2315 50  0000 C CNN
+F 1 "68uH" V 3735 2315 50  0000 C CNN
+F 2 "" H 3770 2315 50  0001 C CNN
+F 3 "~" H 3770 2315 50  0001 C CNN
+	1    3770 2315
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C19
+U 1 1 5C9A17A4
+P 2090 2330
+F 0 "C19" H 2181 2376 50  0000 L CNN
+F 1 "100uF" H 2181 2285 50  0000 L CNN
+F 2 "" H 2128 2180 50  0001 C CNN
+F 3 "~" H 2090 2330 50  0001 C CNN
+	1    2090 2330
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3445 2315 3505 2315
+Wire Wire Line
+	3505 2440 3505 2315
+Connection ~ 3505 2315
+Wire Wire Line
+	3505 2315 3620 2315
+Wire Wire Line
+	4020 2445 4020 2315
+Wire Wire Line
+	4020 2315 3920 2315
+Wire Wire Line
+	3445 2115 4020 2115
+Wire Wire Line
+	4020 2115 4020 2315
+Connection ~ 4020 2315
+Wire Wire Line
+	2945 2515 2945 3005
+Wire Wire Line
+	2945 3005 3505 3005
+Wire Wire Line
+	3505 2740 3505 3005
+Connection ~ 3505 3005
+Wire Wire Line
+	3505 3005 4020 3005
+Wire Wire Line
+	4020 2645 4020 3005
+Wire Wire Line
+	2445 2315 2410 2315
+Wire Wire Line
+	2410 2315 2410 3005
+Wire Wire Line
+	2410 3005 2945 3005
+Connection ~ 2945 3005
+Text HLabel 4995 3005 2    50   Output ~ 0
+-12V
+Wire Wire Line
+	2445 2115 2090 2115
+Wire Wire Line
+	2090 2115 2090 2230
+Connection ~ 2090 2115
+Wire Wire Line
+	2090 2430 2090 2510
+$Comp
+L 6502Bootstrapper-cache:GND #PWR053
+U 1 1 5C9AC9DE
+P 2090 2510
+F 0 "#PWR053" H 2090 2260 50  0001 C CNN
+F 1 "GND" H 2095 2337 50  0000 C CNN
+F 2 "" H 2090 2510 60  0000 C CNN
+F 3 "" H 2090 2510 60  0000 C CNN
+	1    2090 2510
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1880 2115 2090 2115
+Text Label 1880 2115 0    50   ~ 0
++VIN
+$Comp
+L Regulator_Switching:LM2576HVS-5 U12
+U 1 1 5C9B0101
+P 3335 3705
+F 0 "U12" H 2965 3465 50  0000 C CNN
+F 1 "LM2576-5" H 3330 3945 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 3335 3455 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 3335 3705 50  0001 C CNN
+	1    3335 3705
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L2
+U 1 1 5C9B242E
+P 4170 3805
+F 0 "L2" V 4235 3805 50  0000 C CNN
+F 1 "100uH" V 4135 3805 50  0000 C CNN
+F 2 "" H 4170 3805 50  0001 C CNN
+F 3 "~" H 4170 3805 50  0001 C CNN
+	1    4170 3805
+	0    1    1    0   
+$EndComp
+$Comp
+L Diode:1N5822 D2
+U 1 1 5C9B396D
+P 3930 4015
+F 0 "D2" V 3884 4094 50  0000 L CNN
+F 1 "1N5822" V 3975 4094 50  0000 L CNN
+F 2 "Diode_THT:D_DO-201AD_P15.24mm_Horizontal" H 3930 3840 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88526/1n5820.pdf" H 3930 4015 50  0001 C CNN
+	1    3930 4015
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C23
+U 1 1 5C9B410C
+P 4450 4010
+F 0 "C23" H 4460 4080 50  0000 L CNN
+F 1 "1000uF" H 4470 3925 50  0000 L CNN
+F 2 "" H 4488 3860 50  0001 C CNN
+F 3 "~" H 4450 4010 50  0001 C CNN
+	1    4450 4010
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR054
+U 1 1 5C9B57A8
+P 3335 4210
+F 0 "#PWR054" H 3335 3960 50  0001 C CNN
+F 1 "GND" H 3335 4080 50  0000 C CNN
+F 2 "" H 3335 4210 60  0000 C CNN
+F 3 "" H 3335 4210 60  0000 C CNN
+	1    3335 4210
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2835 3805 2805 3805
+$Comp
+L Device:CP1_Small C20
+U 1 1 5C9B6B90
+P 2490 3790
+F 0 "C20" H 2581 3836 50  0000 L CNN
+F 1 "100uF" H 2581 3745 50  0000 L CNN
+F 2 "" H 2528 3640 50  0001 C CNN
+F 3 "~" H 2490 3790 50  0001 C CNN
+	1    2490 3790
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2835 3605 2490 3605
+Wire Wire Line
+	2490 3605 2490 3690
+Wire Wire Line
+	2490 3605 2320 3605
+Connection ~ 2490 3605
+Text Label 2320 3605 0    50   ~ 0
++VIN
+Wire Wire Line
+	3835 3605 4450 3605
+Wire Wire Line
+	4450 3605 4450 3805
+Wire Wire Line
+	4320 3805 4450 3805
+Connection ~ 4450 3805
+Wire Wire Line
+	4450 3805 4450 3910
+Wire Wire Line
+	4020 3805 3930 3805
+Wire Wire Line
+	3930 3865 3930 3805
+Connection ~ 3930 3805
+Wire Wire Line
+	3930 3805 3835 3805
+Wire Wire Line
+	4940 3805 5130 3805
+Text Label 5130 3805 2    50   ~ 0
++5V
+Text HLabel 5130 3805 2    50   Output ~ 0
++5V
+$Comp
+L Device:CP1_Small C26
+U 1 1 5C9C2BC0
+P 4940 4015
+F 0 "C26" H 4950 4085 50  0000 L CNN
+F 1 "100uF" H 4960 3930 50  0000 L CNN
+F 2 "" H 4978 3865 50  0001 C CNN
+F 3 "~" H 4940 4015 50  0001 C CNN
+	1    4940 4015
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L5
+U 1 1 5C9C34DF
+P 4705 3805
+F 0 "L5" V 4770 3805 50  0000 C CNN
+F 1 "20uH" V 4670 3805 50  0000 C CNN
+F 2 "" H 4705 3805 50  0001 C CNN
+F 3 "~" H 4705 3805 50  0001 C CNN
+	1    4705 3805
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4555 3805 4450 3805
+Wire Wire Line
+	4855 3805 4940 3805
+Wire Wire Line
+	4940 3805 4940 3915
+Connection ~ 4940 3805
+Wire Wire Line
+	3335 4005 3335 4195
+Wire Wire Line
+	2805 4195 3335 4195
+Wire Wire Line
+	2805 3805 2805 4195
+Connection ~ 3335 4195
+Wire Wire Line
+	3335 4195 3335 4210
+Wire Wire Line
+	2805 4195 2490 4195
+Wire Wire Line
+	2490 3890 2490 4195
+Connection ~ 2805 4195
+Wire Wire Line
+	3335 4195 3930 4195
+Wire Wire Line
+	3930 4195 3930 4165
+Wire Wire Line
+	3930 4195 4450 4195
+Wire Wire Line
+	4450 4195 4450 4110
+Connection ~ 3930 4195
+Wire Wire Line
+	4450 4195 4940 4195
+Wire Wire Line
+	4940 4195 4940 4115
+Connection ~ 4450 4195
+Wire Wire Line
+	2715 1180 3070 1180
+Text Label 3070 1180 2    50   ~ 0
++VIN
+$Comp
+L Regulator_Switching:LM2576HVS-5 U13
+U 1 1 5CA434E4
+P 3335 4745
+F 0 "U13" H 2965 4505 50  0000 C CNN
+F 1 "LM2576-12" H 3330 4985 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 3335 4495 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 3335 4745 50  0001 C CNN
+	1    3335 4745
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L3
+U 1 1 5CA434EA
+P 4170 4845
+F 0 "L3" V 4235 4845 50  0000 C CNN
+F 1 "100uH" V 4135 4845 50  0000 C CNN
+F 2 "" H 4170 4845 50  0001 C CNN
+F 3 "~" H 4170 4845 50  0001 C CNN
+	1    4170 4845
+	0    1    1    0   
+$EndComp
+$Comp
+L Diode:1N5822 D3
+U 1 1 5CA434F0
+P 3930 5055
+F 0 "D3" V 3884 5134 50  0000 L CNN
+F 1 "1N5822" V 3975 5134 50  0000 L CNN
+F 2 "Diode_THT:D_DO-201AD_P15.24mm_Horizontal" H 3930 4880 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88526/1n5820.pdf" H 3930 5055 50  0001 C CNN
+	1    3930 5055
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C24
+U 1 1 5CA434F6
+P 4450 5050
+F 0 "C24" H 4460 5120 50  0000 L CNN
+F 1 "1000uF" H 4470 4965 50  0000 L CNN
+F 2 "" H 4488 4900 50  0001 C CNN
+F 3 "~" H 4450 5050 50  0001 C CNN
+	1    4450 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR055
+U 1 1 5CA434FC
+P 3335 5250
+F 0 "#PWR055" H 3335 5000 50  0001 C CNN
+F 1 "GND" H 3335 5120 50  0000 C CNN
+F 2 "" H 3335 5250 60  0000 C CNN
+F 3 "" H 3335 5250 60  0000 C CNN
+	1    3335 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2835 4845 2805 4845
+$Comp
+L Device:CP1_Small C21
+U 1 1 5CA43503
+P 2490 4830
+F 0 "C21" H 2581 4876 50  0000 L CNN
+F 1 "100uF" H 2581 4785 50  0000 L CNN
+F 2 "" H 2528 4680 50  0001 C CNN
+F 3 "~" H 2490 4830 50  0001 C CNN
+	1    2490 4830
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2835 4645 2490 4645
+Wire Wire Line
+	2490 4645 2490 4730
+Wire Wire Line
+	2490 4645 2320 4645
+Connection ~ 2490 4645
+Text Label 2320 4645 0    50   ~ 0
++VIN
+Wire Wire Line
+	3835 4645 4450 4645
+Wire Wire Line
+	4450 4645 4450 4845
+Wire Wire Line
+	4320 4845 4450 4845
+Connection ~ 4450 4845
+Wire Wire Line
+	4450 4845 4450 4950
+Wire Wire Line
+	4020 4845 3930 4845
+Wire Wire Line
+	3930 4905 3930 4845
+Connection ~ 3930 4845
+Wire Wire Line
+	3930 4845 3835 4845
+Wire Wire Line
+	4940 4845 5130 4845
+Text Label 5130 4845 2    50   ~ 0
++12V
+Text HLabel 5130 4845 2    50   Output ~ 0
++12V
+$Comp
+L Device:CP1_Small C27
+U 1 1 5CA4351A
+P 4940 5055
+F 0 "C27" H 4950 5125 50  0000 L CNN
+F 1 "100uF" H 4960 4970 50  0000 L CNN
+F 2 "" H 4978 4905 50  0001 C CNN
+F 3 "~" H 4940 5055 50  0001 C CNN
+	1    4940 5055
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L6
+U 1 1 5CA43520
+P 4705 4845
+F 0 "L6" V 4770 4845 50  0000 C CNN
+F 1 "20uH" V 4670 4845 50  0000 C CNN
+F 2 "" H 4705 4845 50  0001 C CNN
+F 3 "~" H 4705 4845 50  0001 C CNN
+	1    4705 4845
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4555 4845 4450 4845
+Wire Wire Line
+	4855 4845 4940 4845
+Wire Wire Line
+	4940 4845 4940 4955
+Connection ~ 4940 4845
+Wire Wire Line
+	3335 5045 3335 5235
+Wire Wire Line
+	2805 5235 3335 5235
+Wire Wire Line
+	2805 4845 2805 5235
+Connection ~ 3335 5235
+Wire Wire Line
+	3335 5235 3335 5250
+Wire Wire Line
+	2805 5235 2490 5235
+Wire Wire Line
+	2490 4930 2490 5235
+Connection ~ 2805 5235
+Wire Wire Line
+	3335 5235 3930 5235
+Wire Wire Line
+	3930 5235 3930 5205
+Wire Wire Line
+	3930 5235 4450 5235
+Wire Wire Line
+	4450 5235 4450 5150
+Connection ~ 3930 5235
+Wire Wire Line
+	4450 5235 4940 5235
+Wire Wire Line
+	4940 5235 4940 5155
+Connection ~ 4450 5235
+$Comp
+L Regulator_Switching:LM2575-12BT U15
+U 1 1 5CA4BB25
+P 6560 2200
+F 0 "U15" H 6195 1960 50  0000 C CNN
+F 1 "LM2576-5" H 6560 2476 50  0000 C CNN
+F 2 "Package_TO_SOT_THT:TO-220-5_Vertical" H 6560 1950 50  0001 L CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/lm2575.pdf" H 6560 2200 50  0001 C CNN
+	1    6560 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N5819 D5
+U 1 1 5CA4BB2B
+P 7120 2575
+F 0 "D5" V 7074 2654 50  0000 L CNN
+F 1 "1N5822" V 7165 2654 50  0000 L CNN
+F 2 "Diode_THT:D_DO-201AD_P15.24mm_Horizontal" H 7120 2400 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88525/1n5817.pdf" H 7120 2575 50  0001 C CNN
+	1    7120 2575
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C31
+U 1 1 5CA4BB31
+P 7635 2530
+F 0 "C31" H 7726 2576 50  0000 L CNN
+F 1 "2200uF" H 7726 2485 50  0000 L CNN
+F 2 "" H 7673 2380 50  0001 C CNN
+F 3 "~" H 7635 2530 50  0001 C CNN
+	1    7635 2530
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L8
+U 1 1 5CA4BB37
+P 7385 2300
+F 0 "L8" V 7450 2300 50  0000 C CNN
+F 1 "68uH" V 7350 2300 50  0000 C CNN
+F 2 "" H 7385 2300 50  0001 C CNN
+F 3 "~" H 7385 2300 50  0001 C CNN
+	1    7385 2300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C29
+U 1 1 5CA4BB3D
+P 5705 2315
+F 0 "C29" H 5796 2361 50  0000 L CNN
+F 1 "100uF" H 5796 2270 50  0000 L CNN
+F 2 "" H 5743 2165 50  0001 C CNN
+F 3 "~" H 5705 2315 50  0001 C CNN
+	1    5705 2315
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7060 2300 7120 2300
+Wire Wire Line
+	7120 2425 7120 2300
+Connection ~ 7120 2300
+Wire Wire Line
+	7120 2300 7235 2300
+Wire Wire Line
+	7635 2430 7635 2300
+Wire Wire Line
+	7635 2300 7535 2300
+Wire Wire Line
+	7060 2100 7635 2100
+Wire Wire Line
+	7635 2100 7635 2300
+Connection ~ 7635 2300
+Connection ~ 7635 2100
+$Comp
+L 6502Bootstrapper-cache:GND #PWR061
+U 1 1 5CA4BB4F
+P 8420 2245
+F 0 "#PWR061" H 8420 1995 50  0001 C CNN
+F 1 "GND" H 8425 2072 50  0000 C CNN
+F 2 "" H 8420 2245 60  0000 C CNN
+F 3 "" H 8420 2245 60  0000 C CNN
+	1    8420 2245
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6560 2500 6560 2990
+Wire Wire Line
+	6560 2990 7120 2990
+Wire Wire Line
+	7120 2725 7120 2990
+Connection ~ 7120 2990
+Wire Wire Line
+	7120 2990 7635 2990
+Wire Wire Line
+	7635 2630 7635 2990
+Wire Wire Line
+	6060 2300 6025 2300
+Wire Wire Line
+	6025 2300 6025 2990
+Wire Wire Line
+	6025 2990 6560 2990
+Connection ~ 6560 2990
+Text HLabel 8610 2990 2    50   Output ~ 0
+-5V
+Wire Wire Line
+	6060 2100 5705 2100
+Wire Wire Line
+	5705 2100 5705 2215
+Connection ~ 5705 2100
+Wire Wire Line
+	5705 2415 5705 2495
+$Comp
+L 6502Bootstrapper-cache:GND #PWR058
+U 1 1 5CA4BB66
+P 5705 2495
+F 0 "#PWR058" H 5705 2245 50  0001 C CNN
+F 1 "GND" H 5710 2322 50  0000 C CNN
+F 2 "" H 5705 2495 60  0000 C CNN
+F 3 "" H 5705 2495 60  0000 C CNN
+	1    5705 2495
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5495 2100 5705 2100
+Text Label 5495 2100 0    50   ~ 0
++VIN
+$Comp
+L Regulator_Switching:LM2576HVS-5 U14
+U 1 1 5CA5B567
+P 6485 3780
+F 0 "U14" H 6115 3540 50  0000 C CNN
+F 1 "LM2576-3.3" H 6480 4020 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 6485 3530 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 6485 3780 50  0001 C CNN
+	1    6485 3780
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L7
+U 1 1 5CA5B56D
+P 7320 3880
+F 0 "L7" V 7385 3880 50  0000 C CNN
+F 1 "100uH" V 7285 3880 50  0000 C CNN
+F 2 "" H 7320 3880 50  0001 C CNN
+F 3 "~" H 7320 3880 50  0001 C CNN
+	1    7320 3880
+	0    1    1    0   
+$EndComp
+$Comp
+L Diode:1N5822 D4
+U 1 1 5CA5B573
+P 7080 4090
+F 0 "D4" V 7034 4169 50  0000 L CNN
+F 1 "1N5822" V 7125 4169 50  0000 L CNN
+F 2 "Diode_THT:D_DO-201AD_P15.24mm_Horizontal" H 7080 3915 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88526/1n5820.pdf" H 7080 4090 50  0001 C CNN
+	1    7080 4090
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP1_Small C30
+U 1 1 5CA5B579
+P 7600 4085
+F 0 "C30" H 7610 4155 50  0000 L CNN
+F 1 "1000uF" H 7620 4000 50  0000 L CNN
+F 2 "" H 7638 3935 50  0001 C CNN
+F 3 "~" H 7600 4085 50  0001 C CNN
+	1    7600 4085
+	1    0    0    -1  
+$EndComp
+$Comp
+L 6502Bootstrapper-cache:GND #PWR059
+U 1 1 5CA5B57F
+P 6485 4285
+F 0 "#PWR059" H 6485 4035 50  0001 C CNN
+F 1 "GND" H 6485 4155 50  0000 C CNN
+F 2 "" H 6485 4285 60  0000 C CNN
+F 3 "" H 6485 4285 60  0000 C CNN
+	1    6485 4285
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5985 3880 5955 3880
+$Comp
+L Device:CP1_Small C28
+U 1 1 5CA5B586
+P 5640 3865
+F 0 "C28" H 5731 3911 50  0000 L CNN
+F 1 "100uF" H 5731 3820 50  0000 L CNN
+F 2 "" H 5678 3715 50  0001 C CNN
+F 3 "~" H 5640 3865 50  0001 C CNN
+	1    5640 3865
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5985 3680 5640 3680
+Wire Wire Line
+	5640 3680 5640 3765
+Wire Wire Line
+	5640 3680 5470 3680
+Connection ~ 5640 3680
+Text Label 5470 3680 0    50   ~ 0
++VIN
+Wire Wire Line
+	6985 3680 7600 3680
+Wire Wire Line
+	7600 3680 7600 3880
+Wire Wire Line
+	7470 3880 7600 3880
+Connection ~ 7600 3880
+Wire Wire Line
+	7600 3880 7600 3985
+Wire Wire Line
+	7170 3880 7080 3880
+Wire Wire Line
+	7080 3940 7080 3880
+Connection ~ 7080 3880
+Wire Wire Line
+	7080 3880 6985 3880
+Wire Wire Line
+	8090 3880 8280 3880
+Text Label 8280 3880 2    50   ~ 0
++3V3
+Text HLabel 8280 3880 2    50   Output ~ 0
++3V3
+$Comp
+L Device:CP1_Small C32
+U 1 1 5CA5B59D
+P 8090 4090
+F 0 "C32" H 8100 4160 50  0000 L CNN
+F 1 "100uF" H 8110 4005 50  0000 L CNN
+F 2 "" H 8128 3940 50  0001 C CNN
+F 3 "~" H 8090 4090 50  0001 C CNN
+	1    8090 4090
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L9
+U 1 1 5CA5B5A3
+P 7855 3880
+F 0 "L9" V 7920 3880 50  0000 C CNN
+F 1 "20uH" V 7820 3880 50  0000 C CNN
+F 2 "" H 7855 3880 50  0001 C CNN
+F 3 "~" H 7855 3880 50  0001 C CNN
+	1    7855 3880
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7705 3880 7600 3880
+Wire Wire Line
+	8005 3880 8090 3880
+Wire Wire Line
+	8090 3880 8090 3990
+Connection ~ 8090 3880
+Wire Wire Line
+	6485 4080 6485 4270
+Wire Wire Line
+	5955 4270 6485 4270
+Wire Wire Line
+	5955 3880 5955 4270
+Connection ~ 6485 4270
+Wire Wire Line
+	6485 4270 6485 4285
+Wire Wire Line
+	5955 4270 5640 4270
+Wire Wire Line
+	5640 3965 5640 4270
+Connection ~ 5955 4270
+Wire Wire Line
+	6485 4270 7080 4270
+Wire Wire Line
+	7080 4270 7080 4240
+Wire Wire Line
+	7080 4270 7600 4270
+Wire Wire Line
+	7600 4270 7600 4185
+Connection ~ 7080 4270
+Wire Wire Line
+	7600 4270 8090 4270
+Wire Wire Line
+	8090 4270 8090 4190
+Connection ~ 7600 4270
+$Comp
+L Connector_Generic:Conn_02x10_Counter_Clockwise J11
+U 1 1 5CAAD78B
+P 4765 6180
+F 0 "J11" V 4769 6660 50  0000 L CNN
+F 1 "Conn_02x10_Counter_Clockwise" V 4860 6660 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x10_P2.54mm_Vertical" H 4765 6180 50  0001 C CNN
+F 3 "~" H 4765 6180 50  0001 C CNN
+	1    4765 6180
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4265 5980 4265 5805
+Wire Wire Line
+	4265 5805 4365 5805
+Wire Wire Line
+	5165 5805 5165 5980
+$Comp
+L 6502Bootstrapper-cache:GND #PWR056
+U 1 1 5CAB7CB2
+P 4715 5745
+F 0 "#PWR056" H 4715 5495 50  0001 C CNN
+F 1 "GND" H 4720 5572 50  0000 C CNN
+F 2 "" H 4715 5745 60  0000 C CNN
+F 3 "" H 4715 5745 60  0000 C CNN
+	1    4715 5745
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4365 5980 4365 5805
+Connection ~ 4365 5805
+Wire Wire Line
+	4465 5980 4465 5805
+Wire Wire Line
+	4365 5805 4465 5805
+Connection ~ 4465 5805
+Wire Wire Line
+	4565 5980 4565 5805
+Wire Wire Line
+	4465 5805 4565 5805
+Connection ~ 4565 5805
+Wire Wire Line
+	4565 5805 4665 5805
+Wire Wire Line
+	4665 5980 4665 5805
+Connection ~ 4665 5805
+Wire Wire Line
+	4765 5980 4765 5805
+Connection ~ 4765 5805
+Wire Wire Line
+	4765 5805 4865 5805
+Wire Wire Line
+	4865 5980 4865 5805
+Connection ~ 4865 5805
+Wire Wire Line
+	4865 5805 4965 5805
+Wire Wire Line
+	4965 5980 4965 5805
+Connection ~ 4965 5805
+Wire Wire Line
+	4965 5805 5065 5805
+Wire Wire Line
+	5065 5980 5065 5805
+Connection ~ 5065 5805
+Wire Wire Line
+	5065 5805 5165 5805
+Wire Wire Line
+	4665 5805 4715 5805
+Wire Wire Line
+	4715 5805 4715 5745
+Connection ~ 4715 5805
+Wire Wire Line
+	4715 5805 4765 5805
+Text Label 4995 3005 2    50   ~ 0
+-12V
+Text Label 8610 2990 2    50   ~ 0
+-5V
+Wire Wire Line
+	4265 6480 4265 6675
+Wire Wire Line
+	4365 6480 4365 6675
+Wire Wire Line
+	4465 6480 4465 6675
+Wire Wire Line
+	4565 6480 4565 6675
+Wire Wire Line
+	4665 6480 4665 6675
+Wire Wire Line
+	4765 6480 4765 6675
+Wire Wire Line
+	4865 6480 4865 6675
+Wire Wire Line
+	4965 6480 4965 6675
+Wire Wire Line
+	5065 6480 5065 6675
+Wire Wire Line
+	5165 6480 5165 6675
+Text Label 4265 6675 1    50   ~ 0
++12V
+Text Label 4365 6675 1    50   ~ 0
++12V
+Text Label 4465 6675 1    50   ~ 0
+-12V
+Text Label 4565 6675 1    50   ~ 0
+-12V
+Text Label 4665 6675 1    50   ~ 0
++5V
+Text Label 4765 6675 1    50   ~ 0
++5V
+Text Label 4865 6675 1    50   ~ 0
+-5V
+Text Label 4965 6675 1    50   ~ 0
+-5V
+Text Label 5065 6675 1    50   ~ 0
++3V3
+Text Label 5165 6675 1    50   ~ 0
++3V3
+$Comp
+L Device:CP1_Small C33
+U 1 1 5CCD9D55
+P 8095 2530
+F 0 "C33" H 8105 2600 50  0000 L CNN
+F 1 "100uF" H 8115 2445 50  0000 L CNN
+F 2 "" H 8133 2380 50  0001 C CNN
+F 3 "~" H 8095 2530 50  0001 C CNN
+	1    8095 2530
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L10
+U 1 1 5CCDA72D
+P 7880 2990
+F 0 "L10" V 7945 2990 50  0000 C CNN
+F 1 "20uH" V 7775 2985 50  0000 C CNN
+F 2 "" H 7880 2990 50  0001 C CNN
+F 3 "~" H 7880 2990 50  0001 C CNN
+	1    7880 2990
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7730 2990 7635 2990
+Connection ~ 7635 2990
+Wire Wire Line
+	8095 2630 8095 2990
+Wire Wire Line
+	8095 2990 8030 2990
+Wire Wire Line
+	8095 2990 8610 2990
+Connection ~ 8095 2990
+Wire Wire Line
+	8420 2100 8420 2245
+Wire Wire Line
+	7635 2100 8095 2100
+Wire Wire Line
+	8095 2430 8095 2100
+Connection ~ 8095 2100
+Wire Wire Line
+	8095 2100 8420 2100
+$Comp
+L 6502Bootstrapper-cache:GND #PWR057
+U 1 1 5CD0ECE9
+P 4805 2260
+F 0 "#PWR057" H 4805 2010 50  0001 C CNN
+F 1 "GND" H 4810 2087 50  0000 C CNN
+F 2 "" H 4805 2260 60  0000 C CNN
+F 3 "" H 4805 2260 60  0000 C CNN
+	1    4805 2260
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP1_Small C25
+U 1 1 5CD0ECEF
+P 4480 2545
+F 0 "C25" H 4490 2615 50  0000 L CNN
+F 1 "100uF" H 4500 2460 50  0000 L CNN
+F 2 "" H 4518 2395 50  0001 C CNN
+F 3 "~" H 4480 2545 50  0001 C CNN
+	1    4480 2545
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4480 2645 4480 3005
+Wire Wire Line
+	4480 3005 4415 3005
+Wire Wire Line
+	4480 3005 4995 3005
+Connection ~ 4480 3005
+Wire Wire Line
+	4020 2115 4480 2115
+Wire Wire Line
+	4480 2445 4480 2115
+Connection ~ 4480 2115
+Wire Wire Line
+	4480 2115 4805 2115
+$Comp
+L Device:L L4
+U 1 1 5CD15769
+P 4265 3005
+F 0 "L4" V 4330 3005 50  0000 C CNN
+F 1 "20uH" V 4160 3000 50  0000 C CNN
+F 2 "" H 4265 3005 50  0001 C CNN
+F 3 "~" H 4265 3005 50  0001 C CNN
+	1    4265 3005
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4115 3005 4020 3005
+Connection ~ 4020 3005
+Wire Wire Line
+	4805 2260 4805 2115
+$EndSCHEMATC

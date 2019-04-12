@@ -1,0 +1,12 @@
+(sym_lib_table
+  (lib (name propeller)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/6502Computer/rev1.a/propeller.lib")(options "")(descr ""))
+  (lib (name vga)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/6502Computer/rev1.a/vga.lib")(options "")(descr ""))
+  (lib (name keyboard_parts)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/6502Computer/rev1.a/keyboard_parts.lib")(options "")(descr ""))
+  (lib (name power1)(type Legacy)(uri "C:/Program Files/KiCad/share/kicad/library/power.lib")(options "")(descr ""))
+  (lib (name device)(type Legacy)(uri "C:/Program Files/KiCad/share/kicad/library/device.lib")(options "")(descr ""))
+  (lib (name 6502Computer-rescue)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/6502Computer/rev1.a/6502Computer-rescue.lib")(options "")(descr ""))
+  (lib (name 6502)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/6502ioPrototypingBoardv1.2/6502.lib")(options "")(descr ""))
+  (lib (name 6502Bootstrapper-cache)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/6502ioPrototypingBoardv1.2/6502Bootstrapper-cache.lib")(options "")(descr ""))
+  (lib (name addressdecoder)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/AddressDecoderModule/rev1.a/addressdecoder.lib")(options "")(descr ""))
+  (lib (name retroii)(type Legacy)(uri "C:/Users/Stache/Documents/KiCad Projects/RetroII/rev1.a/retroii/libs/retroii.lib")(options "")(descr ""))
+)
