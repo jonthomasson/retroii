@@ -1,4 +1,4 @@
-20536329546173763
+20537884738346781
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79926,6 +79926,13 @@ Barrel_Jack_PJ002A
 3
 3
 retroii_footprints
+BOURNS_91A1A-B24-D15L
+
+
+0
+3
+3
+retroii_footprints
 C_Disc_D3.0mm_W2.0mm_P2.50mm
 C, Disc series, Radial, pin pitch=2.50mm, , diameter*width=3*2mm^2, Capacitor
 C Disc series Radial pin pitch 2.50mm  diameter 3mm width 2mm Capacitor
@@ -79993,8 +80000,8 @@ TE_5530841-5
 
 
 0
-1
-1
+50
+50
 retroii_footprints
 WP1503CB_LED
 
