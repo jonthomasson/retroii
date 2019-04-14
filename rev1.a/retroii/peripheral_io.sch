@@ -190,8 +190,6 @@ Text Label 3675 1425 2    50   ~ 0
 RDY
 Text Label 3675 1325 2    50   ~ 0
 ~DMA
-Text Notes 4845 600  0    50   ~ 0
-Designed for TE Connectivity part# 5530841-5
 Text Label 2545 2425 0    50   ~ 0
 Phase_0
 Text Label 2545 2225 0    50   ~ 0
@@ -2109,6 +2107,366 @@ Wire Wire Line
 	2860 4900 2545 4900
 Text Label 2545 4900 0    50   ~ 0
 Prop_7M
+$Comp
+L Device:C_Small C?
+U 1 1 5CD43AB0
+P 1310 7100
+F 0 "C?" H 1320 7160 50  0000 L CNN
+F 1 "DNP" H 1330 7030 50  0000 L CNN
+F 2 "" H 1310 7100 50  0001 C CNN
+F 3 "~" H 1310 7100 50  0001 C CNN
+	1    1310 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD476D4
+P 1505 7100
+F 0 "C?" H 1515 7160 50  0000 L CNN
+F 1 "DNP" H 1525 7030 50  0000 L CNN
+F 2 "" H 1505 7100 50  0001 C CNN
+F 3 "~" H 1505 7100 50  0001 C CNN
+	1    1505 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD4865B
+P 1705 7100
+F 0 "C?" H 1715 7160 50  0000 L CNN
+F 1 "DNP" H 1725 7030 50  0000 L CNN
+F 2 "" H 1705 7100 50  0001 C CNN
+F 3 "~" H 1705 7100 50  0001 C CNN
+	1    1705 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD48661
+P 1900 7100
+F 0 "C?" H 1910 7160 50  0000 L CNN
+F 1 "DNP" H 1920 7030 50  0000 L CNN
+F 2 "" H 1900 7100 50  0001 C CNN
+F 3 "~" H 1900 7100 50  0001 C CNN
+	1    1900 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD8DC28
+P 2095 7100
+F 0 "C?" H 2105 7160 50  0000 L CNN
+F 1 "DNP" H 2115 7030 50  0000 L CNN
+F 2 "" H 2095 7100 50  0001 C CNN
+F 3 "~" H 2095 7100 50  0001 C CNN
+	1    2095 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD8DC2E
+P 2290 7100
+F 0 "C?" H 2300 7160 50  0000 L CNN
+F 1 "DNP" H 2310 7030 50  0000 L CNN
+F 2 "" H 2290 7100 50  0001 C CNN
+F 3 "~" H 2290 7100 50  0001 C CNN
+	1    2290 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD8DC34
+P 2490 7100
+F 0 "C?" H 2500 7160 50  0000 L CNN
+F 1 "DNP" H 2510 7030 50  0000 L CNN
+F 2 "" H 2490 7100 50  0001 C CNN
+F 3 "~" H 2490 7100 50  0001 C CNN
+	1    2490 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5CD8DC3A
+P 2685 7100
+F 0 "C?" H 2695 7160 50  0000 L CNN
+F 1 "DNP" H 2705 7030 50  0000 L CNN
+F 2 "" H 2685 7100 50  0001 C CNN
+F 3 "~" H 2685 7100 50  0001 C CNN
+	1    2685 7100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2685 7000 2685 6880
+Wire Wire Line
+	2685 6880 2490 6880
+Wire Wire Line
+	2685 7200 2685 7285
+Wire Wire Line
+	2685 7285 2490 7285
+Wire Wire Line
+	1310 7200 1310 7285
+Connection ~ 1310 7285
+Wire Wire Line
+	1310 7285 1120 7285
+Wire Wire Line
+	1505 7200 1505 7285
+Connection ~ 1505 7285
+Wire Wire Line
+	1505 7285 1310 7285
+Wire Wire Line
+	1705 7200 1705 7285
+Connection ~ 1705 7285
+Wire Wire Line
+	1705 7285 1505 7285
+Wire Wire Line
+	1900 7200 1900 7285
+Connection ~ 1900 7285
+Wire Wire Line
+	1900 7285 1705 7285
+Wire Wire Line
+	2095 7200 2095 7285
+Connection ~ 2095 7285
+Wire Wire Line
+	2095 7285 1900 7285
+Wire Wire Line
+	2290 7200 2290 7285
+Connection ~ 2290 7285
+Wire Wire Line
+	2290 7285 2095 7285
+Wire Wire Line
+	2490 7200 2490 7285
+Connection ~ 2490 7285
+Wire Wire Line
+	2490 7285 2290 7285
+Wire Wire Line
+	2490 7000 2490 6880
+Connection ~ 2490 6880
+Wire Wire Line
+	2490 6880 2290 6880
+Wire Wire Line
+	2290 7000 2290 6880
+Connection ~ 2290 6880
+Wire Wire Line
+	2290 6880 2095 6880
+Wire Wire Line
+	2095 7000 2095 6880
+Connection ~ 2095 6880
+Wire Wire Line
+	2095 6880 1900 6880
+Wire Wire Line
+	1900 7000 1900 6880
+Connection ~ 1900 6880
+Wire Wire Line
+	1900 6880 1705 6880
+Wire Wire Line
+	1705 7000 1705 6880
+Connection ~ 1705 6880
+Wire Wire Line
+	1705 6880 1505 6880
+Wire Wire Line
+	1505 7000 1505 6880
+Connection ~ 1505 6880
+Wire Wire Line
+	1505 6880 1310 6880
+Wire Wire Line
+	1310 7000 1310 6880
+Connection ~ 1310 6880
+Wire Wire Line
+	1310 6880 1125 6880
+Text Label 1125 6880 0    50   ~ 0
++5V
+Wire Wire Line
+	1120 7285 1120 7305
+$Comp
+L 6502Bootstrapper-cache:GND #PWR?
+U 1 1 5D2A2DB5
+P 1120 7305
+F 0 "#PWR?" H 1120 7055 50  0001 C CNN
+F 1 "GND" H 1120 7170 50  0000 C CNN
+F 2 "" H 1120 7305 60  0000 C CNN
+F 3 "" H 1120 7305 60  0000 C CNN
+	1    1120 7305
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A7028
+P 3240 7100
+F 0 "C?" H 3250 7160 50  0000 L CNN
+F 1 "DNP" H 3260 7030 50  0000 L CNN
+F 2 "" H 3240 7100 50  0001 C CNN
+F 3 "~" H 3240 7100 50  0001 C CNN
+	1    3240 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A702E
+P 3435 7100
+F 0 "C?" H 3445 7160 50  0000 L CNN
+F 1 "DNP" H 3455 7030 50  0000 L CNN
+F 2 "" H 3435 7100 50  0001 C CNN
+F 3 "~" H 3435 7100 50  0001 C CNN
+	1    3435 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A7034
+P 3635 7100
+F 0 "C?" H 3645 7160 50  0000 L CNN
+F 1 "DNP" H 3655 7030 50  0000 L CNN
+F 2 "" H 3635 7100 50  0001 C CNN
+F 3 "~" H 3635 7100 50  0001 C CNN
+	1    3635 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A703A
+P 3830 7100
+F 0 "C?" H 3840 7160 50  0000 L CNN
+F 1 "DNP" H 3850 7030 50  0000 L CNN
+F 2 "" H 3830 7100 50  0001 C CNN
+F 3 "~" H 3830 7100 50  0001 C CNN
+	1    3830 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A7040
+P 4025 7100
+F 0 "C?" H 4035 7160 50  0000 L CNN
+F 1 "DNP" H 4045 7030 50  0000 L CNN
+F 2 "" H 4025 7100 50  0001 C CNN
+F 3 "~" H 4025 7100 50  0001 C CNN
+	1    4025 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A7046
+P 4220 7100
+F 0 "C?" H 4230 7160 50  0000 L CNN
+F 1 "DNP" H 4240 7030 50  0000 L CNN
+F 2 "" H 4220 7100 50  0001 C CNN
+F 3 "~" H 4220 7100 50  0001 C CNN
+	1    4220 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A704C
+P 4420 7100
+F 0 "C?" H 4430 7160 50  0000 L CNN
+F 1 "DNP" H 4440 7030 50  0000 L CNN
+F 2 "" H 4420 7100 50  0001 C CNN
+F 3 "~" H 4420 7100 50  0001 C CNN
+	1    4420 7100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5D2A7052
+P 4615 7100
+F 0 "C?" H 4625 7160 50  0000 L CNN
+F 1 "DNP" H 4635 7030 50  0000 L CNN
+F 2 "" H 4615 7100 50  0001 C CNN
+F 3 "~" H 4615 7100 50  0001 C CNN
+	1    4615 7100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4615 7000 4615 6880
+Wire Wire Line
+	4615 6880 4420 6880
+Wire Wire Line
+	4615 7200 4615 7285
+Wire Wire Line
+	4615 7285 4420 7285
+Wire Wire Line
+	3240 7200 3240 7285
+Connection ~ 3240 7285
+Wire Wire Line
+	3240 7285 3050 7285
+Wire Wire Line
+	3435 7200 3435 7285
+Connection ~ 3435 7285
+Wire Wire Line
+	3435 7285 3240 7285
+Wire Wire Line
+	3635 7200 3635 7285
+Connection ~ 3635 7285
+Wire Wire Line
+	3635 7285 3435 7285
+Wire Wire Line
+	3830 7200 3830 7285
+Connection ~ 3830 7285
+Wire Wire Line
+	3830 7285 3635 7285
+Wire Wire Line
+	4025 7200 4025 7285
+Connection ~ 4025 7285
+Wire Wire Line
+	4025 7285 3830 7285
+Wire Wire Line
+	4220 7200 4220 7285
+Connection ~ 4220 7285
+Wire Wire Line
+	4220 7285 4025 7285
+Wire Wire Line
+	4420 7200 4420 7285
+Connection ~ 4420 7285
+Wire Wire Line
+	4420 7285 4220 7285
+Wire Wire Line
+	4420 7000 4420 6880
+Connection ~ 4420 6880
+Wire Wire Line
+	4420 6880 4220 6880
+Wire Wire Line
+	4220 7000 4220 6880
+Connection ~ 4220 6880
+Wire Wire Line
+	4220 6880 4025 6880
+Wire Wire Line
+	4025 7000 4025 6880
+Connection ~ 4025 6880
+Wire Wire Line
+	4025 6880 3830 6880
+Wire Wire Line
+	3830 7000 3830 6880
+Connection ~ 3830 6880
+Wire Wire Line
+	3830 6880 3635 6880
+Wire Wire Line
+	3635 7000 3635 6880
+Connection ~ 3635 6880
+Wire Wire Line
+	3635 6880 3435 6880
+Wire Wire Line
+	3435 7000 3435 6880
+Connection ~ 3435 6880
+Wire Wire Line
+	3435 6880 3240 6880
+Wire Wire Line
+	3240 7000 3240 6880
+Connection ~ 3240 6880
+Wire Wire Line
+	3240 6880 3055 6880
+Wire Wire Line
+	3050 7285 3050 7305
+$Comp
+L 6502Bootstrapper-cache:GND #PWR?
+U 1 1 5D2A7088
+P 3050 7305
+F 0 "#PWR?" H 3050 7055 50  0001 C CNN
+F 1 "GND" H 3050 7170 50  0000 C CNN
+F 2 "" H 3050 7305 60  0000 C CNN
+F 3 "" H 3050 7305 60  0000 C CNN
+	1    3050 7305
+	1    0    0    -1  
+$EndComp
 Wire Bus Line
 	7505 5600 7505 6490
 Wire Bus Line
@@ -2141,4 +2499,6 @@ Wire Bus Line
 	5460 725  5460 3225
 Wire Bus Line
 	3775 725  3775 3650
+Text Label 3055 6880 0    50   ~ 0
++12V
 $EndSCHEMATC
