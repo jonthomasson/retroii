@@ -39,12 +39,12 @@ $EndComp
 $Comp
 L Device:Speaker LS1
 U 1 1 5C8B0058
-P 10340 4770
-F 0 "LS1" H 10510 4766 50  0000 L CNN
-F 1 "Speaker" H 10270 4970 50  0000 L CNN
-F 2 "" H 10340 4570 50  0001 C CNN
-F 3 "~" H 10330 4720 50  0001 C CNN
-	1    10340 4770
+P 10695 4770
+F 0 "LS1" H 10865 4766 50  0000 L CNN
+F 1 "Speaker" H 10625 4970 50  0000 L CNN
+F 2 "retroii_footprints:CUI_CVI_1708" H 10695 4570 50  0001 C CNN
+F 3 "~" H 10685 4720 50  0001 C CNN
+	1    10695 4770
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -59,12 +59,12 @@ F 3 "~" H 10040 5740 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:AudioJack2 J8
+L retroii:AudioJack2_Ground J8
 U 1 1 5C8B0BBB
 P 9455 4810
 F 0 "J8" H 9275 4793 50  0000 R CNN
-F 1 "Cassette Out" H 9605 4640 50  0000 R CNN
-F 2 "" H 9455 4810 50  0001 C CNN
+F 1 "Cassette Out" H 9445 4675 50  0000 R CNN
+F 2 "retroii_footprints:SJ13525NHeadphone" H 9455 4810 50  0001 C CNN
 F 3 "~" H 9455 4810 50  0001 C CNN
 	1    9455 4810
 	-1   0    0    1   
@@ -103,12 +103,12 @@ F 3 "" H 9420 2195 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:AudioJack2 J7
+L retroii:AudioJack2_Ground J7
 U 1 1 5C8B71E8
 P 6760 3395
 F 0 "J7" H 6675 3590 50  0000 C CNN
-F 1 "Cassette In" H 6760 3260 50  0000 C CNN
-F 2 "" H 6760 3395 50  0001 C CNN
+F 1 "Cassette In" H 6975 3260 50  0000 C CNN
+F 2 "retroii_footprints:SJ13525NHeadphone" H 6760 3395 50  0001 C CNN
 F 3 "~" H 6760 3395 50  0001 C CNN
 	1    6760 3395
 	1    0    0    1   
@@ -178,7 +178,7 @@ Connection ~ 10140 5110
 Wire Wire Line
 	10140 5110 10140 5180
 Wire Wire Line
-	10140 4870 10140 5110
+	10140 4870 10140 4960
 Wire Wire Line
 	9595 6120 9595 6215
 Wire Wire Line
@@ -246,16 +246,7 @@ $EndComp
 Wire Wire Line
 	9255 4910 9160 4910
 Wire Wire Line
-	9160 4910 9160 5220
-Wire Wire Line
-	9160 5220 8950 5220
-Wire Wire Line
-	8950 5220 8950 5250
-Wire Wire Line
-	8950 5190 8950 5220
-Connection ~ 8950 5220
-Wire Wire Line
-	9255 4810 8950 4810
+	9255 4810 9160 4810
 Wire Wire Line
 	8950 4890 8950 4810
 Connection ~ 8950 4810
@@ -302,7 +293,7 @@ Wire Wire Line
 Connection ~ 8540 4810
 Wire Wire Line
 	8540 4810 8445 4810
-Text Label 10525 4425 2    50   ~ 0
+Text Label 10585 3880 2    50   ~ 0
 +5V
 $Comp
 L retroii:Game_IO_Socket J14
@@ -437,19 +428,6 @@ $EndComp
 Wire Wire Line
 	6960 3495 7025 3495
 Wire Wire Line
-	7025 3495 7025 3595
-$Comp
-L 6502Bootstrapper-cache:GND #PWR046
-U 1 1 5C8E3F73
-P 7025 3595
-F 0 "#PWR046" H 7025 3345 50  0001 C CNN
-F 1 "GND" H 7030 3422 50  0000 C CNN
-F 2 "" H 7025 3595 60  0000 C CNN
-F 3 "" H 7025 3595 60  0000 C CNN
-	1    7025 3595
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
 	7295 3395 7465 3395
 Wire Wire Line
 	9220 2045 6105 2045
@@ -487,7 +465,7 @@ F 3 "~" H 7195 3395 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	7095 3395 6960 3395
+	7095 3395 7025 3395
 Wire Wire Line
 	4690 3675 4690 3505
 Wire Wire Line
@@ -780,18 +758,16 @@ NoConn ~ 2545 2345
 $Comp
 L Device:R_POT RV1
 U 1 1 5C9EC141
-P 10140 4425
-F 0 "RV1" H 10070 4471 50  0000 R CNN
-F 1 "Volume" H 10275 4630 50  0000 R CNN
-F 2 "retroii_footprints:BOURNS_91A1A-B24-D15L" H 10140 4425 50  0001 C CNN
-F 3 "~" H 10140 4425 50  0001 C CNN
-	1    10140 4425
+P 10200 3880
+F 0 "RV1" H 10130 3926 50  0000 R CNN
+F 1 "Volume" H 10335 4085 50  0000 R CNN
+F 2 "retroii_footprints:BOURNS_91A1A-B24-D15L" H 10200 3880 50  0001 C CNN
+F 3 "~" H 10200 3880 50  0001 C CNN
+	1    10200 3880
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10140 4575 10140 4770
-Wire Wire Line
-	10290 4425 10525 4425
+	10350 3880 10585 3880
 Text Label 3370 3020 1    50   ~ 0
 PDL0
 Text Label 3230 3025 1    50   ~ 0
@@ -1251,13 +1227,11 @@ U 1 1 5CA152D2
 P 9940 4870
 F 0 "J9" H 9860 4545 50  0000 C CNN
 F 1 "Speaker Jack" H 10000 4970 50  0000 C CNN
-F 2 "" H 9940 4870 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 9940 4870 50  0001 C CNN
 F 3 "~" H 9940 4870 50  0001 C CNN
 	1    9940 4870
 	-1   0    0    1   
 $EndComp
-Connection ~ 10140 4870
-Connection ~ 10140 4770
 NoConn ~ 8160 3595
 NoConn ~ 8260 3595
 Wire Wire Line
@@ -1272,7 +1246,7 @@ Wire Wire Line
 	10590 2895 10370 2895
 Wire Wire Line
 	10590 3095 10370 3095
-NoConn ~ 10140 4275
+NoConn ~ 10200 3730
 $Comp
 L 6502:R R56
 U 1 1 5CCAFCB4
@@ -1421,6 +1395,138 @@ Wire Wire Line
 Connection ~ 8145 5210
 Wire Wire Line
 	8145 5210 8145 5540
+$Comp
+L Device:Jumper_NC_Small JP19
+U 1 1 5CBF9D7F
+P 10345 4870
+F 0 "JP19" H 10345 4820 50  0000 C CNN
+F 1 "Jumper_NC_Small" H 10415 4745 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 10345 4870 50  0001 C CNN
+F 3 "~" H 10345 4870 50  0001 C CNN
+	1    10345 4870
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10495 4870 10445 4870
+Wire Wire Line
+	10245 4870 10140 4870
+Connection ~ 10140 4870
+$Comp
+L retroii:AudioJack2_Ground J24
+U 1 1 5CC45BFD
+P 10460 4355
+F 0 "J24" H 10440 4215 50  0000 R CNN
+F 1 "Headphone" H 10340 4195 50  0000 R CNN
+F 2 "retroii_footprints:SJ13525NHeadphone" H 10460 4355 50  0001 C CNN
+F 3 "~" H 10460 4355 50  0001 C CNN
+	1    10460 4355
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9455 4610 9455 4580
+$Comp
+L 6502Bootstrapper-cache:GND #PWR092
+U 1 1 5CC677A5
+P 9455 4580
+F 0 "#PWR092" H 9455 4330 50  0001 C CNN
+F 1 "GND" H 9455 4455 50  0000 C CNN
+F 2 "" H 9455 4580 60  0000 C CNN
+F 3 "" H 9455 4580 60  0000 C CNN
+	1    9455 4580
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6760 3195 6760 3165
+$Comp
+L 6502Bootstrapper-cache:GND #PWR046
+U 1 1 5CC7531B
+P 6760 3165
+F 0 "#PWR046" H 6760 2915 50  0001 C CNN
+F 1 "GND" H 6760 3030 50  0000 C CNN
+F 2 "" H 6760 3165 60  0000 C CNN
+F 3 "" H 6760 3165 60  0000 C CNN
+	1    6760 3165
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7025 3495 7025 3395
+Connection ~ 7025 3395
+Wire Wire Line
+	7025 3395 6960 3395
+Wire Wire Line
+	8950 5190 8950 5250
+Wire Wire Line
+	9160 4910 9160 4810
+Connection ~ 9160 4810
+Wire Wire Line
+	9160 4810 8950 4810
+Wire Wire Line
+	10140 4960 10210 4960
+Wire Wire Line
+	10210 4355 10260 4355
+Connection ~ 10140 4960
+Wire Wire Line
+	10140 4960 10140 5110
+Wire Wire Line
+	10260 4455 10210 4455
+Wire Wire Line
+	10210 4455 10210 4355
+Wire Wire Line
+	10140 4145 10200 4145
+Wire Wire Line
+	10200 4145 10200 4030
+Wire Wire Line
+	10140 4145 10140 4770
+$Comp
+L Device:Jumper_NC_Small JP17
+U 1 1 5CCD942F
+P 10330 4145
+F 0 "JP17" H 10330 4095 50  0000 C CNN
+F 1 "Jumper_NC_Small" H 10400 4020 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 10330 4145 50  0001 C CNN
+F 3 "~" H 10330 4145 50  0001 C CNN
+	1    10330 4145
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10460 4155 10460 4145
+Wire Wire Line
+	10460 4145 10430 4145
+Wire Wire Line
+	10230 4145 10200 4145
+Connection ~ 10200 4145
+$Comp
+L Device:Jumper_NC_Small JP16
+U 1 1 5CCF7132
+P 10210 4605
+F 0 "JP16" H 10215 4690 50  0000 C CNN
+F 1 "Jumper_NC_Small" H 10280 4480 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 10210 4605 50  0001 C CNN
+F 3 "~" H 10210 4605 50  0001 C CNN
+	1    10210 4605
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	10210 4505 10210 4455
+Connection ~ 10210 4455
+Wire Wire Line
+	10210 4705 10210 4960
+$Comp
+L Device:Jumper_NC_Small JP18
+U 1 1 5CD165ED
+P 10345 4770
+F 0 "JP18" H 10345 4720 50  0000 C CNN
+F 1 "Jumper_NC_Small" H 10415 4645 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 10345 4770 50  0001 C CNN
+F 3 "~" H 10345 4770 50  0001 C CNN
+	1    10345 4770
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10445 4770 10495 4770
+Wire Wire Line
+	10245 4770 10140 4770
 Wire Bus Line
 	10690 2755 10690 3195
+Connection ~ 10140 4770
 $EndSCHEMATC

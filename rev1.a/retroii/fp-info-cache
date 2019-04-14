@@ -1,4 +1,4 @@
-20537884738346781
+20540995114254161
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79933,6 +79933,13 @@ BOURNS_91A1A-B24-D15L
 3
 3
 retroii_footprints
+CUI_CVI_1708
+
+
+0
+2
+2
+retroii_footprints
 C_Disc_D3.0mm_W2.0mm_P2.50mm
 C, Disc series, Radial, pin pitch=2.50mm, , diameter*width=3*2mm^2, Capacitor
 C Disc series Radial pin pitch 2.50mm  diameter 3mm width 2mm Capacitor
@@ -79995,6 +80002,13 @@ Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W le
 0
 2
 2
+retroii_footprints
+SJ13525NHeadphone
+
+
+0
+5
+5
 retroii_footprints
 TE_5530841-5
 
