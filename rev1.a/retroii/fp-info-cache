@@ -1,4 +1,4 @@
-20540995114254161
+20542550402926708
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -80009,6 +80009,13 @@ SJ13525NHeadphone
 0
 5
 5
+retroii_footprints
+SW_Micro_Right_Angle_SPST
+
+Switch Micro SPST
+0
+5
+4
 retroii_footprints
 TE_5530841-5
 

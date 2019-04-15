@@ -84,7 +84,7 @@ AR Path="/5C8AA2BF/5C8ADA13" Ref="SW2"  Part="1"
 AR Path="/5C8AABED/5C8ADA13" Ref="SW?"  Part="1" 
 F 0 "SW2" H 2215 1280 50  0000 C CNN
 F 1 "SPST2" H 2215 1080 50  0000 C CNN
-F 2 "6502Library:SW_Micro_Right_Angle_SPST" H 2215 1180 50  0001 C CNN
+F 2 "retroii_footprints:SW_Micro_Right_Angle_SPST" H 2215 1180 50  0001 C CNN
 F 3 "" H 2215 1180 50  0000 C CNN
 	1    2215 1180
 	1    0    0    -1  

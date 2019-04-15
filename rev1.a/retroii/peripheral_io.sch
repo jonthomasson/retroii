@@ -2108,89 +2108,89 @@ Wire Wire Line
 Text Label 2545 4900 0    50   ~ 0
 Prop_7M
 $Comp
-L Device:C_Small C?
+L Device:C_Small C58
 U 1 1 5CD43AB0
 P 1310 7100
-F 0 "C?" H 1320 7160 50  0000 L CNN
+F 0 "C58" H 1320 7160 50  0000 L CNN
 F 1 "DNP" H 1330 7030 50  0000 L CNN
-F 2 "" H 1310 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 1310 7100 50  0001 C CNN
 F 3 "~" H 1310 7100 50  0001 C CNN
 	1    1310 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C59
 U 1 1 5CD476D4
 P 1505 7100
-F 0 "C?" H 1515 7160 50  0000 L CNN
+F 0 "C59" H 1515 7160 50  0000 L CNN
 F 1 "DNP" H 1525 7030 50  0000 L CNN
-F 2 "" H 1505 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 1505 7100 50  0001 C CNN
 F 3 "~" H 1505 7100 50  0001 C CNN
 	1    1505 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C60
 U 1 1 5CD4865B
 P 1705 7100
-F 0 "C?" H 1715 7160 50  0000 L CNN
+F 0 "C60" H 1715 7160 50  0000 L CNN
 F 1 "DNP" H 1725 7030 50  0000 L CNN
-F 2 "" H 1705 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 1705 7100 50  0001 C CNN
 F 3 "~" H 1705 7100 50  0001 C CNN
 	1    1705 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C61
 U 1 1 5CD48661
 P 1900 7100
-F 0 "C?" H 1910 7160 50  0000 L CNN
+F 0 "C61" H 1910 7160 50  0000 L CNN
 F 1 "DNP" H 1920 7030 50  0000 L CNN
-F 2 "" H 1900 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 1900 7100 50  0001 C CNN
 F 3 "~" H 1900 7100 50  0001 C CNN
 	1    1900 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C62
 U 1 1 5CD8DC28
 P 2095 7100
-F 0 "C?" H 2105 7160 50  0000 L CNN
+F 0 "C62" H 2105 7160 50  0000 L CNN
 F 1 "DNP" H 2115 7030 50  0000 L CNN
-F 2 "" H 2095 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 2095 7100 50  0001 C CNN
 F 3 "~" H 2095 7100 50  0001 C CNN
 	1    2095 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C63
 U 1 1 5CD8DC2E
 P 2290 7100
-F 0 "C?" H 2300 7160 50  0000 L CNN
+F 0 "C63" H 2300 7160 50  0000 L CNN
 F 1 "DNP" H 2310 7030 50  0000 L CNN
-F 2 "" H 2290 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 2290 7100 50  0001 C CNN
 F 3 "~" H 2290 7100 50  0001 C CNN
 	1    2290 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C64
 U 1 1 5CD8DC34
 P 2490 7100
-F 0 "C?" H 2500 7160 50  0000 L CNN
+F 0 "C64" H 2500 7160 50  0000 L CNN
 F 1 "DNP" H 2510 7030 50  0000 L CNN
-F 2 "" H 2490 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 2490 7100 50  0001 C CNN
 F 3 "~" H 2490 7100 50  0001 C CNN
 	1    2490 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C65
 U 1 1 5CD8DC3A
 P 2685 7100
-F 0 "C?" H 2695 7160 50  0000 L CNN
+F 0 "C65" H 2695 7160 50  0000 L CNN
 F 1 "DNP" H 2705 7030 50  0000 L CNN
-F 2 "" H 2685 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 2685 7100 50  0001 C CNN
 F 3 "~" H 2685 7100 50  0001 C CNN
 	1    2685 7100
 	1    0    0    -1  
@@ -2278,10 +2278,10 @@ Text Label 1125 6880 0    50   ~ 0
 Wire Wire Line
 	1120 7285 1120 7305
 $Comp
-L 6502Bootstrapper-cache:GND #PWR?
+L 6502Bootstrapper-cache:GND #PWR095
 U 1 1 5D2A2DB5
 P 1120 7305
-F 0 "#PWR?" H 1120 7055 50  0001 C CNN
+F 0 "#PWR095" H 1120 7055 50  0001 C CNN
 F 1 "GND" H 1120 7170 50  0000 C CNN
 F 2 "" H 1120 7305 60  0000 C CNN
 F 3 "" H 1120 7305 60  0000 C CNN
@@ -2289,89 +2289,89 @@ F 3 "" H 1120 7305 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C66
 U 1 1 5D2A7028
 P 3240 7100
-F 0 "C?" H 3250 7160 50  0000 L CNN
+F 0 "C66" H 3250 7160 50  0000 L CNN
 F 1 "DNP" H 3260 7030 50  0000 L CNN
-F 2 "" H 3240 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 3240 7100 50  0001 C CNN
 F 3 "~" H 3240 7100 50  0001 C CNN
 	1    3240 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C67
 U 1 1 5D2A702E
 P 3435 7100
-F 0 "C?" H 3445 7160 50  0000 L CNN
+F 0 "C67" H 3445 7160 50  0000 L CNN
 F 1 "DNP" H 3455 7030 50  0000 L CNN
-F 2 "" H 3435 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 3435 7100 50  0001 C CNN
 F 3 "~" H 3435 7100 50  0001 C CNN
 	1    3435 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C68
 U 1 1 5D2A7034
 P 3635 7100
-F 0 "C?" H 3645 7160 50  0000 L CNN
+F 0 "C68" H 3645 7160 50  0000 L CNN
 F 1 "DNP" H 3655 7030 50  0000 L CNN
-F 2 "" H 3635 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 3635 7100 50  0001 C CNN
 F 3 "~" H 3635 7100 50  0001 C CNN
 	1    3635 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C69
 U 1 1 5D2A703A
 P 3830 7100
-F 0 "C?" H 3840 7160 50  0000 L CNN
+F 0 "C69" H 3840 7160 50  0000 L CNN
 F 1 "DNP" H 3850 7030 50  0000 L CNN
-F 2 "" H 3830 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 3830 7100 50  0001 C CNN
 F 3 "~" H 3830 7100 50  0001 C CNN
 	1    3830 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C70
 U 1 1 5D2A7040
 P 4025 7100
-F 0 "C?" H 4035 7160 50  0000 L CNN
+F 0 "C70" H 4035 7160 50  0000 L CNN
 F 1 "DNP" H 4045 7030 50  0000 L CNN
-F 2 "" H 4025 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 4025 7100 50  0001 C CNN
 F 3 "~" H 4025 7100 50  0001 C CNN
 	1    4025 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C71
 U 1 1 5D2A7046
 P 4220 7100
-F 0 "C?" H 4230 7160 50  0000 L CNN
+F 0 "C71" H 4230 7160 50  0000 L CNN
 F 1 "DNP" H 4240 7030 50  0000 L CNN
-F 2 "" H 4220 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 4220 7100 50  0001 C CNN
 F 3 "~" H 4220 7100 50  0001 C CNN
 	1    4220 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C72
 U 1 1 5D2A704C
 P 4420 7100
-F 0 "C?" H 4430 7160 50  0000 L CNN
+F 0 "C72" H 4430 7160 50  0000 L CNN
 F 1 "DNP" H 4440 7030 50  0000 L CNN
-F 2 "" H 4420 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 4420 7100 50  0001 C CNN
 F 3 "~" H 4420 7100 50  0001 C CNN
 	1    4420 7100
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C?
+L Device:C_Small C73
 U 1 1 5D2A7052
 P 4615 7100
-F 0 "C?" H 4625 7160 50  0000 L CNN
+F 0 "C73" H 4625 7160 50  0000 L CNN
 F 1 "DNP" H 4635 7030 50  0000 L CNN
-F 2 "" H 4615 7100 50  0001 C CNN
+F 2 "retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm" H 4615 7100 50  0001 C CNN
 F 3 "~" H 4615 7100 50  0001 C CNN
 	1    4615 7100
 	1    0    0    -1  
@@ -2457,10 +2457,10 @@ Wire Wire Line
 Wire Wire Line
 	3050 7285 3050 7305
 $Comp
-L 6502Bootstrapper-cache:GND #PWR?
+L 6502Bootstrapper-cache:GND #PWR096
 U 1 1 5D2A7088
 P 3050 7305
-F 0 "#PWR?" H 3050 7055 50  0001 C CNN
+F 0 "#PWR096" H 3050 7055 50  0001 C CNN
 F 1 "GND" H 3050 7170 50  0000 C CNN
 F 2 "" H 3050 7305 60  0000 C CNN
 F 3 "" H 3050 7305 60  0000 C CNN
