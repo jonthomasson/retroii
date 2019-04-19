@@ -1,4 +1,4 @@
-20542550402926708
+20545754550779197
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79919,6 +79919,13 @@ Amphenol_DSUB9_D15S33E4GV00LF
 17
 15
 retroii_footprints
+Amphenol_ICD15S13E6GV00LF
+
+
+0
+17
+15
+retroii_footprints
 Barrel_Jack_PJ002A
 
 
@@ -79932,6 +79939,13 @@ BOURNS_91A1A-B24-D15L
 0
 3
 3
+retroii_footprints
+Bourns_SRP1770TA-101M
+
+
+0
+2
+1
 retroii_footprints
 CUI_CVI_1708
 
