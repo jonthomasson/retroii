@@ -12,4 +12,10 @@ K IDT 7008 Dual Port
 F https://www.mouser.com/datasheet/2/464/IDT_7008_DST_20180322-1485473.pdf
 $ENDCMP
 #
+$CMP SW_Push
+D Push button switch, generic, two pins
+K switch normally-open pushbutton push-button
+F ~
+$ENDCMP
+#
 #End Doc Library

@@ -1,5 +1,11 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP AudioJack2_Ground
+D Audio Jack, 2 Poles (Mono / TS), Grounded Sleeve
+K audio jack receptacle mono phone headphone TS connector
+F ~
+$ENDCMP
+#
 $CMP IDT7008_Dual_Port_RAM
 D 512kbit 64Kb dual port sram
 K IDT 7008 Dual Port

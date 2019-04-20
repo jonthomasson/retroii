@@ -475,12 +475,12 @@ Connection ~ 6910 1690
 NoConn ~ 2700 2500
 NoConn ~ 2700 1700
 $Comp
-L 6502:SW_PUSH_SAFE SW5
+L retroii:SW_Push SW5
 U 1 1 5C8ADCC7
 P 3580 1455
 F 0 "SW5" H 3730 1565 50  0000 C CNN
 F 1 "SW_PUSH_SAFE" H 3580 1375 50  0000 C CNN
-F 2 "6502Library:1-1825027-1-TACTILE_SWITCH" H 3580 1455 60  0001 C CNN
+F 2 "retroii_footprints:TE_1825910-6" H 3580 1455 60  0001 C CNN
 F 3 "" H 3580 1455 60  0000 C CNN
 	1    3580 1455
 	1    0    0    -1  
@@ -1360,23 +1360,23 @@ $EndComp
 Text Label 4420 5450 2    50   ~ 0
 ~Reset
 $Comp
-L Switch:SW_Push SW4
+L retroii:SW_Push SW4
 U 1 1 5D8FADA2
 P 1270 3375
 F 0 "SW4" H 1270 3325 50  0000 C CNN
 F 1 "LOAD" H 1270 3530 50  0000 C CNN
-F 2 "" H 1270 3575 50  0001 C CNN
+F 2 "retroii_footprints:TE_Tactile_2-1825027-0" H 1270 3575 50  0001 C CNN
 F 3 "~" H 1270 3575 50  0001 C CNN
 	1    1270 3375
 	1    0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_Push SW6
+L retroii:SW_Push SW6
 U 1 1 5D8FC47F
 P 3725 5450
 F 0 "SW6" H 3735 5385 50  0000 C CNN
 F 1 "RESET" H 3725 5605 50  0000 C CNN
-F 2 "" H 3725 5650 50  0001 C CNN
+F 2 "retroii_footprints:TE_Tactile_2-1825027-0" H 3725 5650 50  0001 C CNN
 F 3 "~" H 3725 5650 50  0001 C CNN
 	1    3725 5450
 	1    0    0    -1  
@@ -1514,12 +1514,12 @@ Connection ~ 1635 3375
 Wire Wire Line
 	1635 3375 1700 3375
 $Comp
-L Switch:SW_Push SW3
+L retroii:SW_Push SW3
 U 1 1 5CDC6D67
 P 1270 3980
 F 0 "SW3" H 1270 3930 50  0000 C CNN
 F 1 "SAVE" H 1270 4135 50  0000 C CNN
-F 2 "" H 1270 4180 50  0001 C CNN
+F 2 "retroii_footprints:TE_Tactile_2-1825027-0" H 1270 4180 50  0001 C CNN
 F 3 "~" H 1270 4180 50  0001 C CNN
 	1    1270 3980
 	1    0    0    -1  
@@ -1569,12 +1569,12 @@ Connection ~ 1635 3980
 Wire Wire Line
 	1635 3980 1700 3980
 $Comp
-L Switch:SW_Push SW7
+L retroii:SW_Push SW7
 U 1 1 5CE00EDA
 P 1270 4535
 F 0 "SW7" H 1270 4485 50  0000 C CNN
 F 1 "MISC1" H 1270 4690 50  0000 C CNN
-F 2 "" H 1270 4735 50  0001 C CNN
+F 2 "retroii_footprints:TE_Tactile_2-1825027-0" H 1270 4735 50  0001 C CNN
 F 3 "~" H 1270 4735 50  0001 C CNN
 	1    1270 4535
 	1    0    0    -1  
@@ -1624,12 +1624,12 @@ Connection ~ 1635 4535
 Wire Wire Line
 	1635 4535 1700 4535
 $Comp
-L Switch:SW_Push SW8
+L retroii:SW_Push SW8
 U 1 1 5CE00EF8
 P 1270 5140
 F 0 "SW8" H 1270 5090 50  0000 C CNN
 F 1 "MISC2" H 1270 5295 50  0000 C CNN
-F 2 "" H 1270 5340 50  0001 C CNN
+F 2 "retroii_footprints:TE_Tactile_2-1825027-0" H 1270 5340 50  0001 C CNN
 F 3 "~" H 1270 5340 50  0001 C CNN
 	1    1270 5140
 	1    0    0    -1  
@@ -1884,6 +1884,11 @@ Text HLabel 3960 4560 0    50   Output ~ 0
 Prop_7M
 NoConn ~ 5115 6835
 NoConn ~ 5115 6935
+Wire Wire Line
+	3380 1455 3280 1455
+Wire Wire Line
+	3780 1455 3880 1455
+Connection ~ 3880 1455
 Wire Bus Line
 	10725 2260 10725 5405
 $EndSCHEMATC

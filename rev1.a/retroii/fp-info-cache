@@ -1,4 +1,4 @@
-20545754550779197
+20550421859443725
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79945,7 +79945,7 @@ Bourns_SRP1770TA-101M
 
 0
 2
-1
+2
 retroii_footprints
 CUI_CVI_1708
 
@@ -80010,6 +80010,13 @@ MD60SM
 9
 6
 retroii_footprints
+Pulse_PF0382.223NLT
+
+
+0
+2
+2
+retroii_footprints
 R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal
 Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf
 Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm
@@ -80031,12 +80038,26 @@ Switch Micro SPST
 5
 4
 retroii_footprints
+TE_1825910-6
+
+
+0
+4
+4
+retroii_footprints
 TE_5530841-5
 
 
 0
 50
 50
+retroii_footprints
+TE_Tactile_2-1825027-0
+
+
+0
+4
+4
 retroii_footprints
 WP1503CB_LED
 
