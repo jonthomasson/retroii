@@ -1526,7 +1526,7 @@ Wire Wire Line
 	10445 4770 10495 4770
 Wire Wire Line
 	10245 4770 10140 4770
+Connection ~ 10140 4770
 Wire Bus Line
 	10690 2755 10690 3195
-Connection ~ 10140 4770
 $EndSCHEMATC
