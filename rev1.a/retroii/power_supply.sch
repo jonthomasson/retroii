@@ -818,11 +818,11 @@ Wire Wire Line
 	8090 4270 8090 4190
 Connection ~ 7600 4270
 $Comp
-L Connector_Generic:Conn_02x10_Counter_Clockwise J11
+L Connector_Generic:Conn_02x10_Odd_Even J11
 U 1 1 5CAAD78B
 P 4765 6180
 F 0 "J11" V 4769 6660 50  0000 L CNN
-F 1 "Conn_02x10_Counter_Clockwise" V 4860 6660 50  0000 L CNN
+F 1 "Conn_02x10" V 4860 6660 50  0000 L CNN
 F 2 "Connector_PinSocket_2.54mm:PinSocket_2x10_P2.54mm_Vertical" H 4765 6180 50  0001 C CNN
 F 3 "~" H 4765 6180 50  0001 C CNN
 	1    4765 6180

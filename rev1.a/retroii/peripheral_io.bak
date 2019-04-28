@@ -2467,6 +2467,8 @@ F 3 "" H 3050 7305 60  0000 C CNN
 	1    3050 7305
 	1    0    0    -1  
 $EndComp
+Text Label 3055 6880 0    50   ~ 0
++12V
 Wire Bus Line
 	7505 5600 7505 6490
 Wire Bus Line
@@ -2499,6 +2501,4 @@ Wire Bus Line
 	5460 725  5460 3225
 Wire Bus Line
 	3775 725  3775 3650
-Text Label 3055 6880 0    50   ~ 0
-+12V
 $EndSCHEMATC
