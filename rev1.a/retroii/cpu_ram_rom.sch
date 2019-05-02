@@ -1668,10 +1668,6 @@ Wire Wire Line
 Wire Wire Line
 	15735 2080 15735 1580
 Connection ~ 15500 2080
-Wire Wire Line
-	15735 1375 15735 905 
-Wire Wire Line
-	15355 905  15735 905 
 $Comp
 L Connector_Generic:Conn_01x02 J23
 U 1 1 5CFF8724
@@ -1714,6 +1710,10 @@ Wire Wire Line
 	4625 7960 4325 7960
 Text Label 4625 7960 2    50   ~ 0
 Clock
+Wire Wire Line
+	15735 905  15735 1380
+Wire Wire Line
+	15355 905  15735 905 
 Wire Bus Line
 	6225 1590 6225 3190
 Wire Bus Line

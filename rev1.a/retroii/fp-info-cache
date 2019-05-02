@@ -1,4 +1,4 @@
-20551978664665361
+20553535993978243
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -80065,6 +80065,13 @@ TE_Tactile_2-1825027-0
 0
 4
 4
+retroii_footprints
+TO-220-5_Horizontal_TabDown
+TO-220-5, Horizontal, RM 1.7mm, Pentawatt, Multiwatt-5, see http://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/ltc-legacy-to-220/to-220_5_05-08-1421_straight_lead.pdf
+TO-220-5 Horizontal RM 1.7mm Pentawatt Multiwatt-5
+0
+5
+5
 retroii_footprints
 WP1503CB_LED
 

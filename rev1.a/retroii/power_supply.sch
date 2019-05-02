@@ -99,7 +99,7 @@ U 1 1 5CA26C25
 P 2945 2215
 F 0 "U11" H 2580 1975 50  0000 C CNN
 F 1 "LM2576-12" H 2945 2491 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-220-5_Vertical" H 2945 1965 50  0001 L CIN
+F 2 "retroii_footprints:TO-220-5_Horizontal_TabDown" H 2945 1965 50  0001 L CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/lm2575.pdf" H 2945 2215 50  0001 C CNN
 	1    2945 2215
 	1    0    0    -1  
@@ -226,7 +226,7 @@ U 1 1 5C9B0101
 P 3335 3705
 F 0 "U12" H 2965 3465 50  0000 C CNN
 F 1 "LM2576-5" H 3330 3945 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 3335 3455 50  0001 L CIN
+F 2 "retroii_footprints:TO-220-5_Horizontal_TabDown" H 3335 3455 50  0001 L CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 3335 3705 50  0001 C CNN
 	1    3335 3705
 	1    0    0    -1  
@@ -386,7 +386,7 @@ U 1 1 5CA434E4
 P 3335 4745
 F 0 "U13" H 2965 4505 50  0000 C CNN
 F 1 "LM2576-12" H 3330 4985 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 3335 4495 50  0001 L CIN
+F 2 "retroii_footprints:TO-220-5_Horizontal_TabDown" H 3335 4495 50  0001 L CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 3335 4745 50  0001 C CNN
 	1    3335 4745
 	1    0    0    -1  
@@ -542,7 +542,7 @@ U 1 1 5CA4BB25
 P 6560 2200
 F 0 "U15" H 6195 1960 50  0000 C CNN
 F 1 "LM2576-5" H 6560 2476 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-220-5_Vertical" H 6560 1950 50  0001 L CIN
+F 2 "retroii_footprints:TO-220-5_Horizontal_TabDown" H 6560 1950 50  0001 L CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/lm2575.pdf" H 6560 2200 50  0001 C CNN
 	1    6560 2200
 	1    0    0    -1  
@@ -667,7 +667,7 @@ U 1 1 5CA5B567
 P 6485 3780
 F 0 "U14" H 6115 3540 50  0000 C CNN
 F 1 "LM2576-3.3" H 6480 4020 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 6485 3530 50  0001 L CIN
+F 2 "retroii_footprints:TO-220-5_Horizontal_TabDown" H 6485 3530 50  0001 L CIN
 F 3 "http://www.ti.com/lit/ds/symlink/lm2576.pdf" H 6485 3780 50  0001 C CNN
 	1    6485 3780
 	1    0    0    -1  

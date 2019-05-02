@@ -858,6 +858,7 @@ Wire Wire Line
 	3380 1455 3280 1455
 Wire Wire Line
 	3780 1455 3880 1455
+Connection ~ 3880 1455
 Wire Bus Line
 	5285 3760 5285 4890
 Wire Bus Line
@@ -866,5 +867,4 @@ Wire Bus Line
 	3365 2410 3365 3160
 Wire Bus Line
 	3535 3960 3535 4890
-Connection ~ 3880 1455
 $EndSCHEMATC
