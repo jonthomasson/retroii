@@ -1429,10 +1429,10 @@ Wire Wire Line
 	10245 4770 10140 4770
 Connection ~ 10140 4770
 $Comp
-L Timer:NE556 U2
+L Timer:NE556 H131
 U 1 1 5CCBC03B
 P 4780 2960
-F 0 "U2" H 4485 2615 50  0000 C CNN
+F 0 "H131" H 4485 2615 50  0000 C CNN
 F 1 "NE556" H 4975 3305 50  0000 C CNN
 F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 4780 2960 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne556.pdf" H 4780 2960 50  0001 C CNN
@@ -1442,10 +1442,10 @@ $EndComp
 Wire Wire Line
 	3795 2145 4060 2145
 $Comp
-L Timer:NE556 U2
+L Timer:NE556 H131
 U 2 1 5CCD9CE9
 P 4780 4270
-F 0 "U2" H 4490 3930 50  0000 C CNN
+F 0 "H131" H 4490 3930 50  0000 C CNN
 F 1 "NE556" H 4970 4615 50  0000 C CNN
 F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 4780 4270 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne556.pdf" H 4780 4270 50  0001 C CNN
@@ -1597,10 +1597,10 @@ F 3 "~" H 4920 5085 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Timer:NE556 U7
+L Timer:NE556 H132
 U 1 1 5CDCD2A0
 P 4780 5590
-F 0 "U7" H 4485 5245 50  0000 C CNN
+F 0 "H132" H 4485 5245 50  0000 C CNN
 F 1 "NE556" H 4975 5935 50  0000 C CNN
 F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 4780 5590 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne556.pdf" H 4780 5590 50  0001 C CNN
@@ -1608,10 +1608,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/ne556.pdf" H 4780 5590 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Timer:NE556 U7
+L Timer:NE556 H132
 U 2 1 5CDCD2A6
 P 4780 6900
-F 0 "U7" H 4490 6560 50  0000 C CNN
+F 0 "H132" H 4490 6560 50  0000 C CNN
 F 1 "NE556" H 4970 7245 50  0000 C CNN
 F 2 "retroii_footprints:DIP-14_W7.62mm_Socket_LongPads" H 4780 6900 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne556.pdf" H 4780 6900 50  0001 C CNN
