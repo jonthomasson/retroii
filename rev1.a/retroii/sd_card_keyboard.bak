@@ -1436,8 +1436,6 @@ Wire Wire Line
 Wire Wire Line
 	3375 4810 3375 4460
 Wire Wire Line
-	3375 4460 4030 4460
-Wire Wire Line
 	4980 4560 5035 4560
 Wire Wire Line
 	5035 4560 5035 4705
@@ -2034,6 +2032,10 @@ Wire Wire Line
 	3730 3160 3599 3160
 Wire Wire Line
 	3730 3260 3599 3260
+Text HLabel 3957 4460 0    50   Output ~ 0
+Prop_Q3
+Wire Wire Line
+	3375 4460 4030 4460
 Wire Bus Line
 	10725 2260 10725 5405
 $EndSCHEMATC

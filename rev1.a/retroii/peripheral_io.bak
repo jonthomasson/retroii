@@ -194,7 +194,6 @@ Text Label 2545 2425 0    50   ~ 0
 Phase_0
 Text Label 2545 2225 0    50   ~ 0
 Phase_1
-NoConn ~ 2860 2125
 Entry Wire Line
 	3675 1825 3775 1725
 Entry Wire Line
@@ -427,7 +426,6 @@ Wire Wire Line
 	4545 2225 4230 2225
 Text Label 4230 2225 0    50   ~ 0
 Phase_1
-NoConn ~ 4545 2125
 Entry Wire Line
 	5360 1825 5460 1725
 Entry Wire Line
@@ -660,7 +658,6 @@ Wire Wire Line
 	6235 2225 5920 2225
 Text Label 5920 2225 0    50   ~ 0
 Phase_1
-NoConn ~ 6235 2125
 Entry Wire Line
 	7050 1825 7150 1725
 Entry Wire Line
@@ -893,7 +890,6 @@ Wire Wire Line
 	7920 2225 7605 2225
 Text Label 7605 2225 0    50   ~ 0
 Phase_1
-NoConn ~ 7920 2125
 Entry Wire Line
 	8735 1825 8835 1725
 Entry Wire Line
@@ -1126,7 +1122,6 @@ Wire Wire Line
 	2860 5100 2545 5100
 Text Label 2545 5100 0    50   ~ 0
 Phase_1
-NoConn ~ 2860 5000
 Entry Wire Line
 	3675 4700 3775 4600
 Entry Wire Line
@@ -1359,7 +1354,6 @@ Wire Wire Line
 	4545 5100 4230 5100
 Text Label 4230 5100 0    50   ~ 0
 Phase_1
-NoConn ~ 4545 5000
 Entry Wire Line
 	5360 4700 5460 4600
 Entry Wire Line
@@ -1592,7 +1586,6 @@ Wire Wire Line
 	6235 5100 5920 5100
 Text Label 5920 5100 0    50   ~ 0
 Phase_1
-NoConn ~ 6235 5000
 Entry Wire Line
 	7050 4700 7150 4600
 Entry Wire Line
@@ -1825,7 +1818,6 @@ Wire Wire Line
 	7920 5100 7605 5100
 Text Label 7605 5100 0    50   ~ 0
 Phase_1
-NoConn ~ 7920 5000
 Entry Wire Line
 	8735 4700 8835 4600
 Entry Wire Line
@@ -2501,4 +2493,20 @@ Wire Bus Line
 	5460 725  5460 3225
 Wire Bus Line
 	3775 725  3775 3650
+Text HLabel 2860 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 4545 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 6235 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 7920 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 7920 5000 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 6235 5000 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 4545 5000 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 2860 5000 0    50   Input ~ 0
+Prop_Q3
 $EndSCHEMATC
