@@ -2461,6 +2461,22 @@ F 3 "" H 3050 7305 60  0000 C CNN
 $EndComp
 Text Label 3055 6880 0    50   ~ 0
 +12V
+Text HLabel 2860 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 4545 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 6235 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 7920 2125 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 7920 5000 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 6235 5000 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 4545 5000 0    50   Input ~ 0
+Prop_Q3
+Text HLabel 2860 5000 0    50   Input ~ 0
+Prop_Q3
 Wire Bus Line
 	7505 5600 7505 6490
 Wire Bus Line
@@ -2493,20 +2509,4 @@ Wire Bus Line
 	5460 725  5460 3225
 Wire Bus Line
 	3775 725  3775 3650
-Text HLabel 2860 2125 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 4545 2125 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 6235 2125 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 7920 2125 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 7920 5000 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 6235 5000 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 4545 5000 0    50   Input ~ 0
-Prop_Q3
-Text HLabel 2860 5000 0    50   Input ~ 0
-Prop_Q3
 $EndSCHEMATC
