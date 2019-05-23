@@ -6,6 +6,18 @@ K audio jack receptacle mono phone headphone TS connector
 F ~
 $ENDCMP
 #
+$CMP DB15_Female_Stacked
+D 15-pin female D-SUB connector (low-density/2 columns)
+K female D-SUB connector
+F  ~
+$ENDCMP
+#
+$CMP DB9_Female_Stacked
+D 9-pin female D-SUB connector
+K connector female D-SUB
+F  ~
+$ENDCMP
+#
 $CMP IDT7008_Dual_Port_RAM
 D 512kbit 64Kb dual port sram
 K IDT 7008 Dual Port

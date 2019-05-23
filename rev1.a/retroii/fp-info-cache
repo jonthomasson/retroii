@@ -1,4 +1,4 @@
-20555094699541918
+20556653377064572
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79930,8 +79930,15 @@ Amphenol_L17H2220131
 
 
 0
-1
-1
+22
+18
+retroii_footprints
+Amphenol_L17H2440131
+
+
+0
+34
+30
 retroii_footprints
 Assman_PLCC84_ACCS084GT
 
