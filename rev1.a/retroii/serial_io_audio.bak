@@ -232,8 +232,6 @@ Wire Wire Line
 	8950 4810 8910 4810
 Wire Wire Line
 	8610 4810 8540 4810
-Wire Wire Line
-	8145 5010 8145 5210
 $Comp
 L Device:C_Small C38
 U 1 1 5C8C34C6
@@ -1095,44 +1093,6 @@ Wire Wire Line
 	10590 3095 10370 3095
 NoConn ~ 10200 3730
 $Comp
-L 6502:R R56
-U 1 1 5CCAFCB4
-P 8375 4100
-F 0 "R56" V 8450 4050 50  0000 L CNN
-F 1 "1K" V 8370 4050 50  0000 L CNN
-F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8305 4100 30  0001 C CNN
-F 3 "" H 8375 4100 30  0000 C CNN
-	1    8375 4100
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	8525 4100 8730 4100
-Text Label 8730 4100 2    50   ~ 0
-+5V
-Wire Wire Line
-	8145 4410 8145 4100
-Wire Wire Line
-	8145 4100 8225 4100
-$Comp
-L 6502:R R57
-U 1 1 5CCC6EE7
-P 8380 6200
-F 0 "R57" V 8455 6150 50  0000 L CNN
-F 1 "1K" V 8375 6150 50  0000 L CNN
-F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8310 6200 30  0001 C CNN
-F 3 "" H 8380 6200 30  0000 C CNN
-	1    8380 6200
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	8530 6200 8735 6200
-Text Label 8735 6200 2    50   ~ 0
-+5V
-Wire Wire Line
-	8230 6200 8145 6200
-Wire Wire Line
-	8145 6200 8145 6140
-$Comp
 L 74xx:74LS74 J13
 U 3 1 5CD2FA67
 P 6095 7200
@@ -1222,26 +1182,6 @@ Wire Wire Line
 Connection ~ 6585 7200
 Wire Wire Line
 	6585 7200 6775 7200
-$Comp
-L 6502:R R67
-U 1 1 5CE48ADE
-P 8360 5210
-F 0 "R67" V 8435 5160 50  0000 L CNN
-F 1 "1K" V 8355 5160 50  0000 L CNN
-F 2 "retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 8290 5210 30  0001 C CNN
-F 3 "" H 8360 5210 30  0000 C CNN
-	1    8360 5210
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	8510 5210 8715 5210
-Text Label 8715 5210 2    50   ~ 0
-+5V
-Wire Wire Line
-	8210 5210 8145 5210
-Connection ~ 8145 5210
-Wire Wire Line
-	8145 5210 8145 5540
 $Comp
 L Device:Jumper_NC_Small JP19
 U 1 1 5CBF9D7F
@@ -1798,7 +1738,7 @@ U 1 1 5D2D1F35
 P 825 1235
 F 0 "J2" H 670 -620 50  0000 C CNN
 F 1 "DB9_Female_Stacked" H 857 1836 50  0000 C CNN
-F 2 "" V 775 1235 50  0001 C CNN
+F 2 "retroii_footprints:Amphenol_L17H2220131" V 775 1235 50  0001 C CNN
 F 3 " ~" H 775 1235 50  0001 C CNN
 	1    825  1235
 	1    0    0    -1  
@@ -1817,7 +1757,7 @@ U 1 1 5D3A77E0
 P 895 5175
 F 0 "J3" H 695 3355 50  0000 C CNN
 F 1 "DB15_Female_Stacked" H 839 6976 50  0000 C CNN
-F 2 "" H 745 6075 50  0001 C CNN
+F 2 "retroii_footprints:Amphenol_L17H2440131" H 745 6075 50  0001 C CNN
 F 3 " ~" H 745 6075 50  0001 C CNN
 	1    895  5175
 	1    0    0    -1  
@@ -1832,6 +1772,44 @@ Text Notes 1445 3560 0    50   ~ 0
 PC Port 1
 Text Notes 1465 5470 0    50   ~ 0
 PC Port 2
+$Comp
+L Device:R_Network03 RA2
+U 1 1 5D4AD33A
+P 7275 5215
+F 0 "RA2" V 7065 5285 50  0000 C CNN
+F 1 "1K R_Network" V 7509 5215 50  0000 C CNN
+F 2 "Resistor_THT:R_Array_SIP4" V 7550 5215 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 7275 5215 50  0001 C CNN
+	1    7275 5215
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6870 5315 7075 5315
+Text Label 6870 5315 0    50   ~ 0
++5V
+Wire Wire Line
+	8145 5010 8145 5215
+Wire Wire Line
+	7475 5215 8145 5215
+Connection ~ 8145 5215
+Wire Wire Line
+	8145 5215 8145 5540
+Wire Wire Line
+	7475 5315 7625 5315
+Wire Wire Line
+	7625 5315 7625 6235
+Wire Wire Line
+	7625 6235 8145 6235
+Wire Wire Line
+	8145 6140 8145 6235
+Wire Wire Line
+	7625 5115 7625 4350
+Wire Wire Line
+	7625 4350 8145 4350
+Wire Wire Line
+	8145 4350 8145 4410
+Wire Wire Line
+	7475 5115 7625 5115
 Wire Bus Line
 	10690 2755 10690 3195
 $EndSCHEMATC
