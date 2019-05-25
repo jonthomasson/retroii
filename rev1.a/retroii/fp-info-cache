@@ -1,4 +1,4 @@
-20556653377064572
+20558212172275565
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -80030,6 +80030,13 @@ MD60SM
 0
 9
 6
+retroii_footprints
+PinSocket_2x08_P2.54mm_Vertical
+Through hole straight socket strip, 2x08, 2.54mm pitch, double cols (from Kicad 4.0.7), script generated
+Through hole socket strip THT 2x08 2.54mm double row
+0
+16
+16
 retroii_footprints
 Pulse_PF0382.223NLT
 

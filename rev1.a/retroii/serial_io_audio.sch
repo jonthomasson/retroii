@@ -990,12 +990,12 @@ SS_AN3_OFF_ON
 Text HLabel 2545 2145 0    50   Input ~ 0
 C040_Strobe
 $Comp
-L Connector_Generic:Conn_02x07_Counter_Clockwise J6
+L Connector_Generic:Conn_02x08_Counter_Clockwise J6
 U 1 1 5C9C9388
 P 3320 1000
-F 0 "J6" H 3290 600 50  0000 C CNN
+F 0 "J6" H 3365 510 50  0000 C CNN
 F 1 "Edge mounted connector" H 3370 1426 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x07_P2.54mm_Horizontal" H 3320 1000 50  0001 C CNN
+F 2 "retroii_footprints:PinSocket_2x08_P2.54mm_Vertical" H 3320 1000 50  0001 C CNN
 F 3 "~" H 3320 1000 50  0001 C CNN
 	1    3320 1000
 	1    0    0    -1  
@@ -1014,56 +1014,56 @@ F 3 "" H 9870 3665 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3620 700  3785 700 
-Text Label 3785 700  2    50   ~ 0
+	2955 1000 3120 1000
+Text Label 2955 1000 0    50   ~ 0
 PB2
 Wire Wire Line
-	3620 800  3785 800 
+	2955 900  3120 900 
 Wire Wire Line
-	3620 900  3785 900 
+	2955 800  3120 800 
 Wire Wire Line
-	3620 1000 3785 1000
-Wire Wire Line
-	3620 1100 3785 1100
-Wire Wire Line
-	3620 1200 3785 1200
+	2955 1200 3120 1200
 Wire Wire Line
 	3620 1300 3785 1300
-Text Label 3785 800  2    50   ~ 0
+Wire Wire Line
+	2955 1300 3120 1300
+Wire Wire Line
+	3620 1200 3785 1200
+Text Label 2955 900  0    50   ~ 0
 PB1
-Text Label 3785 900  2    50   ~ 0
+Text Label 2955 800  0    50   ~ 0
 PB0
 Wire Wire Line
 	2955 700  3120 700 
 Text Label 2955 700  0    50   ~ 0
 +5V
-Text Label 3785 1000 2    50   ~ 0
+Text Label 2955 1200 0    50   ~ 0
 PDL0
-Text Label 3785 1100 2    50   ~ 0
-PDL1
-Text Label 3785 1200 2    50   ~ 0
-PDL2
 Text Label 3785 1300 2    50   ~ 0
+PDL1
+Text Label 2955 1300 0    50   ~ 0
+PDL2
+Text Label 3785 1200 2    50   ~ 0
 PDL3
-Text HLabel 3120 800  0    50   Input ~ 0
+Text HLabel 3620 800  2    50   Input ~ 0
 SS_AN0_OFF_ON
-Text HLabel 3120 900  0    50   Input ~ 0
+Text HLabel 3620 900  2    50   Input ~ 0
 SS_AN1_OFF_ON
-Text HLabel 3120 1000 0    50   Input ~ 0
+Text HLabel 3620 1000 2    50   Input ~ 0
 SS_AN2_OFF_ON
-Text HLabel 3120 1100 0    50   Input ~ 0
+Text HLabel 3620 1100 2    50   Input ~ 0
 SS_AN3_OFF_ON
-Text HLabel 3120 1200 0    50   Input ~ 0
+Text HLabel 3120 1100 0    50   Input ~ 0
 C040_Strobe
 $Comp
 L 6502Bootstrapper-cache:GND #PWR042
 U 1 1 5CA140F0
-P 3120 1300
-F 0 "#PWR042" H 3120 1050 50  0001 C CNN
-F 1 "GND" H 3120 1165 50  0000 C CNN
-F 2 "" H 3120 1300 60  0000 C CNN
-F 3 "" H 3120 1300 60  0000 C CNN
-	1    3120 1300
+P 3055 1415
+F 0 "#PWR042" H 3055 1165 50  0001 C CNN
+F 1 "GND" H 3055 1280 50  0000 C CNN
+F 2 "" H 3055 1415 60  0000 C CNN
+F 3 "" H 3055 1415 60  0000 C CNN
+	1    3055 1415
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1810,6 +1810,12 @@ Wire Wire Line
 	8145 4350 8145 4410
 Wire Wire Line
 	7475 5115 7625 5115
+Wire Wire Line
+	3055 1400 3120 1400
+Wire Wire Line
+	3055 1400 3055 1415
+NoConn ~ 3620 1400
+NoConn ~ 3620 700 
 Wire Bus Line
 	10690 2755 10690 3195
 $EndSCHEMATC
