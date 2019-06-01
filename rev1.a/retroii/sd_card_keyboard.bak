@@ -1310,13 +1310,13 @@ Text HLabel 8190 2710 2    50   BiDi ~ 0
 SDA
 Text HLabel 3390 5850 0    50   Output ~ 0
 Reset
-Text HLabel 3599 2960 0    50   Input ~ 0
-SS_GRAPHICS_TEXT
-Text HLabel 3599 3060 0    50   Input ~ 0
-SS_NOMIX_MIX
-Text HLabel 3599 3160 0    50   Input ~ 0
-SS_PAGE1_PAGE2
 Text HLabel 3599 3260 0    50   Input ~ 0
+SS_GRAPHICS_TEXT
+Text HLabel 3599 3160 0    50   Input ~ 0
+SS_NOMIX_MIX
+Text HLabel 3599 3060 0    50   Input ~ 0
+SS_PAGE1_PAGE2
+Text HLabel 3599 2960 0    50   Input ~ 0
 SS_LORES_HIRES
 Wire Wire Line
 	4980 2810 8050 2810
