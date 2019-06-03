@@ -1447,7 +1447,7 @@ Wire Wire Line
 	10325 1615 10725 1615
 Text HLabel 3290 3790 0    50   Input ~ 0
 PHI2
-Text Notes 5710 7320 0    50   ~ 0
+Text Notes 5690 7355 0    50   ~ 0
 Looking at WDC datasheet, you should use \nthe clock source as PHI2 for all peripherals and timing.
 NoConn ~ 4575 3590
 $Comp
@@ -1689,25 +1689,8 @@ Wire Wire Line
 	4210 3040 4065 3040
 Wire Wire Line
 	4210 3140 4575 3140
-Text HLabel 3825 7960 0    50   Input ~ 0
-Prop_PHI2
-$Comp
-L Jumper:Jumper_3_Open JP15
-U 1 1 5D36A93F
-P 4075 7960
-F 0 "JP15" H 4075 8184 50  0000 C CNN
-F 1 "Jumper_3_Open" H 4075 8093 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 4075 7960 50  0001 C CNN
-F 3 "~" H 4075 7960 50  0001 C CNN
-	1    4075 7960
-	1    0    0    -1  
-$EndComp
-Text HLabel 4075 8110 3    50   Output ~ 0
+Text HLabel 6995 7105 2    50   Output ~ 0
 PHI2
-Wire Wire Line
-	4625 7960 4325 7960
-Text Label 4625 7960 2    50   ~ 0
-Clock
 Wire Wire Line
 	15735 905  15735 1380
 Wire Wire Line
@@ -1725,6 +1708,19 @@ F 3 "" H 4425 2390 30  0000 C CNN
 $EndComp
 Wire Wire Line
 	3885 2240 4240 2240
+$Comp
+L Device:Jumper JP15
+U 1 1 5D791E9F
+P 6490 7105
+F 0 "JP15" H 6490 7369 50  0000 C CNN
+F 1 "Jumper" H 6490 7278 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 6490 7105 50  0001 C CNN
+F 3 "~" H 6490 7105 50  0001 C CNN
+	1    6490 7105
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6790 7105 6995 7105
 Wire Bus Line
 	6225 1590 6225 3190
 Wire Bus Line

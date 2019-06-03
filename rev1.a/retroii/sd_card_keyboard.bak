@@ -1428,7 +1428,7 @@ Wire Wire Line
 Wire Wire Line
 	3175 4810 3175 4260
 Wire Wire Line
-	3175 4260 4030 4260
+	3175 4260 3710 4260
 Wire Wire Line
 	4030 4360 3275 4360
 Wire Wire Line
@@ -1440,7 +1440,7 @@ Wire Wire Line
 Wire Wire Line
 	5035 4560 5035 4705
 Wire Wire Line
-	5035 4705 3575 4705
+	5035 4705 4005 4705
 Wire Wire Line
 	3575 4705 3575 4810
 Wire Wire Line
@@ -1853,10 +1853,8 @@ Wire Wire Line
 Text Label 3270 6495 2    50   ~ 0
 +5V
 Wire Wire Line
-	3475 4560 4030 4560
-Text HLabel 5035 4560 2    50   Output ~ 0
-Prop_PHI2
-Text HLabel 3960 4560 0    50   Output ~ 0
+	3475 4560 3855 4560
+Text HLabel 3375 4810 1    50   Output ~ 0
 Prop_7M
 NoConn ~ 5115 6835
 NoConn ~ 5115 6935
@@ -2032,10 +2030,64 @@ Wire Wire Line
 	3730 3160 3599 3160
 Wire Wire Line
 	3730 3260 3599 3260
-Text HLabel 3957 4460 0    50   Output ~ 0
+Text HLabel 3275 4810 1    50   Output ~ 0
 Prop_Q3
 Wire Wire Line
 	3375 4460 4030 4460
+Text HLabel 3710 5015 3    50   Output ~ 0
+PHI2
+Text HLabel 3855 5015 3    50   Output ~ 0
+RDY
+Text HLabel 4005 5015 3    50   Output ~ 0
+DMA
+$Comp
+L Device:Jumper_NO_Small JP22
+U 1 1 5D7BEB06
+P 4005 4915
+F 0 "JP22" V 3900 4915 50  0000 L CNN
+F 1 "Jumper_NO_Small" V 4050 4963 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 4005 4915 50  0001 C CNN
+F 3 "~" H 4005 4915 50  0001 C CNN
+	1    4005 4915
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4005 4815 4005 4705
+Connection ~ 4005 4705
+Wire Wire Line
+	4005 4705 3575 4705
+$Comp
+L Device:Jumper_NO_Small JP21
+U 1 1 5D7ECAFE
+P 3855 4915
+F 0 "JP21" V 3750 4915 50  0000 L CNN
+F 1 "Jumper_NO_Small" V 3900 4963 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3855 4915 50  0001 C CNN
+F 3 "~" H 3855 4915 50  0001 C CNN
+	1    3855 4915
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3855 4815 3855 4560
+Connection ~ 3855 4560
+Wire Wire Line
+	3855 4560 4030 4560
+$Comp
+L Device:Jumper_NO_Small JP20
+U 1 1 5D802F37
+P 3710 4915
+F 0 "JP20" V 3605 4915 50  0000 L CNN
+F 1 "Jumper_NO_Small" V 3755 4963 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3710 4915 50  0001 C CNN
+F 3 "~" H 3710 4915 50  0001 C CNN
+	1    3710 4915
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3710 4815 3710 4260
 Wire Bus Line
 	10725 2260 10725 5405
+Connection ~ 3710 4260
+Wire Wire Line
+	3710 4260 4030 4260
 $EndSCHEMATC
