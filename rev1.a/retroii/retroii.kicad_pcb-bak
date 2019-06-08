@@ -6,7 +6,7 @@
     (tracks 0)
     (zones 0)
     (modules 294)
-    (nets 364)
+    (nets 365)
   )
 
   (page A2)
@@ -456,6 +456,7 @@
   (net 361 "Net-(J6-Pad16)")
   (net 362 "Net-(J22-Pad1)")
   (net 363 "Net-(J22-Pad2)")
+  (net 364 "Net-(C36-Pad2)")
 
   (net_class Default "This is the default net class."
     (clearance 0.2)
@@ -619,6 +620,7 @@
     (add_net "Net-(C24-Pad1)")
     (add_net "Net-(C30-Pad1)")
     (add_net "Net-(C31-Pad2)")
+    (add_net "Net-(C36-Pad2)")
     (add_net "Net-(C38-Pad1)")
     (add_net "Net-(C38-Pad2)")
     (add_net "Net-(C5-Pad1)")
@@ -1038,7 +1040,7 @@
     )
   )
 
-  (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71040) (tstamp 5CD5EBA7)
+  (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71040) (tstamp 5D03C5F7)
     (at 456 202.5)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
@@ -1119,7 +1121,7 @@
     )
   )
 
-  (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71045) (tstamp 5CD5EBD3)
+  (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71045) (tstamp 5D03C4C9)
     (at 438.5 202.5)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
@@ -5396,7 +5398,7 @@
     (fp_line (start -0.25 1) (end 2.75 1) (layer F.Fab) (width 0.1))
     (fp_line (start -0.25 -1) (end -0.25 1) (layer F.Fab) (width 0.1))
     (pad 2 thru_hole circle (at 2.5 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 46 /Power_Supply/+3V3))
+      (net 364 "Net-(C36-Pad2)"))
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 2 GND))
     (model ${KISYS3DMOD}/Capacitor_THT.3dshapes/C_Disc_D3.0mm_W2.0mm_P2.50mm.wrl
@@ -13961,7 +13963,7 @@
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 328 "Net-(R73-Pad2)"))
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 9 /SD_Card_And_Keyboard/K0))
+      (net 14 /SD_Card_And_Keyboard/Strobe))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -14002,7 +14004,7 @@
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 329 "Net-(R74-Pad2)"))
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 7 /SD_Card_And_Keyboard/K1))
+      (net 12 /CPU_RAM_ROM/RESB))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -14043,7 +14045,7 @@
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 330 "Net-(R75-Pad2)"))
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 13 /SD_Card_And_Keyboard/K2))
+      (net 4 /SD_Card_And_Keyboard/K6))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -14082,7 +14084,7 @@
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 11 /SD_Card_And_Keyboard/K3))
+      (net 8 /SD_Card_And_Keyboard/K5))
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 331 "Net-(R76-Pad2)"))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
@@ -14166,7 +14168,7 @@
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 333 "Net-(R78-Pad2)"))
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 8 /SD_Card_And_Keyboard/K5))
+      (net 11 /SD_Card_And_Keyboard/K3))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -14207,7 +14209,7 @@
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 334 "Net-(R79-Pad2)"))
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 4 /SD_Card_And_Keyboard/K6))
+      (net 13 /SD_Card_And_Keyboard/K2))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -14246,7 +14248,7 @@
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 12 /CPU_RAM_ROM/RESB))
+      (net 7 /SD_Card_And_Keyboard/K1))
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 335 "Net-(R80-Pad2)"))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
@@ -14287,7 +14289,7 @@
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (pad 1 thru_hole circle (at 0 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
-      (net 14 /SD_Card_And_Keyboard/Strobe))
+      (net 9 /SD_Card_And_Keyboard/K0))
     (pad 2 thru_hole oval (at 10.16 0 270) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 336 "Net-(R81-Pad2)"))
     (model ${KISYS3DMOD}/Resistor_THT.3dshapes/R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal.wrl
@@ -17079,7 +17081,7 @@
   )
 
   (module Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical (layer F.Cu) (tedit 59FED5CC) (tstamp 5D03C170)
-    (at 580.025001 210.825001)
+    (at 398.25 331.75 180)
     (descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x02 2.54mm single row")
     (path /5C891714/5D791E9F)
@@ -17107,9 +17109,9 @@
     (fp_line (start 1.27 3.81) (end -1.27 3.81) (layer F.Fab) (width 0.1))
     (fp_line (start 1.27 -1.27) (end 1.27 3.81) (layer F.Fab) (width 0.1))
     (fp_line (start -0.635 -1.27) (end 1.27 -1.27) (layer F.Fab) (width 0.1))
-    (pad 2 thru_hole oval (at 0 2.54) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
+    (pad 2 thru_hole oval (at 0 2.54 180) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 43 /Address_Decoding/PHI2))
-    (pad 1 thru_hole rect (at 0 0) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
+    (pad 1 thru_hole rect (at 0 0 180) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 219 /CPU_RAM_ROM/Clock))
     (model ${KISYS3DMOD}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x02_P2.54mm_Vertical.wrl
       (at (xyz 0 0 0))
@@ -17119,7 +17121,7 @@
   )
 
   (module Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical (layer F.Cu) (tedit 59FED5CC) (tstamp 5D03C186)
-    (at 562.325001 210.825001)
+    (at 508.5 223.75)
     (descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x02 2.54mm single row")
     (path /5C8AABED/5D802F37)
@@ -17158,8 +17160,8 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical (layer F.Cu) (tedit 59FED5CC) (tstamp 5D03C19C)
-    (at 566.975001 210.825001)
+  (module Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical (layer F.Cu) (tedit 59FED5CC) (tstamp 5D03C2C6)
+    (at 534.25 223.25)
     (descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x02 2.54mm single row")
     (path /5C8AABED/5D7ECAFE)
@@ -17199,7 +17201,7 @@
   )
 
   (module Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical (layer F.Cu) (tedit 59FED5CC) (tstamp 5D03C1B2)
-    (at 571.625001 210.825001)
+    (at 538 223.25)
     (descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x02 2.54mm single row")
     (path /5C8AABED/5D7BEB06)

@@ -351,8 +351,6 @@ F 3 "" H 5640 3250 60  0000 C CNN
 	1    5640 3250
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	5540 3410 5540 3250
 $Comp
 L device:C_Small C37
 U 1 1 56E418A5
@@ -589,19 +587,15 @@ Wire Wire Line
 	6665 5205 6955 5205
 Text Label 6955 5205 2    50   ~ 0
 K7
-Text Label 5550 4460 2    50   ~ 0
+Text Label 5465 3160 2    50   ~ 0
 Strobe
-Wire Wire Line
-	5280 4460 5550 4460
-Text Label 5550 4360 2    50   ~ 0
+Text Label 5465 3260 2    50   ~ 0
 ~Reset
-Wire Wire Line
-	5280 4360 5550 4360
-Text Label 5550 4260 2    50   ~ 0
+Text Label 5550 3860 2    50   ~ 0
 K6
 Wire Wire Line
 	5280 4260 5550 4260
-Text Label 5550 4160 2    50   ~ 0
+Text Label 5550 3960 2    50   ~ 0
 K5
 Wire Wire Line
 	5280 4160 5550 4160
@@ -609,17 +603,17 @@ Text Label 5550 4060 2    50   ~ 0
 K4
 Wire Wire Line
 	5280 4060 5550 4060
-Text Label 5550 3960 2    50   ~ 0
+Text Label 5550 4160 2    50   ~ 0
 K3
 Wire Wire Line
 	5280 3960 5550 3960
-Text Label 5550 3860 2    50   ~ 0
+Text Label 5550 4260 2    50   ~ 0
 K2
 Wire Wire Line
 	5280 3860 5550 3860
-Text Label 5357 3260 2    50   ~ 0
+Text Label 5550 4360 2    50   ~ 0
 K1
-Text Label 5357 3160 2    50   ~ 0
+Text Label 5550 4460 2    50   ~ 0
 K0
 Wire Wire Line
 	6065 5305 5610 5305
@@ -1210,9 +1204,6 @@ Wire Wire Line
 	3675 3510 4030 3510
 Text Label 3675 3510 0    50   ~ 0
 +3V3
-Wire Wire Line
-	5540 3250 5540 3115
-Connection ~ 5540 3250
 Text Label 5540 3115 3    50   ~ 0
 +3V3
 Wire Wire Line
@@ -1886,10 +1877,6 @@ F 3 "" H 5130 3260 30  0000 C CNN
 	1    5130 3260
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	5280 3160 5357 3160
-Wire Wire Line
-	5280 3260 5357 3260
 $Comp
 L device:R R75
 U 1 1 5D2A8321
@@ -2085,9 +2072,19 @@ F 3 "~" H 3710 4915 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3710 4815 3710 4260
-Wire Bus Line
-	10725 2260 10725 5405
 Connection ~ 3710 4260
 Wire Wire Line
 	3710 4260 4030 4260
+Wire Wire Line
+	5540 3115 5540 3410
+Wire Wire Line
+	5280 3160 5465 3160
+Wire Wire Line
+	5280 3260 5465 3260
+Wire Wire Line
+	5280 4460 5550 4460
+Wire Wire Line
+	5280 4360 5550 4360
+Wire Bus Line
+	10725 2260 10725 5405
 $EndSCHEMATC
