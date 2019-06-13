@@ -832,7 +832,7 @@
   )
 
   (module Package_DIP:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5A02E8C5) (tstamp 5CD5EB2D)
-    (at 421 202.5)
+    (at 420.52 203.8)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C8AABED/5CBD518D)
@@ -908,7 +908,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD973FE) (tstamp 5CD5EB57)
-    (at 463.5 177 180)
+    (at 463.38 176.38 180)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C8AABED/5CBD1B8A)
@@ -976,7 +976,7 @@
   )
 
   (module retroii_footprints:DIP-8_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4CDA) (tstamp 5CD5EB7B)
-    (at 438.5 186)
+    (at 438.14 186.28)
     (descr "8-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C8AABED/5CC5F61A)
@@ -1041,7 +1041,7 @@
   )
 
   (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71040) (tstamp 5D03C5F7)
-    (at 456 202.5)
+    (at 455.76 203.8)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C8AABED/5CBD0460)
@@ -1121,8 +1121,8 @@
     )
   )
 
-  (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71045) (tstamp 5D03C4C9)
-    (at 438.5 202.5)
+  (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD71045) (tstamp 5D04AC8C)
+    (at 438.14 203.8)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C8AABED/5CBCF1CF)
@@ -1732,7 +1732,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CD974FC) (tstamp 5CD5ED23)
-    (at 446 177 180)
+    (at 445.76 176.38 180)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C8AABED/5CBD1D32)
@@ -5721,7 +5721,7 @@
   )
 
   (module retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm (layer F.Cu) (tedit 5AE50EF0) (tstamp 5CD5FA38)
-    (at 443.5 198 180)
+    (at 443.2 198.85 180)
     (descr "C, Disc series, Radial, pin pitch=2.50mm, , diameter*width=3*2mm^2, Capacitor")
     (tags "C Disc series Radial pin pitch 2.50mm  diameter 3mm width 2mm Capacitor")
     (path /5C8AABED/5CDD8E13)
@@ -6150,7 +6150,7 @@
   )
 
   (module retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm (layer F.Cu) (tedit 5CDAC8FE) (tstamp 5CD5FB1F)
-    (at 443.5 181.5 180)
+    (at 443.205 181.32 180)
     (descr "C, Disc series, Radial, pin pitch=2.50mm, , diameter*width=3*2mm^2, Capacitor")
     (tags "C Disc series Radial pin pitch 2.50mm  diameter 3mm width 2mm Capacitor")
     (path /5C8AABED/5CECC41D)
@@ -6189,7 +6189,7 @@
   )
 
   (module retroii_footprints:C_Disc_D3.0mm_W2.0mm_P2.50mm (layer F.Cu) (tedit 5CD7128C) (tstamp 5CD5FB34)
-    (at 461 181.5 180)
+    (at 460.82 181.33 180)
     (descr "C, Disc series, Radial, pin pitch=2.50mm, , diameter*width=3*2mm^2, Capacitor")
     (tags "C Disc series Radial pin pitch 2.50mm  diameter 3mm width 2mm Capacitor")
     (path /5C8AABED/5CECCA43)
@@ -7452,7 +7452,7 @@
   )
 
   (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4ECD) (tstamp 5CD5FE03)
-    (at 454.5 336)
+    (at 455.76 337.12)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5CEA7CE2)
@@ -7533,7 +7533,7 @@
   )
 
   (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4ECD) (tstamp 5CD5FE2F)
-    (at 445.75 248 180)
+    (at 445.76 249.26 180)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5CEA892E)
@@ -7614,7 +7614,7 @@
   )
 
   (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4ECD) (tstamp 5CD5FE5B)
-    (at 428.5 248.25 180)
+    (at 428.14 249.26 180)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5CEABB9E)
@@ -7695,7 +7695,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4AD6) (tstamp 5CD5FE85)
-    (at 434.25 335.75)
+    (at 438.14 337.12)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5C89150B)
@@ -7766,7 +7766,7 @@
   )
 
   (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4ECD) (tstamp 5CD5FEB1)
-    (at 463.5 248.25 180)
+    (at 463.38 249.26 180)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5CEA8998)
@@ -7976,7 +7976,7 @@
   )
 
   (module retroii_footprints:DIP-16_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4ECD) (tstamp 5D0357A2)
-    (at 465 302.5 180)
+    (at 463.38 302.08 180)
     (descr "16-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5CEA7DAC)
@@ -12127,7 +12127,7 @@
   )
 
   (module retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal (layer F.Cu) (tedit 5AE5139B) (tstamp 5CD60878)
-    (at 456 185 270)
+    (at 455.76 184.98 270)
     (descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
     (tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
     (path /5C8AABED/5CC642CD)
@@ -13357,7 +13357,7 @@
   )
 
   (module retroii_footprints:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal (layer F.Cu) (tedit 5AE5139B) (tstamp 5CD60B58)
-    (at 463.5 185 270)
+    (at 463.39 185.01 270)
     (descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
     (tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
     (path /5C8AABED/5CCFA967)
@@ -14969,7 +14969,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4AD6) (tstamp 5CD60EE6)
-    (at 416 338.25)
+    (at 420.52 337.12)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5C98524C)
@@ -15043,7 +15043,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4AD6) (tstamp 5CD60F10)
-    (at 457 311.75)
+    (at 455.76 311.98)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C89058A/5C9FBCCF)
@@ -15587,7 +15587,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4AD6) (tstamp 5CD61024)
-    (at 438.5 260)
+    (at 438.14 259.16)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C891714/5CBABA62)
@@ -16212,7 +16212,7 @@
   )
 
   (module retroii_footprints:DIP-14_W7.62mm_Socket_LongPads (layer F.Cu) (tedit 5CAB4AD6) (tstamp 5CD6119E)
-    (at 457.25 259.75)
+    (at 455.76 259.16)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils), Socket, LongPads")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil Socket LongPads")
     (path /5C891714/5CC14B9F)
