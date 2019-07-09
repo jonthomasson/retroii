@@ -778,4 +778,48 @@ Wire Wire Line
 Wire Wire Line
 	2720 6745 2705 6745
 Connection ~ 6825 4255
+$Comp
+L Mechanical:MountingHole H5
+U 1 1 5D33552B
+P 8025 1200
+F 0 "H5" H 8125 1246 50  0000 L CNN
+F 1 "MountingHole" H 8125 1155 50  0000 L CNN
+F 2 "MountingHole:MountingHole_4.3mm_M4_Pad_Via" H 8025 1200 50  0001 C CNN
+F 3 "~" H 8025 1200 50  0001 C CNN
+	1    8025 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5D335991
+P 8020 1470
+F 0 "H3" H 8120 1516 50  0000 L CNN
+F 1 "MountingHole" H 8120 1425 50  0000 L CNN
+F 2 "MountingHole:MountingHole_4.3mm_M4_Pad_Via" H 8020 1470 50  0001 C CNN
+F 3 "~" H 8020 1470 50  0001 C CNN
+	1    8020 1470
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 5D335BAF
+P 8020 1740
+F 0 "H4" H 8120 1786 50  0000 L CNN
+F 1 "MountingHole" H 8120 1695 50  0000 L CNN
+F 2 "MountingHole:MountingHole_4.3mm_M4_Pad_Via" H 8020 1740 50  0001 C CNN
+F 3 "~" H 8020 1740 50  0001 C CNN
+	1    8020 1740
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H6
+U 1 1 5D335CD5
+P 8025 2015
+F 0 "H6" H 8125 2061 50  0000 L CNN
+F 1 "MountingHole" H 8125 1970 50  0000 L CNN
+F 2 "MountingHole:MountingHole_4.3mm_M4_Pad_Via" H 8025 2015 50  0001 C CNN
+F 3 "~" H 8025 2015 50  0001 C CNN
+	1    8025 2015
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

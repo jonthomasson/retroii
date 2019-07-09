@@ -1431,8 +1431,6 @@ Wire Wire Line
 Wire Wire Line
 	5035 4560 5035 4705
 Wire Wire Line
-	5035 4705 4005 4705
-Wire Wire Line
 	3575 4705 3575 4810
 Wire Wire Line
 	3475 4810 3475 4560
@@ -2038,11 +2036,6 @@ F 3 "~" H 4005 4915 50  0001 C CNN
 	1    4005 4915
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	4005 4815 4005 4705
-Connection ~ 4005 4705
-Wire Wire Line
-	4005 4705 3575 4705
 $Comp
 L Device:Jumper_NO_Small JP21
 U 1 1 5D7ECAFE
@@ -2085,6 +2078,13 @@ Wire Wire Line
 	5280 4460 5550 4460
 Wire Wire Line
 	5280 4360 5550 4360
+Wire Wire Line
+	4005 4815 4005 4705
+Wire Wire Line
+	4005 4705 3575 4705
+Connection ~ 4005 4705
+Wire Wire Line
+	5035 4705 4005 4705
 Wire Bus Line
 	10725 2260 10725 5405
 $EndSCHEMATC
