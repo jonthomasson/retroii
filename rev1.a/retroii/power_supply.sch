@@ -79,14 +79,14 @@ Text Notes 10575 7640 0    60   ~ 0
 $Comp
 L 6502:SPST2 SW2
 U 1 1 5C8ADA13
-P 2025 6590
+P 2410 6590
 AR Path="/5C8AA2BF/5C8ADA13" Ref="SW2"  Part="1" 
 AR Path="/5C8AABED/5C8ADA13" Ref="SW?"  Part="1" 
-F 0 "SW2" H 2025 6690 50  0000 C CNN
-F 1 "SPST2" H 2025 6490 50  0000 C CNN
-F 2 "retroii_footprints:SW_Micro_Right_Angle_SPST" H 2025 6590 50  0001 C CNN
-F 3 "" H 2025 6590 50  0000 C CNN
-	1    2025 6590
+F 0 "SW2" H 2410 6690 50  0000 C CNN
+F 1 "SPST2" H 2410 6490 50  0000 C CNN
+F 2 "retroii_footprints:SW_Micro_Right_Angle_SPST" H 2410 6590 50  0001 C CNN
+F 3 "" H 2410 6590 50  0000 C CNN
+	1    2410 6590
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -323,8 +323,8 @@ Wire Wire Line
 Wire Wire Line
 	5260 3285 5260 3395
 Wire Wire Line
-	2525 6590 2880 6590
-Text Label 2880 6590 2    50   ~ 0
+	2910 6590 3265 6590
+Text Label 3265 6590 2    50   ~ 0
 +VIN
 $Comp
 L Regulator_Switching:LM2576HVS-5 U13
@@ -1470,4 +1470,19 @@ Wire Wire Line
 Connection ~ 9590 2225
 Connection ~ 9850 1335
 Connection ~ 9850 2225
+$Comp
+L Device:Fuse F1
+U 1 1 5D375059
+P 1715 6590
+F 0 "F1" V 1518 6590 50  0000 C CNN
+F 1 "Fuse 2.5 amp" V 1609 6590 50  0000 C CNN
+F 2 "retroii_footprints:littlefuse_5.08_radial" V 1645 6590 50  0001 C CNN
+F 3 "~" H 1715 6590 50  0001 C CNN
+	1    1715 6590
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1525 6590 1565 6590
+Wire Wire Line
+	1865 6590 1910 6590
 $EndSCHEMATC

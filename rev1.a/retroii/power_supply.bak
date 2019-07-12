@@ -323,8 +323,8 @@ Wire Wire Line
 Wire Wire Line
 	5260 3285 5260 3395
 Wire Wire Line
-	2525 6590 2880 6590
-Text Label 2880 6590 2    50   ~ 0
+	2910 6590 3265 6590
+Text Label 3265 6590 2    50   ~ 0
 +VIN
 $Comp
 L Regulator_Switching:LM2576HVS-5 U13
@@ -1470,4 +1470,17 @@ Wire Wire Line
 Connection ~ 9590 2225
 Connection ~ 9850 1335
 Connection ~ 9850 2225
+$Comp
+L Device:Fuse F1
+U 1 1 5D375059
+P 2760 6590
+F 0 "F1" V 2563 6590 50  0000 C CNN
+F 1 "Fuse 2.5 amp" V 2654 6590 50  0000 C CNN
+F 2 "retroii_footprints:littlefuse_5.08_radial" V 2690 6590 50  0001 C CNN
+F 3 "~" H 2760 6590 50  0001 C CNN
+	1    2760 6590
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2610 6590 2525 6590
 $EndSCHEMATC
