@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source "C:\\Users\\Stache\\Documents\\KiCad Projects\\RetroII\\rev1.a\\retroii\\retroii.sch")
-    (date "7/14/2019 9:02:21 AM")
+    (date "7/22/2019 5:20:38 PM")
     (tool "Eeschema (5.1.2)-1")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
