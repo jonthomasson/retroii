@@ -735,17 +735,17 @@ Wire Wire Line
 Wire Wire Line
 	3745 7130 3745 7325
 Wire Wire Line
-	3845 7130 3845 7325
+	4245 7130 4245 7325
 Wire Wire Line
-	3945 7130 3945 7325
+	4345 7130 4345 7325
 Wire Wire Line
 	4045 7130 4045 7325
 Wire Wire Line
 	4145 7130 4145 7325
 Wire Wire Line
-	4245 7130 4245 7325
+	3845 7130 3845 7325
 Wire Wire Line
-	4345 7130 4345 7325
+	3945 7130 3945 7325
 Wire Wire Line
 	4445 7130 4445 7325
 Wire Wire Line
@@ -754,17 +754,17 @@ Text Label 3645 7325 1    50   ~ 0
 +12V
 Text Label 3745 7325 1    50   ~ 0
 +12V
-Text Label 3845 7325 1    50   ~ 0
+Text Label 4245 7325 1    50   ~ 0
 -12V
-Text Label 3945 7325 1    50   ~ 0
+Text Label 4345 7325 1    50   ~ 0
 -12V
 Text Label 4045 7325 1    50   ~ 0
 +5V
 Text Label 4145 7325 1    50   ~ 0
 +5V
-Text Label 4245 7325 1    50   ~ 0
+Text Label 3845 7325 1    50   ~ 0
 -5V
-Text Label 4345 7325 1    50   ~ 0
+Text Label 3945 7325 1    50   ~ 0
 -5V
 Text Label 4445 7325 1    50   ~ 0
 +3V3
