@@ -1,0 +1,2366 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="80mm"
+   height="13mm"
+   viewBox="0 0 283.46457 46.062992"
+   id="svg4153"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="retro2.svg">
+  <defs
+     id="defs4155" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2"
+     inkscape:cx="223.23862"
+     inkscape:cy="26.027346"
+     inkscape:document-units="px"
+     inkscape:current-layer="text4971"
+     showgrid="true"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="737"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:object-nodes="true"
+     inkscape:snap-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-others="false"
+     inkscape:snap-grids="false"
+     inkscape:snap-global="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     showborder="false">
+    <sodipodi:guide
+       position="-4.2426407,-19.79899"
+       orientation="1,0"
+       id="guide4961" />
+    <sodipodi:guide
+       position="28.991378,84.145706"
+       orientation="-0.70710678,0.70710678"
+       id="guide4963" />
+    <sodipodi:guide
+       position="37,162.5"
+       orientation="-0.70710678,0.70710678"
+       id="guide4965" />
+    <sodipodi:guide
+       position="61.88747,7.5702251"
+       orientation="0,1"
+       id="guide4967" />
+    <sodipodi:guide
+       position="139.21671,41.042957"
+       orientation="0,1"
+       id="guide4993" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid7554" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4158">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Layer 4"
+     style="display:inline">
+    <g
+       id="g4880"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(1.2880703,0,0,1.2093023,-69.658911,0.8434589)">
+      <rect
+         y="1.5629922"
+         x="48.5"
+         height="43"
+         width="205.5"
+         id="rect4878"
+         style="opacity:0.83600003;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 134.98198,7.8791664 2.09924,-2.7188652 4.375,0 0,8.7499998 8.75,0 0,4.375 -2.09924,2.718865"
+       id="path4899"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5962"
+       width="150"
+       height="33.5"
+       x="131.74265"
+       y="86.772621"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\copyright\copyright.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:none;opacity:0.803">
+    <rect
+       style="display:inline;opacity:1;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect5032-1"
+       width="4.100533"
+       height="4.100533"
+       x="59.864471"
+       y="31.866909" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer 3"
+     style="display:inline">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 139.35698,16.629166 2.09924,-2.718865"
+       id="path4903"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 139.35698,7.8791664 2.09924,-2.7188652"
+       id="path4905"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 130.60698,16.629166 2.09924,-2.718865 2.18173,0.0039"
+       id="path4907"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 139.35698,34.129166 2.09924,-2.718865 0.002,-10.304699"
+       id="path4909"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 141.45622,31.410301 6.56263,-0.001"
+       id="path4911"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 148.10698,38.504166 2.09924,-2.718865 -0.006,-1.562512"
+       id="path4913"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 152.48198,34.129166 2.09924,-2.718865 0,-4.375 -4.375,0 -2.09924,2.718865"
+       id="path4915"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 152.48198,29.754166 2.09924,-2.718865"
+       id="path4917"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 104.79698,16.629166 2.09924,-2.718865 13.125,0 0,4.375 4.375,0 0,8.75 -2.09924,2.718865"
+       id="path4919"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 104.79698,34.129166 2.09924,-2.718865 17.5,0 0,4.375 -2.09924,2.718865"
+       id="path4921"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 106.89622,31.410301 -0.008,-1.66798"
+       id="path4923"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 248.37795,38.504166 2.12131,-2.718865 0,-4.375 -4.375,0 0,-26.2499998 -4.375,0 -2.12131,2.7188652"
+       id="path5019"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 244.00295,34.129166 2.12131,-2.718865"
+       id="path5021"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 235.25295,34.129166 2.12131,-2.718865 2.15822,-1.2e-5"
+       id="path5023"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 248.37795,34.129166 2.12131,-2.718865"
+       id="path5025"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 235.25295,12.254166 2.12131,-2.7188648 2.1652,0.00337"
+       id="path5027"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 244.00295,7.8791664 2.12131,-2.7188652"
+       id="path5029"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1006.2992)"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="6.0609155"
+       y="1040.2404"
+       id="text4701"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4703"
+         x="6.0609155"
+         y="1040.2404" /></text>
+    <g
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="text4809"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="translate(15.364506,0.14026643)">
+      <path
+         d="m 54.872475,1044.6631 0,-21.875 4.375,0 0,4.375 4.375,0 0,4.375 -4.375,0 0,13.125 -4.375,0 z m 21.875,-21.875 0,4.375 -13.125,0 0,-4.375 13.125,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:35px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium';letter-spacing:-0.44px"
+         id="path4840"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 89.432474,1044.6631 0,-4.375 17.499996,0 0,4.375 -17.499996,0 z m 17.499996,-8.75 -17.499996,0 0,4.375 -4.375,0 0,-13.125 4.375,0 0,4.375 13.124996,0 0,-4.375 4.375,0 0,8.75 z m -4.375,-13.125 0,4.375 -13.124996,0 0,-4.375 13.124996,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:35px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium';letter-spacing:-0.44px"
+         id="path4842"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 132.74247,1040.2881 0,4.375 -8.75,0 0,-4.375 8.75,0 z m -8.75,-17.5 8.75,0 0,4.375 -8.75,0 0,13.125 -4.375,0 0,-13.125 -4.375,0 0,-4.375 4.375,0 0,-8.75 4.375,0 0,8.75 z m 13.125,13.125 0,4.375 -4.375,0 0,-4.375 4.375,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:35px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium';letter-spacing:-0.44px;stroke:#000000;stroke-width:0.2;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         id="path4844"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 145.42747,1044.6631 0,-21.875 4.375,0 0,4.375 4.375,0 0,4.375 -4.375,0 0,13.125 -4.375,0 z m 21.875,-21.875 0,4.375 -13.125,0 0,-4.375 13.125,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:35px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium';letter-spacing:-0.44px;stroke:#000000;stroke-width:0.2;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         id="path4846"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 193.11247,1040.2881 0,4.375 -13.125,0 0,-4.375 13.125,0 z m 4.375,0 -4.375,0 0,-13.125 4.375,0 0,13.125 z m -21.875,-13.125 4.375,0 0,13.125 -4.375,0 0,-13.125 z m 17.5,-4.375 0,4.375 -13.125,0 0,-4.375 13.125,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:35px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium';letter-spacing:-0.44px;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         id="path4848"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 193.11247,1022.7881 2.09924,-2.7189"
+         id="path4873"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 197.48747,1027.1631 2.09924,-2.7189 0,0"
+         id="path4875"
+         inkscape:connector-curvature="0" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 195.35198,1040.4284 2.09924,-2.7189 11.02657,0"
+       id="path4861"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 197.45122,1037.7095 -7.7e-4,-10.4101"
+       id="path4863"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 190.97698,1027.3034 2.09924,-2.7189 2.27657,0"
+       id="path4865"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 195.35198,1022.9284 2.09924,-2.7189 13.125,0 0,4.375 4.375,0 0,13.125 -2.09924,2.7189"
+       id="path4867"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 208.47698,1027.3034 2.09924,-2.7189"
+       id="path4869"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 208.47698,1044.8034 2.09924,-2.7189 -0.005,-1.6601"
+       id="path4871"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 160.79198,1022.9284 2.09924,-2.7189 4.375,0 0,4.375 2.27798,0 0,0"
+       id="path4883"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 165.16698,1022.9284 2.09924,-2.7189"
+       id="path4885"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 165.16698,1027.3034 2.09924,-2.7189"
+       id="path4887"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 169.54198,1022.9284 2.09924,-2.7189 13.125,0 0,4.375 -2.09924,2.7189"
+       id="path4891"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 182.66698,1022.9284 2.09924,-2.7189"
+       id="path4893"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 169.54198,1031.6784 2.09924,-2.7189 6.3e-4,-1.6601"
+       id="path4895"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       d="m 165.16698,1044.8034 2.09924,-2.7189 6.3e-4,-10.414"
+       id="path4897"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997" />
+    <g
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+       id="text4971"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"
+       transform="translate(15.364506,0.14026643)">
+      <path
+         d="m 233.01344,1040.2881 0,4.375 -13.125,0 0,-4.375 4.375,0 0,-17.5 -4.375,0 0,-4.375 4.375,0 0,-4.375 4.375,0 0,26.25 4.375,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:35px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium';stroke:#000000;stroke-width:0.2;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         id="path5014"
+         inkscape:connector-curvature="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.5px;line-height:125%;font-family:'Apple ][';-inkscape-font-specification:'Apple ][, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="251.8855"
+         y="1045.3469"
+         id="text7560"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan7562"
+           x="251.8855"
+           y="1045.3469"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35px;line-height:125%;font-family:'Apple ][';-inkscape-font-specification:'Apple ][, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">][r</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="200.03125"
+       y="1055.9969"
+       id="text5958"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"><tspan
+         sodipodi:role="line"
+         id="tspan5960"
+         x="200.03125"
+         y="1055.9969"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.5px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium'">Ver 1.0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="141.69727"
+       y="1113.4825"
+       id="text5954"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\copyright\copyright.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997"><tspan
+         sodipodi:role="line"
+         id="tspan5956"
+         x="141.69727"
+         y="1113.4825"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.5px;font-family:'Print Char 21';-inkscape-font-specification:'Print Char 21 Medium'">© 2019 Jon Thomasson</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="245.625"
+       y="1040.8622"
+       id="text7556"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7558"
+         x="245.625"
+         y="1040.8622" /></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Layer 5"
+     style="display:inline">
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5289"
+       transform="matrix(0.98450318,-0.17536673,0.17536673,0.98450318,-7.44428,11.080039)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5291"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5293"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5295"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5297"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.98450318,-0.17536673,0.17536673,0.98450318,-7.4442804,4.2134236)"
+       id="g5299">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5301"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5303"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5305"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5307"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5309"
+       transform="matrix(0.98450318,-0.17536673,0.17536673,0.98450318,-7.4442804,-2.6531916)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5311"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5313"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5315"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5317"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.98450318,-0.17536673,0.17536673,0.98450318,-7.4502756,-9.5174746)"
+       id="g5319">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5321"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5323"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5325"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5327"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.88605286,-0.15783005,0.15783005,0.88605286,-7.2943978,14.286643)"
+       id="g5329">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5331"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5333"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5335"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5337"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5339"
+       transform="matrix(0.88605286,-0.15783005,0.15783005,0.88605286,-7.2943978,8.1066892)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5341"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5343"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5345"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5347"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.88605286,-0.15783005,0.15783005,0.88605286,-7.2943978,1.9267356)"
+       id="g5349">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5351"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5353"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5355"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5357"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5359"
+       transform="matrix(0.88605286,-0.15783005,0.15783005,0.88605286,-7.2943978,-4.2532182)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5361"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5363"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5365"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5367"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5369"
+       transform="matrix(0.78760254,-0.14029338,0.14029338,0.78760254,-7.1430471,17.493376)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5371"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5373"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5375"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5377"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.78760254,-0.14029338,0.14029338,0.78760254,-7.1430471,12.000084)"
+       id="g5379">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5381"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5383"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5385"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5387"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5389"
+       transform="matrix(0.78760254,-0.14029338,0.14029338,0.78760254,-7.1430471,6.5067923)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5391"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5393"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5395"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5397"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.78760254,-0.14029338,0.14029338,0.78760254,-7.1430471,1.0135003)"
+       id="g5399">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5401"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5403"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5405"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5407"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.69722875,-0.06222601,0.06222601,0.69722875,-5.3427468,16.678404)"
+       id="g5409">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5411"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5413"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5415"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5417"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5419"
+       transform="matrix(0.69722875,-0.06222601,0.06222601,0.69722875,-5.3427468,11.871773)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5421"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5423"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5425"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5427"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.69722875,-0.06222601,0.06222601,0.69722875,-5.3427468,7.0651434)"
+       id="g5429">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5431"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5433"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5435"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5437"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5439"
+       transform="matrix(0.69722875,-0.06222601,0.06222601,0.69722875,-5.3427468,2.2585129)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5441"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5443"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5445"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5447"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5449"
+       transform="matrix(0.6,0,0,0.6,-3.6824416,18.868946)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5451"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5453"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5455"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5457"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.6,0,0,0.6,-3.6824416,14.748976)"
+       id="g5459">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5461"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5463"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5465"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5467"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5469"
+       transform="matrix(0.6,0,0,0.6,-3.6824416,10.629008)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5471"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5473"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5475"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5477"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.6,0,0,0.6,-3.6824416,6.509039)"
+       id="g5479">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5481"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5483"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5485"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5487"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       transform="translate(-2.3941423,65.859243)"
+       id="g5514"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5516"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5518"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5520"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5522" />
+    </g>
+    <g
+       id="g5524"
+       transform="translate(-2.3941427,58.992628)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5526"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5528"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5530"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5532" />
+    </g>
+    <g
+       transform="translate(-2.3941427,52.126013)"
+       id="g5534"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5536"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5538"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5540"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5542" />
+    </g>
+    <g
+       id="g5544"
+       transform="translate(-2.3941427,45.259398)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5546"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5548"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5550"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5552" />
+    </g>
+    <g
+       id="g5554"
+       transform="translate(-8.853722,65.9)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5556"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5558"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5560"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5562" />
+    </g>
+    <g
+       transform="translate(-8.853722,59.033385)"
+       id="g5564"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5566"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5568"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5570"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5572" />
+    </g>
+    <g
+       id="g5574"
+       transform="translate(-8.853722,52.16677)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5576"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5578"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5580"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5582" />
+    </g>
+    <g
+       transform="translate(-8.853722,45.300155)"
+       id="g5584"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5586"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5588"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5590"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5592" />
+    </g>
+    <g
+       transform="translate(-15.313301,65.940756)"
+       id="g5594"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5596"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5598"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5600"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5602" />
+    </g>
+    <g
+       id="g5604"
+       transform="translate(-15.313301,59.074142)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5606"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5608"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5610"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5612" />
+    </g>
+    <g
+       transform="translate(-15.313301,52.207527)"
+       id="g5614"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5616"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5618"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5620"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5622" />
+    </g>
+    <g
+       id="g5624"
+       transform="translate(-15.313301,45.340912)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5626"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5628"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5630"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5632" />
+    </g>
+    <g
+       id="g5634"
+       transform="translate(-21.760991,65.928868)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5636"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5638"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5640"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5642" />
+    </g>
+    <g
+       transform="translate(-21.760991,59.062253)"
+       id="g5644"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5646"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5648"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5650"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5652" />
+    </g>
+    <g
+       id="g5654"
+       transform="translate(-21.760991,52.195639)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5656"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5658"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5660"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5662" />
+    </g>
+    <g
+       transform="translate(-21.760991,45.329024)"
+       id="g5664"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5666"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5668"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5670"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5672" />
+    </g>
+    <g
+       transform="translate(-28.208681,65.916979)"
+       id="g5674"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5676"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5678"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5680"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5682" />
+    </g>
+    <g
+       id="g5684"
+       transform="translate(-28.208681,59.050364)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5686"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5688"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5690"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5692" />
+    </g>
+    <g
+       transform="translate(-28.208681,52.18375)"
+       id="g5694"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5696"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5698"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5700"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5702" />
+    </g>
+    <g
+       id="g5704"
+       transform="translate(-28.208681,45.317135)"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-ydpi="299.99997">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5706"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5708"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5710"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         id="path5712" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5714"
+       transform="matrix(0.49802053,0.04444715,-0.04444715,0.49802053,-2.3702782,18.761568)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5716"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5718"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5720"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5722"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.49802053,0.04444715,-0.04444715,0.49802053,-2.3702787,15.32826)"
+       id="g5724">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5726"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5728"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5730"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5732"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5734"
+       transform="matrix(0.49802053,0.04444715,-0.04444715,0.49802053,-2.3702787,11.894953)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5736"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5738"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5740"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5742"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.49802053,0.04444715,-0.04444715,0.49802053,-2.3702787,8.461645)"
+       id="g5744">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5746"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5748"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5750"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5752"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.39380127,0.07014669,-0.07014669,0.39380127,-1.5770717,18.087023)"
+       id="g5754">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5756"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5758"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5760"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5762"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5764"
+       transform="matrix(0.39380127,0.07014669,-0.07014669,0.39380127,-1.5770717,15.340377)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5766"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5768"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5770"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5772"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.39380127,0.07014669,-0.07014669,0.39380127,-1.5770717,12.593731)"
+       id="g5774">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5776"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5778"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5780"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5782"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5784"
+       transform="matrix(0.39380127,0.07014669,-0.07014669,0.39380127,-1.5770717,9.8470848)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5786"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5788"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5790"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5792"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5794"
+       transform="matrix(0.29535095,0.05261002,-0.05261002,0.29535095,-2.6645612,19.816057)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5796"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5798"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5800"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5802"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.29535095,0.05261002,-0.05261002,0.29535095,-2.6645612,17.756073)"
+       id="g5804">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5806"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5808"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5810"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5812"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5814"
+       transform="matrix(0.29535095,0.05261002,-0.05261002,0.29535095,-2.6645612,15.696088)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5816"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5818"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5820"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5822"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.29535095,0.05261002,-0.05261002,0.29535095,-2.6645612,13.636104)"
+       id="g5824">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5826"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5828"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5830"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5832"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.19690064,0.03507335,-0.03507335,0.19690064,-3.7359298,21.505205)"
+       id="g5834">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5836"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5838"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5840"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5842"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5844"
+       transform="matrix(0.19690064,0.03507335,-0.03507335,0.19690064,-3.7359298,20.131882)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5846"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5848"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5850"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5852"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.19690064,0.03507335,-0.03507335,0.19690064,-3.7359298,18.758559)"
+       id="g5854">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5856"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5858"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5860"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5862"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5864"
+       transform="matrix(0.19690064,0.03507335,-0.03507335,0.19690064,-3.7359298,17.385236)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5866"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5868"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5870"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5872"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5874"
+       transform="matrix(0.09845032,0.01753667,-0.01753667,0.09845032,-4.8072984,23.194352)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5876"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5878"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5880"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5882"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.09845032,0.01753667,-0.01753667,0.09845032,-4.8072984,22.507691)"
+       id="g5884">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5886"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5888"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5890"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5892"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5894"
+       transform="matrix(0.09845032,0.01753667,-0.01753667,0.09845032,-4.8072984,21.821029)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5896"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5898"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5900"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5902"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.09845032,0.01753667,-0.01753667,0.09845032,-4.8072984,21.134368)"
+       id="g5904">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5906"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5908"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5910"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5912"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5914"
+       transform="matrix(0.04922516,0.00876834,-0.00876834,0.04922516,-8.5787176,23.185628)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5916"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5918"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5920"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5922"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.04922516,0.00876834,-0.00876834,0.04922516,-8.5787176,22.842297)"
+       id="g5924">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5926"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5928"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5930"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5932"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       id="g5934"
+       transform="matrix(0.04922516,0.00876834,-0.00876834,0.04922516,-8.5787176,22.498966)">
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         id="path5936"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         id="path5938"
+         inkscape:connector-curvature="0" />
+      <path
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         id="path5940"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path5942"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       inkscape:export-ydpi="299.99997"
+       inkscape:export-xdpi="299.99997"
+       inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+       transform="matrix(0.04922516,0.00876834,-0.00876834,0.04922516,-8.5787176,22.155635)"
+       id="g5944">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5946"
+         d="m 57.786938,34.392235 2.077533,-2.525326 4.100533,0 0,4.100533"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5948"
+         d="m 61.88747,38.492767 2.077534,-2.525325"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path5950"
+         d="m 61.88747,34.392235 2.077534,-2.525326"
+         style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path5952"
+         d="m 57.786938,34.392235 4.100533,0 0,4.100533 -4.100533,0 z"
+         style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25773463;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 117.91709,22.647763 -11.02087,0.01254 -0.006,-1.691916"
+     id="path4925"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 117.92198,16.629166 2.09924,-2.718865"
+     id="path4927"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 100.42198,21.004166 2.09924,-2.718865 2.29641,-0.01954"
+     id="path4929"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 104.79698,25.379166 2.09924,-2.718863"
+     id="path4931"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 122.29698,34.129166 2.09924,-2.718865"
+     id="path4933"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 122.29698,21.004166 2.09924,-2.718865"
+     id="path4935"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 117.92198,21.004166 2.09924,-2.718865"
+     id="path4937"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 92.111981,21.004166 2.099239,-2.718865 0,-4.375 -13.125,0 -2.099239,2.718865"
+     id="path4939"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 70.236981,16.629166 2.099239,-2.718865 4.375,0 0,4.375 2.293911,-0.0039"
+     id="path4941"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="M 74.611981,16.629166 76.71122,13.910301"
+     id="path4943"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="M 74.611981,21.004166 76.71122,18.285301"
+     id="path4945"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 78.986981,25.379166 2.099239,-2.718865 -0.03421,-1.675793"
+     id="path4947"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="M 74.611981,38.504166 76.71122,35.785301 76.70602,25.376754"
+     id="path4949"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="M 92.111981,16.629166 94.21122,13.910301"
+     id="path4951"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1"
+     d="m 148.10698,16.629166 2.09924,-2.718865"
+     id="path4953"
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Stache\Documents\KiCad Projects\6502Computer\rev1.a\logo\retro1.png"
+     inkscape:export-xdpi="299.99997"
+     inkscape:export-ydpi="299.99997" />
+</svg>
