@@ -1,4 +1,4 @@
-20559775133385423
+20564468979985844
 6502Library
 1-1825027-1-TACTILE_SWITCH
 
@@ -79898,6 +79898,13 @@ retroii_footprints
 28
 28
 retroii_footprints
+6502_inside
+
+
+0
+0
+0
+retroii_footprints
 5747844-4
 
 
@@ -79968,6 +79975,13 @@ Bourns_SRP1770TA-101M
 2
 2
 retroii_footprints
+copyright
+
+
+0
+0
+0
+retroii_footprints
 CUI_CVI_1708
 
 
@@ -80030,6 +80044,13 @@ littlefuse_5.08_radial
 0
 2
 2
+retroii_footprints
+logo
+
+
+0
+0
+0
 retroii_footprints
 MD60SM
 
