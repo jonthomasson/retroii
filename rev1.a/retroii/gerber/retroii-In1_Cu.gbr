@@ -1,147 +1,147 @@
-%TF.GenerationSoftware,KiCad,Pcbnew,(5.1.2)-1*%
-%TF.CreationDate,2019-08-06T07:58:05-07:00*%
-%TF.ProjectId,retroii,72657472-6f69-4692-9e6b-696361645f70,rev?*%
-%TF.SameCoordinates,Original*%
-%TF.FileFunction,Copper,L2,Inr*%
-%TF.FilePolarity,Positive*%
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,(5.1.2)-1*
+G04 #@! TF.CreationDate,2019-08-06T08:10:53-07:00*
+G04 #@! TF.ProjectId,retroii,72657472-6f69-4692-9e6b-696361645f70,rev?*
+G04 #@! TF.SameCoordinates,Original*
+G04 #@! TF.FileFunction,Copper,L2,Inr*
+G04 #@! TF.FilePolarity,Positive*
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW (5.1.2)-1) date 2019-08-06 07:58:05*
+G04 Created by KiCad (PCBNEW (5.1.2)-1) date 2019-08-06 08:10:53*
 %MOMM*%
 %LPD*%
 G04 APERTURE LIST*
-%TA.AperFunction,NonConductor*%
+G04 #@! TA.AperFunction,NonConductor*
 %ADD10C,0.050000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD11R,2.400000X1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD12O,2.400000X1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD13C,1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD14R,1.600000X1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD15R,2.400000X2.400000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD16C,2.400000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD17O,1.600000X1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD18O,3.200000X3.200000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD19R,3.200000X3.200000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD20C,4.000000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD21C,1.900000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD22C,2.200000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD23O,1.700000X1.700000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD24R,1.700000X1.700000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD25C,4.500000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD26O,1.727200X2.032000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD27R,1.727200X2.032000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD28C,3.500000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD29O,1.800000X2.100000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD30O,1.500000X1.050000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD31R,1.500000X1.050000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD32R,1.050000X1.500000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD33O,1.050000X1.500000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD34C,1.724000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD35C,2.800000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD36C,2.000000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD37C,1.700000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD38R,1.600000X2.400000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD39O,1.600000X2.400000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD40R,2.300000X1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD41O,2.300000X1.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD42C,1.554000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD43R,1.450000X2.000000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD44O,1.450000X2.000000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD45C,1.998980*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD46R,1.524000X1.524000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD47C,1.524000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD48C,5.000000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD49C,8.600000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD50C,0.900000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD51C,1.824000*%
-%TD*%
-%TA.AperFunction,ViaPad*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,ViaPad*
 %ADD52C,0.800000*%
-%TD*%
-%TA.AperFunction,Conductor*%
+G04 #@! TD*
+G04 #@! TA.AperFunction,Conductor*
 %ADD53C,0.254000*%
-%TD*%
+G04 #@! TD*
 G04 APERTURE END LIST*
 D10*
 X91720000Y-108940000D02*
@@ -153,98 +153,98 @@ X91720000Y-108940000D01*
 X421920000Y-324840000D02*
 X421920000Y-108940000D01*
 D11*
-%TO.N,GND*%
-%TO.C,B6*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,B6*
 X338310000Y-162780000D03*
 D12*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X345930000Y-180560000D03*
-%TO.N,/SD_Card_And_Keyboard/K2*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K2*
 X338310000Y-165320000D03*
-%TO.N,Net-(B6-Pad10)*%
+G04 #@! TO.N,Net-(B6-Pad10)*
 X345930000Y-178020000D03*
-%TO.N,Net-(B6-Pad3)*%
+G04 #@! TO.N,Net-(B6-Pad3)*
 X338310000Y-167860000D03*
-%TO.N,/SD_Card_And_Keyboard/K0*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K0*
 X345930000Y-175480000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X338310000Y-170400000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X345930000Y-172940000D03*
-%TO.N,/SD_Card_And_Keyboard/K3*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K3*
 X338310000Y-172940000D03*
-%TO.N,Net-(B6-Pad13)*%
+G04 #@! TO.N,Net-(B6-Pad13)*
 X345930000Y-170400000D03*
-%TO.N,Net-(B6-Pad6)*%
+G04 #@! TO.N,Net-(B6-Pad6)*
 X338310000Y-175480000D03*
-%TO.N,/SD_Card_And_Keyboard/K1*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K1*
 X345930000Y-167860000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X338310000Y-178020000D03*
-%TO.N,/Address_Decoding/C00X_Keyboard_Read*%
+G04 #@! TO.N,/Address_Decoding/C00X_Keyboard_Read*
 X345930000Y-165320000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X338310000Y-180560000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X345930000Y-162780000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C79*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C79*
 X218900000Y-264690000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X221400000Y-264690000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,A7*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,A7*
 X303070000Y-162780000D03*
 D12*
-%TO.N,Net-(A7-Pad9)*%
+G04 #@! TO.N,Net-(A7-Pad9)*
 X310690000Y-180560000D03*
-%TO.N,/SD_Card_And_Keyboard/Strobe*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/Strobe*
 X303070000Y-165320000D03*
-%TO.N,/SD_Card_And_Keyboard/K2*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K2*
 X310690000Y-178020000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X303070000Y-167860000D03*
-%TO.N,/SD_Card_And_Keyboard/K3*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K3*
 X310690000Y-175480000D03*
-%TO.N,Net-(A7-Pad4)*%
+G04 #@! TO.N,Net-(A7-Pad4)*
 X303070000Y-170400000D03*
-%TO.N,/SD_Card_And_Keyboard/K0*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K0*
 X310690000Y-172940000D03*
-%TO.N,/SD_Card_And_Keyboard/K5*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K5*
 X303070000Y-172940000D03*
-%TO.N,/SD_Card_And_Keyboard/K1*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K1*
 X310690000Y-170400000D03*
-%TO.N,/SD_Card_And_Keyboard/K4*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K4*
 X303070000Y-175480000D03*
-%TO.N,Net-(A7-Pad14)*%
+G04 #@! TO.N,Net-(A7-Pad14)*
 X310690000Y-167860000D03*
-%TO.N,/SD_Card_And_Keyboard/K6*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K6*
 X303070000Y-178020000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X310690000Y-165320000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X303070000Y-180560000D03*
-%TO.N,Net-(A7-Pad16)*%
+G04 #@! TO.N,Net-(A7-Pad16)*
 X310690000Y-162780000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,Net-(A12-Pad1)*%
-%TO.C,A12*%
+G04 #@! TO.N,Net-(A12-Pad1)*
+G04 #@! TO.C,A12*
 X328310000Y-135360000D03*
 D12*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X320690000Y-120120000D03*
-%TO.N,Net-(A12-Pad2)*%
+G04 #@! TO.N,Net-(A12-Pad2)*
 X328310000Y-132820000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X320690000Y-122660000D03*
-%TO.N,Net-(A12-Pad3)*%
+G04 #@! TO.N,Net-(A12-Pad3)*
 X328310000Y-130280000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X320690000Y-125200000D03*
 X328310000Y-127740000D03*
 X320690000Y-127740000D03*
@@ -252,101 +252,101 @@ X328310000Y-125200000D03*
 X320690000Y-130280000D03*
 X328310000Y-122660000D03*
 X320690000Y-132820000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X328310000Y-120120000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X320690000Y-135360000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,A13*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,A13*
 X328310000Y-145260000D03*
 X320690000Y-152880000D03*
-%TO.N,Net-(A13-Pad7)*%
+G04 #@! TO.N,Net-(A13-Pad7)*
 X328310000Y-147800000D03*
-%TO.N,Net-(A12-Pad3)*%
+G04 #@! TO.N,Net-(A12-Pad3)*
 X320690000Y-150340000D03*
-%TO.N,Net-(A13-Pad2)*%
+G04 #@! TO.N,Net-(A13-Pad2)*
 X328310000Y-150340000D03*
 X320690000Y-147800000D03*
-%TO.N,Net-(A13-Pad5)*%
+G04 #@! TO.N,Net-(A13-Pad5)*
 X328310000Y-152880000D03*
 D11*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X320690000Y-145260000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,B7*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,B7*
 X320690000Y-162780000D03*
 D12*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X328310000Y-180560000D03*
-%TO.N,/SD_Card_And_Keyboard/K6*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K6*
 X320690000Y-165320000D03*
-%TO.N,Net-(B7-Pad10)*%
+G04 #@! TO.N,Net-(B7-Pad10)*
 X328310000Y-178020000D03*
-%TO.N,Net-(B7-Pad3)*%
+G04 #@! TO.N,Net-(B7-Pad3)*
 X320690000Y-167860000D03*
-%TO.N,/SD_Card_And_Keyboard/K4*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K4*
 X328310000Y-175480000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X320690000Y-170400000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X328310000Y-172940000D03*
-%TO.N,/SD_Card_And_Keyboard/K7*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K7*
 X320690000Y-172940000D03*
-%TO.N,Net-(B7-Pad13)*%
+G04 #@! TO.N,Net-(B7-Pad13)*
 X328310000Y-170400000D03*
-%TO.N,Net-(B7-Pad6)*%
+G04 #@! TO.N,Net-(B7-Pad6)*
 X320690000Y-175480000D03*
-%TO.N,/SD_Card_And_Keyboard/K5*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K5*
 X328310000Y-167860000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X320690000Y-178020000D03*
-%TO.N,/Address_Decoding/C00X_Keyboard_Read*%
+G04 #@! TO.N,/Address_Decoding/C00X_Keyboard_Read*
 X328310000Y-165320000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X320690000Y-180560000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X328310000Y-162780000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,B10*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,B10*
 X338310000Y-135360000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345930000Y-120120000D03*
-%TO.N,Net-(A12-Pad1)*%
+G04 #@! TO.N,Net-(A12-Pad1)*
 X338310000Y-132820000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X345930000Y-122660000D03*
-%TO.N,Net-(B10-Pad10)*%
+G04 #@! TO.N,Net-(B10-Pad10)*
 X338310000Y-130280000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X345930000Y-125200000D03*
-%TO.N,/SD_Card_And_Keyboard/Strobe*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/Strobe*
 X338310000Y-127740000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X345930000Y-127740000D03*
-%TO.N,Net-(B10-Pad10)*%
+G04 #@! TO.N,Net-(B10-Pad10)*
 X338310000Y-125200000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X345930000Y-130280000D03*
-%TO.N,/SD_Card_And_Keyboard/K7*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K7*
 X338310000Y-122660000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X345930000Y-132820000D03*
-%TO.N,Net-(B10-Pad8)*%
+G04 #@! TO.N,Net-(B10-Pad8)*
 X338310000Y-120120000D03*
 D11*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X345930000Y-135360000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,B11*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,B11*
 X251560000Y-286200000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X259180000Y-270960000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X251560000Y-283660000D03*
 X259180000Y-273500000D03*
 X251560000Y-281120000D03*
@@ -354,3428 +354,3428 @@ X259180000Y-276040000D03*
 X251560000Y-278580000D03*
 X259180000Y-278580000D03*
 X251560000Y-276040000D03*
-%TO.N,Net-(B11-Pad3)*%
+G04 #@! TO.N,Net-(B11-Pad3)*
 X259180000Y-281120000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X251560000Y-273500000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X259180000Y-283660000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X251560000Y-270960000D03*
 D11*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X259180000Y-286200000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,C1*%
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,C1*
 X255930000Y-170220000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X255930000Y-172720000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C2*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C2*
 X246500000Y-145300000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X246500000Y-147800000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C3*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C3*
 X222630000Y-166710000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X217630000Y-166710000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C4*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C4*
 X325750000Y-141630000D03*
-%TO.N,Net-(A13-Pad2)*%
+G04 #@! TO.N,Net-(A13-Pad2)*
 X323250000Y-141630000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C5*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C5*
 X210090000Y-283700000D03*
-%TO.N,Net-(C5-Pad1)*%
+G04 #@! TO.N,Net-(C5-Pad1)*
 X210090000Y-286200000D03*
-%TD*%
-%TO.N,Net-(C6-Pad1)*%
-%TO.C,C6*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C6-Pad1)*
+G04 #@! TO.C,C6*
 X227670000Y-258560000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X227670000Y-261060000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C7*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C7*
 X212590000Y-261060000D03*
-%TO.N,Net-(C7-Pad1)*%
+G04 #@! TO.N,Net-(C7-Pad1)*
 X212590000Y-258560000D03*
-%TD*%
-%TO.N,Net-(C8-Pad1)*%
-%TO.C,C8*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C8-Pad1)*
+G04 #@! TO.C,C8*
 X227670000Y-283700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X227670000Y-286200000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C9*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C9*
 X221480000Y-289830000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X218980000Y-289830000D03*
-%TD*%
-%TO.N,Net-(C10-Pad2)*%
-%TO.C,C10*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C10-Pad2)*
+G04 #@! TO.C,C10*
 X251120000Y-310730000D03*
-%TO.N,Net-(C10-Pad1)*%
+G04 #@! TO.N,Net-(C10-Pad1)*
 X248620000Y-310730000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,N/C*%
-%TO.C,C11*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,C11*
 X310690000Y-135360000D03*
 D12*
 X303070000Y-120120000D03*
 X310690000Y-132820000D03*
 X303070000Y-122660000D03*
-%TO.N,/Address_Decoding/C01X_Keyboard_Strobe*%
+G04 #@! TO.N,/Address_Decoding/C01X_Keyboard_Strobe*
 X310690000Y-130280000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X303070000Y-125200000D03*
-%TO.N,Net-(A12-Pad2)*%
+G04 #@! TO.N,Net-(A12-Pad2)*
 X310690000Y-127740000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X303070000Y-127740000D03*
 X310690000Y-125200000D03*
 X303070000Y-130280000D03*
 X310690000Y-122660000D03*
 X303070000Y-132820000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X310690000Y-120120000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X303070000Y-135360000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(C12-Pad1)*%
-%TO.C,C12*%
+G04 #@! TO.N,Net-(C12-Pad1)*
+G04 #@! TO.C,C12*
 X187970000Y-290720000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X185470000Y-290720000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C13*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C13*
 X288100000Y-262435000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X288100000Y-264935000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C14*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C14*
 X270780000Y-307090000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X273280000Y-307090000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C15*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C15*
 X314370000Y-245980000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X314370000Y-243480000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C16*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C16*
 X262860000Y-211580000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X262860000Y-209080000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C17*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C17*
 X262860000Y-216700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X262860000Y-219200000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C18*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C18*
 X245070000Y-234440000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X242570000Y-234440000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C19*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C19*
 X101870000Y-130980000D03*
 D14*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X101870000Y-134480000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,GND*%
-%TO.C,C20*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C20*
 X154180000Y-201100000D03*
 D14*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X154180000Y-204600000D03*
-%TD*%
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,C21*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,C21*
 X101870000Y-190355000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X101870000Y-186855000D03*
-%TD*%
+G04 #@! TD*
 D15*
-%TO.N,GND*%
-%TO.C,C22*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C22*
 X129350000Y-130230000D03*
 D16*
-%TO.N,Net-(C22-Pad2)*%
+G04 #@! TO.N,Net-(C22-Pad2)*
 X129350000Y-135230000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C23*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C23*
 X181680000Y-200350000D03*
 D15*
-%TO.N,Net-(C23-Pad1)*%
+G04 #@! TO.N,Net-(C23-Pad1)*
 X181680000Y-205350000D03*
-%TD*%
+G04 #@! TD*
 D16*
-%TO.N,GND*%
-%TO.C,C24*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C24*
 X129370000Y-186105000D03*
 D15*
-%TO.N,Net-(C24-Pad1)*%
+G04 #@! TO.N,Net-(C24-Pad1)*
 X129370000Y-191105000D03*
-%TD*%
+G04 #@! TD*
 D14*
-%TO.N,GND*%
-%TO.C,C25*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C25*
 X141870000Y-130960000D03*
 D13*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X141870000Y-134460000D03*
-%TD*%
+G04 #@! TD*
 D14*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C26*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C26*
 X194180000Y-204600000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X194180000Y-201100000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C27*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C27*
 X141870000Y-186855000D03*
 D14*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X141870000Y-190355000D03*
-%TD*%
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,C28*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,C28*
 X154180000Y-148730000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X154180000Y-145230000D03*
-%TD*%
+G04 #@! TD*
 D14*
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,C29*%
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,C29*
 X101870000Y-246230000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X101870000Y-242730000D03*
-%TD*%
+G04 #@! TD*
 D15*
-%TO.N,Net-(C30-Pad1)*%
-%TO.C,C30*%
+G04 #@! TO.N,Net-(C30-Pad1)*
+G04 #@! TO.C,C30*
 X181680000Y-149480000D03*
 D16*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X181680000Y-144480000D03*
-%TD*%
+G04 #@! TD*
 D15*
-%TO.N,GND*%
-%TO.C,C31*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C31*
 X129390000Y-242000000D03*
 D16*
-%TO.N,Net-(C31-Pad2)*%
+G04 #@! TO.N,Net-(C31-Pad2)*
 X129390000Y-247000000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,GND*%
-%TO.C,C32*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C32*
 X194180000Y-145230000D03*
 D14*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X194180000Y-148730000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Peripheral_IO/-5V*%
-%TO.C,C33*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
+G04 #@! TO.C,C33*
 X141900000Y-246220000D03*
 D14*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X141900000Y-242720000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,GND*%
-%TO.C,C34*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C34*
 X279830000Y-143430000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X282330000Y-143430000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C35*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C35*
 X378030000Y-162720000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X378030000Y-160220000D03*
-%TD*%
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,C36*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,C36*
 X368130000Y-137800000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X368130000Y-135300000D03*
-%TD*%
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,C37*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,C37*
 X339620000Y-156560000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X344620000Y-156560000D03*
-%TD*%
-%TO.N,Net-(C38-Pad2)*%
-%TO.C,C38*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C38-Pad2)*
+G04 #@! TO.C,C38*
 X247880000Y-273460000D03*
-%TO.N,Net-(C38-Pad1)*%
+G04 #@! TO.N,Net-(C38-Pad1)*
 X247880000Y-270960000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C39*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C39*
 X308130000Y-214510000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X305630000Y-214510000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C40*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C40*
 X323250000Y-214510000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X325750000Y-214510000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C41*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C41*
 X254120000Y-289830000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X256620000Y-289830000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C42*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C42*
 X239000000Y-289630000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X236500000Y-289630000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C43*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C43*
 X256620000Y-264690000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X254120000Y-264690000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C44*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C44*
 X343370000Y-139010000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X340870000Y-139010000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C45*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C45*
 X325750000Y-158900000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X323250000Y-158900000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C46*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C46*
 X340870000Y-159350000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X343370000Y-159350000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C47*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C47*
 X288010000Y-292470000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X290510000Y-292470000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C48*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C48*
 X308130000Y-292470000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X305630000Y-292470000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C49*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C49*
 X323250000Y-267330000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X325750000Y-267330000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C50*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C50*
 X325750000Y-264690000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X323250000Y-264690000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C51*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C51*
 X305630000Y-211870000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X308130000Y-211870000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C52*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C52*
 X325750000Y-292470000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X323250000Y-292470000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C53*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C53*
 X288010000Y-211870000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X290510000Y-211870000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C54*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C54*
 X325750000Y-211870000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X323250000Y-211870000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C55*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C55*
 X221380000Y-191610000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X218880000Y-191610000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C56*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C56*
 X308135000Y-139000000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X305635000Y-139000000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C57*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C57*
 X323250000Y-139010000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X325750000Y-139010000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C58*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C58*
 X409140000Y-309730000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X411640000Y-309730000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C59*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C59*
 X411640000Y-279250000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409140000Y-279250000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C60*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C60*
 X409140000Y-263990000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X411640000Y-263990000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C61*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C61*
 X411640000Y-203060000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409140000Y-203060000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C62*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C62*
 X409140000Y-218290000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X411640000Y-218290000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C63*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C63*
 X411640000Y-233530000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409140000Y-233530000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,C64*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,C64*
 X409140000Y-248760000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X411640000Y-248760000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C65*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C65*
 X411640000Y-294490000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409140000Y-294490000D03*
-%TD*%
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,C66*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,C66*
 X348170000Y-233530000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345670000Y-233530000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C67*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C67*
 X345670000Y-294490000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-294490000D03*
-%TD*%
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,C68*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,C68*
 X348170000Y-203050000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345670000Y-203050000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C69*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C69*
 X345670000Y-248760000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-248760000D03*
-%TD*%
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,C70*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,C70*
 X348170000Y-218270000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345670000Y-218270000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C71*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C71*
 X345670000Y-279230000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-279230000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C72*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C72*
 X345670000Y-264000000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-264000000D03*
-%TD*%
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,C73*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,C73*
 X348170000Y-187800000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345670000Y-187800000D03*
-%TD*%
-%TO.N,Net-(C74-Pad2)*%
-%TO.C,C74*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C74-Pad2)*
+G04 #@! TO.C,C74*
 X247880000Y-258560000D03*
-%TO.N,/Address_Decoding/C07X_Timer_Trigger*%
+G04 #@! TO.N,/Address_Decoding/C07X_Timer_Trigger*
 X247880000Y-261060000D03*
-%TD*%
-%TO.N,Net-(C75-Pad2)*%
-%TO.C,C75*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C75-Pad2)*
+G04 #@! TO.C,C75*
 X230260000Y-283700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X230260000Y-286200000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C76*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C76*
 X212640000Y-283700000D03*
-%TO.N,Net-(C76-Pad2)*%
+G04 #@! TO.N,Net-(C76-Pad2)*
 X212640000Y-286200000D03*
-%TD*%
-%TO.N,Net-(C77-Pad2)*%
-%TO.C,C77*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C77-Pad2)*
+G04 #@! TO.C,C77*
 X230220000Y-258560000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X230220000Y-261060000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C78*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C78*
 X210040000Y-261060000D03*
-%TO.N,Net-(C78-Pad2)*%
+G04 #@! TO.N,Net-(C78-Pad2)*
 X210040000Y-258560000D03*
-%TD*%
+G04 #@! TD*
 D14*
-%TO.N,Net-(CR1-Pad1)*%
-%TO.C,CR1*%
+G04 #@! TO.N,Net-(CR1-Pad1)*
+G04 #@! TO.C,CR1*
 X245040000Y-284930000D03*
 D17*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X245040000Y-277310000D03*
-%TD*%
+G04 #@! TD*
 D18*
-%TO.N,Net-(C22-Pad2)*%
-%TO.C,D1*%
+G04 #@! TO.N,Net-(C22-Pad2)*
+G04 #@! TO.C,D1*
 X113440000Y-144230000D03*
 D19*
-%TO.N,Net-(D1-Pad1)*%
+G04 #@! TO.N,Net-(D1-Pad1)*
 X98200000Y-144230000D03*
-%TD*%
-%TO.N,Net-(D2-Pad1)*%
-%TO.C,D2*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(D2-Pad1)*
+G04 #@! TO.C,D2*
 X150400000Y-214400000D03*
 D18*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X165640000Y-214400000D03*
-%TD*%
+G04 #@! TD*
 D19*
-%TO.N,Net-(D3-Pad1)*%
-%TO.C,D3*%
+G04 #@! TO.N,Net-(D3-Pad1)*
+G04 #@! TO.C,D3*
 X98200000Y-200105000D03*
 D18*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X113440000Y-200105000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,D4*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,D4*
 X165640000Y-158400000D03*
 D19*
-%TO.N,Net-(D4-Pad1)*%
+G04 #@! TO.N,Net-(D4-Pad1)*
 X150400000Y-158400000D03*
-%TD*%
-%TO.N,Net-(D5-Pad1)*%
-%TO.C,D5*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(D5-Pad1)*
+G04 #@! TO.C,D5*
 X98160000Y-255980000D03*
 D18*
-%TO.N,Net-(C31-Pad2)*%
+G04 #@! TO.N,Net-(C31-Pad2)*
 X113400000Y-255980000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,F12*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,F12*
 X328310000Y-296100000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X320690000Y-313880000D03*
-%TO.N,Net-(F12-Pad15)*%
+G04 #@! TO.N,Net-(F12-Pad15)*
 X328310000Y-298640000D03*
-%TO.N,Net-(F12-Pad7)*%
+G04 #@! TO.N,Net-(F12-Pad7)*
 X320690000Y-311340000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X328310000Y-301180000D03*
-%TO.N,Net-(F12-Pad6)*%
+G04 #@! TO.N,Net-(F12-Pad6)*
 X320690000Y-308800000D03*
-%TO.N,Net-(F12-Pad13)*%
+G04 #@! TO.N,Net-(F12-Pad13)*
 X328310000Y-303720000D03*
-%TO.N,/Address_Decoding/OE*%
+G04 #@! TO.N,/Address_Decoding/OE*
 X320690000Y-306260000D03*
-%TO.N,Net-(F12-Pad12)*%
+G04 #@! TO.N,Net-(F12-Pad12)*
 X328310000Y-306260000D03*
-%TO.N,/Address_Decoding/OE*%
+G04 #@! TO.N,/Address_Decoding/OE*
 X320690000Y-303720000D03*
-%TO.N,Net-(F12-Pad11)*%
+G04 #@! TO.N,Net-(F12-Pad11)*
 X328310000Y-308800000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X320690000Y-301180000D03*
-%TO.N,Net-(F12-Pad10)*%
+G04 #@! TO.N,Net-(F12-Pad10)*
 X328310000Y-311340000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X320690000Y-298640000D03*
-%TO.N,Net-(F12-Pad9)*%
+G04 #@! TO.N,Net-(F12-Pad9)*
 X328310000Y-313880000D03*
 D11*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X320690000Y-296100000D03*
-%TD*%
-%TO.N,/Address_Decoding/A4*%
-%TO.C,F13*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/A4*
+G04 #@! TO.C,F13*
 X310690000Y-208240000D03*
 D12*
-%TO.N,/Address_Decoding/C06X_Serial*%
+G04 #@! TO.N,/Address_Decoding/C06X_Serial*
 X303070000Y-190460000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X310690000Y-205700000D03*
-%TO.N,Net-(F13-Pad10)*%
+G04 #@! TO.N,Net-(F13-Pad10)*
 X303070000Y-193000000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X310690000Y-203160000D03*
-%TO.N,/Address_Decoding/C040_Strobe*%
+G04 #@! TO.N,/Address_Decoding/C040_Strobe*
 X303070000Y-195540000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X310690000Y-200620000D03*
-%TO.N,/Address_Decoding/C03X_Speaker*%
+G04 #@! TO.N,/Address_Decoding/C03X_Speaker*
 X303070000Y-198080000D03*
-%TO.N,Net-(F13-Pad5)*%
+G04 #@! TO.N,Net-(F13-Pad5)*
 X310690000Y-198080000D03*
-%TO.N,/Address_Decoding/C02X_Cassette*%
+G04 #@! TO.N,/Address_Decoding/C02X_Cassette*
 X303070000Y-200620000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X310690000Y-195540000D03*
-%TO.N,/Address_Decoding/C01X_Keyboard_Strobe*%
+G04 #@! TO.N,/Address_Decoding/C01X_Keyboard_Strobe*
 X303070000Y-203160000D03*
-%TO.N,/Address_Decoding/C07X_Timer_Trigger*%
+G04 #@! TO.N,/Address_Decoding/C07X_Timer_Trigger*
 X310690000Y-193000000D03*
-%TO.N,/Address_Decoding/C00X_Keyboard_Read*%
+G04 #@! TO.N,/Address_Decoding/C00X_Keyboard_Read*
 X303070000Y-205700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X310690000Y-190460000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X303070000Y-208240000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,/Address_Decoding/A1*%
-%TO.C,F14*%
+G04 #@! TO.N,/Address_Decoding/A1*
+G04 #@! TO.C,F14*
 X293070000Y-208240000D03*
 D12*
-%TO.N,/Address_Decoding/SS_AN0_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN0_OFF_ON*
 X285450000Y-190460000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X293070000Y-205700000D03*
-%TO.N,/Address_Decoding/SS_AN1_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN1_OFF_ON*
 X285450000Y-193000000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X293070000Y-203160000D03*
-%TO.N,/Address_Decoding/SS_AN2_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN2_OFF_ON*
 X285450000Y-195540000D03*
-%TO.N,/Address_Decoding/SS_GRAPHICS_TEXT*%
+G04 #@! TO.N,/Address_Decoding/SS_GRAPHICS_TEXT*
 X293070000Y-200620000D03*
-%TO.N,/Address_Decoding/SS_AN3_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN3_OFF_ON*
 X285450000Y-198080000D03*
-%TO.N,/Address_Decoding/SS_NOMIX_MIX*%
+G04 #@! TO.N,/Address_Decoding/SS_NOMIX_MIX*
 X293070000Y-198080000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X285450000Y-200620000D03*
-%TO.N,/Address_Decoding/SS_PAGE1_PAGE2*%
+G04 #@! TO.N,/Address_Decoding/SS_PAGE1_PAGE2*
 X293070000Y-195540000D03*
-%TO.N,Net-(F13-Pad10)*%
+G04 #@! TO.N,Net-(F13-Pad10)*
 X285450000Y-203160000D03*
-%TO.N,/Address_Decoding/SS_LORES_HIRES*%
+G04 #@! TO.N,/Address_Decoding/SS_LORES_HIRES*
 X293070000Y-193000000D03*
-%TO.N,Net-(F14-Pad15)*%
+G04 #@! TO.N,Net-(F14-Pad15)*
 X285450000Y-205700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X293070000Y-190460000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X285450000Y-208240000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,H1*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,H1*
 X310690000Y-296100000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X303070000Y-311340000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-298640000D03*
-%TO.N,Net-(F12-Pad6)*%
+G04 #@! TO.N,Net-(F12-Pad6)*
 X303070000Y-308800000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-301180000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X303070000Y-306260000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-303720000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X303070000Y-303720000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-306260000D03*
-%TO.N,/Address_Decoding/RAM_Enable*%
+G04 #@! TO.N,/Address_Decoding/RAM_Enable*
 X303070000Y-301180000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-308800000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X303070000Y-298640000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-311340000D03*
 D11*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X303070000Y-296100000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,H2*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,H2*
 X320690000Y-208240000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X328310000Y-190460000D03*
-%TO.N,/Address_Decoding/C08X_Device_Select_0*%
+G04 #@! TO.N,/Address_Decoding/C08X_Device_Select_0*
 X320690000Y-205700000D03*
-%TO.N,/Address_Decoding/C0FX_Device_Select_7*%
+G04 #@! TO.N,/Address_Decoding/C0FX_Device_Select_7*
 X328310000Y-193000000D03*
-%TO.N,/Address_Decoding/C09X_Device_Select_1*%
+G04 #@! TO.N,/Address_Decoding/C09X_Device_Select_1*
 X320690000Y-203160000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X328310000Y-195540000D03*
-%TO.N,/Address_Decoding/C0AX_Device_Select_2*%
+G04 #@! TO.N,/Address_Decoding/C0AX_Device_Select_2*
 X320690000Y-200620000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X328310000Y-198080000D03*
-%TO.N,/Address_Decoding/C0BX_Device_Select_3*%
+G04 #@! TO.N,/Address_Decoding/C0BX_Device_Select_3*
 X320690000Y-198080000D03*
-%TO.N,Net-(F13-Pad5)*%
+G04 #@! TO.N,Net-(F13-Pad5)*
 X328310000Y-200620000D03*
-%TO.N,/Address_Decoding/C0CX_Device_Select_4*%
+G04 #@! TO.N,/Address_Decoding/C0CX_Device_Select_4*
 X320690000Y-195540000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X328310000Y-203160000D03*
-%TO.N,/Address_Decoding/C0DX_Device_Select_5*%
+G04 #@! TO.N,/Address_Decoding/C0DX_Device_Select_5*
 X320690000Y-193000000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X328310000Y-205700000D03*
-%TO.N,/Address_Decoding/C0EX_Device_Select_6*%
+G04 #@! TO.N,/Address_Decoding/C0EX_Device_Select_6*
 X320690000Y-190460000D03*
 D11*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X328310000Y-208240000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/CPU_RAM_ROM/RESB*%
-%TO.C,H7*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
+G04 #@! TO.C,H7*
 X269180000Y-282715000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X284420000Y-234455000D03*
-%TO.N,Net-(H7-Pad39)*%
+G04 #@! TO.N,Net-(H7-Pad39)*
 X269180000Y-280175000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X284420000Y-236995000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X269180000Y-277635000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X284420000Y-239535000D03*
-%TO.N,Net-(B11-Pad3)*%
+G04 #@! TO.N,Net-(B11-Pad3)*
 X269180000Y-275095000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X284420000Y-242075000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X269180000Y-272555000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X284420000Y-244615000D03*
-%TO.N,Net-(H7-Pad35)*%
+G04 #@! TO.N,Net-(H7-Pad35)*
 X269180000Y-270015000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X284420000Y-247155000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X269180000Y-267475000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X284420000Y-249695000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X269180000Y-264935000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X284420000Y-252235000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X269180000Y-262395000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X284420000Y-254775000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X269180000Y-259855000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X284420000Y-257315000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X269180000Y-257315000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X284420000Y-259855000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X269180000Y-254775000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X284420000Y-262395000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X269180000Y-252235000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X284420000Y-264935000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X269180000Y-249695000D03*
-%TO.N,Net-(H7-Pad7)*%
+G04 #@! TO.N,Net-(H7-Pad7)*
 X284420000Y-267475000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X269180000Y-247155000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X284420000Y-270015000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X269180000Y-244615000D03*
-%TO.N,Net-(H7-Pad5)*%
+G04 #@! TO.N,Net-(H7-Pad5)*
 X284420000Y-272555000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X269180000Y-242075000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X284420000Y-275095000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X269180000Y-239535000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X284420000Y-277635000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X269180000Y-236995000D03*
-%TO.N,Net-(H7-Pad2)*%
+G04 #@! TO.N,Net-(H7-Pad2)*
 X284420000Y-280175000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X269180000Y-234455000D03*
 D11*
-%TO.N,Net-(H7-Pad1)*%
+G04 #@! TO.N,Net-(H7-Pad1)*
 X284420000Y-282715000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,H12*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,H12*
 X320690000Y-261060000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X328310000Y-243280000D03*
-%TO.N,Net-(F13-Pad5)*%
+G04 #@! TO.N,Net-(F13-Pad5)*
 X320690000Y-258520000D03*
-%TO.N,/Address_Decoding/C7XX_IO_7*%
+G04 #@! TO.N,/Address_Decoding/C7XX_IO_7*
 X328310000Y-245820000D03*
-%TO.N,/Address_Decoding/C1XX_IO_1*%
+G04 #@! TO.N,/Address_Decoding/C1XX_IO_1*
 X320690000Y-255980000D03*
-%TO.N,Net-(H12-Pad6)*%
+G04 #@! TO.N,Net-(H12-Pad6)*
 X328310000Y-248360000D03*
-%TO.N,/Address_Decoding/C2XX_IO_2*%
+G04 #@! TO.N,/Address_Decoding/C2XX_IO_2*
 X320690000Y-253440000D03*
-%TO.N,Net-(F12-Pad15)*%
+G04 #@! TO.N,Net-(F12-Pad15)*
 X328310000Y-250900000D03*
-%TO.N,/Address_Decoding/C3XX_IO_3*%
+G04 #@! TO.N,/Address_Decoding/C3XX_IO_3*
 X320690000Y-250900000D03*
-%TO.N,Net-(F12-Pad15)*%
+G04 #@! TO.N,Net-(F12-Pad15)*
 X328310000Y-253440000D03*
-%TO.N,/Address_Decoding/C4XX_IO_4*%
+G04 #@! TO.N,/Address_Decoding/C4XX_IO_4*
 X320690000Y-248360000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X328310000Y-255980000D03*
-%TO.N,/Address_Decoding/C5XX_IO_5*%
+G04 #@! TO.N,/Address_Decoding/C5XX_IO_5*
 X320690000Y-245820000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X328310000Y-258520000D03*
-%TO.N,/Address_Decoding/C6XX_IO_6*%
+G04 #@! TO.N,/Address_Decoding/C6XX_IO_6*
 X320690000Y-243280000D03*
 D11*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X328310000Y-261060000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,H14*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,H14*
 X251560000Y-261060000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X259180000Y-243280000D03*
-%TO.N,Net-(H131-Pad5)*%
+G04 #@! TO.N,Net-(H131-Pad5)*
 X251560000Y-258520000D03*
-%TO.N,/Address_Decoding/C06X_Serial*%
+G04 #@! TO.N,/Address_Decoding/C06X_Serial*
 X259180000Y-245820000D03*
-%TO.N,Net-(H131-Pad9)*%
+G04 #@! TO.N,Net-(H131-Pad9)*
 X251560000Y-255980000D03*
-%TO.N,Net-(H14-Pad6)*%
+G04 #@! TO.N,Net-(H14-Pad6)*
 X259180000Y-248360000D03*
-%TO.N,Net-(H132-Pad5)*%
+G04 #@! TO.N,Net-(H132-Pad5)*
 X251560000Y-253440000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X259180000Y-250900000D03*
-%TO.N,Net-(H132-Pad9)*%
+G04 #@! TO.N,Net-(H132-Pad9)*
 X251560000Y-250900000D03*
-%TO.N,Net-(H14-Pad4)*%
+G04 #@! TO.N,Net-(H14-Pad4)*
 X259180000Y-253440000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X251560000Y-248360000D03*
-%TO.N,/Serial_IO_Audio/PB0*%
+G04 #@! TO.N,/Serial_IO_Audio/PB0*
 X259180000Y-255980000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X251560000Y-245820000D03*
-%TO.N,/Serial_IO_Audio/PB1*%
+G04 #@! TO.N,/Serial_IO_Audio/PB1*
 X259180000Y-258520000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X251560000Y-243280000D03*
 D11*
-%TO.N,/Serial_IO_Audio/PB2*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
 X259180000Y-261060000D03*
-%TD*%
-%TO.N,Net-(C8-Pad1)*%
-%TO.C,H131*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C8-Pad1)*
+G04 #@! TO.C,H131*
 X223940000Y-286200000D03*
 D12*
-%TO.N,Net-(C74-Pad2)*%
+G04 #@! TO.N,Net-(C74-Pad2)*
 X216320000Y-270960000D03*
-%TO.N,Net-(C8-Pad1)*%
+G04 #@! TO.N,Net-(C8-Pad1)*
 X223940000Y-283660000D03*
-%TO.N,Net-(H131-Pad9)*%
+G04 #@! TO.N,Net-(H131-Pad9)*
 X216320000Y-273500000D03*
-%TO.N,Net-(C75-Pad2)*%
+G04 #@! TO.N,Net-(C75-Pad2)*
 X223940000Y-281120000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X216320000Y-276040000D03*
 X223940000Y-278580000D03*
-%TO.N,Net-(C76-Pad2)*%
+G04 #@! TO.N,Net-(C76-Pad2)*
 X216320000Y-278580000D03*
-%TO.N,Net-(H131-Pad5)*%
+G04 #@! TO.N,Net-(H131-Pad5)*
 X223940000Y-276040000D03*
-%TO.N,Net-(C5-Pad1)*%
+G04 #@! TO.N,Net-(C5-Pad1)*
 X216320000Y-281120000D03*
-%TO.N,Net-(C74-Pad2)*%
+G04 #@! TO.N,Net-(C74-Pad2)*
 X223940000Y-273500000D03*
-%TO.N,Net-(C5-Pad1)*%
+G04 #@! TO.N,Net-(C5-Pad1)*
 X216320000Y-283660000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X223940000Y-270960000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X216320000Y-286200000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,H132*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,H132*
 X216320000Y-261060000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X223940000Y-245820000D03*
-%TO.N,Net-(C7-Pad1)*%
+G04 #@! TO.N,Net-(C7-Pad1)*
 X216320000Y-258520000D03*
-%TO.N,Net-(C74-Pad2)*%
+G04 #@! TO.N,Net-(C74-Pad2)*
 X223940000Y-248360000D03*
-%TO.N,Net-(C7-Pad1)*%
+G04 #@! TO.N,Net-(C7-Pad1)*
 X216320000Y-255980000D03*
-%TO.N,Net-(H132-Pad5)*%
+G04 #@! TO.N,Net-(H132-Pad5)*
 X223940000Y-250900000D03*
-%TO.N,Net-(C78-Pad2)*%
+G04 #@! TO.N,Net-(C78-Pad2)*
 X216320000Y-253440000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X223940000Y-253440000D03*
 X216320000Y-250900000D03*
-%TO.N,Net-(C77-Pad2)*%
+G04 #@! TO.N,Net-(C77-Pad2)*
 X223940000Y-255980000D03*
-%TO.N,Net-(H132-Pad9)*%
+G04 #@! TO.N,Net-(H132-Pad9)*
 X216320000Y-248360000D03*
-%TO.N,Net-(C6-Pad1)*%
+G04 #@! TO.N,Net-(C6-Pad1)*
 X223940000Y-258520000D03*
-%TO.N,Net-(C74-Pad2)*%
+G04 #@! TO.N,Net-(C74-Pad2)*
 X216320000Y-245820000D03*
 D11*
-%TO.N,Net-(C6-Pad1)*%
+G04 #@! TO.N,Net-(C6-Pad1)*
 X223940000Y-261060000D03*
-%TD*%
+G04 #@! TD*
 D20*
-%TO.N,*%
-%TO.C,J1*%
+G04 #@! TO.N,*
+G04 #@! TO.C,J1*
 X204480000Y-120390000D03*
 X229470000Y-120390000D03*
 D21*
-%TO.N,Net-(J1-Pad15)*%
+G04 #@! TO.N,Net-(J1-Pad15)*
 X221790000Y-117850000D03*
-%TO.N,Net-(J1-Pad14)*%
+G04 #@! TO.N,Net-(J1-Pad14)*
 X219510000Y-117850000D03*
-%TO.N,Net-(J1-Pad13)*%
+G04 #@! TO.N,Net-(J1-Pad13)*
 X217230000Y-117850000D03*
-%TO.N,Net-(J1-Pad12)*%
+G04 #@! TO.N,Net-(J1-Pad12)*
 X214950000Y-117850000D03*
-%TO.N,Net-(J1-Pad11)*%
+G04 #@! TO.N,Net-(J1-Pad11)*
 X212670000Y-117850000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X213810000Y-120390000D03*
 X216090000Y-120390000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X218370000Y-120390000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X220650000Y-120390000D03*
 X211530000Y-120390000D03*
 X221790000Y-122930000D03*
-%TO.N,Net-(J1-Pad4)*%
+G04 #@! TO.N,Net-(J1-Pad4)*
 X219510000Y-122930000D03*
-%TO.N,Net-(J1-Pad3)*%
+G04 #@! TO.N,Net-(J1-Pad3)*
 X217230000Y-122930000D03*
-%TO.N,Net-(J1-Pad2)*%
+G04 #@! TO.N,Net-(J1-Pad2)*
 X214950000Y-122930000D03*
-%TO.N,Net-(J1-Pad1)*%
+G04 #@! TO.N,Net-(J1-Pad1)*
 X212670000Y-122930000D03*
-%TD*%
+G04 #@! TD*
 D22*
-%TO.N,N/C*%
-%TO.C,J7*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,J7*
 X251270000Y-315330000D03*
 X256270000Y-315330000D03*
-%TO.N,Net-(C10-Pad2)*%
+G04 #@! TO.N,Net-(C10-Pad2)*
 X248770000Y-315330000D03*
 X258770000Y-315330000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X253770000Y-320330000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,J8*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,J8*
 X238250000Y-320330000D03*
-%TO.N,Net-(J8-Pad2)*%
+G04 #@! TO.N,Net-(J8-Pad2)*
 X243250000Y-315330000D03*
 X233250000Y-315330000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X240750000Y-315330000D03*
 X235750000Y-315330000D03*
-%TD*%
+G04 #@! TD*
 D23*
-%TO.N,Net-(J9-Pad2)*%
-%TO.C,J9*%
+G04 #@! TO.N,Net-(J9-Pad2)*
+G04 #@! TO.C,J9*
 X220120000Y-309610000D03*
 D24*
-%TO.N,Net-(C12-Pad1)*%
+G04 #@! TO.N,Net-(C12-Pad1)*
 X217580000Y-309610000D03*
-%TD*%
+G04 #@! TD*
 D25*
-%TO.N,Net-(F1-Pad2)*%
-%TO.C,J10*%
+G04 #@! TO.N,Net-(F1-Pad2)*
+G04 #@! TO.C,J10*
 X149240000Y-123576000D03*
 D20*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X149240000Y-117576000D03*
-%TO.N,Net-(J10-Pad3)*%
+G04 #@! TO.N,Net-(J10-Pad3)*
 X144540000Y-120576000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,GND*%
-%TO.C,J11*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,J11*
 X177330000Y-261120000D03*
 D23*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X177330000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X174790000Y-261120000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X174790000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X172250000Y-261120000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X172250000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X169710000Y-261120000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X169710000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X167170000Y-261120000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X167170000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X164630000Y-261120000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X164630000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X162090000Y-261120000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X162090000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X159550000Y-261120000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X159550000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X157010000Y-261120000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X157010000Y-258580000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X154470000Y-261120000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X154470000Y-258580000D03*
-%TD*%
+G04 #@! TD*
 D26*
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,J12*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,J12*
 X348170000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-299720000D03*
-%TO.N,/Address_Decoding/C08X_Device_Select_0*%
+G04 #@! TO.N,/Address_Decoding/C08X_Device_Select_0*
 X371030000Y-299720000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-299720000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-299720000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-299720000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-299720000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-299720000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-299720000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-299720000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-299680000D03*
-%TO.N,Net-(J12-Pad28)*%
+G04 #@! TO.N,Net-(J12-Pad28)*
 X404070000Y-299680000D03*
-%TO.N,Net-(J12-Pad27)*%
+G04 #@! TO.N,Net-(J12-Pad27)*
 X406610000Y-299680000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-299680000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-304530000D03*
-%TO.N,Net-(J12-Pad24)*%
+G04 #@! TO.N,Net-(J12-Pad24)*
 X406610000Y-304530000D03*
-%TO.N,Net-(J12-Pad23)*%
+G04 #@! TO.N,Net-(J12-Pad23)*
 X404070000Y-304530000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-304530000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-304530000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-304530000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-304530000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-304530000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-304530000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-304530000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-304530000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-304530000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-304530000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-304530000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-304530000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-304530000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-304530000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-304530000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-304530000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-304530000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-304530000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-304530000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-304530000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-304530000D03*
 D27*
-%TO.N,Net-(J12-Pad1)*%
+G04 #@! TO.N,Net-(J12-Pad1)*
 X348190000Y-304530000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,J13*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,J13*
 X233940000Y-286200000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X241560000Y-270960000D03*
-%TO.N,Net-(J13-Pad13)*%
+G04 #@! TO.N,Net-(J13-Pad13)*
 X233940000Y-283660000D03*
-%TO.N,Net-(J13-Pad2)*%
+G04 #@! TO.N,Net-(J13-Pad2)*
 X241560000Y-273500000D03*
-%TO.N,Net-(J13-Pad12)*%
+G04 #@! TO.N,Net-(J13-Pad12)*
 X233940000Y-281120000D03*
-%TO.N,Net-(C38-Pad1)*%
+G04 #@! TO.N,Net-(C38-Pad1)*
 X241560000Y-276040000D03*
-%TO.N,/Address_Decoding/C02X_Cassette*%
+G04 #@! TO.N,/Address_Decoding/C02X_Cassette*
 X233940000Y-278580000D03*
-%TO.N,Net-(J13-Pad13)*%
+G04 #@! TO.N,Net-(J13-Pad13)*
 X241560000Y-278580000D03*
-%TO.N,Net-(J13-Pad10)*%
+G04 #@! TO.N,Net-(J13-Pad10)*
 X233940000Y-276040000D03*
-%TO.N,/Address_Decoding/C03X_Speaker*%
+G04 #@! TO.N,/Address_Decoding/C03X_Speaker*
 X241560000Y-281120000D03*
-%TO.N,Net-(J13-Pad9)*%
+G04 #@! TO.N,Net-(J13-Pad9)*
 X233940000Y-273500000D03*
-%TO.N,Net-(J13-Pad2)*%
+G04 #@! TO.N,Net-(J13-Pad2)*
 X241560000Y-283660000D03*
-%TO.N,Net-(J13-Pad12)*%
+G04 #@! TO.N,Net-(J13-Pad12)*
 X233940000Y-270960000D03*
 D11*
-%TO.N,Net-(J13-Pad1)*%
+G04 #@! TO.N,Net-(J13-Pad1)*
 X241560000Y-286200000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,Net-(J14-Pad16)*%
-%TO.C,J14*%
+G04 #@! TO.N,Net-(J14-Pad16)*
+G04 #@! TO.C,J14*
 X175870000Y-270960000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X168250000Y-288740000D03*
-%TO.N,/Address_Decoding/SS_AN0_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN0_OFF_ON*
 X175870000Y-273500000D03*
-%TO.N,/Serial_IO_Audio/PDL2*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
 X168250000Y-286200000D03*
-%TO.N,/Address_Decoding/SS_AN1_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN1_OFF_ON*
 X175870000Y-276040000D03*
-%TO.N,/Serial_IO_Audio/PDL0*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL0*
 X168250000Y-283660000D03*
-%TO.N,/Address_Decoding/SS_AN2_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN2_OFF_ON*
 X175870000Y-278580000D03*
-%TO.N,/Address_Decoding/C040_Strobe*%
+G04 #@! TO.N,/Address_Decoding/C040_Strobe*
 X168250000Y-281120000D03*
-%TO.N,/Address_Decoding/SS_AN3_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN3_OFF_ON*
 X175870000Y-281120000D03*
-%TO.N,/Serial_IO_Audio/PB2*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
 X168250000Y-278580000D03*
-%TO.N,/Serial_IO_Audio/PDL3*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
 X175870000Y-283660000D03*
-%TO.N,/Serial_IO_Audio/PB1*%
+G04 #@! TO.N,/Serial_IO_Audio/PB1*
 X168250000Y-276040000D03*
-%TO.N,/Serial_IO_Audio/PDL1*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL1*
 X175870000Y-286200000D03*
-%TO.N,/Serial_IO_Audio/PB0*%
+G04 #@! TO.N,/Serial_IO_Audio/PB0*
 X168250000Y-273500000D03*
-%TO.N,Net-(J14-Pad9)*%
+G04 #@! TO.N,Net-(J14-Pad9)*
 X175870000Y-288740000D03*
 D11*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X168250000Y-270960000D03*
-%TD*%
+G04 #@! TD*
 D26*
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,J15*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,J15*
 X348170000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-238760000D03*
-%TO.N,/Address_Decoding/C0CX_Device_Select_4*%
+G04 #@! TO.N,/Address_Decoding/C0CX_Device_Select_4*
 X371030000Y-238760000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-238760000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-238760000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-238760000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-238760000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-238760000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-238760000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-238760000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-238720000D03*
-%TO.N,Net-(J15-Pad28)*%
+G04 #@! TO.N,Net-(J15-Pad28)*
 X404070000Y-238720000D03*
-%TO.N,Net-(J15-Pad27)*%
+G04 #@! TO.N,Net-(J15-Pad27)*
 X406610000Y-238720000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-238720000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-243570000D03*
-%TO.N,Net-(J15-Pad24)*%
+G04 #@! TO.N,Net-(J15-Pad24)*
 X406610000Y-243570000D03*
-%TO.N,Net-(J15-Pad23)*%
+G04 #@! TO.N,Net-(J15-Pad23)*
 X404070000Y-243570000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-243570000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-243570000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-243570000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-243570000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-243570000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-243570000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-243570000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-243570000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-243570000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-243570000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-243570000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-243570000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-243570000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-243570000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-243570000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-243570000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-243570000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-243570000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-243570000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-243570000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-243570000D03*
 D27*
-%TO.N,/Address_Decoding/C4XX_IO_4*%
+G04 #@! TO.N,/Address_Decoding/C4XX_IO_4*
 X348190000Y-243570000D03*
-%TD*%
-%TO.N,/Address_Decoding/C1XX_IO_1*%
-%TO.C,J16*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/C1XX_IO_1*
+G04 #@! TO.C,J16*
 X348190000Y-289290000D03*
 D26*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-289290000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-289290000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-289290000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-289290000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-289290000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-289290000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-289290000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-289290000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-289290000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-289290000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-289290000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-289290000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-289290000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-289290000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-289290000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-289290000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-289290000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-289290000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-289290000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-289290000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-289290000D03*
-%TO.N,Net-(J16-Pad23)*%
+G04 #@! TO.N,Net-(J16-Pad23)*
 X404070000Y-289290000D03*
-%TO.N,Net-(J16-Pad24)*%
+G04 #@! TO.N,Net-(J16-Pad24)*
 X406610000Y-289290000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-289290000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-284440000D03*
-%TO.N,Net-(J12-Pad24)*%
+G04 #@! TO.N,Net-(J12-Pad24)*
 X406610000Y-284440000D03*
-%TO.N,Net-(J12-Pad23)*%
+G04 #@! TO.N,Net-(J12-Pad23)*
 X404070000Y-284440000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-284440000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-284480000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-284480000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-284480000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-284480000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-284480000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-284480000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-284480000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-284480000D03*
-%TO.N,/Address_Decoding/C09X_Device_Select_1*%
+G04 #@! TO.N,/Address_Decoding/C09X_Device_Select_1*
 X371030000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-284480000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-284480000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-284480000D03*
-%TD*%
+G04 #@! TD*
 D27*
-%TO.N,/Address_Decoding/C5XX_IO_5*%
-%TO.C,J17*%
+G04 #@! TO.N,/Address_Decoding/C5XX_IO_5*
+G04 #@! TO.C,J17*
 X348190000Y-228330000D03*
 D26*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-228330000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-228330000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-228330000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-228330000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-228330000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-228330000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-228330000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-228330000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-228330000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-228330000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-228330000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-228330000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-228330000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-228330000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-228330000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-228330000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-228330000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-228330000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-228330000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-228330000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-228330000D03*
-%TO.N,Net-(J17-Pad23)*%
+G04 #@! TO.N,Net-(J17-Pad23)*
 X404070000Y-228330000D03*
-%TO.N,Net-(J17-Pad24)*%
+G04 #@! TO.N,Net-(J17-Pad24)*
 X406610000Y-228330000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-228330000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-223480000D03*
-%TO.N,Net-(J15-Pad24)*%
+G04 #@! TO.N,Net-(J15-Pad24)*
 X406610000Y-223480000D03*
-%TO.N,Net-(J15-Pad23)*%
+G04 #@! TO.N,Net-(J15-Pad23)*
 X404070000Y-223480000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-223480000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-223520000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-223520000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-223520000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-223520000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-223520000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-223520000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-223520000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-223520000D03*
-%TO.N,/Address_Decoding/C0DX_Device_Select_5*%
+G04 #@! TO.N,/Address_Decoding/C0DX_Device_Select_5*
 X371030000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-223520000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-223520000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-223520000D03*
-%TD*%
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,J18*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,J18*
 X348170000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-269240000D03*
-%TO.N,/Address_Decoding/C0AX_Device_Select_2*%
+G04 #@! TO.N,/Address_Decoding/C0AX_Device_Select_2*
 X371030000Y-269240000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-269240000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-269240000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-269240000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-269240000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-269240000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-269240000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-269240000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-269200000D03*
-%TO.N,Net-(J16-Pad23)*%
+G04 #@! TO.N,Net-(J16-Pad23)*
 X404070000Y-269200000D03*
-%TO.N,Net-(J16-Pad24)*%
+G04 #@! TO.N,Net-(J16-Pad24)*
 X406610000Y-269200000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-269200000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-274050000D03*
-%TO.N,Net-(J18-Pad24)*%
+G04 #@! TO.N,Net-(J18-Pad24)*
 X406610000Y-274050000D03*
-%TO.N,Net-(J18-Pad23)*%
+G04 #@! TO.N,Net-(J18-Pad23)*
 X404070000Y-274050000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-274050000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-274050000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-274050000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-274050000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-274050000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-274050000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-274050000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-274050000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-274050000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-274050000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-274050000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-274050000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-274050000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-274050000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-274050000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-274050000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-274050000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-274050000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-274050000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-274050000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-274050000D03*
 D27*
-%TO.N,/Address_Decoding/C2XX_IO_2*%
+G04 #@! TO.N,/Address_Decoding/C2XX_IO_2*
 X348190000Y-274050000D03*
-%TD*%
+G04 #@! TD*
 D26*
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,J19*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,J19*
 X348170000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-208280000D03*
-%TO.N,/Address_Decoding/C0EX_Device_Select_6*%
+G04 #@! TO.N,/Address_Decoding/C0EX_Device_Select_6*
 X371030000Y-208280000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-208280000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-208280000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-208280000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-208280000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-208280000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-208280000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-208280000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-208240000D03*
-%TO.N,Net-(J17-Pad23)*%
+G04 #@! TO.N,Net-(J17-Pad23)*
 X404070000Y-208240000D03*
-%TO.N,Net-(J17-Pad24)*%
+G04 #@! TO.N,Net-(J17-Pad24)*
 X406610000Y-208240000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-208240000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-213090000D03*
-%TO.N,Net-(J19-Pad24)*%
+G04 #@! TO.N,Net-(J19-Pad24)*
 X406610000Y-213090000D03*
-%TO.N,Net-(J19-Pad23)*%
+G04 #@! TO.N,Net-(J19-Pad23)*
 X404070000Y-213090000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-213090000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-213090000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-213090000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-213090000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-213090000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-213090000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-213090000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-213090000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-213090000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-213090000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-213090000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-213090000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-213090000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-213090000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-213090000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-213090000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-213090000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-213090000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-213090000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-213090000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-213090000D03*
 D27*
-%TO.N,/Address_Decoding/C6XX_IO_6*%
+G04 #@! TO.N,/Address_Decoding/C6XX_IO_6*
 X348190000Y-213090000D03*
-%TD*%
-%TO.N,/Address_Decoding/C3XX_IO_3*%
-%TO.C,J20*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/C3XX_IO_3*
+G04 #@! TO.C,J20*
 X348190000Y-258810000D03*
 D26*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-258810000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-258810000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-258810000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-258810000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-258810000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-258810000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-258810000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-258810000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-258810000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-258810000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-258810000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-258810000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-258810000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-258810000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-258810000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-258810000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-258810000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-258810000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-258810000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-258810000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-258810000D03*
-%TO.N,Net-(J15-Pad28)*%
+G04 #@! TO.N,Net-(J15-Pad28)*
 X404070000Y-258810000D03*
-%TO.N,Net-(J15-Pad27)*%
+G04 #@! TO.N,Net-(J15-Pad27)*
 X406610000Y-258810000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-258810000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-253960000D03*
-%TO.N,Net-(J18-Pad24)*%
+G04 #@! TO.N,Net-(J18-Pad24)*
 X406610000Y-253960000D03*
-%TO.N,Net-(J18-Pad23)*%
+G04 #@! TO.N,Net-(J18-Pad23)*
 X404070000Y-253960000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-253960000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-254000000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-254000000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-254000000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-254000000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-254000000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-254000000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-254000000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-254000000D03*
-%TO.N,/Address_Decoding/C0BX_Device_Select_3*%
+G04 #@! TO.N,/Address_Decoding/C0BX_Device_Select_3*
 X371030000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-254000000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-254000000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-254000000D03*
-%TD*%
+G04 #@! TD*
 D27*
-%TO.N,/Address_Decoding/C7XX_IO_7*%
-%TO.C,J21*%
+G04 #@! TO.N,/Address_Decoding/C7XX_IO_7*
+G04 #@! TO.C,J21*
 X348190000Y-197850000D03*
 D26*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X350730000Y-197850000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X353270000Y-197850000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X355810000Y-197850000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X358350000Y-197850000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X360890000Y-197850000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X363430000Y-197850000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X365970000Y-197850000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X368510000Y-197850000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X371050000Y-197850000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X373590000Y-197850000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X376130000Y-197850000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X378670000Y-197850000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X381210000Y-197850000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X383750000Y-197850000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X386290000Y-197850000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X388830000Y-197850000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X391370000Y-197850000D03*
-%TO.N,/Peripheral_IO/Pin19*%
+G04 #@! TO.N,/Peripheral_IO/Pin19*
 X393910000Y-197850000D03*
-%TO.N,/Address_Decoding/IO_Strobe*%
+G04 #@! TO.N,/Address_Decoding/IO_Strobe*
 X396450000Y-197850000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X398990000Y-197850000D03*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X401530000Y-197850000D03*
-%TO.N,Net-(J21-Pad23)*%
+G04 #@! TO.N,Net-(J21-Pad23)*
 X404070000Y-197850000D03*
-%TO.N,Net-(J21-Pad24)*%
+G04 #@! TO.N,Net-(J21-Pad24)*
 X406610000Y-197850000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X409150000Y-197850000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X409150000Y-193000000D03*
-%TO.N,Net-(J19-Pad24)*%
+G04 #@! TO.N,Net-(J19-Pad24)*
 X406610000Y-193000000D03*
-%TO.N,Net-(J19-Pad23)*%
+G04 #@! TO.N,Net-(J19-Pad23)*
 X404070000Y-193000000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X401530000Y-193000000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X398970000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X396430000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/~INH*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
 X393890000Y-193040000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X391350000Y-193040000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X388810000Y-193040000D03*
-%TO.N,/Peripheral_IO/Pin35*%
+G04 #@! TO.N,/Peripheral_IO/Pin35*
 X386270000Y-193040000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X383730000Y-193040000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X381190000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/PHI1O*%
+G04 #@! TO.N,/CPU_RAM_ROM/PHI1O*
 X378650000Y-193040000D03*
-%TO.N,/Address_Decoding/User_1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
 X376110000Y-193040000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373570000Y-193040000D03*
-%TO.N,/Address_Decoding/C0FX_Device_Select_7*%
+G04 #@! TO.N,/Address_Decoding/C0FX_Device_Select_7*
 X371030000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X368490000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X365950000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X363410000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X360870000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X358330000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X355790000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X353250000Y-193040000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X350710000Y-193040000D03*
-%TO.N,/Peripheral_IO/+12V*%
+G04 #@! TO.N,/Peripheral_IO/+12V*
 X348170000Y-193040000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,Net-(J22-Pad1)*%
-%TO.C,J22*%
+G04 #@! TO.N,Net-(J22-Pad1)*
+G04 #@! TO.C,J22*
 X402730000Y-160570000D03*
 D23*
-%TO.N,Net-(J22-Pad2)*%
+G04 #@! TO.N,Net-(J22-Pad2)*
 X400190000Y-160570000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X397650000Y-160570000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X395110000Y-160570000D03*
-%TO.N,Net-(J22-Pad5)*%
+G04 #@! TO.N,Net-(J22-Pad5)*
 X392570000Y-160570000D03*
-%TO.N,Net-(J22-Pad6)*%
+G04 #@! TO.N,Net-(J22-Pad6)*
 X390030000Y-160570000D03*
-%TO.N,Net-(J22-Pad7)*%
+G04 #@! TO.N,Net-(J22-Pad7)*
 X387490000Y-160570000D03*
-%TO.N,Net-(J22-Pad8)*%
+G04 #@! TO.N,Net-(J22-Pad8)*
 X384950000Y-160570000D03*
-%TO.N,Net-(J22-Pad9)*%
+G04 #@! TO.N,Net-(J22-Pad9)*
 X382410000Y-160570000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,Net-(H7-Pad7)*%
-%TO.C,J23*%
+G04 #@! TO.N,Net-(H7-Pad7)*
+G04 #@! TO.C,J23*
 X288310000Y-254725000D03*
 D23*
-%TO.N,Net-(H7-Pad5)*%
+G04 #@! TO.N,Net-(H7-Pad5)*
 X288310000Y-257265000D03*
-%TD*%
+G04 #@! TD*
 D22*
-%TO.N,Net-(J24-Pad1)*%
-%TO.C,J24*%
+G04 #@! TO.N,Net-(J24-Pad1)*
+G04 #@! TO.C,J24*
 X196430000Y-320330000D03*
-%TO.N,Net-(J24-Pad2)*%
+G04 #@! TO.N,Net-(J24-Pad2)*
 X201430000Y-315330000D03*
 X191430000Y-315330000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X198930000Y-315330000D03*
 X193930000Y-315330000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,/Address_Decoding/User_1*%
-%TO.C,JP1*%
+G04 #@! TO.N,/Address_Decoding/User_1*
+G04 #@! TO.C,JP1*
 X332200000Y-245770000D03*
 D23*
-%TO.N,Net-(H12-Pad6)*%
+G04 #@! TO.N,Net-(H12-Pad6)*
 X332200000Y-248310000D03*
-%TD*%
-%TO.N,Net-(JP2-Pad2)*%
-%TO.C,JP2*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(JP2-Pad2)*
+G04 #@! TO.C,JP2*
 X229880000Y-144970000D03*
 D24*
-%TO.N,Net-(JP2-Pad1)*%
+G04 #@! TO.N,Net-(JP2-Pad1)*
 X229880000Y-147510000D03*
-%TD*%
+G04 #@! TD*
 D23*
-%TO.N,Net-(JP3-Pad2)*%
-%TO.C,JP3*%
+G04 #@! TO.N,Net-(JP3-Pad2)*
+G04 #@! TO.C,JP3*
 X233480000Y-147500000D03*
 D24*
-%TO.N,Net-(JP3-Pad1)*%
+G04 #@! TO.N,Net-(JP3-Pad1)*
 X233480000Y-144960000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/VCE*%
-%TO.C,JP4*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/VCE*
+G04 #@! TO.C,JP4*
 X237080000Y-147510000D03*
 D23*
-%TO.N,Net-(JP3-Pad2)*%
+G04 #@! TO.N,Net-(JP3-Pad2)*
 X237080000Y-144970000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,Net-(JP2-Pad1)*%
-%TO.C,JP5*%
+G04 #@! TO.N,Net-(JP2-Pad1)*
+G04 #@! TO.C,JP5*
 X240840000Y-191130000D03*
 D23*
-%TO.N,/CPU_RAM_ROM/VA15*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA15*
 X240840000Y-193670000D03*
-%TD*%
-%TO.N,/Address_Decoding/ROM_Enable*%
-%TO.C,JP6*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/ROM_Enable*
+G04 #@! TO.C,JP6*
 X299180000Y-218080000D03*
-%TO.N,Net-(JP6-Pad2)*%
+G04 #@! TO.N,Net-(JP6-Pad2)*
 X299180000Y-220620000D03*
 D24*
-%TO.N,/CPU_RAM_ROM/INH_Enable*%
+G04 #@! TO.N,/CPU_RAM_ROM/INH_Enable*
 X299180000Y-223160000D03*
-%TD*%
+G04 #@! TD*
 D23*
-%TO.N,GND*%
-%TO.C,JP7*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,JP7*
 X244450000Y-193670000D03*
-%TO.N,Net-(JP7-Pad2)*%
+G04 #@! TO.N,Net-(JP7-Pad2)*
 X246990000Y-193670000D03*
 D24*
-%TO.N,/CPU_RAM_ROM/VOE*%
+G04 #@! TO.N,/CPU_RAM_ROM/VOE*
 X249530000Y-193670000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/VOE*%
-%TO.C,JP8*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/VOE*
+G04 #@! TO.C,JP8*
 X259290000Y-193670000D03*
 D23*
-%TO.N,Net-(JP8-Pad2)*%
+G04 #@! TO.N,Net-(JP8-Pad2)*
 X256750000Y-193670000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X254210000Y-193670000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,Net-(J2-Pad18)*%
-%TO.C,JP9*%
+G04 #@! TO.N,Net-(J2-Pad18)*
+G04 #@! TO.C,JP9*
 X160605000Y-302990000D03*
 D23*
-%TO.N,/Serial_IO_Audio/PDL3*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
 X160605000Y-300450000D03*
-%TD*%
-%TO.N,/Serial_IO_Audio/PDL2*%
-%TO.C,JP10*%
+G04 #@! TD*
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
+G04 #@! TO.C,JP10*
 X164205000Y-300450000D03*
 D24*
-%TO.N,Net-(J2-Pad13)*%
+G04 #@! TO.N,Net-(J2-Pad13)*
 X164205000Y-302990000D03*
-%TD*%
+G04 #@! TD*
 D23*
-%TO.N,/Serial_IO_Audio/PB2*%
-%TO.C,JP11*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
+G04 #@! TO.C,JP11*
 X167805000Y-300450000D03*
 D24*
-%TO.N,Net-(J2-Pad15)*%
+G04 #@! TO.N,Net-(J2-Pad15)*
 X167805000Y-302990000D03*
-%TD*%
-%TO.N,Net-(J3-Pad28)*%
-%TO.C,JP12*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J3-Pad28)*
+G04 #@! TO.C,JP12*
 X123080000Y-302990000D03*
 D23*
-%TO.N,/Serial_IO_Audio/PDL3*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
 X123080000Y-300450000D03*
-%TD*%
-%TO.N,/Serial_IO_Audio/PDL2*%
-%TO.C,JP13*%
+G04 #@! TD*
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
+G04 #@! TO.C,JP13*
 X126680000Y-300450000D03*
 D24*
-%TO.N,Net-(J3-Pad26)*%
+G04 #@! TO.N,Net-(J3-Pad26)*
 X126680000Y-302990000D03*
-%TD*%
-%TO.N,Net-(J3-Pad25)*%
-%TO.C,JP14*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J3-Pad25)*
+G04 #@! TO.C,JP14*
 X130280000Y-302990000D03*
 D23*
-%TO.N,/Serial_IO_Audio/PB2*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
 X130280000Y-300450000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,Net-(J24-Pad2)*%
-%TO.C,JP16*%
+G04 #@! TO.N,Net-(J24-Pad2)*
+G04 #@! TO.C,JP16*
 X185420000Y-309610000D03*
 D23*
-%TO.N,Net-(C12-Pad1)*%
+G04 #@! TO.N,Net-(C12-Pad1)*
 X182880000Y-309610000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,Net-(J9-Pad2)*%
-%TO.C,JP17*%
+G04 #@! TO.N,Net-(J9-Pad2)*
+G04 #@! TO.C,JP17*
 X209400000Y-309610000D03*
 D23*
-%TO.N,Net-(J24-Pad1)*%
+G04 #@! TO.N,Net-(J24-Pad1)*
 X206860000Y-309610000D03*
-%TD*%
-%TO.N,Net-(JP18-Pad2)*%
-%TO.C,JP18*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(JP18-Pad2)*
+G04 #@! TO.C,JP18*
 X207350000Y-300460000D03*
 D24*
-%TO.N,Net-(J9-Pad2)*%
+G04 #@! TO.N,Net-(J9-Pad2)*
 X207350000Y-303000000D03*
-%TD*%
+G04 #@! TD*
 D23*
-%TO.N,Net-(JP19-Pad2)*%
-%TO.C,JP19*%
+G04 #@! TO.N,Net-(JP19-Pad2)*
+G04 #@! TO.C,JP19*
 X185420000Y-302990000D03*
 D24*
-%TO.N,Net-(C12-Pad1)*%
+G04 #@! TO.N,Net-(C12-Pad1)*
 X185420000Y-300450000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,N/C*%
-%TO.C,K1*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,K1*
 X252960000Y-119930000D03*
-%TO.N,Net-(K1-Pad5)*%
+G04 #@! TO.N,Net-(K1-Pad5)*
 X246160000Y-119930000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X252960000Y-117430000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X246160000Y-117430000D03*
-%TO.N,Net-(K1-Pad1)*%
+G04 #@! TO.N,Net-(K1-Pad1)*
 X248260000Y-117430000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X250860000Y-117430000D03*
 D28*
-%TO.N,*%
+G04 #@! TO.N,*
 X249560000Y-113630000D03*
 X242810000Y-114430000D03*
 X256310000Y-114430000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,Net-(K13-Pad8)*%
-%TO.C,K13*%
+G04 #@! TO.N,Net-(K13-Pad8)*
+G04 #@! TO.C,K13*
 X233940000Y-303720000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X241560000Y-296100000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X233940000Y-301180000D03*
-%TO.N,Net-(K13-Pad3)*%
+G04 #@! TO.N,Net-(K13-Pad3)*
 X241560000Y-298640000D03*
-%TO.N,Net-(K13-Pad6)*%
+G04 #@! TO.N,Net-(K13-Pad6)*
 X233940000Y-298640000D03*
-%TO.N,Net-(K13-Pad2)*%
+G04 #@! TO.N,Net-(K13-Pad2)*
 X241560000Y-301180000D03*
-%TO.N,Net-(K13-Pad5)*%
+G04 #@! TO.N,Net-(K13-Pad5)*
 X233940000Y-296100000D03*
 D11*
-%TO.N,Net-(K13-Pad1)*%
+G04 #@! TO.N,Net-(K13-Pad1)*
 X241560000Y-303720000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,LED1*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,LED1*
 X397962620Y-319105000D03*
-%TO.N,Net-(LED1-Pad1)*%
+G04 #@! TO.N,Net-(LED1-Pad1)*
 X400502620Y-319105000D03*
-%TD*%
+G04 #@! TD*
 D29*
-%TO.N,Net-(JP18-Pad2)*%
-%TO.C,LS1*%
+G04 #@! TO.N,Net-(JP18-Pad2)*
+G04 #@! TO.C,LS1*
 X200180000Y-301740000D03*
-%TO.N,Net-(JP19-Pad2)*%
+G04 #@! TO.N,Net-(JP19-Pad2)*
 X192580000Y-301740000D03*
-%TD*%
+G04 #@! TD*
 D24*
-%TO.N,GND*%
-%TO.C,P1*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,P1*
 X216350000Y-150390000D03*
 D23*
-%TO.N,Net-(P1-Pad2)*%
+G04 #@! TO.N,Net-(P1-Pad2)*
 X218890000Y-150390000D03*
-%TO.N,Net-(JP2-Pad2)*%
+G04 #@! TO.N,Net-(JP2-Pad2)*
 X221430000Y-150390000D03*
-%TO.N,Net-(JP3-Pad1)*%
+G04 #@! TO.N,Net-(JP3-Pad1)*
 X223970000Y-150390000D03*
-%TD*%
-%TO.N,Net-(P2-Pad4)*%
-%TO.C,P2*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(P2-Pad4)*
+G04 #@! TO.C,P2*
 X353750000Y-137550000D03*
-%TO.N,Net-(P2-Pad3)*%
+G04 #@! TO.N,Net-(P2-Pad3)*
 X353750000Y-135010000D03*
-%TO.N,Net-(P2-Pad2)*%
+G04 #@! TO.N,Net-(P2-Pad2)*
 X353750000Y-132470000D03*
 D24*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X353750000Y-129930000D03*
-%TD*%
+G04 #@! TD*
 D30*
-%TO.N,Net-(Q4-Pad2)*%
-%TO.C,Q4*%
+G04 #@! TO.N,Net-(Q4-Pad2)*
+G04 #@! TO.C,Q4*
 X217535000Y-299615000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X217535000Y-298345000D03*
 D31*
-%TO.N,Net-(CR1-Pad1)*%
+G04 #@! TO.N,Net-(CR1-Pad1)*
 X217535000Y-300885000D03*
-%TD*%
+G04 #@! TD*
 D32*
-%TO.N,GND*%
-%TO.C,Q5*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,Q5*
 X305610000Y-150480000D03*
 D33*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X308150000Y-150480000D03*
-%TO.N,Net-(Q5-Pad2)*%
+G04 #@! TO.N,Net-(Q5-Pad2)*
 X306880000Y-150480000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(H12-Pad6)*%
-%TO.C,R1*%
+G04 #@! TO.N,Net-(H12-Pad6)*
+G04 #@! TO.C,R1*
 X329580000Y-239400000D03*
 D17*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X319420000Y-239400000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,R2*%
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,R2*
 X252230000Y-180380000D03*
 D17*
-%TO.N,Net-(P1-Pad2)*%
+G04 #@! TO.N,Net-(P1-Pad2)*
 X252230000Y-170220000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/VD0*%
-%TO.C,R3*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/VD0*
+G04 #@! TO.C,R3*
 X228230000Y-180380000D03*
 D13*
-%TO.N,Net-(R3-Pad1)*%
+G04 #@! TO.N,Net-(R3-Pad1)*
 X228230000Y-170220000D03*
-%TD*%
-%TO.N,Net-(R4-Pad1)*%
-%TO.C,R4*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R4-Pad1)*
+G04 #@! TO.C,R4*
 X231230000Y-170220000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/VD1*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD1*
 X231230000Y-180380000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(R5-Pad1)*%
-%TO.C,R5*%
+G04 #@! TO.N,Net-(R5-Pad1)*
+G04 #@! TO.C,R5*
 X234230000Y-170220000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/VD2*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD2*
 X234230000Y-180380000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(R6-Pad1)*%
-%TO.C,R6*%
+G04 #@! TO.N,Net-(R6-Pad1)*
+G04 #@! TO.C,R6*
 X237230000Y-170220000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/VD3*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD3*
 X237230000Y-180380000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/VD4*%
-%TO.C,R7*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/VD4*
+G04 #@! TO.C,R7*
 X240230000Y-180380000D03*
 D13*
-%TO.N,Net-(R7-Pad1)*%
+G04 #@! TO.N,Net-(R7-Pad1)*
 X240230000Y-170220000D03*
-%TD*%
-%TO.N,Net-(R8-Pad1)*%
-%TO.C,R8*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R8-Pad1)*
+G04 #@! TO.C,R8*
 X243230000Y-170220000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/VD5*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD5*
 X243230000Y-180380000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/VD6*%
-%TO.C,R9*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/VD6*
+G04 #@! TO.C,R9*
 X246230000Y-180380000D03*
 D13*
-%TO.N,Net-(R9-Pad1)*%
+G04 #@! TO.N,Net-(R9-Pad1)*
 X246230000Y-170220000D03*
-%TD*%
-%TO.N,Net-(R10-Pad1)*%
-%TO.C,R10*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R10-Pad1)*
+G04 #@! TO.C,R10*
 X249230000Y-170220000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/VD7*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD7*
 X249230000Y-180380000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(R11-Pad1)*%
-%TO.C,R11*%
+G04 #@! TO.N,Net-(R11-Pad1)*
+G04 #@! TO.C,R11*
 X219980000Y-136820000D03*
 D17*
-%TO.N,Net-(J1-Pad13)*%
+G04 #@! TO.N,Net-(J1-Pad13)*
 X219980000Y-126660000D03*
-%TD*%
-%TO.N,Net-(J1-Pad14)*%
-%TO.C,R12*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J1-Pad14)*
+G04 #@! TO.C,R12*
 X222990000Y-126660000D03*
 D13*
-%TO.N,Net-(R12-Pad1)*%
+G04 #@! TO.N,Net-(R12-Pad1)*
 X222990000Y-136820000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R13-Pad2)*%
-%TO.C,R13*%
+G04 #@! TO.N,Net-(R13-Pad2)*
+G04 #@! TO.C,R13*
 X216980000Y-136820000D03*
 D13*
-%TO.N,Net-(J1-Pad3)*%
+G04 #@! TO.N,Net-(J1-Pad3)*
 X216980000Y-126660000D03*
-%TD*%
-%TO.N,Net-(A12-Pad3)*%
-%TO.C,R14*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(A12-Pad3)*
+G04 #@! TO.C,R14*
 X316760000Y-154150000D03*
 D17*
-%TO.N,Net-(Q5-Pad2)*%
+G04 #@! TO.N,Net-(Q5-Pad2)*
 X316760000Y-143990000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(K13-Pad3)*%
-%TO.C,R15*%
+G04 #@! TO.N,Net-(K13-Pad3)*
+G04 #@! TO.C,R15*
 X230010000Y-294830000D03*
 D17*
-%TO.N,Net-(K13-Pad6)*%
+G04 #@! TO.N,Net-(K13-Pad6)*
 X230010000Y-304990000D03*
-%TD*%
-%TO.N,Net-(K13-Pad3)*%
-%TO.C,R16*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(K13-Pad3)*
+G04 #@! TO.C,R16*
 X242830000Y-292420000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X232670000Y-292420000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,GND*%
-%TO.C,R17*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R17*
 X248490000Y-294830000D03*
 D13*
-%TO.N,Net-(K13-Pad2)*%
+G04 #@! TO.N,Net-(K13-Pad2)*
 X248490000Y-304990000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(J8-Pad2)*%
-%TO.C,R18*%
+G04 #@! TO.N,Net-(J8-Pad2)*
+G04 #@! TO.C,R18*
 X232670000Y-310600000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X242830000Y-310600000D03*
-%TD*%
-%TO.N,Net-(J13-Pad12)*%
-%TO.C,R19*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J13-Pad12)*
+G04 #@! TO.C,R19*
 X242830000Y-307600000D03*
 D17*
-%TO.N,Net-(J8-Pad2)*%
+G04 #@! TO.N,Net-(J8-Pad2)*
 X232670000Y-307600000D03*
-%TD*%
-%TO.N,Net-(C8-Pad1)*%
-%TO.C,R20*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C8-Pad1)*
+G04 #@! TO.C,R20*
 X227870000Y-281120000D03*
 D13*
-%TO.N,/Serial_IO_Audio/PDL0*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL0*
 X227870000Y-270960000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(C5-Pad1)*%
-%TO.C,R21*%
+G04 #@! TO.N,Net-(C5-Pad1)*
+G04 #@! TO.C,R21*
 X212390000Y-281120000D03*
 D13*
-%TO.N,/Serial_IO_Audio/PDL1*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL1*
 X212390000Y-270960000D03*
-%TD*%
-%TO.N,/Serial_IO_Audio/PDL2*%
-%TO.C,R22*%
+G04 #@! TD*
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
+G04 #@! TO.C,R22*
 X227870000Y-245820000D03*
 D17*
-%TO.N,Net-(C6-Pad1)*%
+G04 #@! TO.N,Net-(C6-Pad1)*
 X227870000Y-255980000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Serial_IO_Audio/PDL3*%
-%TO.C,R23*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
+G04 #@! TO.C,R23*
 X212390000Y-245820000D03*
 D17*
-%TO.N,Net-(C7-Pad1)*%
+G04 #@! TO.N,Net-(C7-Pad1)*
 X212390000Y-255980000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(CR1-Pad1)*%
-%TO.C,R24*%
+G04 #@! TO.N,Net-(CR1-Pad1)*
+G04 #@! TO.C,R24*
 X247830000Y-286200000D03*
 D17*
-%TO.N,Net-(C38-Pad2)*%
+G04 #@! TO.N,Net-(C38-Pad2)*
 X247830000Y-276040000D03*
-%TD*%
-%TO.N,Net-(Q4-Pad2)*%
-%TO.C,R25*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(Q4-Pad2)*
+G04 #@! TO.C,R25*
 X201460000Y-290720000D03*
 D13*
-%TO.N,Net-(C12-Pad1)*%
+G04 #@! TO.N,Net-(C12-Pad1)*
 X191300000Y-290720000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(A13-Pad2)*%
-%TO.C,R26*%
+G04 #@! TO.N,Net-(A13-Pad2)*
+G04 #@! TO.C,R26*
 X332240000Y-154150000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X332240000Y-143990000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R27-Pad2)*%
-%TO.C,R27*%
+G04 #@! TO.N,Net-(R27-Pad2)*
+G04 #@! TO.C,R27*
 X213980000Y-136820000D03*
 D13*
-%TO.N,Net-(J1-Pad2)*%
+G04 #@! TO.N,Net-(J1-Pad2)*
 X213980000Y-126660000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(F14-Pad15)*%
-%TO.C,R28*%
+G04 #@! TO.N,Net-(F14-Pad15)*
+G04 #@! TO.C,R28*
 X281520000Y-204430000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X281520000Y-194270000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(H14-Pad4)*%
-%TO.C,R29*%
+G04 #@! TO.N,Net-(H14-Pad4)*
+G04 #@! TO.C,R29*
 X227010000Y-294830000D03*
 D13*
-%TO.N,Net-(K13-Pad6)*%
+G04 #@! TO.N,Net-(K13-Pad6)*
 X227010000Y-304990000D03*
-%TD*%
-%TO.N,Net-(C10-Pad1)*%
-%TO.C,R30*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C10-Pad1)*
+G04 #@! TO.C,R30*
 X245490000Y-304990000D03*
 D17*
-%TO.N,Net-(K13-Pad2)*%
+G04 #@! TO.N,Net-(K13-Pad2)*
 X245490000Y-294830000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(J1-Pad1)*%
-%TO.C,R31*%
+G04 #@! TO.N,Net-(J1-Pad1)*
+G04 #@! TO.C,R31*
 X210980000Y-126660000D03*
 D17*
-%TO.N,Net-(R31-Pad2)*%
+G04 #@! TO.N,Net-(R31-Pad2)*
 X210980000Y-136820000D03*
-%TD*%
-%TO.N,/SD_Card_And_Keyboard/SCL*%
-%TO.C,R32*%
+G04 #@! TD*
+G04 #@! TO.N,/SD_Card_And_Keyboard/SCL*
+G04 #@! TO.C,R32*
 X209140000Y-153610000D03*
 D13*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X209140000Y-163770000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,/SD_Card_And_Keyboard/SDA*%
-%TO.C,R33*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SDA*
+G04 #@! TO.C,R33*
 X212170000Y-153610000D03*
 D13*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X212170000Y-163770000D03*
-%TD*%
-%TO.N,/Address_Decoding/OE*%
-%TO.C,R34*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/OE*
+G04 #@! TO.C,R34*
 X314620000Y-268880000D03*
 D17*
-%TO.N,Net-(R34-Pad2)*%
+G04 #@! TO.N,Net-(R34-Pad2)*
 X314620000Y-258720000D03*
-%TD*%
-%TO.N,Net-(R35-Pad2)*%
-%TO.C,R35*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R35-Pad2)*
+G04 #@! TO.C,R35*
 X231750000Y-255980000D03*
 D13*
-%TO.N,/Address_Decoding/RAM_Enable*%
+G04 #@! TO.N,/Address_Decoding/RAM_Enable*
 X231750000Y-245820000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,R36*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,R36*
 X234750000Y-245820000D03*
 D17*
-%TO.N,Net-(R36-Pad2)*%
+G04 #@! TO.N,Net-(R36-Pad2)*
 X234750000Y-255980000D03*
-%TD*%
-%TO.N,Net-(R37-Pad2)*%
-%TO.C,R37*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R37-Pad2)*
+G04 #@! TO.C,R37*
 X237750000Y-255980000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X237750000Y-245820000D03*
-%TD*%
-%TO.N,/Address_Decoding/WE*%
-%TO.C,R38*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/WE*
+G04 #@! TO.C,R38*
 X240750000Y-245820000D03*
 D17*
-%TO.N,Net-(R38-Pad2)*%
+G04 #@! TO.N,Net-(R38-Pad2)*
 X240750000Y-255980000D03*
-%TD*%
-%TO.N,Net-(R39-Pad2)*%
-%TO.C,R39*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R39-Pad2)*
+G04 #@! TO.C,R39*
 X243750000Y-245820000D03*
 D13*
-%TO.N,/Address_Decoding/OE*%
+G04 #@! TO.N,/Address_Decoding/OE*
 X243750000Y-255980000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,R40*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,R40*
 X222050000Y-225060000D03*
 D17*
-%TO.N,Net-(R40-Pad2)*%
+G04 #@! TO.N,Net-(R40-Pad2)*
 X222050000Y-214900000D03*
-%TD*%
-%TO.N,Net-(R41-Pad2)*%
-%TO.C,R41*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R41-Pad2)*
+G04 #@! TO.C,R41*
 X219050000Y-214900000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X219050000Y-225060000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/~INH*%
-%TO.C,R42*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
+G04 #@! TO.C,R42*
 X316760000Y-218140000D03*
 D17*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X316760000Y-228300000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,R43*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,R43*
 X227780000Y-193630000D03*
 D17*
-%TO.N,Net-(R43-Pad2)*%
+G04 #@! TO.N,Net-(R43-Pad2)*
 X237940000Y-193630000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,R44*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,R44*
 X227780000Y-190630000D03*
 D17*
-%TO.N,Net-(R44-Pad2)*%
+G04 #@! TO.N,Net-(R44-Pad2)*
 X237940000Y-190630000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/CPU_RAM_ROM/VCE*%
-%TO.C,R45*%
+G04 #@! TO.N,/CPU_RAM_ROM/VCE*
+G04 #@! TO.C,R45*
 X227780000Y-187630000D03*
 D17*
-%TO.N,Net-(R45-Pad2)*%
+G04 #@! TO.N,Net-(R45-Pad2)*
 X237940000Y-187630000D03*
-%TD*%
-%TO.N,Net-(R46-Pad2)*%
-%TO.C,R46*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R46-Pad2)*
+G04 #@! TO.C,R46*
 X216050000Y-214900000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X216050000Y-225060000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R47-Pad2)*%
-%TO.C,R47*%
+G04 #@! TO.N,Net-(R47-Pad2)*
+G04 #@! TO.C,R47*
 X213050000Y-214900000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X213050000Y-225060000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R48-Pad2)*%
-%TO.C,R48*%
+G04 #@! TO.N,Net-(R48-Pad2)*
+G04 #@! TO.C,R48*
 X210050000Y-214900000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X210050000Y-225060000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,GND*%
-%TO.C,R49*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R49*
 X394145000Y-313045000D03*
 D13*
-%TO.N,Net-(LED1-Pad1)*%
+G04 #@! TO.N,Net-(LED1-Pad1)*
 X404305000Y-313045000D03*
-%TD*%
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,R50*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,R50*
 X373930000Y-170420000D03*
 D17*
-%TO.N,Net-(P2-Pad2)*%
+G04 #@! TO.N,Net-(P2-Pad2)*
 X373930000Y-160260000D03*
-%TD*%
-%TO.N,Net-(R51-Pad2)*%
-%TO.C,R51*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R51-Pad2)*
+G04 #@! TO.C,R51*
 X245110000Y-134250000D03*
 D13*
-%TO.N,Net-(K1-Pad5)*%
+G04 #@! TO.N,Net-(K1-Pad5)*
 X245110000Y-124090000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R52-Pad2)*%
-%TO.C,R52*%
+G04 #@! TO.N,Net-(R52-Pad2)*
+G04 #@! TO.C,R52*
 X254110000Y-134250000D03*
 D13*
-%TO.N,Net-(K1-Pad1)*%
+G04 #@! TO.N,Net-(K1-Pad1)*
 X254110000Y-124090000D03*
-%TD*%
-%TO.N,Net-(K1-Pad5)*%
-%TO.C,R53*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(K1-Pad5)*
+G04 #@! TO.C,R53*
 X248110000Y-124090000D03*
 D17*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X248110000Y-134250000D03*
-%TD*%
-%TO.N,Net-(K1-Pad1)*%
-%TO.C,R54*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(K1-Pad1)*
+G04 #@! TO.C,R54*
 X251110000Y-124090000D03*
 D13*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X251110000Y-134250000D03*
-%TD*%
-%TO.N,Net-(H7-Pad1)*%
-%TO.C,R55*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(H7-Pad1)*
+G04 #@! TO.C,R55*
 X281880000Y-289595000D03*
 D17*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X271720000Y-289595000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(B10-Pad10)*%
-%TO.C,R58*%
+G04 #@! TO.N,Net-(B10-Pad10)*
+G04 #@! TO.C,R58*
 X334380000Y-122870000D03*
 D17*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X334380000Y-133030000D03*
-%TD*%
-%TO.N,Net-(R59-Pad2)*%
-%TO.C,R59*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R59-Pad2)*
+G04 #@! TO.C,R59*
 X370370000Y-116980000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X380530000Y-116980000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R60-Pad2)*%
-%TO.C,R60*%
+G04 #@! TO.N,Net-(R60-Pad2)*
+G04 #@! TO.C,R60*
 X389370000Y-116980000D03*
 D13*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X399530000Y-116980000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,R61*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R61*
 X413930000Y-141580000D03*
 D17*
-%TO.N,Net-(R61-Pad2)*%
+G04 #@! TO.N,Net-(R61-Pad2)*
 X413930000Y-131420000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,GND*%
-%TO.C,R62*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R62*
 X413930000Y-160580000D03*
 D17*
-%TO.N,Net-(R62-Pad2)*%
+G04 #@! TO.N,Net-(R62-Pad2)*
 X413930000Y-150420000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(J22-Pad9)*%
-%TO.C,R63*%
+G04 #@! TO.N,Net-(J22-Pad9)*
+G04 #@! TO.C,R63*
 X380530000Y-119980000D03*
 D17*
-%TO.N,Net-(R59-Pad2)*%
+G04 #@! TO.N,Net-(R59-Pad2)*
 X370370000Y-119980000D03*
-%TD*%
-%TO.N,Net-(R60-Pad2)*%
-%TO.C,R64*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R60-Pad2)*
+G04 #@! TO.C,R64*
 X389370000Y-119980000D03*
 D13*
-%TO.N,Net-(J22-Pad8)*%
+G04 #@! TO.N,Net-(J22-Pad8)*
 X399530000Y-119980000D03*
-%TD*%
-%TO.N,Net-(J22-Pad7)*%
-%TO.C,R65*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J22-Pad7)*
+G04 #@! TO.C,R65*
 X410930000Y-141580000D03*
 D17*
-%TO.N,Net-(R61-Pad2)*%
+G04 #@! TO.N,Net-(R61-Pad2)*
 X410930000Y-131420000D03*
-%TD*%
-%TO.N,Net-(R62-Pad2)*%
-%TO.C,R66*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R62-Pad2)*
+G04 #@! TO.C,R66*
 X410930000Y-150420000D03*
 D13*
-%TO.N,Net-(J22-Pad6)*%
+G04 #@! TO.N,Net-(J22-Pad6)*
 X410930000Y-160580000D03*
-%TD*%
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,R68*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,R68*
 X247630000Y-245820000D03*
 D17*
-%TO.N,Net-(C74-Pad2)*%
+G04 #@! TO.N,Net-(C74-Pad2)*
 X247630000Y-255980000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(R69-Pad1)*%
-%TO.C,R69*%
+G04 #@! TO.N,Net-(R69-Pad1)*
+G04 #@! TO.C,R69*
 X361930000Y-160260000D03*
 D17*
-%TO.N,/Address_Decoding/SS_LORES_HIRES*%
+G04 #@! TO.N,/Address_Decoding/SS_LORES_HIRES*
 X361930000Y-170420000D03*
-%TD*%
-%TO.N,/Address_Decoding/SS_PAGE1_PAGE2*%
-%TO.C,R70*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/SS_PAGE1_PAGE2*
+G04 #@! TO.C,R70*
 X364930000Y-170420000D03*
 D13*
-%TO.N,Net-(R70-Pad1)*%
+G04 #@! TO.N,Net-(R70-Pad1)*
 X364930000Y-160260000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,/Address_Decoding/SS_NOMIX_MIX*%
-%TO.C,R71*%
+G04 #@! TO.N,/Address_Decoding/SS_NOMIX_MIX*
+G04 #@! TO.C,R71*
 X367930000Y-170420000D03*
 D13*
-%TO.N,Net-(R71-Pad1)*%
+G04 #@! TO.N,Net-(R71-Pad1)*
 X367930000Y-160260000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,/Address_Decoding/SS_GRAPHICS_TEXT*%
-%TO.C,R72*%
+G04 #@! TO.N,/Address_Decoding/SS_GRAPHICS_TEXT*
+G04 #@! TO.C,R72*
 X370930000Y-170420000D03*
 D13*
-%TO.N,Net-(R72-Pad1)*%
+G04 #@! TO.N,Net-(R72-Pad1)*
 X370930000Y-160260000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R73-Pad2)*%
-%TO.C,R73*%
+G04 #@! TO.N,Net-(R73-Pad2)*
+G04 #@! TO.C,R73*
 X361030000Y-137860000D03*
 D13*
-%TO.N,/SD_Card_And_Keyboard/Strobe*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/Strobe*
 X361030000Y-127700000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R74-Pad2)*%
-%TO.C,R74*%
+G04 #@! TO.N,Net-(R74-Pad2)*
+G04 #@! TO.C,R74*
 X364030000Y-137860000D03*
 D13*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X364030000Y-127700000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R75-Pad2)*%
-%TO.C,R75*%
+G04 #@! TO.N,Net-(R75-Pad2)*
+G04 #@! TO.C,R75*
 X383930000Y-137860000D03*
 D13*
-%TO.N,/SD_Card_And_Keyboard/K6*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K6*
 X383930000Y-127700000D03*
-%TD*%
-%TO.N,/SD_Card_And_Keyboard/K5*%
-%TO.C,R76*%
+G04 #@! TD*
+G04 #@! TO.N,/SD_Card_And_Keyboard/K5*
+G04 #@! TO.C,R76*
 X386930000Y-127700000D03*
 D17*
-%TO.N,Net-(R76-Pad2)*%
+G04 #@! TO.N,Net-(R76-Pad2)*
 X386930000Y-137860000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/SD_Card_And_Keyboard/K4*%
-%TO.C,R77*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K4*
+G04 #@! TO.C,R77*
 X389930000Y-127700000D03*
 D17*
-%TO.N,Net-(R77-Pad2)*%
+G04 #@! TO.N,Net-(R77-Pad2)*
 X389930000Y-137860000D03*
-%TD*%
-%TO.N,Net-(R78-Pad2)*%
-%TO.C,R78*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R78-Pad2)*
+G04 #@! TO.C,R78*
 X392930000Y-137860000D03*
 D13*
-%TO.N,/SD_Card_And_Keyboard/K3*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K3*
 X392930000Y-127700000D03*
-%TD*%
+G04 #@! TD*
 D17*
-%TO.N,Net-(R79-Pad2)*%
-%TO.C,R79*%
+G04 #@! TO.N,Net-(R79-Pad2)*
+G04 #@! TO.C,R79*
 X395930000Y-137860000D03*
 D13*
-%TO.N,/SD_Card_And_Keyboard/K2*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K2*
 X395930000Y-127700000D03*
-%TD*%
-%TO.N,/SD_Card_And_Keyboard/K1*%
-%TO.C,R80*%
+G04 #@! TD*
+G04 #@! TO.N,/SD_Card_And_Keyboard/K1*
+G04 #@! TO.C,R80*
 X398930000Y-127700000D03*
 D17*
-%TO.N,Net-(R80-Pad2)*%
+G04 #@! TO.N,Net-(R80-Pad2)*
 X398930000Y-137860000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/SD_Card_And_Keyboard/K0*%
-%TO.C,R81*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/K0*
+G04 #@! TO.C,R81*
 X401930000Y-127700000D03*
 D17*
-%TO.N,Net-(R81-Pad2)*%
+G04 #@! TO.N,Net-(R81-Pad2)*
 X401930000Y-137860000D03*
-%TD*%
-%TO.N,Net-(R82-Pad2)*%
-%TO.C,R82*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R82-Pad2)*
+G04 #@! TO.C,R82*
 X117710000Y-198605000D03*
 D13*
-%TO.N,Net-(C24-Pad1)*%
+G04 #@! TO.N,Net-(C24-Pad1)*
 X127870000Y-198605000D03*
-%TD*%
-%TO.N,Net-(R82-Pad2)*%
-%TO.C,R83*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(R82-Pad2)*
+G04 #@! TO.C,R83*
 X117620000Y-201605000D03*
 D17*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X127780000Y-201605000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,GND*%
-%TO.C,R84*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R84*
 X127870000Y-142730000D03*
 D17*
-%TO.N,Net-(R84-Pad2)*%
+G04 #@! TO.N,Net-(R84-Pad2)*
 X117710000Y-142730000D03*
-%TD*%
-%TO.N,Net-(C22-Pad2)*%
-%TO.C,R85*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C22-Pad2)*
+G04 #@! TO.C,R85*
 X127780000Y-145730000D03*
 D13*
-%TO.N,Net-(R84-Pad2)*%
+G04 #@! TO.N,Net-(R84-Pad2)*
 X117620000Y-145730000D03*
-%TD*%
-%TO.N,Net-(C23-Pad1)*%
-%TO.C,R86*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(C23-Pad1)*
+G04 #@! TO.C,R86*
 X180180000Y-212850000D03*
 D17*
-%TO.N,Net-(R86-Pad2)*%
+G04 #@! TO.N,Net-(R86-Pad2)*
 X170020000Y-212850000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,R87*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R87*
 X180180000Y-215850000D03*
 D13*
-%TO.N,Net-(R86-Pad2)*%
+G04 #@! TO.N,Net-(R86-Pad2)*
 X170020000Y-215850000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,R88*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R88*
 X127870000Y-254480000D03*
 D17*
-%TO.N,Net-(R88-Pad2)*%
+G04 #@! TO.N,Net-(R88-Pad2)*
 X117710000Y-254480000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(R88-Pad2)*%
-%TO.C,R89*%
+G04 #@! TO.N,Net-(R88-Pad2)*
+G04 #@! TO.C,R89*
 X117620000Y-257480000D03*
 D17*
-%TO.N,Net-(C31-Pad2)*%
+G04 #@! TO.N,Net-(C31-Pad2)*
 X127780000Y-257480000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,Net-(C30-Pad1)*%
-%TO.C,R90*%
+G04 #@! TO.N,Net-(C30-Pad1)*
+G04 #@! TO.C,R90*
 X180180000Y-157000000D03*
 D17*
-%TO.N,Net-(R90-Pad2)*%
+G04 #@! TO.N,Net-(R90-Pad2)*
 X170020000Y-157000000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,R91*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,R91*
 X180160000Y-160000000D03*
 D13*
-%TO.N,Net-(R90-Pad2)*%
+G04 #@! TO.N,Net-(R90-Pad2)*
 X170000000Y-160000000D03*
-%TD*%
+G04 #@! TD*
 D14*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,RA1*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,RA1*
 X288380000Y-269965000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X288380000Y-272505000D03*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X288380000Y-275045000D03*
-%TO.N,/CPU_RAM_ROM/NMIB*%
+G04 #@! TO.N,/CPU_RAM_ROM/NMIB*
 X288380000Y-277585000D03*
-%TO.N,/CPU_RAM_ROM/IRQB*%
+G04 #@! TO.N,/CPU_RAM_ROM/IRQB*
 X288380000Y-280125000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X288380000Y-282665000D03*
-%TD*%
+G04 #@! TD*
 D29*
-%TO.N,Net-(J9-Pad2)*%
-%TO.C,RV1*%
+G04 #@! TO.N,Net-(J9-Pad2)*
+G04 #@! TO.C,RV1*
 X216030000Y-313730000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X213490000Y-313730000D03*
-%TO.N,Net-(RV1-Pad1)*%
+G04 #@! TO.N,Net-(RV1-Pad1)*
 X210950000Y-313730000D03*
-%TD*%
+G04 #@! TD*
 D34*
-%TO.N,GND*%
-%TO.C,SW1*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,SW1*
 X261550000Y-181540000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X255050000Y-181540000D03*
-%TO.N,Net-(P1-Pad2)*%
+G04 #@! TO.N,Net-(P1-Pad2)*
 X255050000Y-177040000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X261550000Y-177040000D03*
-%TD*%
+G04 #@! TD*
 D35*
-%TO.N,N/C*%
-%TO.C,SW2*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,SW2*
 X168415000Y-112200000D03*
 X181625000Y-112200000D03*
 X170320000Y-121730000D03*
-%TO.N,Net-(F1-Pad1)*%
+G04 #@! TO.N,Net-(F1-Pad1)*
 X175020000Y-121730000D03*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X179720000Y-121730000D03*
-%TD*%
+G04 #@! TD*
 D36*
-%TO.N,N/C*%
-%TO.C,SW3*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,SW3*
 X397930000Y-112980000D03*
 X390920000Y-112980000D03*
 D37*
-%TO.N,Net-(R60-Pad2)*%
+G04 #@! TO.N,Net-(R60-Pad2)*
 X392175000Y-110490000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X396675000Y-110490000D03*
-%TD*%
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,SW4*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,SW4*
 X377675000Y-110490000D03*
-%TO.N,Net-(R59-Pad2)*%
+G04 #@! TO.N,Net-(R59-Pad2)*
 X373175000Y-110490000D03*
 D36*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X371920000Y-112980000D03*
 X378930000Y-112980000D03*
-%TD*%
+G04 #@! TD*
 D34*
-%TO.N,N/C*%
-%TO.C,SW5*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,SW5*
 X384530000Y-166520000D03*
-%TO.N,Net-(P2-Pad2)*%
+G04 #@! TO.N,Net-(P2-Pad2)*
 X378030000Y-166520000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X378030000Y-171020000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X384530000Y-171020000D03*
-%TD*%
+G04 #@! TD*
 D36*
-%TO.N,N/C*%
-%TO.C,SW6*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,SW6*
 X359930000Y-112980000D03*
 X352920000Y-112980000D03*
 D37*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X354175000Y-110490000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X358675000Y-110490000D03*
-%TD*%
-%TO.N,/Power_Supply/+3V3*%
-%TO.C,SW7*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+3V3*
+G04 #@! TO.C,SW7*
 X420420000Y-138725000D03*
-%TO.N,Net-(R61-Pad2)*%
+G04 #@! TO.N,Net-(R61-Pad2)*
 X420420000Y-134225000D03*
 D36*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X417930000Y-132970000D03*
 X417930000Y-139980000D03*
-%TD*%
-%TO.N,N/C*%
-%TO.C,SW8*%
+G04 #@! TD*
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,SW8*
 X417930000Y-158980000D03*
 X417930000Y-151970000D03*
 D37*
-%TO.N,Net-(R62-Pad2)*%
+G04 #@! TO.N,Net-(R62-Pad2)*
 X420420000Y-153225000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X420420000Y-157725000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,/Address_Decoding/RW*%
-%TO.C,U1*%
+G04 #@! TO.N,/Address_Decoding/RW*
+G04 #@! TO.C,U1*
 X285450000Y-296100000D03*
 D12*
-%TO.N,/Address_Decoding/WE*%
+G04 #@! TO.N,/Address_Decoding/WE*
 X293070000Y-311340000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X285450000Y-298640000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X293070000Y-308800000D03*
-%TO.N,Net-(U1-Pad10)*%
+G04 #@! TO.N,Net-(U1-Pad10)*
 X285450000Y-301180000D03*
 X293070000Y-306260000D03*
-%TO.N,/Address_Decoding/RW*%
+G04 #@! TO.N,/Address_Decoding/RW*
 X285450000Y-303720000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X293070000Y-303720000D03*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X285450000Y-306260000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X293070000Y-301180000D03*
-%TO.N,/Address_Decoding/OE*%
+G04 #@! TO.N,/Address_Decoding/OE*
 X285450000Y-308800000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X293070000Y-298640000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X285450000Y-311340000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X293070000Y-296100000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,Net-(F12-Pad7)*%
-%TO.C,U3*%
+G04 #@! TO.N,Net-(F12-Pad7)*
+G04 #@! TO.C,U3*
 X320690000Y-270960000D03*
 D12*
-%TO.N,/Address_Decoding/ROM_Enable*%
+G04 #@! TO.N,/Address_Decoding/ROM_Enable*
 X328310000Y-286200000D03*
-%TO.N,Net-(F12-Pad9)*%
+G04 #@! TO.N,Net-(F12-Pad9)*
 X320690000Y-273500000D03*
-%TO.N,Net-(U3-Pad6)*%
+G04 #@! TO.N,Net-(U3-Pad6)*
 X328310000Y-283660000D03*
-%TO.N,Net-(U3-Pad12)*%
+G04 #@! TO.N,Net-(U3-Pad12)*
 X320690000Y-276040000D03*
-%TO.N,Net-(F12-Pad13)*%
+G04 #@! TO.N,Net-(F12-Pad13)*
 X328310000Y-281120000D03*
-%TO.N,Net-(F12-Pad11)*%
+G04 #@! TO.N,Net-(F12-Pad11)*
 X320690000Y-278580000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X328310000Y-278580000D03*
-%TO.N,Net-(F12-Pad12)*%
+G04 #@! TO.N,Net-(F12-Pad12)*
 X320690000Y-281120000D03*
-%TO.N,Net-(U3-Pad12)*%
+G04 #@! TO.N,Net-(U3-Pad12)*
 X328310000Y-276040000D03*
-%TO.N,Net-(U3-Pad6)*%
+G04 #@! TO.N,Net-(U3-Pad6)*
 X320690000Y-283660000D03*
-%TO.N,Net-(F12-Pad10)*%
+G04 #@! TO.N,Net-(F12-Pad10)*
 X328310000Y-273500000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X320690000Y-286200000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X328310000Y-270960000D03*
-%TD*%
+G04 #@! TD*
 D38*
-%TO.N,Net-(R3-Pad1)*%
-%TO.C,U4*%
+G04 #@! TO.N,Net-(R3-Pad1)*
+G04 #@! TO.C,U4*
 X229940000Y-166640000D03*
 D39*
-%TO.N,Net-(R12-Pad1)*%
+G04 #@! TO.N,Net-(R12-Pad1)*
 X278200000Y-151400000D03*
-%TO.N,Net-(R4-Pad1)*%
+G04 #@! TO.N,Net-(R4-Pad1)*
 X232480000Y-166640000D03*
-%TO.N,Net-(R11-Pad1)*%
+G04 #@! TO.N,Net-(R11-Pad1)*
 X275660000Y-151400000D03*
-%TO.N,Net-(R5-Pad1)*%
+G04 #@! TO.N,Net-(R5-Pad1)*
 X235020000Y-166640000D03*
-%TO.N,Net-(R13-Pad2)*%
+G04 #@! TO.N,Net-(R13-Pad2)*
 X273120000Y-151400000D03*
-%TO.N,Net-(R6-Pad1)*%
+G04 #@! TO.N,Net-(R6-Pad1)*
 X237560000Y-166640000D03*
-%TO.N,Net-(R27-Pad2)*%
+G04 #@! TO.N,Net-(R27-Pad2)*
 X270580000Y-151400000D03*
-%TO.N,Net-(R7-Pad1)*%
+G04 #@! TO.N,Net-(R7-Pad1)*
 X240100000Y-166640000D03*
-%TO.N,Net-(R31-Pad2)*%
+G04 #@! TO.N,Net-(R31-Pad2)*
 X268040000Y-151400000D03*
-%TO.N,Net-(R8-Pad1)*%
+G04 #@! TO.N,Net-(R8-Pad1)*
 X242640000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA8*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA8*
 X265500000Y-151400000D03*
-%TO.N,Net-(R9-Pad1)*%
+G04 #@! TO.N,Net-(R9-Pad1)*
 X245180000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA9*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA9*
 X262960000Y-151400000D03*
-%TO.N,Net-(R10-Pad1)*%
+G04 #@! TO.N,Net-(R10-Pad1)*
 X247720000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA10*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA10*
 X260420000Y-151400000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X250260000Y-166640000D03*
 X257880000Y-151400000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X252800000Y-166640000D03*
-%TO.N,Net-(U4-Pad30)*%
+G04 #@! TO.N,Net-(U4-Pad30)*
 X255340000Y-151400000D03*
-%TO.N,Net-(P1-Pad2)*%
+G04 #@! TO.N,Net-(P1-Pad2)*
 X255340000Y-166640000D03*
-%TO.N,Net-(U4-Pad31)*%
+G04 #@! TO.N,Net-(U4-Pad31)*
 X252800000Y-151400000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X257880000Y-166640000D03*
 X250260000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA0*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA0*
 X260420000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA11*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA11*
 X247720000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA1*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA1*
 X262960000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA12*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA12*
 X245180000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA2*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA2*
 X265500000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA13*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA13*
 X242640000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA3*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA3*
 X268040000Y-166640000D03*
-%TO.N,/CPU_RAM_ROM/VA14*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA14*
 X240100000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA4*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA4*
 X270580000Y-166640000D03*
-%TO.N,/SD_Card_And_Keyboard/SCL*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SCL*
 X237560000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA5*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA5*
 X273120000Y-166640000D03*
-%TO.N,/SD_Card_And_Keyboard/SDA*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SDA*
 X235020000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA6*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA6*
 X275660000Y-166640000D03*
-%TO.N,Net-(JP3-Pad2)*%
+G04 #@! TO.N,Net-(JP3-Pad2)*
 X232480000Y-151400000D03*
-%TO.N,/CPU_RAM_ROM/VA7*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA7*
 X278200000Y-166640000D03*
-%TO.N,Net-(JP2-Pad1)*%
+G04 #@! TO.N,Net-(JP2-Pad1)*
 X229940000Y-151400000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,GND*%
-%TO.C,U5*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,U5*
 X223940000Y-162830000D03*
 D12*
-%TO.N,/SD_Card_And_Keyboard/SDA*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SDA*
 X216320000Y-155210000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X223940000Y-160290000D03*
-%TO.N,/SD_Card_And_Keyboard/SCL*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SCL*
 X216320000Y-157750000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X223940000Y-157750000D03*
 X216320000Y-160290000D03*
 X223940000Y-155210000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X216320000Y-162830000D03*
-%TD*%
+G04 #@! TD*
 D40*
-%TO.N,/Address_Decoding/A14*%
-%TO.C,U6*%
+G04 #@! TO.N,/Address_Decoding/A14*
+G04 #@! TO.C,U6*
 X294840000Y-243480000D03*
 D41*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X294840000Y-246020000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X294840000Y-248560000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X294840000Y-251100000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X294840000Y-253640000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X294840000Y-256180000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X294840000Y-258720000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X294840000Y-261260000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X294840000Y-263800000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X294840000Y-266340000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X294840000Y-268880000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X294840000Y-271420000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X294840000Y-273960000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X294840000Y-276500000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X310080000Y-276500000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X310080000Y-273960000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X310080000Y-271420000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X310080000Y-268880000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X310080000Y-266340000D03*
-%TO.N,Net-(JP6-Pad2)*%
+G04 #@! TO.N,Net-(JP6-Pad2)*
 X310080000Y-263800000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X310080000Y-261260000D03*
-%TO.N,Net-(R34-Pad2)*%
+G04 #@! TO.N,Net-(R34-Pad2)*
 X310080000Y-258720000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X310080000Y-256180000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X310080000Y-253640000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X310080000Y-251100000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X310080000Y-248560000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X310080000Y-246020000D03*
 X310080000Y-243480000D03*
-%TD*%
+G04 #@! TD*
 D42*
-%TO.N,/CPU_RAM_ROM/VA7*%
-%TO.C,U8*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA7*
+G04 #@! TO.C,U8*
 X229870000Y-198920000D03*
-%TO.N,/CPU_RAM_ROM/VA9*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA9*
 X232410000Y-198920000D03*
-%TO.N,/CPU_RAM_ROM/VA11*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA11*
 X234950000Y-198920000D03*
-%TO.N,/CPU_RAM_ROM/VA15*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA15*
 X240030000Y-198920000D03*
-%TO.N,/CPU_RAM_ROM/VA13*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA13*
 X237490000Y-198920000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X242570000Y-198920000D03*
-%TO.N,Net-(U8-Pad83)*%
+G04 #@! TO.N,Net-(U8-Pad83)*
 X245110000Y-198920000D03*
-%TO.N,Net-(R43-Pad2)*%
+G04 #@! TO.N,Net-(R43-Pad2)*
 X247650000Y-198920000D03*
-%TO.N,Net-(R45-Pad2)*%
+G04 #@! TO.N,Net-(R45-Pad2)*
 X250190000Y-198920000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X252730000Y-198920000D03*
-%TO.N,Net-(U8-Pad75)*%
+G04 #@! TO.N,Net-(U8-Pad75)*
 X255270000Y-198920000D03*
-%TO.N,/CPU_RAM_ROM/VA5*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA5*
 X229870000Y-201460000D03*
-%TO.N,/CPU_RAM_ROM/VA8*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA8*
 X232410000Y-201460000D03*
-%TO.N,/CPU_RAM_ROM/VA10*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA10*
 X234950000Y-201460000D03*
-%TO.N,/CPU_RAM_ROM/VA12*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA12*
 X237490000Y-201460000D03*
-%TO.N,/CPU_RAM_ROM/VA14*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA14*
 X240030000Y-201460000D03*
-%TO.N,Net-(U8-Pad2)*%
+G04 #@! TO.N,Net-(U8-Pad2)*
 X242570000Y-201460000D03*
-%TO.N,Net-(U8-Pad84)*%
+G04 #@! TO.N,Net-(U8-Pad84)*
 X245110000Y-201460000D03*
-%TO.N,Net-(JP7-Pad2)*%
+G04 #@! TO.N,Net-(JP7-Pad2)*
 X247650000Y-201460000D03*
-%TO.N,Net-(R44-Pad2)*%
+G04 #@! TO.N,Net-(R44-Pad2)*
 X250190000Y-201460000D03*
-%TO.N,Net-(JP8-Pad2)*%
+G04 #@! TO.N,Net-(JP8-Pad2)*
 X252730000Y-201460000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X255270000Y-201460000D03*
-%TO.N,/CPU_RAM_ROM/VA3*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA3*
 X229870000Y-204000000D03*
-%TO.N,/CPU_RAM_ROM/VA1*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA1*
 X229870000Y-206540000D03*
-%TO.N,Net-(R47-Pad2)*%
+G04 #@! TO.N,Net-(R47-Pad2)*
 X229870000Y-209080000D03*
-%TO.N,Net-(R48-Pad2)*%
+G04 #@! TO.N,Net-(R48-Pad2)*
 X229870000Y-211620000D03*
-%TO.N,Net-(R40-Pad2)*%
+G04 #@! TO.N,Net-(R40-Pad2)*
 X229870000Y-214160000D03*
-%TO.N,Net-(U8-Pad25)*%
+G04 #@! TO.N,Net-(U8-Pad25)*
 X229870000Y-216700000D03*
-%TO.N,/Address_Decoding/A1*%
+G04 #@! TO.N,/Address_Decoding/A1*
 X229870000Y-219240000D03*
-%TO.N,/Address_Decoding/A3*%
+G04 #@! TO.N,/Address_Decoding/A3*
 X229870000Y-221780000D03*
-%TO.N,/Address_Decoding/A5*%
+G04 #@! TO.N,/Address_Decoding/A5*
 X229870000Y-224320000D03*
-%TO.N,/Address_Decoding/A8*%
+G04 #@! TO.N,/Address_Decoding/A8*
 X229870000Y-226860000D03*
-%TO.N,/Address_Decoding/A6*%
+G04 #@! TO.N,/Address_Decoding/A6*
 X227330000Y-226860000D03*
-%TO.N,/Address_Decoding/A4*%
+G04 #@! TO.N,/Address_Decoding/A4*
 X227330000Y-224320000D03*
-%TO.N,/Address_Decoding/A0*%
+G04 #@! TO.N,/Address_Decoding/A0*
 X227330000Y-219240000D03*
-%TO.N,/Address_Decoding/A2*%
+G04 #@! TO.N,/Address_Decoding/A2*
 X227330000Y-221780000D03*
-%TO.N,Net-(R41-Pad2)*%
+G04 #@! TO.N,Net-(R41-Pad2)*
 X227330000Y-216700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X227330000Y-214160000D03*
-%TO.N,Net-(R46-Pad2)*%
+G04 #@! TO.N,Net-(R46-Pad2)*
 X227330000Y-211620000D03*
-%TO.N,/CPU_RAM_ROM/VA0*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA0*
 X227330000Y-209080000D03*
-%TO.N,/CPU_RAM_ROM/VA2*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA2*
 X227330000Y-206540000D03*
-%TO.N,/CPU_RAM_ROM/VA4*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA4*
 X227330000Y-204000000D03*
-%TO.N,/CPU_RAM_ROM/VD7*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD7*
 X255270000Y-204000000D03*
-%TO.N,/CPU_RAM_ROM/VD5*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD5*
 X255270000Y-206540000D03*
-%TO.N,/CPU_RAM_ROM/VD3*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD3*
 X255270000Y-209080000D03*
-%TO.N,/CPU_RAM_ROM/VD2*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD2*
 X255270000Y-211620000D03*
-%TO.N,/CPU_RAM_ROM/VD0*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD0*
 X255270000Y-214160000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X255270000Y-216700000D03*
-%TO.N,/CPU_RAM_ROM/D1*%
+G04 #@! TO.N,/CPU_RAM_ROM/D1*
 X255270000Y-219240000D03*
-%TO.N,/CPU_RAM_ROM/D2*%
+G04 #@! TO.N,/CPU_RAM_ROM/D2*
 X255270000Y-221780000D03*
-%TO.N,/CPU_RAM_ROM/D4*%
+G04 #@! TO.N,/CPU_RAM_ROM/D4*
 X255270000Y-224320000D03*
-%TO.N,/CPU_RAM_ROM/D6*%
+G04 #@! TO.N,/CPU_RAM_ROM/D6*
 X255270000Y-226860000D03*
-%TO.N,/CPU_RAM_ROM/VD6*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD6*
 X257810000Y-204000000D03*
-%TO.N,/CPU_RAM_ROM/VD4*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD4*
 X257810000Y-206540000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X257810000Y-209080000D03*
-%TO.N,/CPU_RAM_ROM/VD1*%
+G04 #@! TO.N,/CPU_RAM_ROM/VD1*
 X257810000Y-211620000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X257810000Y-214160000D03*
-%TO.N,/CPU_RAM_ROM/D0*%
+G04 #@! TO.N,/CPU_RAM_ROM/D0*
 X257810000Y-216700000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X257810000Y-219240000D03*
-%TO.N,/CPU_RAM_ROM/D3*%
+G04 #@! TO.N,/CPU_RAM_ROM/D3*
 X257810000Y-221780000D03*
-%TO.N,/CPU_RAM_ROM/D5*%
+G04 #@! TO.N,/CPU_RAM_ROM/D5*
 X257810000Y-224320000D03*
-%TO.N,/CPU_RAM_ROM/D7*%
+G04 #@! TO.N,/CPU_RAM_ROM/D7*
 X257810000Y-226860000D03*
-%TO.N,/Address_Decoding/A10*%
+G04 #@! TO.N,/Address_Decoding/A10*
 X232410000Y-226860000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X234950000Y-226860000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X237490000Y-226860000D03*
-%TO.N,Net-(U8-Pad42)*%
+G04 #@! TO.N,Net-(U8-Pad42)*
 X240030000Y-226860000D03*
-%TO.N,Net-(U8-Pad44)*%
+G04 #@! TO.N,Net-(U8-Pad44)*
 X242570000Y-226860000D03*
-%TO.N,Net-(R35-Pad2)*%
+G04 #@! TO.N,Net-(R35-Pad2)*
 X245110000Y-226860000D03*
-%TO.N,Net-(R37-Pad2)*%
+G04 #@! TO.N,Net-(R37-Pad2)*
 X247650000Y-226860000D03*
-%TO.N,Net-(R39-Pad2)*%
+G04 #@! TO.N,Net-(R39-Pad2)*
 X250190000Y-226860000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X252730000Y-226860000D03*
-%TO.N,/CPU_RAM_ROM/VA6*%
+G04 #@! TO.N,/CPU_RAM_ROM/VA6*
 X227330000Y-201460000D03*
-%TO.N,Net-(U8-Pad74)*%
+G04 #@! TO.N,Net-(U8-Pad74)*
 X257810000Y-201460000D03*
-%TO.N,/Address_Decoding/A7*%
+G04 #@! TO.N,/Address_Decoding/A7*
 X229870000Y-229400000D03*
-%TO.N,/Address_Decoding/A9*%
+G04 #@! TO.N,/Address_Decoding/A9*
 X232410000Y-229400000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X234950000Y-229400000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X237490000Y-229400000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X240030000Y-229400000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X242570000Y-229400000D03*
-%TO.N,Net-(U8-Pad45)*%
+G04 #@! TO.N,Net-(U8-Pad45)*
 X245110000Y-229400000D03*
-%TO.N,Net-(R36-Pad2)*%
+G04 #@! TO.N,Net-(R36-Pad2)*
 X247650000Y-229400000D03*
-%TO.N,Net-(R38-Pad2)*%
+G04 #@! TO.N,Net-(R38-Pad2)*
 X250190000Y-229400000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X252730000Y-229400000D03*
-%TO.N,Net-(U8-Pad53)*%
+G04 #@! TO.N,Net-(U8-Pad53)*
 X255270000Y-229400000D03*
-%TD*%
+G04 #@! TD*
 D12*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,U9*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,U9*
 X310690000Y-218140000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X303070000Y-233380000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-220680000D03*
 X303070000Y-230840000D03*
 X310690000Y-223220000D03*
@@ -3783,31 +3783,31 @@ X303070000Y-228300000D03*
 X310690000Y-225760000D03*
 X303070000Y-225760000D03*
 X310690000Y-228300000D03*
-%TO.N,/CPU_RAM_ROM/INH_Enable*%
+G04 #@! TO.N,/CPU_RAM_ROM/INH_Enable*
 X303070000Y-223220000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-230840000D03*
-%TO.N,/Address_Decoding/ROM_Enable*%
+G04 #@! TO.N,/Address_Decoding/ROM_Enable*
 X303070000Y-220680000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X310690000Y-233380000D03*
 D11*
-%TO.N,Net-(U18-Pad2)*%
+G04 #@! TO.N,Net-(U18-Pad2)*
 X303070000Y-218140000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/VCE*%
-%TO.C,U10*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/VCE*
+G04 #@! TO.C,U10*
 X223940000Y-187970000D03*
 D12*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X216320000Y-172730000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X223940000Y-185430000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X216320000Y-175270000D03*
-%TO.N,/CPU_RAM_ROM/VOE*%
+G04 #@! TO.N,/CPU_RAM_ROM/VOE*
 X223940000Y-182890000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X216320000Y-177810000D03*
 X223940000Y-180350000D03*
 X216320000Y-180350000D03*
@@ -3815,189 +3815,189 @@ X223940000Y-177810000D03*
 X216320000Y-182890000D03*
 X223940000Y-175270000D03*
 X216320000Y-185430000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X223940000Y-172730000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X216320000Y-187970000D03*
-%TD*%
+G04 #@! TD*
 D43*
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,U11*%
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,U11*
 X112370000Y-137730000D03*
 D44*
-%TO.N,Net-(D1-Pad1)*%
+G04 #@! TO.N,Net-(D1-Pad1)*
 X114070000Y-137730000D03*
-%TO.N,Net-(C22-Pad2)*%
+G04 #@! TO.N,Net-(C22-Pad2)*
 X115770000Y-137730000D03*
-%TO.N,Net-(R84-Pad2)*%
+G04 #@! TO.N,Net-(R84-Pad2)*
 X117470000Y-137730000D03*
-%TO.N,Net-(C22-Pad2)*%
+G04 #@! TO.N,Net-(C22-Pad2)*
 X119170000Y-137730000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,U12*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,U12*
 X171480000Y-207850000D03*
-%TO.N,Net-(R86-Pad2)*%
+G04 #@! TO.N,Net-(R86-Pad2)*
 X169780000Y-207850000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X168080000Y-207850000D03*
-%TO.N,Net-(D2-Pad1)*%
+G04 #@! TO.N,Net-(D2-Pad1)*
 X166380000Y-207850000D03*
 D43*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X164680000Y-207850000D03*
-%TD*%
+G04 #@! TD*
 D44*
-%TO.N,GND*%
-%TO.C,U13*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,U13*
 X119170000Y-193605000D03*
-%TO.N,Net-(R82-Pad2)*%
+G04 #@! TO.N,Net-(R82-Pad2)*
 X117470000Y-193605000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X115770000Y-193605000D03*
-%TO.N,Net-(D3-Pad1)*%
+G04 #@! TO.N,Net-(D3-Pad1)*
 X114070000Y-193605000D03*
 D43*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X112370000Y-193605000D03*
-%TD*%
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,U14*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,U14*
 X164680000Y-151980000D03*
 D44*
-%TO.N,Net-(D4-Pad1)*%
+G04 #@! TO.N,Net-(D4-Pad1)*
 X166380000Y-151980000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X168080000Y-151980000D03*
-%TO.N,Net-(R90-Pad2)*%
+G04 #@! TO.N,Net-(R90-Pad2)*
 X169780000Y-151980000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X171480000Y-151980000D03*
-%TD*%
+G04 #@! TD*
 D43*
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,U15*%
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,U15*
 X112370000Y-249480000D03*
 D44*
-%TO.N,Net-(D5-Pad1)*%
+G04 #@! TO.N,Net-(D5-Pad1)*
 X114070000Y-249480000D03*
-%TO.N,Net-(C31-Pad2)*%
+G04 #@! TO.N,Net-(C31-Pad2)*
 X115770000Y-249480000D03*
-%TO.N,Net-(R88-Pad2)*%
+G04 #@! TO.N,Net-(R88-Pad2)*
 X117470000Y-249480000D03*
-%TO.N,Net-(C31-Pad2)*%
+G04 #@! TO.N,Net-(C31-Pad2)*
 X119170000Y-249480000D03*
-%TD*%
+G04 #@! TD*
 D38*
-%TO.N,Net-(CON1-Pad7)*%
-%TO.C,U16*%
+G04 #@! TO.N,Net-(CON1-Pad7)*
+G04 #@! TO.C,U16*
 X351930000Y-156680000D03*
 D39*
-%TO.N,Net-(J22-Pad1)*%
+G04 #@! TO.N,Net-(J22-Pad1)*
 X400190000Y-141440000D03*
-%TO.N,Net-(CON1-Pad5)*%
+G04 #@! TO.N,Net-(CON1-Pad5)*
 X354470000Y-156680000D03*
-%TO.N,Net-(R81-Pad2)*%
+G04 #@! TO.N,Net-(R81-Pad2)*
 X397650000Y-141440000D03*
-%TO.N,Net-(CON1-Pad2)*%
+G04 #@! TO.N,Net-(CON1-Pad2)*
 X357010000Y-156680000D03*
-%TO.N,Net-(R80-Pad2)*%
+G04 #@! TO.N,Net-(R80-Pad2)*
 X395110000Y-141440000D03*
-%TO.N,Net-(CON1-Pad1)*%
+G04 #@! TO.N,Net-(CON1-Pad1)*
 X359550000Y-156680000D03*
-%TO.N,Net-(R79-Pad2)*%
+G04 #@! TO.N,Net-(R79-Pad2)*
 X392570000Y-141440000D03*
-%TO.N,Net-(R69-Pad1)*%
+G04 #@! TO.N,Net-(R69-Pad1)*
 X362090000Y-156680000D03*
-%TO.N,Net-(R78-Pad2)*%
+G04 #@! TO.N,Net-(R78-Pad2)*
 X390030000Y-141440000D03*
-%TO.N,Net-(R70-Pad1)*%
+G04 #@! TO.N,Net-(R70-Pad1)*
 X364630000Y-156680000D03*
-%TO.N,Net-(R77-Pad2)*%
+G04 #@! TO.N,Net-(R77-Pad2)*
 X387490000Y-141440000D03*
-%TO.N,Net-(R71-Pad1)*%
+G04 #@! TO.N,Net-(R71-Pad1)*
 X367170000Y-156680000D03*
-%TO.N,Net-(R76-Pad2)*%
+G04 #@! TO.N,Net-(R76-Pad2)*
 X384950000Y-141440000D03*
-%TO.N,Net-(R72-Pad1)*%
+G04 #@! TO.N,Net-(R72-Pad1)*
 X369710000Y-156680000D03*
-%TO.N,Net-(R75-Pad2)*%
+G04 #@! TO.N,Net-(R75-Pad2)*
 X382410000Y-141440000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X372250000Y-156680000D03*
 X379870000Y-141440000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X374790000Y-156680000D03*
-%TO.N,Net-(U16-Pad30)*%
+G04 #@! TO.N,Net-(U16-Pad30)*
 X377330000Y-141440000D03*
-%TO.N,Net-(P2-Pad2)*%
+G04 #@! TO.N,Net-(P2-Pad2)*
 X377330000Y-156680000D03*
-%TO.N,Net-(U16-Pad31)*%
+G04 #@! TO.N,Net-(U16-Pad31)*
 X374790000Y-141440000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X379870000Y-156680000D03*
 X372250000Y-141440000D03*
-%TO.N,Net-(J22-Pad9)*%
+G04 #@! TO.N,Net-(J22-Pad9)*
 X382410000Y-156680000D03*
-%TO.N,Net-(R74-Pad2)*%
+G04 #@! TO.N,Net-(R74-Pad2)*
 X369710000Y-141440000D03*
-%TO.N,Net-(J22-Pad8)*%
+G04 #@! TO.N,Net-(J22-Pad8)*
 X384950000Y-156680000D03*
-%TO.N,Net-(R73-Pad2)*%
+G04 #@! TO.N,Net-(R73-Pad2)*
 X367170000Y-141440000D03*
-%TO.N,Net-(J22-Pad7)*%
+G04 #@! TO.N,Net-(J22-Pad7)*
 X387490000Y-156680000D03*
-%TO.N,Net-(R52-Pad2)*%
+G04 #@! TO.N,Net-(R52-Pad2)*
 X364630000Y-141440000D03*
-%TO.N,Net-(J22-Pad6)*%
+G04 #@! TO.N,Net-(J22-Pad6)*
 X390030000Y-156680000D03*
-%TO.N,Net-(R51-Pad2)*%
+G04 #@! TO.N,Net-(R51-Pad2)*
 X362090000Y-141440000D03*
-%TO.N,Net-(J22-Pad5)*%
+G04 #@! TO.N,Net-(J22-Pad5)*
 X392570000Y-156680000D03*
-%TO.N,/SD_Card_And_Keyboard/SCL*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SCL*
 X359550000Y-141440000D03*
-%TO.N,/Peripheral_IO/Prop_Q3*%
+G04 #@! TO.N,/Peripheral_IO/Prop_Q3*
 X395110000Y-156680000D03*
-%TO.N,/SD_Card_And_Keyboard/SDA*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SDA*
 X357010000Y-141440000D03*
-%TO.N,/Peripheral_IO/Prop_7M*%
+G04 #@! TO.N,/Peripheral_IO/Prop_7M*
 X397650000Y-156680000D03*
-%TO.N,Net-(P2-Pad4)*%
+G04 #@! TO.N,Net-(P2-Pad4)*
 X354470000Y-141440000D03*
-%TO.N,Net-(J22-Pad2)*%
+G04 #@! TO.N,Net-(J22-Pad2)*
 X400190000Y-156680000D03*
-%TO.N,Net-(P2-Pad3)*%
+G04 #@! TO.N,Net-(P2-Pad3)*
 X351930000Y-141440000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,GND*%
-%TO.C,U17*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,U17*
 X345930000Y-152880000D03*
 D12*
-%TO.N,/SD_Card_And_Keyboard/SDA*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SDA*
 X338310000Y-145260000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345930000Y-150340000D03*
-%TO.N,/SD_Card_And_Keyboard/SCL*%
+G04 #@! TO.N,/SD_Card_And_Keyboard/SCL*
 X338310000Y-147800000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X345930000Y-147800000D03*
 X338310000Y-150340000D03*
 X345930000Y-145260000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X338310000Y-152880000D03*
-%TD*%
+G04 #@! TD*
 D11*
-%TO.N,/CPU_RAM_ROM/~INH*%
-%TO.C,U18*%
+G04 #@! TO.N,/CPU_RAM_ROM/~INH*
+G04 #@! TO.C,U18*
 X320690000Y-218140000D03*
 D12*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X328310000Y-233380000D03*
-%TO.N,Net-(U18-Pad2)*%
+G04 #@! TO.N,Net-(U18-Pad2)*
 X320690000Y-220680000D03*
-%TO.N,N/C*%
+G04 #@! TO.N,N/C*
 X328310000Y-230840000D03*
 X320690000Y-223220000D03*
 X328310000Y-228300000D03*
@@ -4007,297 +4007,297 @@ X320690000Y-228300000D03*
 X328310000Y-223220000D03*
 X320690000Y-230840000D03*
 X328310000Y-220680000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X320690000Y-233380000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X328310000Y-218140000D03*
-%TD*%
+G04 #@! TD*
 D45*
-%TO.N,Net-(U4-Pad31)*%
-%TO.C,Y1*%
+G04 #@! TO.N,Net-(U4-Pad31)*
+G04 #@! TO.C,Y1*
 X251430000Y-146480000D03*
-%TO.N,Net-(U4-Pad30)*%
+G04 #@! TO.N,Net-(U4-Pad30)*
 X256510000Y-146480000D03*
-%TD*%
+G04 #@! TD*
 D46*
-%TO.N,GND*%
-%TO.C,Y2*%
+G04 #@! TO.N,GND*
+G04 #@! TO.C,Y2*
 X275670000Y-303530000D03*
 D47*
 X275670000Y-295910000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X268050000Y-303530000D03*
-%TO.N,/CPU_RAM_ROM/Clock*%
+G04 #@! TO.N,/CPU_RAM_ROM/Clock*
 X268050000Y-295910000D03*
-%TD*%
+G04 #@! TD*
 D45*
-%TO.N,Net-(U16-Pad30)*%
-%TO.C,Y3*%
+G04 #@! TO.N,Net-(U16-Pad30)*
+G04 #@! TO.C,Y3*
 X378470000Y-136530000D03*
-%TO.N,Net-(U16-Pad31)*%
+G04 #@! TO.N,Net-(U16-Pad31)*
 X373390000Y-136530000D03*
-%TD*%
+G04 #@! TD*
 D13*
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,C80*%
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,C80*
 X108370000Y-137730000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X108370000Y-135230000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C81*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C81*
 X160680000Y-205350000D03*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X160680000Y-207850000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C82*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C82*
 X108370000Y-191105000D03*
-%TO.N,/Power_Supply/+VIN*%
+G04 #@! TO.N,/Power_Supply/+VIN*
 X108370000Y-193605000D03*
-%TD*%
-%TO.N,/Peripheral_IO/-12V*%
-%TO.C,C83*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/-12V*
+G04 #@! TO.C,C83*
 X148370000Y-134060000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X148370000Y-131560000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C84*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C84*
 X200680000Y-201600000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X200680000Y-204100000D03*
-%TD*%
-%TO.N,/Peripheral_IO/+12V*%
-%TO.C,C85*%
+G04 #@! TD*
+G04 #@! TO.N,/Peripheral_IO/+12V*
+G04 #@! TO.C,C85*
 X148370000Y-189855000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X148370000Y-187355000D03*
-%TD*%
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,C86*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,C86*
 X160680000Y-151980000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X160680000Y-149480000D03*
-%TD*%
-%TO.N,/Power_Supply/+VIN*%
-%TO.C,C87*%
+G04 #@! TD*
+G04 #@! TO.N,/Power_Supply/+VIN*
+G04 #@! TO.C,C87*
 X108370000Y-249480000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X108370000Y-246980000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C88*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C88*
 X200680000Y-145730000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X200680000Y-148230000D03*
-%TD*%
-%TO.N,GND*%
-%TO.C,C89*%
+G04 #@! TD*
+G04 #@! TO.N,GND*
+G04 #@! TO.C,C89*
 X148400000Y-243210000D03*
-%TO.N,/Peripheral_IO/-5V*%
+G04 #@! TO.N,/Peripheral_IO/-5V*
 X148400000Y-245710000D03*
-%TD*%
-%TO.N,Net-(H7-Pad2)*%
-%TO.C,R92*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(H7-Pad2)*
+G04 #@! TO.C,R92*
 X271720000Y-286595000D03*
 D17*
-%TO.N,/CPU_RAM_ROM/RDY*%
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
 X281880000Y-286595000D03*
-%TD*%
+G04 #@! TD*
 D21*
-%TO.N,/Serial_IO_Audio/PDL2*%
-%TO.C,J2*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
+G04 #@! TO.C,J2*
 X158670000Y-307040000D03*
-%TO.N,Net-(J2-Pad4)*%
+G04 #@! TO.N,Net-(J2-Pad4)*
 X161440000Y-307040000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X164210000Y-307040000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X166980000Y-307040000D03*
-%TO.N,Net-(J2-Pad1)*%
+G04 #@! TO.N,Net-(J2-Pad1)*
 X169750000Y-307040000D03*
-%TO.N,Net-(J2-Pad9)*%
+G04 #@! TO.N,Net-(J2-Pad9)*
 X160055000Y-309880000D03*
-%TO.N,/Serial_IO_Audio/PDL3*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
 X162825000Y-309880000D03*
-%TO.N,/Serial_IO_Audio/PB2*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
 X165595000Y-309880000D03*
-%TO.N,Net-(J2-Pad6)*%
+G04 #@! TO.N,Net-(J2-Pad6)*
 X168365000Y-309880000D03*
-%TO.N,/Serial_IO_Audio/PDL0*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL0*
 X158670000Y-313800000D03*
-%TO.N,Net-(J2-Pad13)*%
+G04 #@! TO.N,Net-(J2-Pad13)*
 X161440000Y-313800000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X164210000Y-313800000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X166980000Y-313800000D03*
-%TO.N,/Serial_IO_Audio/PB1*%
+G04 #@! TO.N,/Serial_IO_Audio/PB1*
 X169750000Y-313800000D03*
-%TO.N,Net-(J2-Pad18)*%
+G04 #@! TO.N,Net-(J2-Pad18)*
 X160055000Y-316640000D03*
-%TO.N,/Serial_IO_Audio/PDL1*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL1*
 X162825000Y-316640000D03*
-%TO.N,/Serial_IO_Audio/PB0*%
+G04 #@! TO.N,/Serial_IO_Audio/PB0*
 X165595000Y-316640000D03*
-%TO.N,Net-(J2-Pad15)*%
+G04 #@! TO.N,Net-(J2-Pad15)*
 X168365000Y-316640000D03*
 D48*
-%TO.N,*%
+G04 #@! TO.N,*
 X176705000Y-308610000D03*
 X176705000Y-316610000D03*
 X151715000Y-316610000D03*
 X151715000Y-308610000D03*
-%TD*%
+G04 #@! TD*
 D21*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,J3*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,J3*
 X116960000Y-307040000D03*
-%TO.N,Net-(J3-Pad7)*%
+G04 #@! TO.N,Net-(J3-Pad7)*
 X119730000Y-307040000D03*
-%TO.N,/Serial_IO_Audio/PDL3*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
 X122500000Y-307040000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X125270000Y-307040000D03*
 X128040000Y-307040000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X118345000Y-309880000D03*
-%TO.N,Net-(J3-Pad14)*%
+G04 #@! TO.N,Net-(J3-Pad14)*
 X121115000Y-309880000D03*
-%TO.N,Net-(J3-Pad13)*%
+G04 #@! TO.N,Net-(J3-Pad13)*
 X123885000Y-309880000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X126655000Y-309880000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X116960000Y-313800000D03*
-%TO.N,/Serial_IO_Audio/PB1*%
+G04 #@! TO.N,/Serial_IO_Audio/PB1*
 X119730000Y-313800000D03*
-%TO.N,/Serial_IO_Audio/PDL1*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL1*
 X122500000Y-313800000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X125270000Y-313800000D03*
 X128040000Y-313800000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X118345000Y-316640000D03*
-%TO.N,Net-(J3-Pad29)*%
+G04 #@! TO.N,Net-(J3-Pad29)*
 X121115000Y-316640000D03*
-%TO.N,Net-(J3-Pad28)*%
+G04 #@! TO.N,Net-(J3-Pad28)*
 X123885000Y-316640000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X126655000Y-316640000D03*
 D48*
-%TO.N,*%
+G04 #@! TO.N,*
 X143325000Y-308610000D03*
 X143325000Y-316610000D03*
 X110005000Y-316610000D03*
 X110005000Y-308610000D03*
 D21*
-%TO.N,/Serial_IO_Audio/PDL2*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
 X130810000Y-307040000D03*
-%TO.N,/Serial_IO_Audio/PB2*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
 X133580000Y-307040000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X136350000Y-307040000D03*
-%TO.N,Net-(J3-Pad11)*%
+G04 #@! TO.N,Net-(J3-Pad11)*
 X129425000Y-309880000D03*
-%TO.N,Net-(J3-Pad10)*%
+G04 #@! TO.N,Net-(J3-Pad10)*
 X132195000Y-309880000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X134965000Y-309880000D03*
-%TO.N,/Serial_IO_Audio/PDL0*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL0*
 X130810000Y-313800000D03*
-%TO.N,/Serial_IO_Audio/PB0*%
+G04 #@! TO.N,/Serial_IO_Audio/PB0*
 X133580000Y-313800000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X136350000Y-313800000D03*
-%TO.N,Net-(J3-Pad26)*%
+G04 #@! TO.N,Net-(J3-Pad26)*
 X129425000Y-316640000D03*
-%TO.N,Net-(J3-Pad25)*%
+G04 #@! TO.N,Net-(J3-Pad25)*
 X132195000Y-316640000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X134965000Y-316640000D03*
-%TD*%
+G04 #@! TD*
 D14*
-%TO.N,/Address_Decoding/+5V*%
-%TO.C,RA2*%
+G04 #@! TO.N,/Address_Decoding/+5V*
+G04 #@! TO.C,RA2*
 X234025000Y-267050000D03*
 D17*
-%TO.N,Net-(J13-Pad1)*%
+G04 #@! TO.N,Net-(J13-Pad1)*
 X236565000Y-267050000D03*
-%TO.N,Net-(J13-Pad13)*%
+G04 #@! TO.N,Net-(J13-Pad13)*
 X239105000Y-267050000D03*
-%TO.N,Net-(J13-Pad10)*%
+G04 #@! TO.N,Net-(J13-Pad10)*
 X241645000Y-267050000D03*
-%TD*%
+G04 #@! TD*
 D23*
-%TO.N,Net-(J6-Pad16)*%
-%TO.C,J6*%
+G04 #@! TO.N,Net-(J6-Pad16)*
+G04 #@! TO.C,J6*
 X158360000Y-271020000D03*
 D24*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X155820000Y-271020000D03*
 D23*
-%TO.N,/Address_Decoding/SS_AN0_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN0_OFF_ON*
 X158360000Y-273560000D03*
-%TO.N,/Serial_IO_Audio/PB0*%
+G04 #@! TO.N,/Serial_IO_Audio/PB0*
 X155820000Y-273560000D03*
-%TO.N,/Address_Decoding/SS_AN1_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN1_OFF_ON*
 X158360000Y-276100000D03*
-%TO.N,/Serial_IO_Audio/PB1*%
+G04 #@! TO.N,/Serial_IO_Audio/PB1*
 X155820000Y-276100000D03*
-%TO.N,/Address_Decoding/SS_AN2_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN2_OFF_ON*
 X158360000Y-278640000D03*
-%TO.N,/Serial_IO_Audio/PB2*%
+G04 #@! TO.N,/Serial_IO_Audio/PB2*
 X155820000Y-278640000D03*
-%TO.N,/Address_Decoding/SS_AN3_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN3_OFF_ON*
 X158360000Y-281180000D03*
-%TO.N,/Address_Decoding/C040_Strobe*%
+G04 #@! TO.N,/Address_Decoding/C040_Strobe*
 X155820000Y-281180000D03*
-%TO.N,/Serial_IO_Audio/PDL3*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL3*
 X158360000Y-283720000D03*
-%TO.N,/Serial_IO_Audio/PDL0*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL0*
 X155820000Y-283720000D03*
-%TO.N,/Serial_IO_Audio/PDL1*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL1*
 X158360000Y-286260000D03*
-%TO.N,/Serial_IO_Audio/PDL2*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
 X155820000Y-286260000D03*
-%TO.N,Net-(J6-Pad9)*%
+G04 #@! TO.N,Net-(J6-Pad9)*
 X158360000Y-288800000D03*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X155820000Y-288800000D03*
-%TD*%
-%TO.N,/Address_Decoding/PHI2*%
-%TO.C,JP15*%
+G04 #@! TD*
+G04 #@! TO.N,/Address_Decoding/PHI2*
+G04 #@! TO.C,JP15*
 X263150000Y-298470000D03*
 D24*
-%TO.N,/CPU_RAM_ROM/Clock*%
+G04 #@! TO.N,/CPU_RAM_ROM/Clock*
 X263150000Y-295930000D03*
-%TD*%
-%TO.N,Net-(J22-Pad5)*%
-%TO.C,JP20*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J22-Pad5)*
+G04 #@! TO.C,JP20*
 X373630000Y-182080000D03*
 D23*
-%TO.N,/Address_Decoding/PHI2*%
+G04 #@! TO.N,/Address_Decoding/PHI2*
 X373630000Y-184620000D03*
-%TD*%
-%TO.N,/CPU_RAM_ROM/RDY*%
-%TO.C,JP21*%
+G04 #@! TD*
+G04 #@! TO.N,/CPU_RAM_ROM/RDY*
+G04 #@! TO.C,JP21*
 X400230000Y-184620000D03*
 D24*
-%TO.N,Net-(J22-Pad2)*%
+G04 #@! TO.N,Net-(J22-Pad2)*
 X400230000Y-182080000D03*
-%TD*%
-%TO.N,Net-(J22-Pad1)*%
-%TO.C,JP22*%
+G04 #@! TD*
+G04 #@! TO.N,Net-(J22-Pad1)*
+G04 #@! TO.C,JP22*
 X403830000Y-182080000D03*
 D23*
-%TO.N,/CPU_RAM_ROM/DMA*%
+G04 #@! TO.N,/CPU_RAM_ROM/DMA*
 X403830000Y-184620000D03*
-%TD*%
+G04 #@! TD*
 D49*
-%TO.N,N/C*%
-%TO.C,H3*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,H3*
 X414260000Y-116600000D03*
 D50*
 X417485000Y-116600000D03*
@@ -4308,9 +4308,9 @@ X411035000Y-116600000D03*
 X411979581Y-114319581D03*
 X414260000Y-113375000D03*
 X416540419Y-114319581D03*
-%TD*%
-%TO.N,N/C*%
-%TO.C,H4*%
+G04 #@! TD*
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,H4*
 X100920419Y-114319581D03*
 X98640000Y-113375000D03*
 X96359581Y-114319581D03*
@@ -4321,10 +4321,10 @@ X100920419Y-118880419D03*
 X101865000Y-116600000D03*
 D49*
 X98640000Y-116600000D03*
-%TD*%
+G04 #@! TD*
 D50*
-%TO.N,N/C*%
-%TO.C,H5*%
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,H5*
 X416540419Y-314899581D03*
 X414260000Y-313955000D03*
 X411979581Y-314899581D03*
@@ -4335,9 +4335,9 @@ X416540419Y-319460419D03*
 X417485000Y-317180000D03*
 D49*
 X414260000Y-317180000D03*
-%TD*%
-%TO.N,N/C*%
-%TO.C,H6*%
+G04 #@! TD*
+G04 #@! TO.N,N/C*
+G04 #@! TO.C,H6*
 X99380000Y-317180000D03*
 D50*
 X102605000Y-317180000D03*
@@ -4348,16 +4348,16 @@ X96155000Y-317180000D03*
 X97099581Y-314899581D03*
 X99380000Y-313955000D03*
 X101660419Y-314899581D03*
-%TD*%
+G04 #@! TD*
 D51*
-%TO.N,Net-(F1-Pad1)*%
-%TO.C,F1*%
+G04 #@! TO.N,Net-(F1-Pad1)*
+G04 #@! TO.C,F1*
 X163920000Y-123562540D03*
-%TO.N,Net-(F1-Pad2)*%
+G04 #@! TO.N,Net-(F1-Pad2)*
 X158840000Y-123562540D03*
-%TD*%
+G04 #@! TD*
 D52*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 X97000000Y-111400000D03*
 X279820000Y-137510000D03*
 X287340000Y-137540000D03*
@@ -4684,12 +4684,12 @@ X169000000Y-255400000D03*
 X139000000Y-165400000D03*
 X151000000Y-195400000D03*
 X151000000Y-201400000D03*
-%TO.N,/Peripheral_IO/-12V*%
+G04 #@! TO.N,/Peripheral_IO/-12V*
 X350140000Y-117990000D03*
 X315380000Y-118850000D03*
-%TO.N,/CPU_RAM_ROM/RESB*%
+G04 #@! TO.N,/CPU_RAM_ROM/RESB*
 X349230000Y-140000000D03*
-%TO.N,/Address_Decoding/+5V*%
+G04 #@! TO.N,/Address_Decoding/+5V*
 X190000000Y-208000000D03*
 X192000000Y-208000000D03*
 X194000000Y-208000000D03*
@@ -4713,77 +4713,77 @@ X196000000Y-212000000D03*
 X194000000Y-212000000D03*
 X192000000Y-212000000D03*
 X190000000Y-206000000D03*
-%TO.N,/Power_Supply/+3V3*%
+G04 #@! TO.N,/Power_Supply/+3V3*
 X367270000Y-125830000D03*
-%TO.N,Net-(CON1-Pad7)*%
+G04 #@! TO.N,Net-(CON1-Pad7)*
 X289710000Y-137480000D03*
-%TO.N,Net-(CON1-Pad5)*%
+G04 #@! TO.N,Net-(CON1-Pad5)*
 X284830000Y-137510000D03*
-%TO.N,Net-(CON1-Pad2)*%
+G04 #@! TO.N,Net-(CON1-Pad2)*
 X277340000Y-137490000D03*
-%TO.N,Net-(CON1-Pad1)*%
+G04 #@! TO.N,Net-(CON1-Pad1)*
 X274790000Y-137450000D03*
-%TO.N,/Address_Decoding/A11*%
+G04 #@! TO.N,/Address_Decoding/A11*
 X291260000Y-269670000D03*
 X306900000Y-250220000D03*
-%TO.N,/Address_Decoding/A12*%
+G04 #@! TO.N,/Address_Decoding/A12*
 X292000000Y-268520000D03*
 X272810000Y-235270000D03*
 X292560000Y-230320000D03*
-%TO.N,/Address_Decoding/A13*%
+G04 #@! TO.N,/Address_Decoding/A13*
 X307240000Y-248580000D03*
 X273250000Y-238420000D03*
-%TO.N,/Address_Decoding/C06X_Serial*%
+G04 #@! TO.N,/Address_Decoding/C06X_Serial*
 X259580000Y-230320000D03*
-%TO.N,/Address_Decoding/C040_Strobe*%
+G04 #@! TO.N,/Address_Decoding/C040_Strobe*
 X184970000Y-276020000D03*
 X240800000Y-230900000D03*
-%TO.N,/Address_Decoding/C03X_Speaker*%
+G04 #@! TO.N,/Address_Decoding/C03X_Speaker*
 X251110000Y-232640000D03*
 X237890000Y-259660000D03*
-%TO.N,/Address_Decoding/C02X_Cassette*%
+G04 #@! TO.N,/Address_Decoding/C02X_Cassette*
 X253210000Y-233290000D03*
 X235250000Y-260900000D03*
-%TO.N,/Address_Decoding/C07X_Timer_Trigger*%
+G04 #@! TO.N,/Address_Decoding/C07X_Timer_Trigger*
 X255320000Y-233480000D03*
-%TO.N,/Address_Decoding/SS_AN0_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN0_OFF_ON*
 X233500000Y-223050000D03*
-%TO.N,/Address_Decoding/SS_AN1_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN1_OFF_ON*
 X234240000Y-223800000D03*
-%TO.N,/Address_Decoding/SS_AN2_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN2_OFF_ON*
 X235310000Y-224550000D03*
-%TO.N,/Address_Decoding/SS_AN3_OFF_ON*%
+G04 #@! TO.N,/Address_Decoding/SS_AN3_OFF_ON*
 X236340000Y-225360000D03*
-%TO.N,/Address_Decoding/A15*%
+G04 #@! TO.N,/Address_Decoding/A15*
 X306970000Y-246260000D03*
-%TO.N,/Address_Decoding/A14*%
+G04 #@! TO.N,/Address_Decoding/A14*
 X272660000Y-240420000D03*
 X294860000Y-231190000D03*
 X278150000Y-234930000D03*
 X278170000Y-272900000D03*
-%TO.N,/Address_Decoding/C7XX_IO_7*%
+G04 #@! TO.N,/Address_Decoding/C7XX_IO_7*
 X343650000Y-196880000D03*
-%TO.N,/Address_Decoding/C1XX_IO_1*%
+G04 #@! TO.N,/Address_Decoding/C1XX_IO_1*
 X343650000Y-287160000D03*
-%TO.N,/Address_Decoding/C2XX_IO_2*%
+G04 #@! TO.N,/Address_Decoding/C2XX_IO_2*
 X343830000Y-271970000D03*
-%TO.N,/Address_Decoding/C3XX_IO_3*%
+G04 #@! TO.N,/Address_Decoding/C3XX_IO_3*
 X344010000Y-259390000D03*
-%TO.N,/Address_Decoding/C4XX_IO_4*%
+G04 #@! TO.N,/Address_Decoding/C4XX_IO_4*
 X343670000Y-243590000D03*
-%TO.N,/Address_Decoding/C5XX_IO_5*%
+G04 #@! TO.N,/Address_Decoding/C5XX_IO_5*
 X343640000Y-228510000D03*
-%TO.N,/Address_Decoding/C6XX_IO_6*%
+G04 #@! TO.N,/Address_Decoding/C6XX_IO_6*
 X342540000Y-211640000D03*
-%TO.N,/Serial_IO_Audio/PDL2*%
+G04 #@! TO.N,/Serial_IO_Audio/PDL2*
 X179650000Y-283740000D03*
-%TO.N,Net-(P1-Pad2)*%
+G04 #@! TO.N,Net-(P1-Pad2)*
 X257890000Y-161100000D03*
-%TO.N,Net-(J24-Pad1)*%
+G04 #@! TO.N,Net-(J24-Pad1)*
 X206550000Y-316090000D03*
-%TD*%
+G04 #@! TD*
 D53*
-%TO.N,GND*%
+G04 #@! TO.N,GND*
 G36*
 X353591903Y-109399102D02*
 G01*
@@ -138292,5 +138292,5 @@ X92126000Y-116138962D01*
 X92126000Y-109346000D01*
 X353720103Y-109346000D01*
 X353591903Y-109399102D01*
-%TD*%
+G04 #@! TD*
 M02*
