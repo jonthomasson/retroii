@@ -84,7 +84,7 @@ PUB main | a, d, i
     a := 1 'init address to 1
     d := 1 'init data to 1
     
-    repeat 80 'number of rows
+    repeat 240 
         write_byte(d, a)
         d := d + 1
         if d == 9
@@ -93,7 +93,7 @@ PUB main | a, d, i
     
     i := 1
     
-    repeat 80 'now read from data
+    repeat 240 'now read from data
         data := read_byte(i)
         str($04, $03, string("address: "))
         hex($04, $03, i, 2)
