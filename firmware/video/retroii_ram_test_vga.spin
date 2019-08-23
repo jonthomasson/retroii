@@ -72,30 +72,47 @@ VAR
     long bpos                               ' Global Screen-Pointer
     byte data
 
-PUB main | v, i 
+PUB main | a, d, i
     init
 
-'    repeat
-'        str($04, $03, string("hello world"))
-'        waitcnt(clkfreq * 1 + cnt) 
-    str($04, $03, string("start ram test"))
+    str($04, $03, string("starting ram test..."))
     
-    write_byte(%10011001, %11111111)
-    i := 0
-    write_byte(%10101011, %00000111)
-    i := 0
-    data := read_byte(%11111111)
+    'loop through ram addresses
+    'increment data and write to address
+    'read ram addresses
+    'display read data
+    a := 1 'init address to 1
+    d := 1 'init data to 1
+    
+    repeat 80 'number of rows
+        write_byte(d, a)
+        d := d + 1
+        if d == 9
+            d := 1
+        a := a + 1
+    
+    i := 1
+    
+    repeat 80 'now read from data
+        data := read_byte(i)
+        str($04, $03, string("address: "))
+        hex($04, $03, i, 2)
+        str($04, $03, string(" data: "))
+        hex($04, $03, data, 2)
+        i := i + 1
+         
+    'write_byte(%10011001, %11111111)
+    
+    'write_byte(%10101011, %00000111)
+    
+    'data := read_byte(%11111111)
     
     'display read data
-    hex($04, $03, data, 2)
+    'hex($04, $03, data, 2)
+       
     
-    i := 0
-    'dira[D0..D7]~  'output
-    'outa[D0..D7] := %00000000   'low
-    
-    
-    data := read_byte(%00000111)
-    hex($04, $03, data, 2)
+    'data := read_byte(%00000111)
+    'hex($04, $03, data, 2)
 
 
 PRI init | i, x, y
@@ -292,15 +309,15 @@ pri write_byte(data_out, address) | i
     'set we pin low for specified time
     outa[WE]~
     dira[D0..D7]~~  'output /avoid bus contention
-    i := 0
+    'i := 0
     'set data pins
     outa[D0..D7] := data_out
-    i := 0
+    'i := 0
     
     'bring we pin high to complete write
     outa[WE]~~
     dira[D0..D7]~  'input /avoid bus contention
-    i := 0
+    'i := 0
     outa[A0..A7] := %0000000 'low
 
 pri read_byte(address) | data_in, i
@@ -314,10 +331,10 @@ pri read_byte(address) | data_in, i
     'set address pins
     outa[A0..A7] := address 
     'wait specified time
-    i := 0
+    'i := 0
     'read data pins
     data_in := ina[D0..D7]
-    i := 0
+    'i := 0
     outa[A0..A7] := %0000000 'low
     return data_in
     
