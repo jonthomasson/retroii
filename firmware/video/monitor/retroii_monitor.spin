@@ -80,14 +80,15 @@ PUB main | i, index
 
 PRI prompt
     
-    if row_num > 80
+    if row_num > 58
         row_num := 0
+        cls
         
     setPos(0,row_num)
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data
+PUB parse_command | addr, op, val, data, i
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
@@ -99,27 +100,24 @@ PUB parse_command | addr, op, val, data
     op := line_buffer[4]
     
     if op == "."
-        data := read_byte(addr)
-        hex($07, $00, data, 4)
-    '    str($07, $00, string("reading ram"))
+        if val > 0
+            i := val - addr 'get difference between addresses and iterate
+            repeat i + 1
+                data := read_byte(i)
+                hex($07, $00, i, 2)
+                str($07, $00, string(":"))
+                hex($07, $00, data, 2)
+                prompt
+                i := i + 1
+        else
+            data := read_byte(addr)
+            hex($07, $00, data, 4)
     elseif op == ":"
         write_byte(val, addr)
-    '    str($07, $00, string("writing ram"))
-    'else
-    '    str($07, $00, string("no operation given"))
+    else
+        data := read_byte(addr)
+        hex($07, $00, data, 4)
      
-   
-    'addr1[1] := BYTE[@line_buffer[2]]
-    'str($07, $00, string("parsing string: "))
-    'str($07, $00, @line_buffer)
-    'str($07, $00, string("line_buffer: "))
-    'bin($07, $00, line_buffer[0], 8)
-    'bin($07, $00, line_buffer[1], 8)
-    'bin($07, $00, line_buffer[2], 8)
-    'bin($07, $00, line_buffer[3], 8)
-    'str($07, $00, string("addr1: "))
-    'hex($07, $00, addr, 4)
-    'bin($07, $00, addr, 32)
     
     'after everything, make sure to clear line_buffer
     bytefill(@line_buffer, 0, 20)
