@@ -53,62 +53,80 @@ VAR
 
     long pos                                ' Global Screen-Pointer
     long bpos                               ' Global Screen-Pointer
-    byte data
+    'byte data
     byte line_buffer[20]
+    long row_num
 
 PUB main | i, index
     init
     
     i := 0
-    str($07, $00, string("*"))
+   
+    prompt
     
     repeat
         index := slave.check_reg(31)
         if index > -1
             if index == $0D 'enter key detected
+                
                 i := 0
+                prompt
                 parse_command
+                prompt
             else   
                 print($07, $00, index)
                 line_buffer[i] := index
                 i++
 
+PRI prompt
+    
+    if row_num > 80
+        row_num := 0
+        
+    setPos(0,row_num)
+    str($07, $00, string("*"))
+    row_num++
 
-PUB parse_command | addr, op, val
+PUB parse_command | addr, op, val, data
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
     
     'pull out address1, operation, and address2 from line_buffer
     addr := ((ascii_2bin(line_buffer[0])) << 12) | ((ascii_2bin(line_buffer[1])) << 8) | ((ascii_2bin(line_buffer[2])) << 4) | (ascii_2bin(line_buffer[3]))
-    
+    val := ((ascii_2bin(line_buffer[5])) << 12) | ((ascii_2bin(line_buffer[6])) << 8) | ((ascii_2bin(line_buffer[7])) << 4) | (ascii_2bin(line_buffer[8]))
+    'hex($07, $00, val, 4)
     op := line_buffer[4]
     
     if op == "."
-        str($07, $00, string("reading ram"))
+        data := read_byte(addr)
+        hex($07, $00, data, 4)
+    '    str($07, $00, string("reading ram"))
     elseif op == ":"
-        str($07, $00, string("writing ram"))
-    else
-        str($07, $00, string("no operation given"))
+        write_byte(val, addr)
+    '    str($07, $00, string("writing ram"))
+    'else
+    '    str($07, $00, string("no operation given"))
      
    
     'addr1[1] := BYTE[@line_buffer[2]]
-    str($07, $00, string("parsing string: "))
+    'str($07, $00, string("parsing string: "))
     'str($07, $00, @line_buffer)
-    str($07, $00, string("line_buffer: "))
-    bin($07, $00, line_buffer[0], 8)
-    bin($07, $00, line_buffer[1], 8)
-    bin($07, $00, line_buffer[2], 8)
-    bin($07, $00, line_buffer[3], 8)
-    str($07, $00, string("addr1: "))
-    hex($07, $00, addr, 4)
-    bin($07, $00, addr, 32)
+    'str($07, $00, string("line_buffer: "))
+    'bin($07, $00, line_buffer[0], 8)
+    'bin($07, $00, line_buffer[1], 8)
+    'bin($07, $00, line_buffer[2], 8)
+    'bin($07, $00, line_buffer[3], 8)
+    'str($07, $00, string("addr1: "))
+    'hex($07, $00, addr, 4)
+    'bin($07, $00, addr, 32)
     
     'after everything, make sure to clear line_buffer
     bytefill(@line_buffer, 0, 20)
     
     
 PRI ascii_2bin(ascii) | binary
+
     if ascii < 58                   'if ascii number (dec 48-57)
         binary := ascii -48 'subtract 48 to get dec equivalent
     else
@@ -118,6 +136,7 @@ PRI ascii_2bin(ascii) | binary
     
 PRI init | i, x, y
 
+    row_num := 0
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 
     vga.start(BasePin, @vgabuff, @cursor, @sync)
