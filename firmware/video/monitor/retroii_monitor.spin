@@ -63,7 +63,7 @@ PUB main | i, index
     
     i := 0
    
-    prompt
+    print_header
     
     repeat
         index := slave.check_reg(31)
@@ -71,14 +71,20 @@ PUB main | i, index
             if index == $0D 'enter key detected
                 
                 i := 0
-                prompt
+                print_header
                 parse_command
-                prompt
+                setPos(0, 0)
             else   
                 print($07, $00, index)
                 line_buffer[i] := index
                 i++
-
+                
+PRI print_header
+    cls
+    setPos(0, 1)
+    str($07, $03, string("ADDR| 0| 1| 2| 3| 4| 5| 6| 7| 8| 9| A| B| C| D| E| F|      ASCII       "))
+    setPos(0, 0)
+    
 PRI prompt
     
     if row_num > 58
@@ -89,10 +95,13 @@ PRI prompt
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data, i, j, y, h, ascii
+PUB parse_command | addr, op, val, data, i, j, y, line_no
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
+    
+    line_no := 2
+    setPos(0, line_no)
     
     'pull out address1, operation, and val from line_buffer
     addr := ((ascii_2bin(line_buffer[0])) << 12) | ((ascii_2bin(line_buffer[1])) << 8) | ((ascii_2bin(line_buffer[2])) << 4) | (ascii_2bin(line_buffer[3]))
@@ -110,7 +119,7 @@ PUB parse_command | addr, op, val, data, i, j, y, h, ascii
             repeat (i + 1) / 16
                 longfill(@ascii_buffer, 0, 4)
                 y := 0
-                h := 0
+                
                 hex($07, $00, j, 4)
                 str($07, $00, string(":"))
                 repeat 16 'display 16 bytes per line
@@ -125,8 +134,13 @@ PUB parse_command | addr, op, val, data, i, j, y, h, ascii
                 repeat 16 'display ascii
                     print($07, $00, ascii_buffer[y])
                     y++
+                if line_no > 56
+                    line_no := 2
+                    setPos(0, line_no)
+                else 
+                    line_no++   
+                    setPos(0, line_no)
                     
-                prompt
         else
             data := read_byte(addr)
             hex($07, $00, data, 4)
