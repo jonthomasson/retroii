@@ -56,6 +56,7 @@ VAR
     'byte data
     byte line_buffer[20]
     long row_num
+    byte ascii_buffer[16]
 
 PUB main | i, index
     init
@@ -88,12 +89,12 @@ PRI prompt
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data, i, j
+PUB parse_command | addr, op, val, data, i, j, y, h, ascii
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
     
-    'pull out address1, operation, and address2 from line_buffer
+    'pull out address1, operation, and val from line_buffer
     addr := ((ascii_2bin(line_buffer[0])) << 12) | ((ascii_2bin(line_buffer[1])) << 8) | ((ascii_2bin(line_buffer[2])) << 4) | (ascii_2bin(line_buffer[3]))
     val := ((ascii_2bin(line_buffer[5])) << 12) | ((ascii_2bin(line_buffer[6])) << 8) | ((ascii_2bin(line_buffer[7])) << 4) | (ascii_2bin(line_buffer[8]))
     
@@ -106,14 +107,26 @@ PUB parse_command | addr, op, val, data, i, j
             i :=  val - addr 'get difference between addresses and iterate
             j := addr
             
-            repeat i + 1
-                data := read_byte(j)
+            repeat (i + 1) / 16
+                longfill(@ascii_buffer, 0, 4)
+                y := 0
+                h := 0
                 hex($07, $00, j, 4)
                 str($07, $00, string(":"))
-                hex($07, $00, data, 2)
+                repeat 16 'display 16 bytes per line
+                    data := read_byte(j)
+                    hex($07, $00, data, 2)
+                    str($07, $00, string(" "))
+                    ascii_buffer[y] := data
+                    y++
+                    j++
+                y := 0
+                
+                repeat 16 'display ascii
+                    print($07, $00, ascii_buffer[y])
+                    y++
+                    
                 prompt
-                i++
-                j++
         else
             data := read_byte(addr)
             hex($07, $00, data, 4)
