@@ -26,6 +26,7 @@ CON
     WE = 30
   
 OBJ 
+    numbers: "Numbers"
     slave : "I2C slave v1.2"
     vga :   "VGA5PIN_Text_640x480_80x60_8x8_FG8_BG8"     ' VGA Driver       Font 8x8        
 
@@ -88,7 +89,7 @@ PRI prompt
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data, i
+PUB parse_command | addr, op, val, data, i, val_str
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
@@ -96,15 +97,25 @@ PUB parse_command | addr, op, val, data, i
     'pull out address1, operation, and address2 from line_buffer
     addr := ((ascii_2bin(line_buffer[0])) << 12) | ((ascii_2bin(line_buffer[1])) << 8) | ((ascii_2bin(line_buffer[2])) << 4) | (ascii_2bin(line_buffer[3]))
     val := ((ascii_2bin(line_buffer[5])) << 12) | ((ascii_2bin(line_buffer[6])) << 8) | ((ascii_2bin(line_buffer[7])) << 4) | (ascii_2bin(line_buffer[8]))
+    
     'hex($07, $00, val, 4)
     op := line_buffer[4]
     
     if op == "."
         if val > 0
-            i := val - addr 'get difference between addresses and iterate
+            
+            i :=  val - addr 'get difference between addresses and iterate
+            str($07, $00, string("val"))
+            dec($07, $00, val)
+            str($07, $00, string("addr"))
+            dec($07, $00, addr)
+            str($07, $00, string("i"))
+            dec($07, $00, i)
+            prompt
+            'dec($07, $00, i)
             repeat i + 1
                 data := read_byte(i)
-                hex($07, $00, i, 2)
+                hex($07, $00, i, 4)
                 str($07, $00, string(":"))
                 hex($07, $00, data, 2)
                 prompt
@@ -113,10 +124,11 @@ PUB parse_command | addr, op, val, data, i
             data := read_byte(addr)
             hex($07, $00, data, 4)
     elseif op == ":"
+        val := ascii_2bin(line_buffer[5]) << 4 | ascii_2bin(line_buffer[6])
         write_byte(val, addr)
     else
         data := read_byte(addr)
-        hex($07, $00, data, 4)
+        hex($07, $00, data, 2)
      
     
     'after everything, make sure to clear line_buffer
@@ -131,6 +143,7 @@ PRI ascii_2bin(ascii) | binary
         binary := ascii -55 'else subtract 55 for ABCDEF 
     
     return binary
+   
     
 PRI init | i, x, y
 
@@ -138,6 +151,7 @@ PRI init | i, x, y
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 
     vga.start(BasePin, @vgabuff, @cursor, @sync)
+    numbers.Init
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
     cls
