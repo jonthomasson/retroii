@@ -26,7 +26,6 @@ CON
     WE = 30
   
 OBJ 
-    numbers: "Numbers"
     slave : "I2C slave v1.2"
     vga :   "VGA5PIN_Text_640x480_80x60_8x8_FG8_BG8"     ' VGA Driver       Font 8x8        
 
@@ -89,7 +88,7 @@ PRI prompt
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data, i, val_str
+PUB parse_command | addr, op, val, data, i, j
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
@@ -105,21 +104,16 @@ PUB parse_command | addr, op, val, data, i, val_str
         if val > 0
             
             i :=  val - addr 'get difference between addresses and iterate
-            str($07, $00, string("val"))
-            dec($07, $00, val)
-            str($07, $00, string("addr"))
-            dec($07, $00, addr)
-            str($07, $00, string("i"))
-            dec($07, $00, i)
-            prompt
-            'dec($07, $00, i)
+            j := addr
+            
             repeat i + 1
-                data := read_byte(i)
-                hex($07, $00, i, 4)
+                data := read_byte(j)
+                hex($07, $00, j, 4)
                 str($07, $00, string(":"))
                 hex($07, $00, data, 2)
                 prompt
-                i := i + 1
+                i++
+                j++
         else
             data := read_byte(addr)
             hex($07, $00, data, 4)
@@ -151,7 +145,7 @@ PRI init | i, x, y
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 
     vga.start(BasePin, @vgabuff, @cursor, @sync)
-    numbers.Init
+    
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
     cls
