@@ -148,12 +148,16 @@ PUB parse_command | addr, op, val, data, i, j, y, line_no
                     setPos(0, line_no)
                     
         else
+            hex($07, $03, addr, 4)
+            str($07, $03, string(":"))
             data := read_byte(addr)
-            hex($07, $00, data, 4)
+            hex($07, $00, data, 2)
     elseif op == ":"
         val := ascii_2bin(line_buffer[5]) << 4 | ascii_2bin(line_buffer[6])
         write_byte(val, addr)
     else
+        hex($07, $03, addr, 4)
+        str($07, $03, string(":"))
         data := read_byte(addr)
         hex($07, $00, data, 2)
      
