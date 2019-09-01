@@ -120,8 +120,8 @@ PUB parse_command | addr, op, val, data, i, j, y, line_no
                 longfill(@ascii_buffer, 0, 4)
                 y := 0
                 
-                hex($07, $00, j, 4)
-                str($07, $00, string(":"))
+                hex($07, $03, j, 4)
+                str($07, $03, string(":"))
                 repeat 16 'display 16 bytes per line
                     data := read_byte(j)
                     hex($07, $00, data, 2)
@@ -268,15 +268,20 @@ PRI hexxy(x, y, fgc, bgc, value, digits)
     setPos(x, y)
     hex(fgc, bgc, value, digits)
 
-pri write_byte(data_out, address) | i
+pri write_byte(data_out, address) | i, msb, lsb
     'to write:
-    
+    lsb := address 
+    msb := address >> 8
+    'bin($07, $00, msb, 8)
+    'bin($07, $00, lsb, 8)
     'we should start high
     outa[WE]~~
     'set data pins as input
     dira[D0..D7]~  'input /avoid bus contention
     'set address pins
-    outa[A0..A7] := address 
+    'outa[A0..A7] := address 
+    outa[A0..A7] := lsb 
+    outa[A8..A14] := msb
     'set we pin low for specified time
     outa[WE]~
     dira[D0..D7]~~  'output /avoid bus contention
@@ -289,24 +294,29 @@ pri write_byte(data_out, address) | i
     outa[WE]~~
     dira[D0..D7]~  'input /avoid bus contention
     'i := 0
-    outa[A0..A7] := %0000000 'low
+    outa[A0..A7] := %00000000 'low
+    outa[A8..A14] := %0000000 'low
 
-pri read_byte(address) | data_in, i
+pri read_byte(address) | data_in, i, msb, lsb
     'to read:
     
-    
+    lsb := address 
+    msb := address >> 8
     'set we pin high
     outa[WE]~~
     'set data pins as input
     dira[D0..D7]~
     'set address pins
-    outa[A0..A7] := address 
+    'outa[A0..A7] := address 
+    outa[A0..A7] := lsb
+    outa[A8..A14] := msb
     'wait specified time
     'i := 0
     'read data pins
     data_in := ina[D0..D7]
     'i := 0
-    outa[A0..A7] := %0000000 'low
+    outa[A0..A7] := %00000000 'low
+    outa[A8..A14] := %0000000 'low
     return data_in
     
 DAT
