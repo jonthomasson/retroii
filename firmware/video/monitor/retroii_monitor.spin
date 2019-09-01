@@ -57,6 +57,7 @@ VAR
     byte line_buffer[20]
     long row_num
     byte ascii_buffer[16]
+    byte cursor_x
 
 PUB main | i, index
     init
@@ -74,9 +75,12 @@ PUB main | i, index
                 print_header
                 parse_command
                 setPos(0, 0)
+                cursor_x := 0
             else   
                 print($07, $00, index)
                 line_buffer[i] := index
+                cursor_x++
+                cursor[0] := cursor_x
                 i++
                 
 PRI print_header
@@ -84,6 +88,8 @@ PRI print_header
     setPos(0, 1)
     str($07, $03, string("ADDR| 0| 1| 2| 3| 4| 5| 6| 7| 8| 9| A| B| C| D| E| F|      ASCII       "))
     setPos(0, 0)
+    cursor[0] := 0
+    cursor_x := 0
     
 PRI prompt
     
@@ -172,6 +178,10 @@ PRI init | i, x, y
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 
     vga.start(BasePin, @vgabuff, @cursor, @sync)
+    cursor[2] := %010
+    cursor[1] := 0
+    cursor[0] := 0
+    cursor_x := 0
     
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
