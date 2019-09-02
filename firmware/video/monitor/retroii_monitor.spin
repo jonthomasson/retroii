@@ -11,6 +11,8 @@ CON
     BasePin   = 16                          ' P16-P20 VGA
     SDA_pin = 29
     SCL_pin = 28      
+    
+    Line_Buffer_Size = 50
                                       ' 
     {DATA PINS}
     D0 = 0
@@ -54,15 +56,17 @@ VAR
     long pos                                ' Global Screen-Pointer
     long bpos                               ' Global Screen-Pointer
     'byte data
-    byte line_buffer[20]
+    byte line_buffer[Line_Buffer_Size]
     long row_num
     byte ascii_buffer[16]
     byte cursor_x
+    byte line_count
 
 PUB main | i, index
     init
     
     i := 0
+    line_count := 0
    
     print_header
     
@@ -76,11 +80,13 @@ PUB main | i, index
                 parse_command
                 setPos(0, 0)
                 cursor_x := 0
+                line_count := 0
             else   
                 print($07, $00, index)
                 line_buffer[i] := index
                 cursor_x++
                 cursor[0] := cursor_x
+                line_count++
                 i++
                 
 PRI print_header
@@ -101,7 +107,7 @@ PRI prompt
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data, i, j, y, line_no
+PUB parse_command | addr, op, val, data, i, j, y, k, l, line_no
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
@@ -153,8 +159,13 @@ PUB parse_command | addr, op, val, data, i, j, y, line_no
             data := read_byte(addr)
             hex($07, $00, data, 2)
     elseif op == ":"
-        val := ascii_2bin(line_buffer[5]) << 4 | ascii_2bin(line_buffer[6])
-        write_byte(val, addr)
+        'loop through rest of line_buffer and write each byte to incremental memory address
+        l := 0
+        
+        repeat k from 0 to (line_count - 6) step 2
+            val := ascii_2bin(line_buffer[k + 5]) << 4 | ascii_2bin(line_buffer[k + 6])
+            write_byte(val, addr + l)
+            l++
     else
         hex($07, $03, addr, 4)
         str($07, $03, string(":"))
@@ -163,7 +174,7 @@ PUB parse_command | addr, op, val, data, i, j, y, line_no
      
     
     'after everything, make sure to clear line_buffer
-    bytefill(@line_buffer, 0, 20)
+    bytefill(@line_buffer, 0, Line_Buffer_Size)
     
     
 PRI ascii_2bin(ascii) | binary
