@@ -12,7 +12,7 @@ CON
     SDA_pin = 29
     SCL_pin = 28      
     
-    Line_Buffer_Size = 50
+    Line_Buffer_Size = 60
                                       ' 
     {DATA PINS}
     D0 = 0
@@ -107,9 +107,10 @@ PRI prompt
     str($07, $00, string("*"))
     row_num++
 
-PUB parse_command | addr, op, val, data, i, j, y, k, l, line_no
+PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val, line_no
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
+    '[address].[address]:[val] will write [val] to range of addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
     
     line_no := 2
@@ -119,7 +120,6 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, line_no
     addr := ((ascii_2bin(line_buffer[0])) << 12) | ((ascii_2bin(line_buffer[1])) << 8) | ((ascii_2bin(line_buffer[2])) << 4) | (ascii_2bin(line_buffer[3]))
     val := ((ascii_2bin(line_buffer[5])) << 12) | ((ascii_2bin(line_buffer[6])) << 8) | ((ascii_2bin(line_buffer[7])) << 4) | (ascii_2bin(line_buffer[8]))
     
-    'hex($07, $00, val, 4)
     op := line_buffer[4]
     
     if op == "."
@@ -128,30 +128,40 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, line_no
             i :=  val - addr 'get difference between addresses and iterate
             j := addr
             
-            repeat (i + 1) / 16
-                longfill(@ascii_buffer, 0, 4)
-                y := 0
-                
-                hex($07, $03, j, 4)
-                str($07, $03, string(":"))
-                repeat 16 'display 16 bytes per line
-                    data := read_byte(j)
-                    hex($07, $00, data, 2)
-                    str($07, $00, string(" "))
-                    ascii_buffer[y] := data
-                    y++
+            'determine if this is a bulk write operation
+            bulk_write := line_buffer[9]
+            
+            if bulk_write == ":"
+                'get value to write
+                bulk_val := ascii_2bin(line_buffer[10]) << 4 | ascii_2bin(line_buffer[11])
+                repeat i + 1
+                    write_byte(bulk_val, j)
                     j++
-                y := 0
+            else        
+                repeat (i + 1) / 16
+                    longfill(@ascii_buffer, 0, 4)
+                    y := 0
                 
-                repeat 16 'display ascii
-                    print($07, $00, ascii_buffer[y])
-                    y++
-                if line_no > 56
-                    line_no := 2
-                    setPos(0, line_no)
-                else 
-                    line_no++   
-                    setPos(0, line_no)
+                    hex($07, $03, j, 4)
+                    str($07, $03, string(":"))
+                    repeat 16 'display 16 bytes per line
+                        data := read_byte(j)
+                        hex($07, $00, data, 2)
+                        str($07, $00, string(" "))
+                        ascii_buffer[y] := data
+                        y++
+                        j++
+                    y := 0
+                
+                    repeat 16 'display ascii
+                        print($07, $00, ascii_buffer[y])
+                        y++
+                    if line_no > 56
+                        line_no := 2
+                        setPos(0, line_no)
+                    else 
+                        line_no++   
+                        setPos(0, line_no)
                     
         else
             hex($07, $03, addr, 4)
