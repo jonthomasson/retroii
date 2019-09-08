@@ -43,6 +43,7 @@ VAR
     word key                                                           
     byte tbuf[14]   
     byte file_buffer[FILE_BUF_SIZE]
+    byte tslist_buffer[FILE_BUF_SIZE]
     long file_count
     long current_page
     long last_page
@@ -101,7 +102,7 @@ PRI get_stats | index
   sd.unmount 'unmount the sd card
              '
 
-PRI parse_dsk(dsk_name) | bytes_read, count, i, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector, tslist_track, tslist_sector, file_type, file_name, file_length, next_tslist_track, next_tslist_sector
+PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector, tslist_track, tslist_sector, file_type, file_name, file_length, next_tslist_track, next_tslist_sector
     'each Apple DOS formatted dsk consists of 35 tracks
     'each track consists of 16 sectors
     'each sector is 256 bytes in size
@@ -168,13 +169,26 @@ PRI parse_dsk(dsk_name) | bytes_read, count, i, cat_track, cat_sector, dos_ver, 
     bytes_read := 0
     bytes_read := goto_sector(dsk_name, tslist_track, tslist_sector)
     
+    'move data to tslist_buffer so I can start iterating over tslist tracks/sectors?
+    bytemove(@tslist_buffer, @file_buffer, strsize(@file_buffer))
+    
     'loop through tslist and find all data sectors and read in the file data
     i := 1
-    repeat skip 2
-        next_tslist_track := byte[@file_buffer][i]
-        next_tslist_sector := byte[@file_buffer][i + 1]
-        bytes_read := 0
-        bytes_read := goto_sector(dsk_name, tslist_track, tslist_sector)
+    repeat
+        next_tslist_track := byte[@tslist_buffer][i]
+        next_tslist_sector := byte[@tslist_buffer][i + 1]
+        
+        if next_tslist_track <> $00
+            bytes_read := 0
+            bytes_read := goto_sector(dsk_name, next_tslist_track, next_tslist_sector)
+            y := 0
+            repeat while y < bytes_read
+                ser.Hex (byte[@file_buffer][y], 2)
+                y++
+            
+        i := i + 2
+        'loop and list data for track/sector
+        '
     while next_tslist_track <> $00 'track will read 0 when we are at the end of the file data
     
     'ser.Str (string("Catalog:"))
