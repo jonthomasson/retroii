@@ -102,7 +102,7 @@ PRI get_stats | index
   sd.unmount 'unmount the sd card
              '
 
-PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector, tslist_track, tslist_sector, file_type, file_name, file_length, next_tslist_track, next_tslist_sector
+PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector, tslist_track, tslist_sector, file_type, file_name, file_length, next_tslist_track, next_tslist_sector, next_data_track, next_data_sector
     'each Apple DOS formatted dsk consists of 35 tracks
     'each track consists of 16 sectors
     'each sector is 256 bytes in size
@@ -144,15 +144,15 @@ PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ve
     'loop through catalog and print file info
     
     repeat i from 0 to 6
+        if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+            next
+            
         tslist_track := byte[@file_buffer][11 + (35 * i)]
         tslist_sector := byte[@file_buffer][12 + (35 * i)]
         file_type := byte[@file_buffer][13 + (35 * i)]
         file_name := byte[@file_buffer][14 + (35 * i)]
         file_length := byte[@file_buffer][33 + (35 * i)]
         
-        if tslist_track == $00 'track is empty, so skip
-            next
-            
         ser.Str (string("File Track:"))
         ser.Hex (tslist_track, 2)
         ser.Str (string("File Sector:"))
@@ -169,24 +169,47 @@ PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ve
     bytes_read := 0
     bytes_read := goto_sector(dsk_name, tslist_track, tslist_sector)
     
+    
+    
     'move data to tslist_buffer so I can start iterating over tslist tracks/sectors?
-    bytemove(@tslist_buffer, @file_buffer, strsize(@file_buffer))
+    bytemove(@tslist_buffer, @file_buffer, FILE_BUF_SIZE)
+    'i := 0
+    'repeat while i < bytes_read
+    '  ser.Hex (byte[@tslist_buffer][i], 2)
+    '  i++
+    
     
     'loop through tslist and find all data sectors and read in the file data
-    i := 1
+    
     repeat
-        next_tslist_track := byte[@tslist_buffer][i]
-        next_tslist_sector := byte[@tslist_buffer][i + 1]
+        next_tslist_track := byte[@tslist_buffer][1]
+        next_tslist_sector := byte[@tslist_buffer][2]
         
-        if next_tslist_track <> $00
-            bytes_read := 0
-            bytes_read := goto_sector(dsk_name, next_tslist_track, next_tslist_sector)
-            y := 0
-            repeat while y < bytes_read
-                ser.Hex (byte[@file_buffer][y], 2)
-                y++
+        'navigate to all data sectors in this list
+        i := 0
+        repeat
+            next_data_track := byte[@tslist_buffer][12 + i]
+            next_data_sector := byte[@tslist_buffer][13 + i]
             
-        i := i + 2
+            bytes_read := 0
+            bytes_read := goto_sector(dsk_name, next_data_track, next_data_sector)  
+            
+            ser.Str (string("data track/sector: "))
+            ser.Hex (next_data_track, 2)
+            ser.Hex (next_data_sector, 2)
+            ser.Str (string(" "))
+            ser.Str (string("i="))
+            ser.Dec (i)
+            
+            'y := 0
+            'repeat while y < bytes_read
+            '    ser.Hex (byte[@file_buffer][y], 2)
+            '    y++
+                
+            i := i + 2
+        while next_data_track <> $00 and i =< FILE_BUF_SIZE - 13
+        
+        quit    
         'loop and list data for track/sector
         '
     while next_tslist_track <> $00 'track will read 0 when we are at the end of the file data
