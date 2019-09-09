@@ -171,8 +171,7 @@ PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ve
     
     
     
-    'move data to tslist_buffer so I can start iterating over tslist tracks/sectors?
-    bytemove(@tslist_buffer, @file_buffer, FILE_BUF_SIZE)
+    
     'i := 0
     'repeat while i < bytes_read
     '  ser.Hex (byte[@tslist_buffer][i], 2)
@@ -182,6 +181,9 @@ PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ve
     'loop through tslist and find all data sectors and read in the file data
     
     repeat
+        'move data to tslist_buffer so I can start iterating over tslist tracks/sectors?
+        bytemove(@tslist_buffer, @file_buffer, FILE_BUF_SIZE)
+        
         next_tslist_track := byte[@tslist_buffer][1]
         next_tslist_sector := byte[@tslist_buffer][2]
         
@@ -209,7 +211,9 @@ PRI parse_dsk(dsk_name) | bytes_read, count, i, y, cat_track, cat_sector, dos_ve
             i := i + 2
         while next_data_track <> $00 and i =< FILE_BUF_SIZE - 13
         
-        quit    
+        bytes_read := 0
+        bytes_read := goto_sector(dsk_name, next_tslist_track, next_tslist_sector)  
+                
         'loop and list data for track/sector
         '
     while next_tslist_track <> $00 'track will read 0 when we are at the end of the file data
