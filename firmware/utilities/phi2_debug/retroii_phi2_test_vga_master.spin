@@ -37,6 +37,7 @@ PUB main
     ser.Str(string("keyboard test..."))
     ser.Str(string("connect keyboard to ps2 port and type a message."))
     repeat
+        
         key := kb.key 
         if key <128 and key > 0
             ser.Tx (key) 
@@ -45,7 +46,7 @@ PUB main
 
 PRI init 
     dira[Prop_Phi2]~~  'output
-    outa[Prop_Phi2] := 0   'low
+    outa[Prop_Phi2]~   'low
     dira[Btn_Phi2]~  'input
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
@@ -54,10 +55,14 @@ PRI init
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
 
-pri process_phi2 | i
+pri process_phi2
+  dira[Prop_Phi2]~~  'output
+  outa[Prop_Phi2]~   'low
   repeat
+    '!outa[Prop_Phi2]
     'Returns true only if button pressed, held for at least 80ms and released.
     if button.ChkBtnPulse(Btn_Phi2, 1, 80)
+        'ser.Str (string("button pushed"))
         !outa[Prop_Phi2] 'toggle phi2
 
 
