@@ -28,7 +28,8 @@ DAT
 
 VAR
     word key               
-    long phi2_stack[20]                                            
+    long phi2_stack[20]  
+    long cog_phi2                                          
 
 
 PUB main 
@@ -49,7 +50,7 @@ PRI init
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
     kb.startx(26, 27, NUM, RepeatRate)  
-    cog_button := cognew(process_phi2, @phi2_stack)   
+    cog_phi2 := cognew(process_phi2, @phi2_stack)   
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
 
