@@ -1,7 +1,7 @@
-const char ADDR[] = {22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52};
-const char DATA[] = {39, 41, 43, 45, 47, 49, 51, 53};
+const char ADDR[] = {53, 51, 49, 47, 45, 43, 41, 39, 37, 35, 33, 31, 29, 27, 25, 23};
+const char DATA[] = {50, 48, 46, 44, 42, 40, 38, 36};
 #define CLOCK 2
-#define READ_WRITE 3
+#define READ_WRITE 34
 
 void setup() {
   for(int n = 0; n < 16; n += 1){
@@ -44,5 +44,5 @@ void onClock(){
 }
 
 void loop() {
-
+ 
 }
