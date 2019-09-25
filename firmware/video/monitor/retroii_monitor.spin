@@ -148,7 +148,11 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
                         data := read_byte(j)
                         hex($07, $00, data, 2)
                         str($07, $00, string(" "))
-                        ascii_buffer[y] := data
+                        if data > 128
+                            ascii_buffer[y] := (data - 128) 'convert from high ascii to low ascii
+                        else
+                            ascii_buffer[y] := data 
+                        
                         y++
                         j++
                     y := 0
@@ -315,14 +319,14 @@ pri write_byte(data_out, address) | i, msb, lsb
     dira[D0..D7]~  'input /avoid bus contention
     'set address pins
     'outa[A0..A7] := address 
-    outa[A0..A7] := lsb 
-    outa[A8..A14] := msb
+    outa[A7..A0] := lsb 
+    outa[A14..A8] := msb
     'set we pin low for specified time
     outa[WE]~
     dira[D0..D7]~~  'output /avoid bus contention
     'i := 0
     'set data pins
-    outa[D0..D7] := data_out
+    outa[D7..D0] := data_out
     'i := 0
     
     'bring we pin high to complete write
@@ -343,12 +347,12 @@ pri read_byte(address) | data_in, i, msb, lsb
     dira[D0..D7]~
     'set address pins
     'outa[A0..A7] := address 
-    outa[A0..A7] := lsb
-    outa[A8..A14] := msb
+    outa[A7..A0] := lsb
+    outa[A14..A8] := msb
     'wait specified time
     'i := 0
     'read data pins
-    data_in := ina[D0..D7]
+    data_in := ina[D7..D0]
     'i := 0
     outa[A0..A7] := %00000000 'low
     outa[A8..A14] := %0000000 'low
