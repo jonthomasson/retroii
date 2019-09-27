@@ -33,27 +33,33 @@ VAR
     word key               
     long phi2_stack[20]  
     long cog_phi2 
-    byte soft_switches_old                                         
+    long soft_switches_old                                         
 
 
-PUB main | soft_switches
+PUB main 
     init
     ser.Str(string("initializing keyboard..."))
     
     repeat     
         key := kb.key 
+        ser.Str(string("key sent: "))
         ser.Tx (key) 
         I2C.writeByte($42,31,key)                       'send key to register 31 of video processor
-        ser.Str(string("key sent"))
-        soft_switches := ina(SS_LOW..SS_HIGH)           'send soft switch to register 30 of video processor
-        'only send soft_switches when their value changes
-        'may need to put this in its own cog so we're not waiting for a key press...
-        if soft_swtches_old <> soft_switches
-            I2C.writeByte($42,30,soft_switches) 
+        
+        
 
 'this will run in its own cog to handle incoming/outgoing requests to video processor on i2c bus            
-PRI process_i2c
-      
+PRI process_i2c | soft_switches
+    repeat
+        soft_switches := ina[SS_LOW..SS_HIGH]           'send soft switch to register 30 of video processor
+        'only send soft_switches when their value changes
+        if soft_switches_old <> soft_switches
+            ser.Str (string("soft switches updated: "))
+            ser.Hex (soft_switches, 2)
+            I2C.writeByte($42,30,soft_switches) 
+            soft_switches_old := soft_switches
+            
+        'check for incoming messages and perform appropriate action (ie toggle clock speed, kb data out, sd card read)
 
 PRI init 
     'dira[Prop_Phi2]~~  'output
@@ -62,7 +68,7 @@ PRI init
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
     kb.startx(26, 27, NUM, RepeatRate)  
-    soft_switches_old := ina(SS_LOW..SS_HIGH) 'populate our soft switch var so we can tell if it changes later
+    soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
     'cog_phi2 := cognew(process_phi2, @phi2_stack)   
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
