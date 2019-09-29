@@ -66,7 +66,8 @@ PUB main | soft_switches
         if key == 209 'f2 toggle clock speed
         
         if key == 210 'f3 toggle mode
-                                    
+            'send i2c to video processor to tell it to switch modes
+                                   
         if key < 128 and key > 0
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
@@ -89,6 +90,7 @@ PRI init
     dira[Strobe]~~ 'set strobe pin to output
     outa[K0..K6] := %0000000 'low
     outa[Strobe]~ 'strobe low
+    dira[SS_LOW..SS_HIGH]~
     kb_output_data := false
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
