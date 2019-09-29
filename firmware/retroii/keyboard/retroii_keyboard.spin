@@ -27,8 +27,8 @@ CON
 OBJ 
     kb:   "keyboard"  
     ser: "FullDuplexSerial.spin"
-    'I2C : "I2C PASM driver v1.8od" 'od or open drain method requires pull ups on sda/scl lines. But may use this if I need a speed boost.
-    I2C : "I2C PASM driver v1.8pp" 
+    I2C : "I2C PASM driver v1.8od" 'od or open drain method requires pull ups on sda/scl lines. But may use this if I need a speed boost.
+    'I2C : "I2C PASM driver v1.8pp" 
     button: "Button"
 DAT
 
