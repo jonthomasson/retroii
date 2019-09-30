@@ -26,6 +26,12 @@ CON
     
     {WRITE ENABLE PIN}
     WE = 30
+    
+    {MODES}
+    MODE_MONITOR = 1
+    MODE_RETROII = 2
+    MODE_ASSEMBLER = 3
+    MODE_SD_CARD = 4
   
 OBJ 
     slave : "I2C slave v1.2"
@@ -61,16 +67,35 @@ VAR
     byte ascii_buffer[16]
     byte cursor_x
     byte line_count
+    long current_mode
 
-PUB main | i, index
+PUB main | index
     init
     
+    repeat
+        'index := slave.check_reg(29) 'check for new mode
+        'if index > -1
+        '    current_mode := index
+            
+        case current_mode
+            MODE_MONITOR: 
+                run_monitor
+            MODE_RETROII:
+                run_retroii
+    
+
+                
+PRI run_monitor | i, index
     i := 0
     line_count := 0
    
     print_header
     
     repeat
+        index := slave.check_reg(29) 'check for new mode
+        if index > -1
+            current_mode := index
+            QUIT 'mode changed, so exit out
         index := slave.check_reg(31)
         if index > -1
             if index == $0D 'enter key detected
@@ -88,7 +113,22 @@ PUB main | i, index
                 cursor[0] := cursor_x
                 line_count++
                 i++
-                
+
+PRI run_retroii | index
+    cls
+    str($07, $03, string("RETROII mode"))
+    repeat
+        index := slave.check_reg(29) 'check for new mode
+        if index > -1
+            current_mode := index
+            QUIT 'mode changed, so exit out
+                 '
+        'just going to get text page 1 up and running for now.
+        'read from $0400 to $07FF for TEXT mode page 1
+        'for each row 24
+        '   for each column 40
+        '       read memory and display ascii value
+
 PRI print_header
     cls
     setPos(0, 1)
@@ -203,6 +243,7 @@ PRI ascii_2bin(ascii) | binary
     
 PRI init | i, x, y
 
+    current_mode := MODE_MONITOR
     row_num := 0
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 

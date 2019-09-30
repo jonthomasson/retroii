@@ -23,6 +23,11 @@ CON
     Strobe = 25
     K0 = 17
     K6 = 23
+    {MODES}
+    MODE_MONITOR = 1
+    MODE_RETROII = 2
+    MODE_ASSEMBLER = 3
+    MODE_SD_CARD = 4
   
 OBJ 
     kb:   "keyboard"  
@@ -40,6 +45,7 @@ VAR
     long cog_phi2 
     long soft_switches_old                                         
     long kb_output_data
+    long current_mode
 
 PUB main | soft_switches
     init
@@ -65,9 +71,13 @@ PUB main | soft_switches
             ser.Dec (kb_output_data)
         if key == 209 'f2 toggle clock speed
         
-        if key == 210 'f3 toggle mode
+        if key == 210 'f3 mode monitor
             'send i2c to video processor to tell it to switch modes
-                                   
+            I2C.writeByte($42,29,MODE_MONITOR)  
+            current_mode := MODE_MONITOR
+        if key == 211 'f4 mode RETROII
+            I2C.writeByte($42,29,MODE_RETROII)  
+            current_mode := MODE_RETROII           
         if key < 128 and key > 0
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
@@ -96,7 +106,7 @@ PRI init
     ser.Start(rx, tx, 0, 115200)
     kb.startx(26, 27, NUM, RepeatRate)  
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
-   
+    current_mode := MODE_MONITOR
     'cog_phi2 := cognew(process_phi2, @phi2_stack)   
     'cog_i2c := cognew(process_i2c, @i2c_stack)  
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
