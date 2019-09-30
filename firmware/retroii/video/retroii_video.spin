@@ -114,20 +114,34 @@ PRI run_monitor | i, index
                 line_count++
                 i++
 
-PRI run_retroii | index
+PRI run_retroii | index, mem_loc, data, row
     cls
-    str($07, $03, string("RETROII mode"))
+    'str($07, $03, string("RETROII mode"))
     repeat
         index := slave.check_reg(29) 'check for new mode
         if index > -1
             current_mode := index
             QUIT 'mode changed, so exit out
-                 '
+             '
         'just going to get text page 1 up and running for now.
         'read from $0400 to $07FF for TEXT mode page 1
         'for each row 24
         '   for each column 40
         '       read memory and display ascii value
+        mem_loc := $0400    'set starting address  
+        row := 0     
+        'setPos(0, 0) 'start in upper left corner of screen
+        repeat 24 'row
+            setPos(0, row)
+            repeat 40 'column
+                data := read_byte(mem_loc)
+                print($07, $00, data - 128)
+                mem_loc++
+            
+            row++
+            
+            
+                       
 
 PRI print_header
     cls
