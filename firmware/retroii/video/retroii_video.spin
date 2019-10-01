@@ -86,6 +86,7 @@ PUB main | index
 
                 
 PRI run_monitor | i, index
+    cursor[2] := %010   
     i := 0
     line_count := 0
    
@@ -114,8 +115,9 @@ PRI run_monitor | i, index
                 line_count++
                 i++
 
-PRI run_retroii | index, mem_loc, data, row
+PRI run_retroii | index, mem_loc, mem_start, data, row, col, i
     cls
+    cursor[2] := 0   
     'str($07, $03, string("RETROII mode"))
     repeat
         index := slave.check_reg(29) 'check for new mode
@@ -128,20 +130,32 @@ PRI run_retroii | index, mem_loc, data, row
         'for each row 24
         '   for each column 40
         '       read memory and display ascii value
-        mem_loc := $0400    'set starting address  
-        row := 0     
+        mem_loc := $400    'set starting address  
+        mem_start := $00              
+        row := 0  
+        col := 0   
+        i := 0
         'setPos(0, 0) 'start in upper left corner of screen
-        repeat 24 'row
-            setPos(0, row)
-            repeat 40 'column
-                data := read_byte(mem_loc)
-                print($07, $00, data - 128)
-                mem_loc++
+        
+        repeat 3
+            mem_loc := $400 + mem_start
+            repeat 8
+                col := 0
+                repeat 40 'columns
+                    
+                    data := read_byte(mem_loc)
+                    if data > 128
+                        printxy(col, row, $07, $00, data - 128)
+                    else
+                        printxy(col, row, $07, $00, data)
+                    col++
+                    'mem_loc := mem_loc + col
+                    mem_loc++
+                
+                row++
+                mem_loc += $58
+            mem_start += $28
             
-            row++
-            
-            
-                       
 
 PRI print_header
     cls
@@ -422,4 +436,3 @@ strRes   byte "Resolution : ", 0
 strCols  byte "Cols/Rows  : ", 0 
 strFont  byte "Font       : ", 0
 strPort  byte "P23..P21", 0
-
