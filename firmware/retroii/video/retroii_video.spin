@@ -115,10 +115,12 @@ PRI run_monitor | i, index
                 line_count++
                 i++
 
-PRI run_retroii | index, mem_loc, mem_start, data, row, col
+PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, cursor_timer
     cls
     cursor[2] := 0   
-    'str($07, $03, string("RETROII mode"))
+    cursor_toggle := false
+    cursor_timer := 0
+    
     repeat
         index := slave.check_reg(29) 'check for new mode
         if index > -1
@@ -129,7 +131,11 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col
         mem_start := $00              
         row := 0  
         col := 0  
-        'setPos(0, 0) 'start in upper left corner of screen
+        
+        cursor_timer++
+        if cursor_timer == 2
+            cursor_toggle := !cursor_toggle
+            cursor_timer := 0
         
         repeat 3
             mem_loc := $400 + mem_start
@@ -138,7 +144,10 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col
                 repeat 40 'columns
                     data := read_byte(mem_loc)
                     if data == $60 'cursor
-                                   
+                        if cursor_toggle == true
+                            printxy(col, row, $07, $00, 219)   
+                        else
+                            printxy(col, row, $07, $00, 32)       
                     else
                         printxy(col, row, $07, $00, data - 128)
                         
