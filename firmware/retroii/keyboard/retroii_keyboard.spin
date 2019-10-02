@@ -19,6 +19,8 @@ CON
     Prop_Phi2 = 12
     SS_LOW = 4
     SS_HIGH = 7
+    RESET_pin = 24
+    RESET_PERIOD  = 20_000_000 '1/2 second
     {KEYBOARD RETRO][}
     Strobe = 25
     K0 = 17
@@ -28,6 +30,7 @@ CON
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
     MODE_SD_CARD = 4
+    
   
 OBJ 
     kb:   "keyboard"  
@@ -65,6 +68,9 @@ PUB main | soft_switches
         
         key := kb.key
         
+        if key == 200 or key == 201 'backspace or delete
+            if current_mode == MODE_RETROII
+                kb_write($88) 'sending left arrow
         if key == 208 'f1 toggle kb to data bus
             kb_output_data := !kb_output_data
             ser.Str (string("toggling kb_output_data : "))
@@ -79,7 +85,17 @@ PUB main | soft_switches
         if key == 211 'f4 mode RETROII
             I2C.writeByte($42,29,MODE_RETROII)  
             current_mode := MODE_RETROII    
-            kb_output_data := true       
+            kb_output_data := true   
+        if  key == 212 'f5 reset
+            'toggle reset line
+            outa[RESET_pin] := 0
+            dira[RESET_pin] := 1 'set reset pin as output
+            waitcnt(RESET_PERIOD + cnt)
+            outa[RESET_pin] := 1
+            dira[RESET_pin] := 1
+            waitcnt(RESET_PERIOD + cnt)
+            dira[RESET_pin] := 0 
+            ser.Str (string("reset pressed"))
         if key < 128 and key > 0
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
@@ -104,6 +120,8 @@ PRI init
     outa[Strobe]~ 'strobe low
     dira[SS_LOW..SS_HIGH]~
     kb_output_data := true
+    dira[RESET_pin]~ 'input
+    'outa[RESET_pin]~~ 'high           
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
     kb.startx(26, 27, NUM, RepeatRate)  

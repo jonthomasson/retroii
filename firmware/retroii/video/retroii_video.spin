@@ -36,7 +36,7 @@ CON
 OBJ 
     slave : "I2C slave v1.2"
     vga :   "VGA5PIN_Text_640x480_80x60_8x8_FG8_BG8"     ' VGA Driver       Font 8x8        
-
+    'vga :   "VGA5PIN_Text_320x240_40x30_8x8_FG8_BG8"    'this driver looks pretty good in text mode
 DAT
 
 '   Colors:
@@ -61,7 +61,6 @@ VAR
 
     long pos                                ' Global Screen-Pointer
     long bpos                               ' Global Screen-Pointer
-    'byte data
     byte line_buffer[Line_Buffer_Size]
     long row_num
     byte ascii_buffer[16]
@@ -129,14 +128,14 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, curs
              '
         mem_loc := $400    'set starting address  
         mem_start := $00              
-        row := 0  
+        row := 1  
         col := 0  
         
         cursor_timer++
         if cursor_timer == 2
             cursor_toggle := !cursor_toggle
             cursor_timer := 0
-        
+        'read Apple II Computer Graphics page 41 for example memory map of text/lores graphics
         repeat 3
             mem_loc := $400 + mem_start
             repeat 8
@@ -145,11 +144,11 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, curs
                     data := read_byte(mem_loc)
                     if data == $60 'cursor
                         if cursor_toggle == true
-                            printxy(col, row, $07, $00, 219)   
+                            printxy(col, row, $07, $00, 219)   'print cursor
                         else
-                            printxy(col, row, $07, $00, 32)       
+                            printxy(col, row, $07, $00, 32)    'print space   
                     else
-                        printxy(col, row, $07, $00, data - 128)
+                        printxy(col, row, $07, $00, data - 128)'convert high ascii to low ascii
                         
                     col++
                     mem_loc++
