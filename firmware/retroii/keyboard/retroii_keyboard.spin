@@ -75,9 +75,11 @@ PUB main | soft_switches
             'send i2c to video processor to tell it to switch modes
             I2C.writeByte($42,29,MODE_MONITOR)  
             current_mode := MODE_MONITOR
+            kb_output_data := false
         if key == 211 'f4 mode RETROII
             I2C.writeByte($42,29,MODE_RETROII)  
-            current_mode := MODE_RETROII           
+            current_mode := MODE_RETROII    
+            kb_output_data := true       
         if key < 128 and key > 0
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
@@ -101,12 +103,12 @@ PRI init
     outa[K0..K6] := %0000000 'low
     outa[Strobe]~ 'strobe low
     dira[SS_LOW..SS_HIGH]~
-    kb_output_data := false
+    kb_output_data := true
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
     kb.startx(26, 27, NUM, RepeatRate)  
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
-    current_mode := MODE_MONITOR
+    current_mode := MODE_RETROII
     'cog_phi2 := cognew(process_phi2, @phi2_stack)   
     'cog_i2c := cognew(process_i2c, @i2c_stack)  
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start

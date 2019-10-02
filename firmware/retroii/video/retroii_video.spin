@@ -115,7 +115,7 @@ PRI run_monitor | i, index
                 line_count++
                 i++
 
-PRI run_retroii | index, mem_loc, mem_start, data, row, col, i
+PRI run_retroii | index, mem_loc, mem_start, data, row, col
     cls
     cursor[2] := 0   
     'str($07, $03, string("RETROII mode"))
@@ -125,16 +125,10 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, i
             current_mode := index
             QUIT 'mode changed, so exit out
              '
-        'just going to get text page 1 up and running for now.
-        'read from $0400 to $07FF for TEXT mode page 1
-        'for each row 24
-        '   for each column 40
-        '       read memory and display ascii value
         mem_loc := $400    'set starting address  
         mem_start := $00              
         row := 0  
-        col := 0   
-        i := 0
+        col := 0  
         'setPos(0, 0) 'start in upper left corner of screen
         
         repeat 3
@@ -142,16 +136,14 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, i
             repeat 8
                 col := 0
                 repeat 40 'columns
-                    
                     data := read_byte(mem_loc)
-                    if data > 128
-                        printxy(col, row, $07, $00, data - 128)
+                    if data == $60 'cursor
+                                   
                     else
-                        printxy(col, row, $07, $00, data)
+                        printxy(col, row, $07, $00, data - 128)
+                        
                     col++
-                    'mem_loc := mem_loc + col
                     mem_loc++
-                
                 row++
                 mem_loc += $58
             mem_start += $28
@@ -271,7 +263,7 @@ PRI ascii_2bin(ascii) | binary
     
 PRI init | i, x, y
 
-    current_mode := MODE_MONITOR
+    current_mode := MODE_RETROII
     row_num := 0
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 
