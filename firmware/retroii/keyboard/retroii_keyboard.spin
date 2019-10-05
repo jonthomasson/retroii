@@ -15,10 +15,13 @@ CON
     SDA_pin = 14
     SCL_pin = 13
     Bitrate = 400_000
+    {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
+    {SOFT SWITCHES}
     SS_LOW = 4
     SS_HIGH = 7
+    {RESET}
     RESET_pin = 24
     RESET_PERIOD  = 20_000_000 '1/2 second
     {KEYBOARD RETRO][}
@@ -30,9 +33,13 @@ CON
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
     MODE_SD_CARD = 4
-    
-  
+    {SD CARD}
+    SD_PINS  = 0
+    RESULTS_PER_PAGE = 29
+    ROWS_PER_FILE = 4 'number of longs it takes to store 1 file name
+    MAX_FILES = 300 'limiting to 300 for now due to memory limits
 OBJ 
+    sd: "fsrw" 
     kb:   "keyboard"  
     ser: "FullDuplexSerial.spin"
     I2C : "I2C PASM driver v1.8od" 'od or open drain method requires pull ups on sda/scl lines. But may use this if I need a speed boost.
@@ -49,6 +56,12 @@ VAR
     long soft_switches_old                                         
     long kb_output_data
     long current_mode
+    {sd card}
+    byte tbuf[14]   '
+    long file_count'
+    long current_page'
+    long last_page'
+    long files[MAX_FILES * ROWS_PER_FILE] 'byte array to hold index and filename '
 
 PUB main | soft_switches
     init
@@ -95,13 +108,74 @@ PUB main | soft_switches
             dira[RESET_pin] := 1
             waitcnt(RESET_PERIOD + cnt)
             dira[RESET_pin] := 0 
-            ser.Str (string("reset pressed"))
+            'ser.Str (string("reset pressed"))
+        if  key == 213 'f6 sd card
+            ser.Str (string("entering sd card mode"))
+            I2C.writeByte($42,29,MODE_SD_CARD)  
+            current_mode := MODE_SD_CARD    
+            kb_output_data := false
+            sd_send_filename(0)
         if key < 128 and key > 0
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
                 kb_write(key)
-        
-        
+
+{{read file names for page number from sd card and send them to video processor}}
+PRI sd_send_filename(page) | count, page_count, count2
+    'determine if this is the first read of the card
+    'if it is, fill buffer with file names and indexes
+    'else send the appropriate page to video processor
+    if file_count == 0
+        ser.Str (string("loading files into memory"))
+        sd_load_files
+    
+    ser.Str (string("files loaded")) 
+    ser.Dec (file_count)   
+    count := 0  
+    count2 := 0  
+    page_count := page * RESULTS_PER_PAGE
+    
+    repeat while count < RESULTS_PER_PAGE and (count2 < file_count - 1)
+      count2 := page_count + count
+      'need to figure out delimeter
+      
+      'send total pages?
+      
+      'send number of records on current page?
+      
+      'send filename
+      'ser.Str (@files[ROWS_PER_FILE * count2])
+      ser.Str (@files[ROWS_PER_FILE * count2])
+      'send end of filename delimeter?
+      ser.Str (string("filename printed"))
+      count++
+    'update sd card mode to next phase
+       
+PRI sd_load_files | index
+  sd.mount(SD_PINS) ' Mount SD card
+  sd.opendir    'open root directory for reading
+  
+  'loading file names from sd card into ram for faster paging              
+  repeat while 0 == sd.nextfile(@tbuf) 
+    
+      ' so I need a second file to open and query filesize
+      'sd[1].popen( @tbuf, "r" )
+      
+      'save file size in file_sizes array
+      'file_sizes[file_count] := sd[1].get_filesize
+      'sd[1].pclose      
+      
+      'move tbuf to files. each file takes up 4 rows of files
+      'each row can hold 4 bytes (32 bit long / 8bit bytes = 4)
+      'since the short file name needs 13 bytes (8(name)+1(dot)+3(extension)+1(zero terminate))
+      bytemove(@files[ROWS_PER_FILE*file_count],@tbuf,strsize(@tbuf))
+      
+      file_count++
+  
+  last_page := file_count / RESULTS_PER_PAGE
+  
+  sd.unmount 'unmount the sd card
+             '
 PRI kb_write(data_out) | i
     outa[K6..K0] := data_out 'had to reverse order for it to show on data bus correctly
     
@@ -127,6 +201,7 @@ PRI init
     kb.startx(26, 27, NUM, RepeatRate)  
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
     current_mode := MODE_RETROII
+    file_count := 0
     'cog_phi2 := cognew(process_phi2, @phi2_stack)   
     'cog_i2c := cognew(process_i2c, @i2c_stack)  
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
