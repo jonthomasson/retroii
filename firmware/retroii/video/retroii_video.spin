@@ -96,6 +96,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, cou
     cursor[2] := 0 
     setPos(0,0)
     count := 0
+    index := 0
     slave.flush 'clears all 32 registers to 0                
     str($07, $03, string("disk selection"))
     
@@ -110,33 +111,13 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, cou
     hex($07, $03, current_page, 2)
     count_files_sent := rx_byte
     hex($07, $03, count_files_sent, 2)
-    rx_done
-    'repeat while count < 3 'end of transmission
-    '    waitcnt(clkfreq * 1 + cnt)
-    '    index := slave.check_reg(28)
-    '    hex($07, $03, index, 2)
-    '    count++
-    'index := slave.check_reg(28)
-    '    if index > -1
-    '        total_pages := index
-    '        str($07, $03, string("total_pages="))
-    '        hex($07, $03, total_pages,2)
-    'index := slave.check_reg(27)
-    '    if index > -1
-    '        current_page := index
-    '        str($07, $03, string("current_page="))
-    '        hex($07, $03, current_page,2)
-    'index := slave.check_reg(26)
-    '    if index > -1
-    '        count_files_sent := index
-    '        str($07, $03, string("count_files_sent="))
-    '        hex($07, $03, count_files_sent,2)
-
-    'slave.put(25,$FF) 'confirm package delivered
-                          
-    'repeat while index <> $04 'end of transmission
-    '    index := slave.check_reg(25)
-    '    hex($07, $03, index, 2)    
+    
+    repeat while index <> $04 'end of transmission
+        index := rx_byte
+        print($07, $03, index)
+                                
+    'rx_done 'rx finished
+   
                               
     repeat
         index := slave.check_reg(29) 'check for new mode
@@ -159,10 +140,10 @@ PRI is_rx_ready
                    
 PRI rx_byte | tx_ready, data
     'wait till tx_flag is set
-    str($07, $03, string("checking tx_flag"))
+    'str($07, $03, string("checking tx_flag"))
     repeat while tx_ready <> REG_FLAG
         tx_ready := slave.check_reg(TX_FLAG)
-    str($07, $03, string("tx_flag set!"))
+    'str($07, $03, string("tx_flag set!"))
     data := slave.check_reg(TX_BYTE)
     slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
     slave.put(TX_FLAG, $00) 'clear tx_flag
