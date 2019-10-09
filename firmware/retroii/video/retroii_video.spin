@@ -13,7 +13,11 @@ CON
     SCL_pin = 28      
     
     Line_Buffer_Size = 60
-                                      ' 
+    TX_FLAG = 26    'I2C register set when there's a byte being transmitted
+    RX_FLAG = 27    'I2C register set when byte is received at video processor
+    TX_BYTE = 28    'I2C register which holds the byte being transmitted
+    REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
+    RX_READY = 25   'I2C register set when ready  to receive from keyboard
     {DATA PINS}
     D0 = 0
     D7 = 7
@@ -31,7 +35,9 @@ CON
     MODE_MONITOR = 1
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
-    MODE_SD_CARD = 4
+    MODE_SD_CARD_1 = 4 'disk selection
+    MODE_SD_CARD_2 = 5 'program selection
+    MODE_SD_CARD_3 = 6 'program download 
   
 OBJ 
     slave : "I2C slave v1.2"
@@ -81,9 +87,87 @@ PUB main | index
                 run_monitor
             MODE_RETROII:
                 run_retroii
+            MODE_SD_CARD_1:
+                run_sd_disk_select
     
 
-                
+PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, count
+    cls
+    cursor[2] := 0 
+    setPos(0,0)
+    count := 0
+    slave.flush 'clears all 32 registers to 0                
+    str($07, $03, string("disk selection"))
+    
+    
+    'receive the header
+    'waitcnt(clkfreq * 1 + cnt)
+    'tell kb processor we're ready to rx
+    is_rx_ready 'setup receiver
+    total_pages := rx_byte
+    hex($07, $03, total_pages, 2)
+    current_page := rx_byte
+    hex($07, $03, current_page, 2)
+    count_files_sent := rx_byte
+    hex($07, $03, count_files_sent, 2)
+    rx_done
+    'repeat while count < 3 'end of transmission
+    '    waitcnt(clkfreq * 1 + cnt)
+    '    index := slave.check_reg(28)
+    '    hex($07, $03, index, 2)
+    '    count++
+    'index := slave.check_reg(28)
+    '    if index > -1
+    '        total_pages := index
+    '        str($07, $03, string("total_pages="))
+    '        hex($07, $03, total_pages,2)
+    'index := slave.check_reg(27)
+    '    if index > -1
+    '        current_page := index
+    '        str($07, $03, string("current_page="))
+    '        hex($07, $03, current_page,2)
+    'index := slave.check_reg(26)
+    '    if index > -1
+    '        count_files_sent := index
+    '        str($07, $03, string("count_files_sent="))
+    '        hex($07, $03, count_files_sent,2)
+
+    'slave.put(25,$FF) 'confirm package delivered
+                          
+    'repeat while index <> $04 'end of transmission
+    '    index := slave.check_reg(25)
+    '    hex($07, $03, index, 2)    
+                              
+    repeat
+        index := slave.check_reg(29) 'check for new mode
+        if index > -1
+            if index == MODE_MONITOR or index == MODE_RETROII or index == MODE_SD_CARD_1
+                current_mode := index
+                str($07, $03, string("mode changed"))
+                dec($07, $03, index)
+                QUIT 'mode changed, so exit out
+
+PRI rx_done
+    'clear flags
+    slave.put(RX_FLAG,$00)
+    slave.put(RX_READY,$00)
+    
+PRI is_rx_ready             
+    'clear flags
+    slave.put(RX_FLAG,$00)
+    slave.put(RX_READY,REG_FLAG)
+                   
+PRI rx_byte | tx_ready, data
+    'wait till tx_flag is set
+    str($07, $03, string("checking tx_flag"))
+    repeat while tx_ready <> REG_FLAG
+        tx_ready := slave.check_reg(TX_FLAG)
+    str($07, $03, string("tx_flag set!"))
+    data := slave.check_reg(TX_BYTE)
+    slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
+    slave.put(TX_FLAG, $00) 'clear tx_flag
+    return data                           
+        
 PRI run_monitor | i, index
     cursor[2] := %010   
     i := 0

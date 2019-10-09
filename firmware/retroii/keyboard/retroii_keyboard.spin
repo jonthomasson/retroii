@@ -15,6 +15,11 @@ CON
     SDA_pin = 14
     SCL_pin = 13
     Bitrate = 400_000
+    TX_FLAG = 26    'I2C register set when there's a byte being transmitted
+    RX_FLAG = 27    'I2C register set when byte is received at video processor
+    TX_DATA = 28    'I2C register which holds the byte being transmitted
+    REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set
+    RX_READY = 25   'this register set when video processor ready to receive
     {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
@@ -32,7 +37,9 @@ CON
     MODE_MONITOR = 1
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
-    MODE_SD_CARD = 4
+    MODE_SD_CARD_1 = 4 'disk selection
+    MODE_SD_CARD_2 = 5 'program selection
+    MODE_SD_CARD_3 = 6 'program download            
     {SD CARD}
     SD_PINS  = 0
     RESULTS_PER_PAGE = 29
@@ -111,17 +118,17 @@ PUB main | soft_switches
             'ser.Str (string("reset pressed"))
         if  key == 213 'f6 sd card
             ser.Str (string("entering sd card mode"))
-            I2C.writeByte($42,29,MODE_SD_CARD)  
-            current_mode := MODE_SD_CARD    
+            I2C.writeByte($42,29,MODE_SD_CARD_1)  
+            current_mode := MODE_SD_CARD_1   
             kb_output_data := false
-            sd_send_filename(0)
+            sd_send_filenames(0)
         if key < 128 and key > 0
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
                 kb_write(key)
 
 {{read file names for page number from sd card and send them to video processor}}
-PRI sd_send_filename(page) | count, page_count, count2
+PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready
     'determine if this is the first read of the card
     'if it is, fill buffer with file names and indexes
     'else send the appropriate page to video processor
@@ -133,24 +140,78 @@ PRI sd_send_filename(page) | count, page_count, count2
     ser.Dec (file_count)   
     count := 0  
     count2 := 0  
+    count_files_sent := 0
     page_count := page * RESULTS_PER_PAGE
+    ready := 0
     
-    repeat while count < RESULTS_PER_PAGE and (count2 < file_count - 1)
-      count2 := page_count + count
+    if file_count < RESULTS_PER_PAGE
+        count_files_sent := file_count
+    elseif page < last_page
+        count_files_sent := RESULTS_PER_PAGE
+    else
+        count_files_sent := file_count - page_count
+    
+    is_tx_ready 'wait for tx ready
+                
+    tx_byte($01)
+    tx_byte($02)
+    tx_byte($03)
+    'repeat while ready == 0
+    '    ready := I2C.readByte($42,25) 'make sure we're ready to send
+    'ser.Hex (ready, 2)
+    'ready := 0                                  
+    'I2C.writeByte($42,25,$00) 'clear ready flag
+    'waitcnt(10000 + cnt)
+    'header is going to be 1 byte each - total_pages, current_page, count_files_sent
+    'I2C.writeByte($42,28,last_page)
+    'I2C.writeByte($42,28,page)
+    'I2C.writeByte($42,28,count_files_sent)
+    'repeat while ready == 0
+    '    ready := I2C.readByte($42,25) 'get confirmation that the package was delivered
+    'ready := 0
+    'I2C.writeByte($42,25,$00)
+    'ser.Str (string("package delivered!"))      
+    'ser.Hex (ready, 2) 
+                                
+    'repeat while count < RESULTS_PER_PAGE and (count2 < file_count - 1)
+    '  count2 := page_count + count
       'need to figure out delimeter
-      
-      'send total pages?
-      
-      'send number of records on current page?
       
       'send filename
       'ser.Str (@files[ROWS_PER_FILE * count2])
-      ser.Str (@files[ROWS_PER_FILE * count2])
+    '  ser.Str (@files[ROWS_PER_FILE * count2])
+    '  I2C.writeLongsB($42,25,@files[ROWS_PER_FILE * count2],ROWS_PER_FILE)
+    '  I2C.writeByte($42,25,$03) 'send delimeter "end of text"
       'send end of filename delimeter?
-      ser.Str (string("filename printed"))
-      count++
+    '  ser.Str (string("filename printed"))
+    '  count++
     'update sd card mode to next phase
-       
+    'I2C.writeByte($42,25,$04) 'send end of transmission   
+
+PRI is_tx_ready | ready
+    'clear flags
+    I2C.writeByte($42,TX_FLAG,$00)
+    I2C.writeByte($42,RX_FLAG,$00)
+    'wait for receiver to be ready
+    repeat while ready <> REG_FLAG
+        ready := I2C.readByte($42,RX_READY)
+
+PRI tx_byte(data) | success, ready
+    'need to wait till tx_flag is cleared by video processor
+    repeat while ready == REG_FLAG
+        ready := I2C.readByte($42,TX_FLAG)
+        
+    I2C.writeByte($42,RX_FLAG,$00)      'clear rx flag
+    I2C.writeByte($42,TX_DATA,data)     'place data in tx_byte register  
+    I2C.writeByte($42,TX_FLAG,REG_FLAG)      'set tx flag
+    ser.Str (string("data sent="))
+    ser.Hex (data, 2)
+    'read rx_flag until the flag is set
+    success := $00
+    repeat while success <> REG_FLAG
+        success := I2C.readByte($42,RX_FLAG)
+                                        
+    
 PRI sd_load_files | index
   sd.mount(SD_PINS) ' Mount SD card
   sd.opendir    'open root directory for reading
