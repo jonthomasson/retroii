@@ -18,6 +18,7 @@ CON
     TX_BYTE = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
+    TXRX_TIMEOUT = 1_000
     {DATA PINS}
     D0 = 0
     D7 = 7
@@ -91,14 +92,13 @@ PUB main | index
                 run_sd_disk_select
     
 
-PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, count
+PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     cls
     cursor[2] := 0 
     setPos(0,0)
-    count := 0
     index := 0
     slave.flush 'clears all 32 registers to 0                
-    str($07, $03, string("disk selection"))
+    str($07, $00, string("SELECT DISK"))
     
     
     'receive the header
@@ -106,15 +106,39 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, cou
     'tell kb processor we're ready to rx
     is_rx_ready 'setup receiver
     total_pages := rx_byte
-    hex($07, $03, total_pages, 2)
+    str($07, $00, string(" "))
     current_page := rx_byte
-    hex($07, $03, current_page, 2)
+    str($07, $00, string(" "))
     count_files_sent := rx_byte
-    hex($07, $03, count_files_sent, 2)
+    str($07, $00, string(" "))
+     
+    setPos(0,1)
+    str($07, $00, string("PAGE "))
+    dec($07, $00, current_page)
+    str($07, $00, string(" OF "))
+    dec($07, $00, total_pages)
+    'hex($07, $00, count_files_sent,2)
+    setPos(0,2)
+    i := 2
     
+    if count_files_sent == 0
+        dec($07, $00, string("no disks found"))
+        return
+        
+    str($07, $00, string("1. "))
     repeat while index <> $04 'end of transmission
+        
         index := rx_byte
-        print($07, $03, index)
+        if index == $03 'end of line
+            if i =< count_files_sent
+                setPos(0,i+1)
+                dec($07, $00, i)
+            
+                str($07, $00, string(". "))
+            i++
+            
+        elseif index <> $04 'end of transmission
+            print($07, $00, index)
                                 
     'rx_done 'rx finished
    
@@ -138,10 +162,15 @@ PRI is_rx_ready
     slave.put(RX_FLAG,$00)
     slave.put(RX_READY,REG_FLAG)
                    
-PRI rx_byte | tx_ready, data
+PRI rx_byte | tx_ready, data, i
     'wait till tx_flag is set
     'str($07, $03, string("checking tx_flag"))
+    i := 0
     repeat while tx_ready <> REG_FLAG
+        i++
+        if i > TXRX_TIMEOUT
+            str($07, $03, string("timed out"))
+            return 'timeout
         tx_ready := slave.check_reg(TX_FLAG)
     'str($07, $03, string("tx_flag set!"))
     data := slave.check_reg(TX_BYTE)

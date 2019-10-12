@@ -20,6 +20,7 @@ CON
     TX_DATA = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set
     RX_READY = 25   'this register set when video processor ready to receive
+    TXRX_TIMEOUT = 1_000
     {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
@@ -152,11 +153,19 @@ PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready
         count_files_sent := file_count - page_count
     
     set_tx_ready 'wait for tx ready
-    'send header info           
-    tx_byte(last_page)
-    tx_byte(page)
+    'send header info  
+    'tx_byte($01)      
+    'tx_byte($01)
+    'tx_byte($03)   
+    tx_byte(last_page + 1)
+    'ser.Str(string("sent last_page="))
+    'ser.Hex(last_page,2)
+    tx_byte(page + 1)
+    'ser.Str(string("sent current_page="))
+    'ser.Hex(page,2)
     tx_byte(count_files_sent)
-    
+    'ser.Str(string("sent count_files_sent="))
+    'ser.Hex(count_files_sent,2)
     'stop_tx_ready 'stop rx for now
                   '
                   
@@ -183,23 +192,38 @@ PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready
 PRI stop_tx_ready 
     I2C.writeByte($42,RX_READY,$00) 'put rx back in non receiving state
                                     
-PRI set_tx_ready | ready
+PRI set_tx_ready | ready, i
     'clear flags
     I2C.writeByte($42,TX_FLAG,$00)
     I2C.writeByte($42,RX_FLAG,$00)
+    i := 0
     'wait for receiver to be ready
     repeat while ready <> REG_FLAG
         ready := I2C.readByte($42,RX_READY)
+        i++
+        if i > TXRX_TIMEOUT
+            ser.Str(string("timed out"))
+            return 'timeout
 
-PRI tx_byte(data) | success, ready
+PRI tx_byte(data) | success, ready, i
     'make sure receiver is ready
     ready := 0
+    i := 0
     repeat while ready <> REG_FLAG
         ready := I2C.readByte($42,RX_READY)
+        i++
+        if i > TXRX_TIMEOUT
+            ser.Str(string("timed out"))
+            return 'timeout
     'need to wait till tx_flag is cleared by video processor
     ready := REG_FLAG
+    i := 0
     repeat while ready == REG_FLAG
         ready := I2C.readByte($42,TX_FLAG)
+        i++
+        if i > TXRX_TIMEOUT
+            ser.Str(string("timed out"))
+            return 'timeout
         
     I2C.writeByte($42,RX_FLAG,$00)      'clear rx flag
     I2C.writeByte($42,TX_DATA,data)     'place data in tx_byte register  
@@ -208,8 +232,13 @@ PRI tx_byte(data) | success, ready
     ser.Hex (data, 2)
     'read rx_flag until the flag is set
     success := $00
+    i := 0
     repeat while success <> REG_FLAG
         success := I2C.readByte($42,RX_FLAG)
+        i++
+        if i > TXRX_TIMEOUT
+            ser.Str(string("timed out"))
+            return 'timeout
                                         
     
 PRI sd_load_files | index
