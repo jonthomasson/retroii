@@ -140,7 +140,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
         elseif index <> $04 'end of transmission
             print($07, $00, index)
                                 
-    'rx_done 'rx finished
+    rx_done 'rx finished
    
                               
     repeat
