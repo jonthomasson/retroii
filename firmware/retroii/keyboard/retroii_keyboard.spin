@@ -46,6 +46,8 @@ CON
     RESULTS_PER_PAGE = 29
     ROWS_PER_FILE = 4 'number of longs it takes to store 1 file name
     MAX_FILES = 300 'limiting to 300 for now due to memory limits
+    FILE_BUF_SIZE = 256 'size of file buffer. can optimize this later on.
+
 OBJ 
     sd: "fsrw" 
     kb:   "keyboard"  
@@ -70,7 +72,9 @@ VAR
     long current_page'
     long last_page'
     long files[MAX_FILES * ROWS_PER_FILE] 'byte array to hold index and filename '
-
+    byte file_buffer[FILE_BUF_SIZE]
+    byte tslist_buffer[FILE_BUF_SIZE]
+    
 PUB main | soft_switches
     init
     ser.Str(string("initializing keyboard..."))
@@ -124,15 +128,127 @@ PUB main | soft_switches
             kb_output_data := false
             sd_send_filenames(0)
         if key < 128 and key > 0
+            if current_mode == MODE_SD_CARD_1
+                I2C.writeByte($42,29,MODE_SD_CARD_2)  
+                current_mode := MODE_SD_CARD_2   
+                sd_send_catalog(key)     
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
                 kb_write(key)
+                
+{{parse the Apple DOS dsk image and send the catalog data for the selected program}}
+PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
+    'send catalog for dsk index entered
+    dsk_name := sd_get_filename_byindex(ascii_2bin(dsk_idx))
+    ser.Str(string("sending file: "))
+    ser.Str(dsk_name)
+    
+    'navigate to catalog of file
+    'each Apple DOS formatted dsk consists of 35 tracks
+    'each track consists of 16 sectors
+    'each sector is 256 bytes in size
+    'this yields a total disk size of 146,360
+    'track 17 is the VTOC or table of contents which has the 
+    'info about where each file is located
+    
+    'read in the first sector for track 17 (VTOC)
+    'we want to fast forward to track 17 sector 1
+    'to do this we loop 17 x 16 = 272 (17 tracks x 16 sectors per track)
+    'For more info, read "Beneath Apple DOS" 4-4
+    
+    bytes_read := 0
+    bytes_read := goto_sector(dsk_name, 17, 0)
+            
+    'we should now be at the first sector of VTOC
+    'we may use more data from the vtoc once we start writing back to the disk etc.
+    cat_track := byte[@file_buffer][1]
+    cat_sector := byte[@file_buffer][2]
+    dos_ver := byte[@file_buffer][3]
+    dsk_vol := byte[@file_buffer][6]
+    
+    ser.Str (string("Catalog Track:"))
+    ser.Hex (cat_track, 2)
+    ser.Str (string("Catalog Sector:"))
+    ser.Hex (cat_sector, 2)
+    ser.Str (string("DOS Ver:"))
+    ser.Hex (dos_ver, 2)
+    ser.Str (string("Volume #:"))
+    ser.Hex (dsk_vol, 2)
+    
+    'we have our data from the vtoc, now go to catalog and get our files list
+    bytes_read := 0
+    bytes_read := goto_sector(dsk_name, cat_track, cat_sector)
+    
+    next_cat_track := byte[@file_buffer][1]
+    next_cat_sector := byte[@file_buffer][2]
+    
+    'loop through catalog and print file info
+    
+    repeat i from 0 to 6
+        if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+            next
+            
+        tslist_track := byte[@file_buffer][11 + (35 * i)]
+        tslist_sector := byte[@file_buffer][12 + (35 * i)]
+        file_type := byte[@file_buffer][13 + (35 * i)]
+        file_name := byte[@file_buffer][14 + (35 * i)]
+        file_length := byte[@file_buffer][33 + (35 * i)]
+        
+        ser.Str (string("File Track:"))
+        ser.Hex (tslist_track, 2)
+        ser.Str (string("File Sector:"))
+        ser.Hex (tslist_sector, 2)
+        ser.Str (string("File Type:"))
+        ser.Hex (file_type, 2)
+        ser.Str (string("File Name:"))
+        ser.Hex (file_name, 2)
+        ser.Str (string("File Length:"))
+        ser.Hex (file_length, 2)
 
+PRI ascii_2bin(ascii) | binary
+
+    if ascii < 58                   'if ascii number (dec 48-57)
+        binary := ascii -48 'subtract 48 to get dec equivalent
+    else
+        binary := ascii -55 'else subtract 55 for ABCDEF 
+    
+    return binary
+    
+PRI goto_sector(file_name, track_num, sector_num)| sector_count, open_error, bytes_read
+    sd.mount(SD_PINS)
+    
+    open_error := sd.popen(file_name, "r") ' Open file
+    
+    if open_error == -1 'error opening file
+        ser.Str (string("error opening file "))
+        sd.unmount
+        return 'exit sub
+    
+    'get sector location 
+    sector_count := (track_num * 16) + sector_num
+    
+    bytes_read := 0
+    repeat sector_count
+        bytes_read := sd.pread(@file_buffer,FILE_BUF_SIZE)
+        
+    'navigate to desired sector  
+    bytes_read := sd.pread(@file_buffer,FILE_BUF_SIZE)
+    
+    sd.unmount
+    
+    return bytes_read
+
+PRI sd_get_filename_byindex(index) | open_error, file_name
+    file_name := @files[ROWS_PER_FILE * ((current_page * RESULTS_PER_PAGE) + (index - 1))]
+    
+    return file_name
+        
 {{read file names for page number from sd card and send them to video processor}}
 PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready, i
     'determine if this is the first read of the card
     'if it is, fill buffer with file names and indexes
     'else send the appropriate page to video processor
+    current_page := page
     if file_count == 0
         ser.Str (string("loading files into memory"))
         sd_load_files

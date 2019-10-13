@@ -90,7 +90,29 @@ PUB main | index
                 run_retroii
             MODE_SD_CARD_1:
                 run_sd_disk_select
+            MODE_SD_CARD_2:
+                run_sd_prog_select
     
+PRI run_sd_prog_select | index
+    cls
+    cursor[2] := 0 
+    setPos(0,0)
+    
+    slave.flush 'clears all 32 registers to 0                
+    str($07, $00, string("SELECT PROGRAM"))
+    
+    'read in catalog
+    
+    
+    
+    repeat
+        index := slave.check_reg(29) 'check for new mode
+        if index > -1
+            if index == MODE_MONITOR or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
+                current_mode := index
+                str($07, $03, string("mode changed"))
+                dec($07, $03, index)
+                QUIT 'mode changed, so exit out
 
 PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     cls
@@ -146,7 +168,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     repeat
         index := slave.check_reg(29) 'check for new mode
         if index > -1
-            if index == MODE_MONITOR or index == MODE_RETROII or index == MODE_SD_CARD_1
+            if index == MODE_MONITOR or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
                 current_mode := index
                 str($07, $03, string("mode changed"))
                 dec($07, $03, index)
