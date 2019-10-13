@@ -137,12 +137,20 @@ PUB main | soft_switches
                 kb_write(key)
                 
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
-PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
+PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
     'send catalog for dsk index entered
     dsk_name := sd_get_filename_byindex(ascii_2bin(dsk_idx))
     ser.Str(string("sending file: "))
     ser.Str(dsk_name)
     
+    set_tx_ready 'wait for tx ready
+    'send disk name
+    
+    'each file name is 4 longs which should be 16 bytes total
+    i := 0
+    repeat 16
+        tx_byte(byte[dsk_name][i])
+        i++
     'navigate to catalog of file
     'each Apple DOS formatted dsk consists of 35 tracks
     'each track consists of 16 sectors
@@ -192,7 +200,8 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length, 
         tslist_sector := byte[@file_buffer][12 + (35 * i)]
         file_type := byte[@file_buffer][13 + (35 * i)]
         file_name := byte[@file_buffer][14 + (35 * i)]
-        file_length := byte[@file_buffer][33 + (35 * i)]
+        file_length_ls := byte[@file_buffer][44 + (35 * i)]
+        file_length_ms := byte[@file_buffer][45 + (35 * i)]
         
         ser.Str (string("File Track:"))
         ser.Hex (tslist_track, 2)
@@ -201,9 +210,18 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length, 
         ser.Str (string("File Type:"))
         ser.Hex (file_type, 2)
         ser.Str (string("File Name:"))
-        ser.Hex (file_name, 2)
+        'ser.Hex (file_name, 2)
+        
+        y := 0
+        repeat 30
+            file_name := byte[@file_buffer][14 + y + (35 * i)]
+            y++
+            ser.Hex (file_name,2)
+            
+            
         ser.Str (string("File Length:"))
-        ser.Hex (file_length, 2)
+        ser.Hex (file_length_ls, 2)
+        ser.Hex (file_length_ms, 2)
 
 PRI ascii_2bin(ascii) | binary
 

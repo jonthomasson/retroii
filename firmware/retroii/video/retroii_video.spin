@@ -93,7 +93,7 @@ PUB main | index
             MODE_SD_CARD_2:
                 run_sd_prog_select
     
-PRI run_sd_prog_select | index
+PRI run_sd_prog_select | index, i, rx_char
     cls
     cursor[2] := 0 
     setPos(0,0)
@@ -102,8 +102,16 @@ PRI run_sd_prog_select | index
     str($07, $00, string("SELECT PROGRAM"))
     
     'read in catalog
+    is_rx_ready 'setup receiver
     
-    
+    i := 0
+    repeat 16
+        rx_char := rx_byte
+        'hex($07, $00, rx_char, 2)
+        print($07, $00, rx_char)
+        i++
+        
+    rx_done 'rx finished
     
     repeat
         index := slave.check_reg(29) 'check for new mode
