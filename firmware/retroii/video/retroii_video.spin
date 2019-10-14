@@ -18,7 +18,7 @@ CON
     TX_BYTE = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
-    TXRX_TIMEOUT = 1_000
+    TXRX_TIMEOUT = 10_000
     {DATA PINS}
     D0 = 0
     D7 = 7
@@ -93,13 +93,13 @@ PUB main | index
             MODE_SD_CARD_2:
                 run_sd_prog_select
     
-PRI run_sd_prog_select | index, i, rx_char
+PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
     cls
     cursor[2] := 0 
     setPos(0,0)
     
-    slave.flush 'clears all 32 registers to 0                
-    str($07, $00, string("SELECT PROGRAM"))
+    'slave.flush 'clears all 32 registers to 0                
+    str($07, $00, string("DISK "))
     
     'read in catalog
     is_rx_ready 'setup receiver
@@ -110,7 +110,19 @@ PRI run_sd_prog_select | index, i, rx_char
         'hex($07, $00, rx_char, 2)
         print($07, $00, rx_char)
         i++
-        
+    
+   
+            
+    str($07, $00, string(" DOS 3."))
+    dec($07, $00, rx_byte)
+    
+    str($07, $00, string(" VOL: "))
+    dec($07, $00, rx_byte)
+    
+    setPos(0,2)
+    str($07, $00, string("CATALOG:"))
+    dec($07, $00, rx_byte)    
+    
     rx_done 'rx finished
     
     repeat
@@ -206,6 +218,7 @@ PRI rx_byte | tx_ready, data, i
     data := slave.check_reg(TX_BYTE)
     slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
     slave.put(TX_FLAG, $00) 'clear tx_flag
+    
     return data                           
         
 PRI run_monitor | i, index

@@ -20,7 +20,7 @@ CON
     TX_DATA = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set
     RX_READY = 25   'this register set when video processor ready to receive
-    TXRX_TIMEOUT = 1_000
+    TXRX_TIMEOUT = 10_000
     {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
@@ -174,6 +174,7 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
     dos_ver := byte[@file_buffer][3]
     dsk_vol := byte[@file_buffer][6]
     
+    
     ser.Str (string("Catalog Track:"))
     ser.Hex (cat_track, 2)
     ser.Str (string("Catalog Sector:"))
@@ -182,6 +183,8 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
     ser.Hex (dos_ver, 2)
     ser.Str (string("Volume #:"))
     ser.Hex (dsk_vol, 2)
+    tx_byte(dos_ver)
+    tx_byte(dsk_vol)
     
     'we have our data from the vtoc, now go to catalog and get our files list
     bytes_read := 0
@@ -190,8 +193,17 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
     next_cat_track := byte[@file_buffer][1]
     next_cat_sector := byte[@file_buffer][2]
     
+    'get count of catalog contents
+    i := 0
+    repeat i from 0 to 6
+        if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+            quit
+        i++
+            
+    tx_byte(i) 'send count of files
+                       
     'loop through catalog and print file info
-    
+    i := 0    
     repeat i from 0 to 6
         if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
             next
@@ -217,7 +229,11 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
             file_name := byte[@file_buffer][14 + y + (35 * i)]
             y++
             ser.Hex (file_name,2)
-            
+            'tx_byte(file_name)
+        
+        'tx_byte(file_type)
+        'tx_byte(file_length_ls)
+        'tx_byte(file_length_ms)
             
         ser.Str (string("File Length:"))
         ser.Hex (file_length_ls, 2)
@@ -347,7 +363,7 @@ PRI tx_byte(data) | success, ready, i
         ready := I2C.readByte($42,RX_READY)
         i++
         if i > TXRX_TIMEOUT
-            ser.Str(string("timed out"))
+            ser.Str(string("rxtimed out"))
             return 'timeout
     'need to wait till tx_flag is cleared by video processor
     ready := REG_FLAG
@@ -356,14 +372,14 @@ PRI tx_byte(data) | success, ready, i
         ready := I2C.readByte($42,TX_FLAG)
         i++
         if i > TXRX_TIMEOUT
-            ser.Str(string("timed out"))
+            ser.Str(string("txtimed out"))
             return 'timeout
         
     I2C.writeByte($42,RX_FLAG,$00)      'clear rx flag
     I2C.writeByte($42,TX_DATA,data)     'place data in tx_byte register  
     I2C.writeByte($42,TX_FLAG,REG_FLAG)      'set tx flag
-    ser.Str (string("data sent="))
-    ser.Hex (data, 2)
+    'ser.Str (string("data sent="))
+    'ser.Hex (data, 2)
     'read rx_flag until the flag is set
     success := $00
     i := 0
@@ -371,7 +387,7 @@ PRI tx_byte(data) | success, ready, i
         success := I2C.readByte($42,RX_FLAG)
         i++
         if i > TXRX_TIMEOUT
-            ser.Str(string("timed out"))
+            ser.Str(string("noresponsetimed out"))
             return 'timeout
                                         
     
