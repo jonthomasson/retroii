@@ -123,6 +123,38 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
     str($07, $00, string("CATALOG:"))
     dec($07, $00, rx_byte)    
     
+    setPos(0,4)
+    i := 1
+    
+    'str($07, $00, string("1. "))
+    repeat while index <> $04 'end of transmission
+        index := rx_byte
+        'hex($07, $00, index, 2)
+        if index <> $04 'end of transmission
+            dec($07, $00, i)
+            str($07, $00, string(". "))
+            print($07, $00, index - 128)
+            
+            repeat 29 'get rest of file name
+                'print($07, $00, rx_byte) 
+                index := rx_byte
+                print($07, $00, index - 128)
+                'hex($07, $00, rx_byte, 2)
+        setPos(0, i+4)
+        i++
+        'read file name
+         
+        'if index == $03 'end of line
+        '    if i =< count_files_sent
+        '        setPos(0,i+1)
+        '        dec($07, $00, i)
+        '    
+        '        str($07, $00, string(". "))
+        'i++
+            
+        'if index <> $04 'end of transmission
+         '   print($07, $00, index)
+                                
     rx_done 'rx finished
     
     repeat
