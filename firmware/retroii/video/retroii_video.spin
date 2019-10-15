@@ -93,11 +93,12 @@ PUB main | index
             MODE_SD_CARD_2:
                 run_sd_prog_select
     
-PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
+PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_length, file_type, file_access
     cls
     cursor[2] := 0 
     setPos(0,0)
     cat_count := 0
+    file_length := 0
     
     'slave.flush 'clears all 32 registers to 0                
     str($07, $00, string("DISK "))
@@ -123,6 +124,9 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
     setPos(0,2)
     cat_count := rx_byte
     str($07, $00, string("CATALOG:"))
+    setPos(0, 3)
+    str($07, $03, string("   FILE                          TYPE  PERM SIZE "))
+    
     'dec($07, $00, cat_count)    
     
     setPos(0,4)
@@ -147,7 +151,33 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
             'hex($07, $00, index, 2) 'file type
         
         index := rx_byte
-        hex($07, $00, index, 2) 'file type
+        'hex($07, $00, index, 2)
+        'str($07, $00, string("   "))
+        file_access := index & $80 'bitwise and to mask lock bit
+        file_type := index & $0F 'mask first nibble which holds the file type
+        
+        'hex($07, $00, file_type, 2) 'file type
+        if file_type == $04
+            str($07, $00, string("BIN"))
+        elseif file_type == $02
+            str($07, $00, string("BAS"))
+        else    
+            str($07, $00, string("NA "))
+            
+        str($07, $00, string("   "))
+        'hex($07, $00, file_access, 2) 'file access
+        
+        if file_access == $80
+            str($07, $00, string(" R"))
+        else
+            str($07, $00, string("WR"))
+        str($07, $00, string("   "))
+        file_length := rx_byte 'file length ls byte (length in sectors)
+        'hex($07, $00, file_length, 2) 'file length ls
+        
+        'index := rx_byte
+        'hex($07, $00, index, 2) 'file length ms
+        dec($07, $00, file_length * 256)
         
         setPos(0, i+4)
         i++

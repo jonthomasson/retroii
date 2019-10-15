@@ -232,7 +232,7 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
             tx_byte(file_name)
         
         tx_byte(file_type)
-        'tx_byte(file_length_ls)
+        tx_byte(file_length_ls)
         'tx_byte(file_length_ms)
             
         ser.Str (string("File Length:"))
