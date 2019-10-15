@@ -198,7 +198,7 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
     repeat i from 0 to 6
         if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
             quit
-        i++
+        'i++
             
     tx_byte(i) 'send count of files
                        
@@ -231,14 +231,14 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
             ser.Hex (file_name,2)
             tx_byte(file_name)
         
-        'tx_byte(file_type)
+        tx_byte(file_type)
         'tx_byte(file_length_ls)
         'tx_byte(file_length_ms)
             
         ser.Str (string("File Length:"))
         ser.Hex (file_length_ls, 2)
         ser.Hex (file_length_ms, 2)
-    tx_byte($04) 'end of transmission
+    'tx_byte($04) 'end of transmission
 
 PRI ascii_2bin(ascii) | binary
 

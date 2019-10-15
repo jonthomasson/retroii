@@ -97,6 +97,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
     cls
     cursor[2] := 0 
     setPos(0,0)
+    cat_count := 0
     
     'slave.flush 'clears all 32 registers to 0                
     str($07, $00, string("DISK "))
@@ -120,26 +121,34 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count
     dec($07, $00, rx_byte)
     
     setPos(0,2)
+    cat_count := rx_byte
     str($07, $00, string("CATALOG:"))
-    dec($07, $00, rx_byte)    
+    'dec($07, $00, cat_count)    
     
     setPos(0,4)
     i := 1
     
     'str($07, $00, string("1. "))
-    repeat while index <> $04 'end of transmission
+    repeat cat_count 'end of transmission
         index := rx_byte
         'hex($07, $00, index, 2)
-        if index <> $04 'end of transmission
-            dec($07, $00, i)
-            str($07, $00, string(". "))
-            print($07, $00, index - 128)
+        'if index <> $04 'end of transmission
+        dec($07, $00, i)
+        str($07, $00, string(". "))
+        print($07, $00, index - 128)
             
-            repeat 29 'get rest of file name
-                'print($07, $00, rx_byte) 
-                index := rx_byte
-                print($07, $00, index - 128)
-                'hex($07, $00, rx_byte, 2)
+        repeat 29 'get rest of file name
+            'print($07, $00, rx_byte) 
+            index := rx_byte
+            print($07, $00, index - 128)
+            'hex($07, $00, rx_byte, 2)
+            
+            'index := rx_byte
+            'hex($07, $00, index, 2) 'file type
+        
+        index := rx_byte
+        hex($07, $00, index, 2) 'file type
+        
         setPos(0, i+4)
         i++
         'read file name
