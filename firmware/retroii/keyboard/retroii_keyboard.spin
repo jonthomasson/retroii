@@ -200,7 +200,7 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
             'transmit data from this data sector
             y := 0
             repeat while y < bytes_read
-                ser.Hex (byte[@file_buffer][y], 2)
+                'ser.Hex (byte[@file_buffer][y], 2)
                 tx_byte(byte[@file_buffer][y])
                 y++
                 

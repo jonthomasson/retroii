@@ -127,12 +127,12 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     hex($07, $00, address,4)
     length := length_msb << 8 | length_lsb
     str($07, $00, string("length="))
-    hex($07, $00, length,4)
+    bin($07, $00, length,16)
     
     'read data
     'start at address. for i = 0 to length: write_byte(rx_byte,addr + i)
     i := 0
-    repeat while i < length
+    repeat length
         index := rx_byte
         write_byte(index, address + i)
         'hex($07, $00, index, 2) 
