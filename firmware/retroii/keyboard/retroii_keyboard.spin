@@ -174,7 +174,7 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
     bytes_read := goto_sector(dsk_name, tslist_track, tslist_sector)
     
     'loop through tslist and find all data sectors and read in the file data  
-    repeat 1
+    repeat 
         'move data to tslist_buffer so I can start iterating over tslist tracks/sectors?
         bytemove(@tslist_buffer, @file_buffer, FILE_BUF_SIZE)
         
@@ -183,7 +183,7 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
         
         'navigate to all data sectors in this list
         i := 0
-        repeat 1
+        repeat 
             next_data_track := byte[@tslist_buffer][12 + i]
             next_data_sector := byte[@tslist_buffer][13 + i]
             
@@ -199,20 +199,20 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
             
             'transmit data from this data sector
             y := 0
-            repeat 4 'while y < bytes_read
+            repeat while y < bytes_read
                 ser.Hex (byte[@file_buffer][y], 2)
                 tx_byte(byte[@file_buffer][y])
                 y++
                 
             i := i + 2
-        'while next_data_track <> $00 and i =< FILE_BUF_SIZE - 13
+        while next_data_track <> $00 and i =< FILE_BUF_SIZE - 13
         
         bytes_read := 0
         bytes_read := goto_sector(dsk_name, next_tslist_track, next_tslist_sector)  
                 
         'loop and list data for track/sector
         '
-    'while next_tslist_track <> $00 'track will read 0 when we are at the end of the file data
+    while next_tslist_track <> $00 'track will read 0 when we are at the end of the file data
     
                     
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}

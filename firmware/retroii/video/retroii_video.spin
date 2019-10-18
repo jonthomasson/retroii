@@ -95,7 +95,7 @@ PUB main | index
             MODE_SD_CARD_3:
                 run_sd_file_download
 
-PRI run_sd_file_download | index, adr_lsb, adr_msb, length_lsb, length_msb
+PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, length_msb, length
     
     cls
     cursor[2] := 0
@@ -122,10 +122,24 @@ PRI run_sd_file_download | index, adr_lsb, adr_msb, length_lsb, length_msb
     length_msb := rx_byte
     hex($07, $00, length_msb,2)
     
+    str($07, $00, string("address="))
+    address := adr_msb << 8 | adr_lsb
+    hex($07, $00, address,4)
+    length := length_msb << 8 | length_lsb
+    str($07, $00, string("length="))
+    hex($07, $00, length,4)
+    
     'read data
+    'start at address. for i = 0 to length: write_byte(rx_byte,addr + i)
+    i := 0
+    repeat while i < length
+        index := rx_byte
+        write_byte(index, address + i)
+        'hex($07, $00, index, 2) 
+        i++     
     
     rx_done 'rx finished
-    
+    str($07, $00, string("done"))
     repeat
         index := slave.check_reg(29) 'check for new mode
         if index > -1
