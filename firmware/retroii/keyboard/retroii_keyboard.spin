@@ -131,15 +131,37 @@ PUB main | soft_switches
             if current_mode == MODE_SD_CARD_1
                 I2C.writeByte($42,29,MODE_SD_CARD_2)  
                 current_mode := MODE_SD_CARD_2   
-                sd_send_catalog(key)     
+                sd_send_catalog(key)  
+            elseif current_mode == MODE_SD_CARD_2
+                I2C.writeByte($42,29,MODE_SD_CARD_3)  
+                current_mode := MODE_SD_CARD_3   
+                sd_send_file(key)
+                   
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
                 kb_write(key)
-                
+
+{{send the selected file to RAM}}                
+PRI sd_send_file(file_idx) | file_name, i, y, index
+    'send file name, address, length, bytes
+    index := ascii_2bin(file_idx)
+    'ser.Dec (index)
+    'file_name := sd_get_filename_byindex(index)
+    ser.Str(string("sending file: "))
+    'ser.Str(file_name)
+    set_tx_ready
+    'i := ascii_2bin(file_idx)
+    y := 0
+    repeat 30
+        file_name := byte[@file_buffer][14 + y + (35 * (index - 1))]
+        y++
+        ser.Hex (file_name,2)
+        tx_byte(file_name)
+                    
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
 PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
     'send catalog for dsk index entered
-    dsk_name := sd_get_filename_byindex(ascii_2bin(dsk_idx))
+    dsk_name := sd_get_diskname_byindex(ascii_2bin(dsk_idx))
     ser.Str(string("sending file: "))
     ser.Str(dsk_name)
     
@@ -273,11 +295,26 @@ PRI goto_sector(file_name, track_num, sector_num)| sector_count, open_error, byt
     
     return bytes_read
 
-PRI sd_get_filename_byindex(index) | open_error, file_name
-    file_name := @files[ROWS_PER_FILE * ((current_page * RESULTS_PER_PAGE) + (index - 1))]
+PRI sd_get_filename_byindex(index) | file_name, y
     
-    return file_name
+    'i := ascii_2bin(index)
+    'i := 1
+    'ser.dec (i)
+    y := 0
+    repeat 30
+        file_name := byte[@file_buffer][14 + y + (35 * (index - 1))]
+        y++
+        ser.Hex (file_name,2)
         
+    return file_name
+    
+    
+
+PRI sd_get_diskname_byindex(index) | open_error, file_name
+    file_name := @files[ROWS_PER_FILE * ((current_page * RESULTS_PER_PAGE) + (index - 1))]
+    'ser.dec (index)
+    return file_name
+       
 {{read file names for page number from sd card and send them to video processor}}
 PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready, i
     'determine if this is the first read of the card

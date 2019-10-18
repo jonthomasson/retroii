@@ -92,7 +92,37 @@ PUB main | index
                 run_sd_disk_select
             MODE_SD_CARD_2:
                 run_sd_prog_select
+            MODE_SD_CARD_3:
+                run_sd_file_download
+
+PRI run_sd_file_download | index
     
+    cls
+    cursor[2] := 0
+    setPos(0,0)
+    is_rx_ready 'setup receiver
+    'get file name/address location/length 
+    'start downloading to ram
+    str($07, $00, string("UPLOADING FILE TO RAM "))
+    
+    'read in catalog
+    
+    
+    'receive file name
+    repeat 30
+        index := rx_byte                
+        print($07, $00, index - 128)
+    rx_done 'rx finished
+    
+    repeat
+        index := slave.check_reg(29) 'check for new mode
+        if index > -1
+            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
+                current_mode := index
+                str($07, $03, string("mode changed"))
+                dec($07, $03, index)
+                QUIT 'mode changed, so exit out              
+                
 PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_length, file_type, file_access
     cls
     cursor[2] := 0 
@@ -199,7 +229,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     repeat
         index := slave.check_reg(29) 'check for new mode
         if index > -1
-            if index == MODE_MONITOR or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
+            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
                 current_mode := index
                 str($07, $03, string("mode changed"))
                 dec($07, $03, index)
@@ -259,7 +289,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     repeat
         index := slave.check_reg(29) 'check for new mode
         if index > -1
-            if index == MODE_MONITOR or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
+            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
                 current_mode := index
                 str($07, $03, string("mode changed"))
                 dec($07, $03, index)
