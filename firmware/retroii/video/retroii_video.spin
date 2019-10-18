@@ -18,7 +18,7 @@ CON
     TX_BYTE = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
-    TXRX_TIMEOUT = 10_000
+    TXRX_TIMEOUT = 15_000
     {DATA PINS}
     D0 = 0
     D7 = 7
@@ -95,7 +95,7 @@ PUB main | index
             MODE_SD_CARD_3:
                 run_sd_file_download
 
-PRI run_sd_file_download | index
+PRI run_sd_file_download | index, adr_lsb, adr_msb, length_lsb, length_msb
     
     cls
     cursor[2] := 0
@@ -105,13 +105,25 @@ PRI run_sd_file_download | index
     'start downloading to ram
     str($07, $00, string("UPLOADING FILE TO RAM "))
     
-    'read in catalog
-    
-    
+   
     'receive file name
     repeat 30
         index := rx_byte                
         print($07, $00, index - 128)
+    
+    'read address
+    adr_lsb := rx_byte
+    hex($07, $00, adr_lsb,2)
+    adr_msb := rx_byte
+    hex($07, $00, adr_msb,2)
+    'read file length
+    length_lsb := rx_byte
+    hex($07, $00, length_lsb,2)
+    length_msb := rx_byte
+    hex($07, $00, length_msb,2)
+    
+    'read data
+    
     rx_done 'rx finished
     
     repeat
