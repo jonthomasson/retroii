@@ -74,6 +74,7 @@ VAR
     byte cursor_x
     byte line_count
     long current_mode
+    byte rx_error
 
 PUB main | index
     init
@@ -100,12 +101,12 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     cls
     cursor[2] := 0
     setPos(0,0)
-    is_rx_ready 'setup receiver
+    
     'get file name/address location/length 
     'start downloading to ram
     str($07, $00, string("UPLOADING FILE TO RAM "))
     
-   
+    is_rx_ready 'setup receiver
     'receive file name
     repeat 30
         index := rx_byte                
@@ -113,30 +114,31 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     
     'read address
     adr_lsb := rx_byte
-    hex($07, $00, adr_lsb,2)
+    'hex($07, $00, adr_lsb,2)
     adr_msb := rx_byte
-    hex($07, $00, adr_msb,2)
+    'hex($07, $00, adr_msb,2)
     'read file length
     length_lsb := rx_byte
-    hex($07, $00, length_lsb,2)
+    'hex($07, $00, length_lsb,2)
     length_msb := rx_byte
-    hex($07, $00, length_msb,2)
+    'hex($07, $00, length_msb,2)
     
     str($07, $00, string("address="))
     address := adr_msb << 8 | adr_lsb
     hex($07, $00, address,4)
     length := length_msb << 8 | length_lsb
     str($07, $00, string("length="))
-    bin($07, $00, length,16)
+    hex($07, $00, length,4)
     
     'read data
     'start at address. for i = 0 to length: write_byte(rx_byte,addr + i)
     i := 0
     repeat length
         index := rx_byte
-        write_byte(index, address + i)
-        'hex($07, $00, index, 2) 
-        i++     
+        if rx_error == false 'only write valid data
+            write_byte(index, address + i)
+            'hex($07, $00, index, 2) 
+            i++     
     
     rx_done 'rx finished
     str($07, $00, string("done"))
@@ -331,20 +333,32 @@ PRI is_rx_ready
     slave.put(RX_FLAG,$00)
     slave.put(RX_READY,REG_FLAG)
                    
-PRI rx_byte | tx_ready, data, i
+PRI rx_byte | tx_ready, data, i, new_data
     'wait till tx_flag is set
-    'str($07, $03, string("checking tx_flag"))
+    rx_error := false
+    
     i := 0
-    repeat while tx_ready <> REG_FLAG
+    'repeat while tx_ready <> REG_FLAG
+    '    i++
+    '    if i > TXRX_TIMEOUT
+    '        str($07, $03, string("timed out"))
+    '        return 'timeout
+    '    tx_ready := slave.check_reg(TX_FLAG)
+    
+    new_data := -1
+    repeat while new_data == -1 'until we have something new
         i++
         if i > TXRX_TIMEOUT
-            str($07, $03, string("timed out"))
+            rx_error := true 'flag system we had an error receiving
+            'slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
+            'slave.put(TX_FLAG, $00) 'clear tx_flag
+            str($07, $03, string("rx error"))
             return 'timeout
-        tx_ready := slave.check_reg(TX_FLAG)
-    'str($07, $03, string("tx_flag set!"))
-    data := slave.check_reg(TX_BYTE)
-    slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
-    slave.put(TX_FLAG, $00) 'clear tx_flag
+        new_data := slave.check_reg(TX_BYTE)
+        
+    data := new_data
+    'slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
+    'slave.put(TX_FLAG, $00) 'clear tx_flag
     
     return data                           
         
