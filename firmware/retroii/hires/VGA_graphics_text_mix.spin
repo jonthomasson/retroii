@@ -1,19 +1,38 @@
-''***************************************
-''*  VGA Terminal 40x15 v1.0            *
-''*  Author: Chip Gracey                *
-''*  Copyright (c) 2006 Parallax, Inc.  *
-''*  See end of file for terms of use.  *
-''***************************************
+{{
+***************************************
+*  Graphics/Text Mix Example          *
+*  Author: Albert Emanuel Milani      *
+*  Copyright (c) 2014 AEM             *
+*  See end of file for terms of use.  *
+***************************************
+}}
 
 CON
 
-  _clkmode = xtal1+pll16x
-  _clkfreq = 80_000_000
+  _clkmode = xtal1 + pll16x
+  _xinfreq = 5_000_000
+  _stack = (gr_screensize*128 + 100) >> 2   'accomodate display memory and stack
 
-  vga_params = 21
-  cols = 32
-  rows = 16
-  screensize = cols * rows
+  x_tiles = 16
+  y_tiles = 12
+
+  screensize = x_tiles * y_tiles
+  lastrow = screensize - x_tiles
+
+  minx = 0
+  maxx = 15
+  miny = 8
+  maxy = 15
+
+  gr_x_tiles = maxx - minx + 1
+  gr_y_tiles = maxy - miny + 1
+
+  gr_screensize = gr_x_tiles * gr_y_tiles
+
+  paramcount = 21       
+  bitmap_base = $8000-(gr_screensize*64)
+  display_base = $8000-(gr_screensize*128)
+  
 
 VAR
 
@@ -22,7 +41,7 @@ VAR
   long  vga_pins        'pins: byte(2),topbit(3)        write-only
   long  vga_mode        'mode: interlace,hpol,vpol      write-only
   long  vga_videobase   'video base @word               write-only
-  long  vga_colorbase   'color base @long               write-only              
+  long  vga_colorbase   'color base @long               write-only
   long  vga_hc          'horizontal cells               write-only
   long  vga_vc          'vertical cells                 write-only
   long  vga_hx          'horizontal cell expansion      write-only
@@ -39,185 +58,169 @@ VAR
   long  vga_vb          'vertical back-porch lines      write-only
   long  vga_rate        'pixel rate (Hz)                write-only
 
-  word  screen[screensize]
+  word  screen[x_tiles * y_tiles]
 
-  long  col, row, color
-  long  boxcolor,ptr
-  long  stack[100]
+  long  txt_x, txt_y, color, flag
+  
 
 OBJ
 
-  vga : "vga"
+  vga   : "vga"
+  gr    : "graphics"
 
-pub launch
+PUB start | i,dx,dy
 
-  cognew(begin, @stack)
+  'start vga
+  longmove(@vga_status,@vgaparams,paramcount)
+  vga_videobase:=@screen
+  vga_colorbase:=@colors
+  vga.start(@vga_status)
 
+  out($00)
 
-PUB begin: I
-  start(%010101) 'pin group 16, 5 pins
-  print($112)
-  'print("H")
-  repeat i from 0 to $FF
-   'print(i)
-    print(altscreen[i])
-'return
-  boxcolor := $10
-  box(25,5,4,2)
-  col := 26
-  row := 6
-  print($114)
-  print("M")
-  print("e")
-  print("o")
-  print("w")
+  'init tile screen
+  repeat dx from minx to maxx
+    repeat dy from miny to maxy
+      screen[dy*vga_hc+dx]:=display_base>>6 + (dy-miny)+(dx-minx)*gr_y_tiles + (17<<10)            'base>>6 + index + color<<10
 
-  boxcolor := $11
-  box(15,5,4,2)
-  col := 16
-  row := 6
-  print($115)
-  print("W")
-  print("o")
-  print("o")
-  print("f")
+  'start and setup graphics
+  gr.start
+  gr.setup(gr_x_tiles,gr_y_tiles,gr_x_tiles*8,gr_y_tiles*8,bitmap_base)
+  gr.colorwidth(3,0)
+  gr.textmode(3,3,6,%0101)
 
-  boxcolor := $12
-  box(5,5,4,2)
-  col := 6
-  row := 6
-  print($116)
-  print("W")
-  print("o")
-  print("o")
-  print("f")
-  boxcolor := $14
-  ptr := 8 * cols + 6
-  boxchr($D)
+'----------[insert your code after here, this is just an example]------------------------------------------------------
 
-  boxcolor := $13
-  box(15,10,4,2)
-  col := 16
-  row := 11
-  print($117)
-  print("E")
-  print("X")
-  print("I")
-  print("T")
-
-  repeat
-    i := cnt
-    waitcnt(i += 22500000)
-    spcl := $30101020
-    waitcnt(i += 22500000)
-    spcl := $10301020
-
-
-'' Start terminal - starts a cog
-'' returns false if no cog available
-
-PUB start(pins)
-
-  print($100)
-  longmove(@vga_status, @vgaparams, vga_params)
-  vga_pins := pins
-  vga_videobase := @screen
-  vga_colorbase := @vgacolors
-  result := vga.start(@vga_status)
-
-
-'' Stop terminal - frees a cog
-
-PUB stop
-
-  vga.stop
-
-'' Draw a box
-
-PUB box(left,top,width,height) | x, y, i
-
-  ptr := top * cols + left
-  boxchr($0)
-  repeat i from 1 to width
-    boxchr($C)
-  boxchr($8)
-  repeat i from 1 to height
-    ptr := (top + i) * cols + left
-    boxchr($A)
-    ptr += width
-    boxchr($B)
-  ptr := (top + height + 1) * cols + left
-  boxchr($1)
-  repeat i from 1 to width
-    boxchr($D)
-  boxchr($9)
-
-PRI boxchr(c): i
-
-  screen[ptr++] := boxcolor << 10 + $200 + c
-
+  txt_x:=0
+  txt_y:=0
+  'str(string("Example Text"))
+  i:=0
   
+  repeat
+    gr.box(1,-10,20,16)
+    'display some text
+    'txt_x:=0
+    'txt_y:=1
+    'dec(i++)
+    
+    'clear bitmap
+    gr.clear
 
-'' Print a character
+    'draw some stuff
+    'gr.plot(-16,-16+(i&31))
+    'gr.line(16,16)
+    'gr.plot (1,30)
+    'copy bitmap to display
+    gr.plot (i,i)
+    i++
+    gr.copy(display_base)
+    
+    waitcnt(clkfreq/4 + cnt)
+
+'----------[text functions from VGA_Text.spin, somewhat modified]------------------------------------------------------
+PUB str(stringptr)
+
+'' Print a zero-terminated string
+
+  repeat strsize(stringptr)
+    out(byte[stringptr++])
+
+
+PUB dec(value) | i
+
+'' Print a decimal number
+
+  if value < 0
+    -value
+    out("-")
+
+  i := 1_000_000_000
+
+  repeat 10
+    if value => i
+      out(value / i + "0")
+      value //= i
+      result~~
+    elseif result or i == 1
+      out("0")
+    i /= 10
+
+
+PUB hex(value, digits)
+
+'' Print a hexadecimal number
+
+  value <<= (8 - digits) << 2
+  repeat digits
+    out(lookupz((value <-= 4) & $F : "0".."9", "A".."F"))
+
+
+PUB bin(value, digits)
+
+'' Print a binary number
+
+  value <<= 32 - digits
+  repeat digits
+    out((value <-= 1) & 1 + "0")
+
+
+PUB out(c) | i, k
+
+'' Output a character
 ''
-''  $00..$FF = character
-''      $100 = clear screen
-''      $108 = backspace
-''      $10D = new line
-''$110..$11F = select color
+''     $00 = clear screen
+''     $01 = home
+''     $08 = backspace
+''     $09 = tab (8 spaces per)
+''     $0A = set X position (X follows)
+''     $0B = set Y position (Y follows)
+''     $0C = set color (color follows)
+''     $0D = return
+''  others = printable characters
 
-PUB print(c) | i, k
+  case flag
+    $00: case c
+           $00: wordfill(@screen, $220 + 17<<10, screensize)
+                txt_x := txt_y := 0
+           $01: txt_x := txt_y := 0
+           $08: if txt_x
+                  txt_x--
+           $09: repeat
+                  print(" ")
+                while txt_x & 7
+           $0A..$0C: flag := c
+                     return
+           $0D: newline
+           other: print(c)
+    $0A: txt_x := c // x_tiles
+    $0B: txt_y := c // y_tiles
+    $0C: color := c & 7
+  flag := 0
 
-  case c
-    $00..$FF:           'character?
-      k := color << 1 + c & 1
-      i := k << 10 + $200 + c & $FE
-      screen[row * cols + col] := i
-      screen[(row + 1) * cols + col] := i | 1
-      if ++col == cols
-        newline
+PRI print(c)
 
-    $100:               'clear screen?
-      wordfill(@screen, $200, screensize)
-      col := row := 0
+  screen[txt_y * x_tiles + txt_x] := (color << 1 + c & 1) << 10 + $200 + c & $FE
+  if ++txt_x == x_tiles
+    newline
 
-    $108:               'backspace?
-      if col
-        col--
+PRI newline | i
 
-    $10D:               'return?
-      newline
-
-    $110..$11F:         'select color?
-      color := c & $F
-
-
-' New line
-
-PRI newline : i
-
-  col := 0
-  if (row += 2) == rows
-    row -= 2
-    'scroll lines
-    repeat i from 0 to rows-3
-'      wordmove(@screen[i*cols], @screen[(i+2)*cols], cols)
-    'clear new line
-'    wordfill(@screen[(rows-2)*cols], $200, cols<<1)
-
-
-' Data
+  txt_x := 0
+  if ++txt_y == y_tiles
+    txt_y--
+    wordmove(@screen, @screen[x_tiles], lastrow)   'scroll lines                ''BAD - will also scroll your graphics!!!!
+    wordfill(@screen[lastrow], $220, x_tiles)      'clear new line
 
 DAT
 
 vgaparams               long    0               'status
                         long    1               'enable
-                        long    %010_111        'pins
-                        long    %001            'mode
+                        long    %010_101        'pins
+                        long    %0011           'mode
                         long    0               'videobase
                         long    0               'colorbase
-                        long    cols            'hc
-                        long    rows            'vc
+                        long    x_tiles         'hc
+                        long    y_tiles         'vc
                         long    1               'hx
                         long    1               'vx
                         long    0               'ho
@@ -232,8 +235,7 @@ vgaparams               long    0               'status
                         long    31              'vb
                         long    20_000_000      'rate
 
-vgacolors               long
-                        long    $C000C000       'red
+colors                  long    $C000C000       'red
                         long    $C0C00000
                         long    $08A808A8       'green
                         long    $0808A8A8
@@ -247,25 +249,13 @@ vgacolors               long
                         long    $FFFF2020
                         long    $FF28FF28       'cyan/white
                         long    $FFFF2828
-                        long    $00A800A8       'grey/black
-                        long    $0000A8A8
-                        long    $C0408080       'redbox
-spcl                    long    $30100020       'greenbox
-                        long    $3C142828       'cyanbox
-                        long    $FC54A8A8       'greybox
-                        long    $3C14FF28       'cyanbox+underscore
-                        long    0
+                        long    $FFA8FFA8       'grey/black
+                        long    $FFFFA8A8
 
-altscreen               byte    $15,$6E,$20,$14,$20,$B1,$6D,$16,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$5F,$5F,$5F,$5F,$5F,$20
-                        byte    $20,$81,$82,$86,$87,$8B,$80,$8b,$80,$8B,$20,$20,$AF,$BD,$BE,$9B,$7F,$9B,$A6,$A8,$AA,$20,$20,$17,$20,$20,$53,$54,$41,$52,$54,$20
-                        byte    $20,$20,$20,$20,$20,$20,$20,$20,$20,$17,$20,$20,$20,$20,$20,$AC,$20,$AC,$20,$20,$20,$20,$1D,$1E,$20,$20,$20,$20,$20,$20,$20,$20
-                        byte    $20,$20,$42,$49,$41,$53,$20,$A0,$1A,$1B,$20,$20,$20,$20,$20,$18,$20,$18,$20,$20,$20,$20,$20,$91,$20,$23,$24,$38,$30,$30,$30,$20
-                        byte    $3A,$3D,$20,$20,$20,$20,$20,$20,$20,$99,$BB,$20,$56,$62,$20,$20,$20,$20,$20,$20,$20,$20,$20,$BC,$20,$23,$25,$31,$30,$30,$31,$20
-                        byte    $20,$50,$30,$20,$BA,$BB,$90,$94,$20,$B6,$20,$31,$30,$30,$6B,$13,$20,$17,$20,$20,$20,$20,$20,$18,$20,$70,$5B,$69,$5D,$20,$20,$20
-                        byte    $20,$20,$20,$20,$20,$20,$20,$20,$20,$18,$20,$20,$20,$20,$20,$20,$AB,$AC,$AD,$31,$30,$B5,$46,$20,$20,$20,$20,$20,$20,$20,$20,$20
-                        byte    $12,$10,$13,$41,$2F,$44,$20,$20,$20,$20,$58,$B2,$2D,$20,$31,$20,$20,$18,$20,$20,$20,$20,$20,$20,$63,$61,$74,$5F,$64,$6F,$70,$65
+                        long    %%3330_2220_1110_0000   'graphics
 
 {{
+
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                                   TERMS OF USE: MIT License                                                  │                                                            
 ├──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
@@ -281,4 +271,4 @@ altscreen               byte    $15,$6E,$20,$14,$20,$B1,$6D,$16,$20,$20,$20,$20,
 │COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,   │
 │ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                         │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-}}                        
+}}
