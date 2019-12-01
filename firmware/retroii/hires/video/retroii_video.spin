@@ -345,7 +345,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     cat_count := rx_byte
     str($07, $00, string("CATALOG:"))
     setPos(0, 3)
-    str($07, $03, string("   FILE                          TYPE  PERM SIZE "))
+    str($07, $03, string("   FILE                TYPE  PERM SIZE "))
     
     'dec($07, $00, cat_count)    
     
@@ -361,7 +361,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
         str($07, $00, string(". "))
         print($07, $00, index - 128)
             
-        repeat 29 'get rest of file name
+        repeat 19 'get rest of file name
             'print($07, $00, rx_byte) 
             index := rx_byte
             print($07, $00, index - 128)

@@ -315,7 +315,7 @@ PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_l
         'ser.Hex (file_name, 2)
         waitcnt(150000 + cnt)
         y := 0
-        repeat 30
+        repeat 20 'sending 20 of 30 chars of filename
             waitcnt(150000 + cnt) 'add delay for video to catch up
             file_name := byte[@file_buffer][14 + y + (35 * i)]
             y++
