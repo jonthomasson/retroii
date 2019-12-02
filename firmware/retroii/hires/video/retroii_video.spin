@@ -142,12 +142,21 @@ PRI init | i, x, y
 PRI check_soft_switches | index
    
     repeat
-        waitcnt(100000 + cnt)
+        waitcnt(500000 + cnt)
         index := slave.check_reg(30) 'check for soft switch changes
     
         if index > -1
             soft_switches := index
             soft_switches_updated := TRUE
+        
+        index := -1
+        
+        index := slave.check_reg(29) 'check for new mode
+    
+        if index > -1
+            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
+                current_mode := index
+                
                 
 PRI run_monitor | i, index
     'cursor[2] := %010   
@@ -157,11 +166,7 @@ PRI run_monitor | i, index
    
     print_header
     
-    repeat
-        index := slave.check_reg(29) 'check for new mode
-        if index > -1
-            current_mode := index
-            QUIT 'mode changed, so exit out
+    repeat while current_mode == MODE_MONITOR
         index := slave.check_reg(31)
         if index > -1
             if index == $0D 'enter key detected
@@ -319,14 +324,8 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     
     rx_done 'rx finished
     str($07, $00, string("done"))
-    repeat
-        index := slave.check_reg(29) 'check for new mode
-        if index > -1
-            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
-                current_mode := index
-                str($07, $03, string("mode changed"))
-                dec($07, $03, index)
-                QUIT 'mode changed, so exit out              
+    repeat while current_mode == MODE_SD_CARD_3
+                   
                 
 PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_length, file_type, file_access
     cls
@@ -432,14 +431,8 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
                                 
     rx_done 'rx finished
     
-    repeat
-        index := slave.check_reg(29) 'check for new mode
-        if index > -1
-            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
-                current_mode := index
-                str($07, $03, string("mode changed"))
-                dec($07, $03, index)
-                QUIT 'mode changed, so exit out
+    repeat while current_mode == MODE_SD_CARD_2
+        
 
 PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     cls
@@ -493,14 +486,8 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     rx_done 'rx finished
    
                               
-    repeat
-        index := slave.check_reg(29) 'check for new mode
-        if index > -1
-            if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
-                current_mode := index
-                str($07, $03, string("mode changed"))
-                dec($07, $03, index)
-                QUIT 'mode changed, so exit out
+    repeat while current_mode == MODE_SD_CARD_1
+        
 
 PRI rx_done
     'clear flags
@@ -548,17 +535,8 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, curs
     cursor_toggle := false
     cursor_timer := 0
     
-    repeat
-        'setPos(0,0)
-        'hex($07, $03, soft_switches, 2)
+    repeat while current_mode == MODE_RETROII
         
-        'next
-        
-        index := slave.check_reg(29) 'check for new mode
-        if index > -1
-            current_mode := index
-            QUIT 'mode changed, so exit out
-             '
         mem_loc := $400    'set starting address  
         mem_start := $00              
         row := 1  
