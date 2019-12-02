@@ -63,6 +63,10 @@ VAR
     byte line_count
     long current_mode
     byte rx_error  
+    long soft_switches
+    byte soft_switches_updated 
+    long cog_soft_switches
+    long cog_ss_stack[20]
 
 OBJ
 
@@ -99,7 +103,7 @@ PRI ascii_2bin(ascii) | binary
    
     
 PRI init | i, x, y
-
+    soft_switches_updated := FALSE
     current_mode := MODE_RETROII
     row_num := 0
     dira[21..23]~~
@@ -132,7 +136,19 @@ PRI init | i, x, y
     
     dira[WE]~~      'output
     outa[WE]~~      'set we high to avoid writing data
+    
+    cog_soft_switches := cognew(check_soft_switches, @cog_ss_stack) 
 
+PRI check_soft_switches | index
+   
+    repeat
+        waitcnt(100000 + cnt)
+        index := slave.check_reg(30) 'check for soft switch changes
+    
+        if index > -1
+            soft_switches := index
+            soft_switches_updated := TRUE
+                
 PRI run_monitor | i, index
     'cursor[2] := %010   
     C64.Cursor(TRUE)
@@ -533,6 +549,11 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, curs
     cursor_timer := 0
     
     repeat
+        'setPos(0,0)
+        'hex($07, $03, soft_switches, 2)
+        
+        'next
+        
         index := slave.check_reg(29) 'check for new mode
         if index > -1
             current_mode := index
