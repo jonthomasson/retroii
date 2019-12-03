@@ -47,6 +47,10 @@ CON
     MODE_SD_CARD_1 = 4 'disk selection
     MODE_SD_CARD_2 = 5 'program selection
     MODE_SD_CARD_3 = 6 'program download 
+                       '
+    {PAGE_LOCATIONS}
+    TEXT_PAGE1 = $400
+    TEXT_PAGE2 = $800
 
 VAR
                                             '                             
@@ -557,7 +561,7 @@ PRI rx_byte | tx_ready, data, i, new_data
     
     return data    
     
-PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls
     'cursor[2] := 0   
     C64.Cursor(FALSE)
@@ -566,18 +570,23 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, curs
     
     repeat while current_mode == MODE_RETROII
         
-        mem_loc := $400    'set starting address  
-        mem_start := $00              
+        mem_loc := TEXT_PAGE1    'set starting address  
+        mem_start := $00         
+        mem_page_start := TEXT_PAGE1
+             
         row := 1  
         col := 0  
         
+        if ss_page2 == $FF
+            mem_page_start := TEXT_PAGE2
+            
         cursor_timer++
         if cursor_timer == 2
             cursor_toggle := !cursor_toggle
             cursor_timer := 0
         'read Apple II Computer Graphics page 41 for example memory map of text/lores graphics
         repeat 3
-            mem_loc := $400 + mem_start
+            mem_loc := mem_page_start + mem_start
             repeat 8
                 col := 0
                 repeat 40 'columns
