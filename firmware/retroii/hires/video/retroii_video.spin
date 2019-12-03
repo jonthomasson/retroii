@@ -64,6 +64,10 @@ VAR
     long current_mode
     byte rx_error  
     long soft_switches
+    byte ss_text
+    byte ss_mix
+    byte ss_page2
+    byte ss_hires
     byte soft_switches_updated 
     long cog_soft_switches
     long cog_ss_stack[20]
@@ -104,6 +108,11 @@ PRI ascii_2bin(ascii) | binary
     
 PRI init | i, x, y
     soft_switches_updated := FALSE
+    ss_hires := FALSE
+    ss_page2 := FALSE
+    ss_mix := FALSE
+    ss_text := TRUE
+    
     current_mode := MODE_RETROII
     row_num := 0
     dira[21..23]~~
@@ -148,7 +157,27 @@ PRI check_soft_switches | index
         if index > -1
             soft_switches := index
             soft_switches_updated := TRUE
-        
+            
+            if ($08 & soft_switches) == $08
+                ss_hires := TRUE
+            else
+                ss_hires := FALSE
+            
+            if ($04 & soft_switches) == $04
+                ss_page2 := TRUE
+            else
+                ss_page2 := FALSE
+                
+            if ($02 & soft_switches) == $02
+                ss_mix := TRUE
+            else
+                ss_mix := FALSE 
+                
+            if ($01 & soft_switches) == $01
+                ss_text := TRUE
+            else
+                ss_text := FALSE    
+                
         index := -1
         
         index := slave.check_reg(29) 'check for new mode
@@ -566,6 +595,20 @@ PRI run_retroii | index, mem_loc, mem_start, data, row, col, cursor_toggle, curs
                 row++
                 mem_loc += $58
             mem_start += $28
+        
+        'display soft switches
+        setPos(28, 26)
+        str($07, $00, string("HIRES: "))
+        hex($07, $00, ss_hires, 2)
+        setPos(28, 27)
+        str($07, $00, string("PAGE2: "))
+        hex($07, $00, ss_page2, 2)
+        setPos(28, 28)
+        str($07, $00, string("MIX:   "))
+        hex($07, $00, ss_mix, 2)
+        setPos(28, 29)
+        str($07, $00, string("TEXT:  "))
+        hex($07, $00, ss_text, 2)
 
 PRI cls
     C64.ClearScreen
