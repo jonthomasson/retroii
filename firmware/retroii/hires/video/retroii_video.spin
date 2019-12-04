@@ -51,6 +51,8 @@ CON
     {PAGE_LOCATIONS}
     TEXT_PAGE1 = $400
     TEXT_PAGE2 = $800
+    HIRES_PAGE1 = $2000
+    HIRES_PAGE2 = $4000
 
 VAR
                                             '                             
@@ -561,8 +563,7 @@ PRI rx_byte | tx_ready, data, i, new_data
     
     return data    
     
-PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer, color
-    color := 0 'for hires
+PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls
     'cursor[2] := 0   
     C64.Cursor(FALSE)
@@ -570,7 +571,7 @@ PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cur
     cursor_timer := 0
     
     repeat while current_mode == MODE_RETROII
-        if ss_text == $FF
+        if ss_text == $FF 'TEXT MODE
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
@@ -620,19 +621,39 @@ PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cur
             'str($07, $00, string("TEXT:  "))
             'hex($07, $00, ss_text, 2)
         elseif ss_text == $00 and ss_hires == $FF 'HIRES MODE
+            mem_loc := HIRES_PAGE1    'set starting address  
+            mem_start := $00         
+            mem_page_start := HIRES_PAGE1
             row := 0  
             col := 0 
-            if color == 0
-                color := 1
-            else
-                color := 0
+            
+            if ss_page2 == $FF
+                mem_page_start := HIRES_PAGE2
+               
                 
-            repeat 192 'rows
-                col := 0
-                repeat 240 'columns
-                    C64.Pixel(color, col, row)
-                    col++    
-                row++
+            repeat 3 '3 sections
+                mem_loc := mem_page_start + mem_start
+                repeat 64 '64 rows per section
+                    col := 0
+                    repeat 40 '40 columns/bytes per row
+                        data := read_byte(mem_loc)
+                        
+                        'the msb is ignored since it's the color grouping bit
+                        'the other bits are displayed opposite to where they appear
+                        'ie the lsb bit appears on the left and each subsequent bit moves to the right.
+                        'read Apple II Computer Graphics page 70ish for more details.
+                        C64.Pixel(1, (col * 7), row)
+                        
+                        col++
+                        mem_loc++
+                    row++
+                    mem_loc += $58
+                mem_start += $28
+                
+        elseif ss_text == $00 and ss_hires == $00 'LORES MODE
+            strxy(0, 0, $07, $00, string("lores mode..."))                                        
+                                                  
+                                                  
 PRI cls
     C64.ClearScreen
     'wordfill(@vgabuff, $0720 , vga#cols * vga#rows)
