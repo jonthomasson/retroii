@@ -642,8 +642,47 @@ PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cur
                         'the other bits are displayed opposite to where they appear
                         'ie the lsb bit appears on the left and each subsequent bit moves to the right.
                         'read Apple II Computer Graphics page 70ish for more details.
-                        C64.Pixel(1, (col * 7), row)
                         
+                        if ($01 & data) == $01
+                            C64.Pixel(1, (col * 7) - 6, row)
+                        else
+                            C64.Pixel(0, (col * 7) - 6, row)    
+                        
+                        if ($02 & data) == $02
+                            C64.Pixel(1, ((col * 7) - 5), row)
+                        else
+                            C64.Pixel(0, ((col * 7) - 5), row) 
+                        
+                        if ($04 & data) == $04
+                            C64.Pixel(1, ((col * 7) - 4), row)
+                        else
+                            C64.Pixel(0, ((col * 7) - 4), row) 
+                        
+                        if ($08 & data) == $08
+                            C64.Pixel(1, ((col * 7) - 3), row)
+                        else
+                            C64.Pixel(0, ((col * 7) - 3), row)    
+                        
+                        if ($10 & data) == $10
+                            C64.Pixel(1, ((col * 7) - 2), row)
+                        else
+                            C64.Pixel(0, ((col * 7) - 2), row)   
+                        
+                        if ($20 & data) == $20
+                            C64.Pixel(1, ((col * 7) - 1), row)
+                        else
+                            C64.Pixel(0, ((col * 7) - 1), row)
+                        
+                        if ($40 & data) == $40
+                            C64.Pixel(1, ((col * 7)), row)
+                        else
+                            C64.Pixel(0, ((col * 7)), row)
+                        
+                        'if ($80 & data) == $80
+                        '    C64.Pixel(1, ((col * 7) - 7), row)
+                        'else
+                        '    C64.Pixel(0, ((col * 7) - 7), row)
+                                     
                         col++
                         mem_loc++
                     row++
