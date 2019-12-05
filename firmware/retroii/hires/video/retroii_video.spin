@@ -563,7 +563,7 @@ PRI rx_byte | tx_ready, data, i, new_data
     
     return data    
     
-PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls
     'cursor[2] := 0   
     C64.Cursor(FALSE)
@@ -625,68 +625,71 @@ PRI run_retroii | index, mem_loc, mem_start, mem_page_start, data, row, col, cur
             mem_start := $00         
             mem_page_start := HIRES_PAGE1
             row := 0  
-            col := 0 
+            'col := 0 
             
             if ss_page2 == $FF
                 mem_page_start := HIRES_PAGE2
                
                 
             repeat 3 '3 sections
-                mem_loc := mem_page_start + mem_start
-                repeat 64 '64 rows per section
-                    col := 0
-                    repeat 40 '40 columns/bytes per row
-                        data := read_byte(mem_loc)
+                'mem_loc := mem_page_start + mem_start
+                mem_box := 0
+                repeat 8 '8 box rows per section
+                    
+                    mem_row := 0
+                    repeat 8 '8 rows within box row
+                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
+                        col := 0
+                        repeat 40 '40 columns/bytes per row
+                            data := read_byte(mem_loc)
                         
-                        'the msb is ignored since it's the color grouping bit
-                        'the other bits are displayed opposite to where they appear
-                        'ie the lsb bit appears on the left and each subsequent bit moves to the right.
-                        'read Apple II Computer Graphics page 70ish for more details.
+                            'the msb is ignored since it's the color grouping bit
+                            'the other bits are displayed opposite to where they appear
+                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
+                            'read Apple II Computer Graphics page 70ish for more details.
                         
-                        if ($01 & data) == $01
-                            C64.Pixel(1, (col * 7) - 6, row)
-                        else
-                            C64.Pixel(0, (col * 7) - 6, row)    
+                            if ($01 & data) == $01
+                                C64.Pixel(1, (col * 7) - 6, row)
+                            else
+                                C64.Pixel(0, (col * 7) - 6, row)    
                         
-                        if ($02 & data) == $02
-                            C64.Pixel(1, ((col * 7) - 5), row)
-                        else
-                            C64.Pixel(0, ((col * 7) - 5), row) 
+                            if ($02 & data) == $02
+                                C64.Pixel(1, ((col * 7) - 5), row)
+                            else
+                                C64.Pixel(0, ((col * 7) - 5), row) 
                         
-                        if ($04 & data) == $04
-                            C64.Pixel(1, ((col * 7) - 4), row)
-                        else
-                            C64.Pixel(0, ((col * 7) - 4), row) 
+                            if ($04 & data) == $04
+                                C64.Pixel(1, ((col * 7) - 4), row)
+                            else
+                                C64.Pixel(0, ((col * 7) - 4), row) 
                         
-                        if ($08 & data) == $08
-                            C64.Pixel(1, ((col * 7) - 3), row)
-                        else
-                            C64.Pixel(0, ((col * 7) - 3), row)    
+                            if ($08 & data) == $08
+                                C64.Pixel(1, ((col * 7) - 3), row)
+                            else
+                                C64.Pixel(0, ((col * 7) - 3), row)    
                         
-                        if ($10 & data) == $10
-                            C64.Pixel(1, ((col * 7) - 2), row)
-                        else
-                            C64.Pixel(0, ((col * 7) - 2), row)   
+                            if ($10 & data) == $10
+                                C64.Pixel(1, ((col * 7) - 2), row)
+                            else
+                                C64.Pixel(0, ((col * 7) - 2), row)   
                         
-                        if ($20 & data) == $20
-                            C64.Pixel(1, ((col * 7) - 1), row)
-                        else
-                            C64.Pixel(0, ((col * 7) - 1), row)
+                            if ($20 & data) == $20
+                                C64.Pixel(1, ((col * 7) - 1), row)
+                            else
+                                C64.Pixel(0, ((col * 7) - 1), row)
                         
-                        if ($40 & data) == $40
-                            C64.Pixel(1, ((col * 7)), row)
-                        else
-                            C64.Pixel(0, ((col * 7)), row)
+                            if ($40 & data) == $40
+                                C64.Pixel(1, ((col * 7)), row)
+                            else
+                                C64.Pixel(0, ((col * 7)), row)
                         
-                        'if ($80 & data) == $80
-                        '    C64.Pixel(1, ((col * 7) - 7), row)
-                        'else
-                        '    C64.Pixel(0, ((col * 7) - 7), row)
-                                     
-                        col++
-                        mem_loc++
-                    row++
-                    mem_loc += $58
+                                  
+                            col++
+                            mem_loc++
+                        row++
+                        mem_row += $400
+                        
+                    mem_box += $80
                 mem_start += $28
                 
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
@@ -825,25 +828,25 @@ pri read_byte(address) | data_in, i, msb, lsb
      
 
 {{
-┌──────────────────────────────────────────────────────────────────────────┐
-│                       TERMS OF USE: MIT License                          │                                                            
-├──────────────────────────────────────────────────────────────────────────┤
-│Permission is hereby granted, free of charge, to any person obtaining a   │
-│copy of this software and associated documentation files (the "Software"),│
-│to deal in the Software without restriction, including without limitation │
-│the rights to use, copy, modify, merge, publish, distribute, sublicense,  │
-│and/or sell copies of the Software, and to permit persons to whom the     │
-│Software is furnished to do so, subject to the following conditions:      │                                                           │
-│                                                                          │                                                  │
-│The above copyright notice and this permission notice shall be included in│
-│all copies or substantial portions of the Software.                       │
-│                                                                          │                                                  │
-│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR│
-│IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  │
-│FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL   │
-│THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER│
-│LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING   │
-│FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER       │
-│DEALINGS IN THE SOFTWARE.                                                 │
-└──────────────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                       TERMS OF USE: MIT License                          â”‚                                                            
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚Permission is hereby granted, free of charge, to any person obtaining a   â”‚
+â”‚copy of this software and associated documentation files (the "Software"),â”‚
+â”‚to deal in the Software without restriction, including without limitation â”‚
+â”‚the rights to use, copy, modify, merge, publish, distribute, sublicense,  â”‚
+â”‚and/or sell copies of the Software, and to permit persons to whom the     â”‚
+â”‚Software is furnished to do so, subject to the following conditions:      â”‚                                                           â”‚
+â”‚                                                                          â”‚                                                  â”‚
+â”‚The above copyright notice and this permission notice shall be included inâ”‚
+â”‚all copies or substantial portions of the Software.                       â”‚
+â”‚                                                                          â”‚                                                  â”‚
+â”‚THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORâ”‚
+â”‚IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  â”‚
+â”‚FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL   â”‚
+â”‚THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERâ”‚
+â”‚LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING   â”‚
+â”‚FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER       â”‚
+â”‚DEALINGS IN THE SOFTWARE.                                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 }}
