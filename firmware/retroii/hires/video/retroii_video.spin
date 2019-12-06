@@ -36,6 +36,7 @@ CON
     A7 = 15
     A8 = 21
     A14 = 27
+    A15 = 31
     
     {WRITE ENABLE PIN}
     WE = 30
@@ -148,7 +149,9 @@ PRI init | i, x, y
     outa[A0..A7] := %00000000   'low
     dira[A8..A14]~~ 'output
     outa[A8..A14] := %0000000 'low
-    
+    dira[A15]~~ 'output
+    outa[A15]~ 'low
+                              
     dira[WE]~~      'output
     outa[WE]~~      'set we high to avoid writing data
     
@@ -632,7 +635,7 @@ PRI run_retroii | index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, d
                
                 
             repeat 3 '3 sections
-                'mem_loc := mem_page_start + mem_start
+                
                 mem_box := 0
                 repeat 8 '8 box rows per section
                     
@@ -789,6 +792,7 @@ pri write_byte(data_out, address) | i, msb, lsb
     'outa[A0..A7] := address 
     outa[A7..A0] := lsb 
     outa[A14..A8] := msb
+    outa[A15] := msb >> 7
     'set we pin low for specified time
     outa[WE]~
     dira[D0..D7]~~  'output /avoid bus contention
@@ -803,7 +807,7 @@ pri write_byte(data_out, address) | i, msb, lsb
     'i := 0
     outa[A0..A7] := %00000000 'low
     outa[A8..A14] := %0000000 'low
-
+    outa[A15]~ 'low
 pri read_byte(address) | data_in, i, msb, lsb
     'to read:
     
@@ -817,6 +821,7 @@ pri read_byte(address) | data_in, i, msb, lsb
     'outa[A0..A7] := address 
     outa[A7..A0] := lsb
     outa[A14..A8] := msb
+    outa[A15] := msb >> 7
     'wait specified time
     'i := 0
     'read data pins
@@ -824,6 +829,7 @@ pri read_byte(address) | data_in, i, msb, lsb
     'i := 0
     outa[A0..A7] := %00000000 'low
     outa[A8..A14] := %0000000 'low
+    outa[A15]~ 'low                          
     return data_in
      
 
