@@ -215,27 +215,27 @@ PUB CChar(ch, fg, bg) | i, j, ptr, val, pix
     draw_command := ch | (cursorx << 8) | (cursory << 17) | (fg << 25) | (bg << 27)
     cursorx += 1
 
-  elseif ch == CR
-    cursorx := 0
-    cursory += 1
+  'elseif ch == CR
+  '  cursorx := 0
+  '  cursory += 1
 
-  elseif ch == BS
-    if cursorx > 0
-      cursorx -= 1
-      repeat while draw_command <> 0
-    draw_command := 32 | (cursorx << 8) | (cursory << 17) | (bg << 27)
+  'elseif ch == BS
+  '  if cursorx > 0
+  '    cursorx -= 1
+  '    repeat while draw_command <> 0
+  '  draw_command := 32 | (cursorx << 8) | (cursory << 17) | (bg << 27)
        
-  elseif ch == CLS
-    longfill(@pixel_bfr, 0, LSIZE)
-    cursorx := 0
-    cursory := 0
+  'elseif ch == CLS
+  '  longfill(@pixel_bfr, 0, LSIZE)
+  '  cursorx := 0
+  '  cursory := 0
 
-  elseif ch == HOME
-    cursorx := 0
-    cursory := 0
+  'elseif ch == HOME
+  '  cursorx := 0
+  '  cursory := 0
     
-  elseif ch == TAB
-    cursorx := (cursorx + 4) & $FC
+  'elseif ch == TAB
+  '  cursorx := (cursorx + 4) & $FC
 
   'If at end of line, goto next line
   if cursorx => COLS
