@@ -642,7 +642,6 @@ PRI run_retroii | index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, d
                     mem_row := 0
                     repeat 8 '8 rows within box row
                         mem_loc := mem_page_start + mem_start + mem_box + mem_row
-                        col := 1
                         repeat 40 '40 columns/bytes per row
                             data := read_byte(mem_loc)
                         
