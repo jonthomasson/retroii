@@ -49,6 +49,11 @@ CON
     MODE_SD_CARD_2 = 5 'program selection
     MODE_SD_CARD_3 = 6 'program download 
                        '
+    {RETROII_MODES}
+    RETROII_TEXT = 1
+    RETROII_HIRES = 2
+    RETROII_LORES = 3
+    
     {PAGE_LOCATIONS}
     TEXT_PAGE1 = $400
     TEXT_PAGE2 = $800
@@ -186,7 +191,8 @@ PRI check_soft_switches | index
                 ss_text := TRUE
             else
                 ss_text := FALSE    
-                
+            
+              
         index := -1
         
         index := slave.check_reg(29) 'check for new mode
@@ -208,7 +214,7 @@ PRI run_monitor | i, index
         index := slave.check_reg(31)
         if index > -1
             if index == $0D 'enter key detected
-                'C64.Cursor(FALSE)
+                
                 i := 0
                 print_header
                 parse_command
@@ -566,15 +572,21 @@ PRI rx_byte | tx_ready, data, i, new_data
     
     return data    
     
-PRI run_retroii | index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls
     'cursor[2] := 0   
     C64.Cursor(FALSE)
     cursor_toggle := false
     cursor_timer := 0
     
+
     repeat while current_mode == MODE_RETROII
+        if retroii_mode <> retroii_mode_old
+            cls
+        retroii_mode_old := retroii_mode 
+        
         if ss_text == $FF 'TEXT MODE
+            retroii_mode := RETROII_TEXT
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
@@ -624,6 +636,7 @@ PRI run_retroii | index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, d
             'str($07, $00, string("TEXT:  "))
             'hex($07, $00, ss_text, 2)
         elseif ss_text == $00 and ss_hires == $FF 'HIRES MODE
+            retroii_mode := RETROII_HIRES
             mem_loc := HIRES_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := HIRES_PAGE1
@@ -696,8 +709,10 @@ PRI run_retroii | index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, d
                 mem_start += $28
                 
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
+            retroii_mode := RETROII_LORES
             strxy(0, 0, $07, $00, string("lores mode..."))                                        
-                                                  
+    
+                                                     
                                                   
 PRI cls
     C64.ClearScreen
