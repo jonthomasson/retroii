@@ -47,7 +47,7 @@ CON
     ROWS_PER_FILE = 4 'number of longs it takes to store 1 file name
     MAX_FILES = 300 'limiting to 300 for now due to memory limits
     FILE_BUF_SIZE = 256 'size of file buffer. can optimize this later on.
-
+    LINE_BUF_SIZE = 10
 OBJ 
     sd: "fsrw" 
     kb:   "keyboard"  
@@ -75,8 +75,9 @@ VAR
     long files[MAX_FILES * ROWS_PER_FILE] 'byte array to hold index and filename '
     byte file_buffer[FILE_BUF_SIZE]
     byte tslist_buffer[FILE_BUF_SIZE]
+    byte line_buffer[LINE_BUF_SIZE]
     
-PUB main | soft_switches
+PUB main | soft_switches, i
     init
     ser.Str(string("initializing keyboard..."))
     
@@ -123,6 +124,7 @@ PUB main | soft_switches
             dira[RESET_pin] := 0 
             'ser.Str (string("reset pressed"))
         if  key == 213 'f6 sd card
+            i := 0 'start line buffer over
             ser.Str (string("entering sd card mode"))
             I2C.writeByte($42,29,MODE_SD_CARD_1)  
             current_mode := MODE_SD_CARD_1   
@@ -130,9 +132,15 @@ PUB main | soft_switches
             sd_send_filenames(0)
         if key < 128 and key > 0
             if current_mode == MODE_SD_CARD_1
-                I2C.writeByte($42,29,MODE_SD_CARD_2)  
-                current_mode := MODE_SD_CARD_2   
-                sd_send_catalog(key)  
+                if key == $0D 'enter
+                    I2C.writeByte($42,29,MODE_SD_CARD_2)  
+                    current_mode := MODE_SD_CARD_2   
+                    sd_send_catalog(i)                  
+                else
+                    'write to line buffer
+                    line_buffer[i] := key
+                    i++
+                  
             elseif current_mode == MODE_SD_CARD_2
                 I2C.writeByte($42,29,MODE_SD_CARD_3)  
                 current_mode := MODE_SD_CARD_3   
@@ -146,7 +154,7 @@ PUB main | soft_switches
 PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector
     'send file name, address, length, bytes
     index := ascii_2bin(file_idx)
-    dsk_name := sd_get_diskname_byindex(ascii_2bin(current_disk))
+    dsk_name := sd_get_diskname_byindex(current_disk)
     ser.Str(string("disk: "))
     ser.Str(dsk_name)
     
@@ -224,11 +232,20 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
     
                     
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
-PRI sd_send_catalog(dsk_idx) | dsk_name,i, y,file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
+PRI sd_send_catalog(line_size) | dsk_idx, dsk_name,i, y,file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
+    'populate dsk_idx from line_buffer
+    if line_size == 1
+        dsk_idx := ascii_2bin(line_buffer[0])
+    
+    else '2
+        'multiply 2nd num entered by 10 and add to first number
+        dsk_idx := (ascii_2bin(line_buffer[0]) * 10) + ascii_2bin(line_buffer[1])
+       
+    'ser.Bin (dsk_idx, 32)
     'send catalog for dsk index entered
     'set current disk
     current_disk := dsk_idx
-    dsk_name := sd_get_diskname_byindex(ascii_2bin(dsk_idx))
+    dsk_name := sd_get_diskname_byindex(dsk_idx)
     ser.Str(string("sending file: "))
     ser.Str(dsk_name)
     
