@@ -428,24 +428,27 @@ PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready
         count_files_sent := RESULTS_PER_PAGE
     else
         count_files_sent := file_count - page_count
-    
+    waitcnt(100000 + cnt)
     set_tx_ready 'wait for tx ready
     'send header info  
     'tx_byte($01)      
     'tx_byte($01)
     'tx_byte($03)   
+    waitcnt(100000 + cnt) 'add delay for video to catch up
     tx_byte(last_page + 1)
     'ser.Str(string("sent last_page="))
     'ser.Hex(last_page,2)
+    waitcnt(50000 + cnt)
     tx_byte(page + 1)
     'ser.Str(string("sent current_page="))
     'ser.Hex(page,2)
+    waitcnt(50000 + cnt)
     tx_byte(count_files_sent)
     'ser.Str(string("sent count_files_sent="))
     'ser.Hex(count_files_sent,2)
     'stop_tx_ready 'stop rx for now
                   '
-    waitcnt(100000 + cnt) 'add delay for video to catch up              
+    waitcnt(200000 + cnt) 'add delay for video to catch up              
     repeat while count < RESULTS_PER_PAGE and (count2 < file_count - 1)
       count2 := page_count + count
       

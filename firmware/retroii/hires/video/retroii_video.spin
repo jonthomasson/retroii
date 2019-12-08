@@ -481,11 +481,13 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
 PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     cls
     'cursor[2] := 0 
-    C64.Cursor(FALSE)
+    C64.Cursor(TRUE)
     setPos(0,0)
     index := 0
     slave.flush 'clears all 32 registers to 0                
-    str($07, $00, string("SELECT DISK"))
+    str($07, $00, string("SELECT DISK: "))
+    
+    
     
     
     'receive the header
@@ -529,10 +531,13 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
                                 
     rx_done 'rx finished
    
+    setPos(13,0)
                               
     repeat while current_mode == MODE_SD_CARD_1
-        
-
+        index := slave.check_reg(31)
+        if index > -1    
+            print($07, $00, index)
+            
 PRI rx_done
     'clear flags
     slave.put(RX_FLAG,$00)
