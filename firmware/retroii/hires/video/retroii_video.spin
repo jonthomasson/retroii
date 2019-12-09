@@ -330,8 +330,9 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     
     'get file name/address location/length 
     'start downloading to ram
-    str($07, $00, string("UPLOADING FILE TO RAM "))
-    
+    str($07, $00, string("UPLOADING PROGRAM"))
+    setPos(0,2)
+    str($07, $00, string("NAME: "))
     is_rx_ready 'setup receiver
     'receive file name
     repeat 30
@@ -349,13 +350,19 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     length_msb := rx_byte
     'hex($07, $00, length_msb,2)
     
-    str($07, $00, string("address="))
+    setPos(0,3)
+    str($07, $00, string("ADDR: "))
+    
     address := adr_msb << 8 | adr_lsb
     hex($07, $00, address,4)
     length := length_msb << 8 | length_lsb
-    str($07, $00, string("length="))
-    hex($07, $00, length,4)
     
+    setPos(0,4)
+    str($07, $00, string("SIZE: "))
+    dec($07, $00, length)
+    
+    setPos(0,5)
+    str($07, $00, string("STAT: PENDING"))
     'read data
     'start at address. for i = 0 to length: write_byte(rx_byte,addr + i)
     i := 0
@@ -367,7 +374,9 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
             i++     
     
     rx_done 'rx finished
-    str($07, $00, string("done"))
+    
+    setPos(0,5)
+    str($07, $00, string("STAT: COMPLETE"))
     repeat while current_mode == MODE_SD_CARD_3
                    
                 

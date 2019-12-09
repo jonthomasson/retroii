@@ -213,7 +213,7 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
                 tx_byte(byte[@file_buffer][y])
                 y++    
             'transmit data from this data sector
-            waitcnt(300000 + cnt) 'adding delay for video to catch up
+            waitcnt(450000 + cnt) 'adding delay for video to catch up
            ' y := 0
             repeat while y < bytes_read
                 ser.Hex (byte[@file_buffer][y], 2)
