@@ -223,6 +223,7 @@ PUB CChar(ch, fg, bg) | i, j, ptr, val, pix
   if ch > 31
     repeat while draw_command <> 0
     draw_command := ch | (cursorx << 8) | (cursory << 17) | (fg << 25) | (bg << 27)
+    'draw_command := ch | (cursorx << 8) | (cursory << 17) | (fg << 25) | (bg << 27)
     cursorx += 1
 
   'elseif ch == CR
@@ -551,27 +552,27 @@ cursor_mask0            res     1
                         org     0
 
 '---- Wait for a command, then decode -----------------------------------------------------------
-draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
-              if_z      jmp     #draw_start
+draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz 'read command from pointer location. if result is 0, z flag will be set.
+              if_z      jmp     #draw_start                  'if z flag is set (0) then loop back to draw_start
 
-                        mov     draw_cntr0, #0
-                        wrlong  draw_cntr0, draw_cmnd_ptr
+                        mov     draw_cntr0, #0               'set draw_cntr0 to 0
+                        wrlong  draw_cntr0, draw_cmnd_ptr    'setting draw_cmnd_ptr to 0 (frees up calling procedure)
 
-                        mov     draw_val, draw_cmnd
-                        and     draw_val, #255
-                        shr     draw_cmnd, #8
-                        mov     draw_xpos, draw_cmnd
-                        and     draw_xpos, #511
-                        shr     draw_cmnd, #9
-                        mov     draw_ypos, draw_cmnd
-                        and     draw_ypos, #255
-                        shr     draw_cmnd, #8
+                        mov     draw_val, draw_cmnd          'set draw_val to draw_cmnd
+                        and     draw_val, #255               'and draw_val by 255 (1111_1111) mask
+                        shr     draw_cmnd, #8                'shift 8 bits over to the right
+                        mov     draw_xpos, draw_cmnd         'set draw_xpos to draw_cmnd
+                        and     draw_xpos, #511              'and draw_xpos with 511(1_1111_1111) 9 bits mask
+                        shr     draw_cmnd, #9                'shift 9 bits right for draw_cmnd
+                        mov     draw_ypos, draw_cmnd         'set draw_ypos = draw_cmnd
+                        and     draw_ypos, #255              'apply 8 bit mask to draw_ypos
+                        shr     draw_cmnd, #8                '...
                         mov     draw_fg, draw_cmnd
                         and     draw_fg, #3
                         shr     draw_cmnd, #2
                         mov     draw_bg, draw_cmnd
                         and     draw_bg, #3
-                        shr     draw_cmnd, #2
+                        shr     draw_cmnd, #2                'get command, go to appropriate routine
 
                         cmp     draw_cmnd, #3  wz
               if_z      jmp     #draw_line
@@ -580,43 +581,43 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
               if_z      jmp     #draw_pixel
 
                         cmp     draw_cmnd, #2  wz
-              if_z      jmp     #draw_set
+              if_z      jmp     #draw_set                    'if command is char, will just fall through to below routine
 
 '---- Draw a character --------------------------------------------------------------------------
 '    ch := (ch - 32) << 3
-draw_char               sub     draw_val, #32
+draw_char               sub     draw_val, #32                'draw_val just holds the char value from draw_start routine
                         shl     draw_val, #3
 
 '    ptr1 := @C64CharMap + ch
-                        mov     draw_ptr1, draw_map_ptr
-                        add     draw_ptr1, draw_val
+                        mov     draw_ptr1, draw_map_ptr      'take value and add it to map pointer to get pointer to char rom
+                        add     draw_ptr1, draw_val          'draw_ptr1 is the pointer to the char rom
 
 '    ptr0 := @pixel_bfr + ((cursorx + (cursory * WIDTH)) << 1)
-                        mov     draw_ptr0, draw_xpos
+                        mov     draw_ptr0, draw_xpos         'draw_ptr0 is the x,y pointer to the pixel buffer
 
-draw_char1              test    draw_ypos, #255  wz
-              if_nz     sub     draw_ypos, #1
-              if_nz     add     draw_ptr0, #WIDTH
+draw_char1              test    draw_ypos, #255  wz          'AND 255 with draw_ypos
+              if_nz     sub     draw_ypos, #1                'if Z flag not set, subtract 1 from draw_ypos and add #width to draw_ptr0
+              if_nz     add     draw_ptr0, #WIDTH            'finds the y starting point for the char
               if_nz     jmp     #draw_char1
 
                         shl     draw_ptr0, #1
-                        add     draw_ptr0, par
+                        add     draw_ptr0, par               'once y is found, store the pointer to shared ram (pixel buf)
 
 '    repeat i from 0 to 7
-                        mov     draw_cntr0, #8
+                        mov     draw_cntr0, #8               'counter to hold num rows to iterate
 
 '      pix := byte[ptr1 + i]
-draw_char2              rdbyte  draw_pix, draw_ptr1
-                        add     draw_ptr1, #1 '#1
+draw_char2              rdbyte  draw_pix, draw_ptr1          'reads one byte from font rom char
+                        add     draw_ptr1, #1 '#1            'increment font rom pointer by 1
 
 '      val := 0 
                         mov     draw_val, #0 '#0
 '      repeat j from 0 to 7
-                        mov     draw_cntr1, #8 '#8
+                        mov     draw_cntr1, #7 '#8           'counter to hold num cols to iterate
 
 '        val <<= 2
-draw_char3              shl     draw_val, #2
-
+draw_char3              shl     draw_val, #2                 'iterates font row
+                                                             'draw fg or bg depending on whether bit is set in font rom
 '        if pix & $80 val |= fg
                         test    draw_pix, #$80  wz
               if_nz     or      draw_val, draw_fg
@@ -626,15 +627,15 @@ draw_char3              shl     draw_val, #2
 
 '        pix <<= 1
                         shl     draw_pix, #1
-                        djnz    draw_cntr1, #draw_char3
+                        djnz    draw_cntr1, #draw_char3     'decrement x counter, go to next column
 
 '      word[ptr0] := val
 '      ptr += COLS2
-                        wrword  draw_val, draw_ptr0
-                        add     draw_ptr0, #COLS2     
+                        wrword  draw_val, draw_ptr0         'write value to pixel buffer
+                        add     draw_ptr0, #COLS2           'updates pix buffer pointer to next column?
 
-                        djnz    draw_cntr0, #draw_char2
-                        jmp     #draw_start
+                        djnz    draw_cntr0, #draw_char2     'decrement y counter, go to next row
+                        jmp     #draw_start                 'if done, go to draw_start routine
 
 '---- Draw a pixel ------------------------------------------------------------------------------
 '  p1 := (WIDTH * y) + x

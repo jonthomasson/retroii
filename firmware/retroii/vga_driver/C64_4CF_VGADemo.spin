@@ -50,7 +50,7 @@ PUB Main | I, J, C, frq
   'C64.Char(48)
   'I := 0
   C64.Pos(35,15)
-  'C64.Char(48)
+  C64.Char(48)
   'repeat I from 0 to 24
     'C64.Pos(I, 15)
   '  C64.Char(48)
@@ -80,7 +80,7 @@ PUB Main | I, J, C, frq
   'Turn on cursor
   C64.Cursor(FALSE)
 
-  frq := frqVal(12587500, clkfreq)
+  frq := frqVal(11328750, clkfreq)
   C64.Pos(0,10)
   dec(frq)
 {{use this to get my frqa value to run the vga driver
