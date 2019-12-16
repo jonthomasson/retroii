@@ -38,22 +38,22 @@
 '' Video Circuit:
 ''
 '' Pin              VGA
-'' Group   240Ω
-''  +0 ──────── 14 Vertical Sync                +5V ──── 9
-''         240Ω
-''  +1 ──────── 13 Horizontal Sync              GND ┳─── 5
-''         470Ω                                          │
-''  +2 ──────┳─ 3  Blue                              ┣─── 6
-''         240Ω │                                        │
-''  +3 ──────┘                                        ┣─── 7
-''         470Ω                                          │
-''  +4 ──────┳─ 2  Green                             ┣─── 8
-''         240Ω │                                        │
-''  +5 ──────┘                                        └─── 10
-''         470Ω                                         
-''  +6 ──────┳─ 1  Red
-''         240Ω │
-''  +7 ──────┘
+'' Group   240Î©
+''  +0 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”€â”€ï‚» 14 Vertical Sync                +5V ï‚©â”€â”€â”€â”€ï‚» 9
+''         240Î©
+''  +1 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”€â”€ï‚» 13 Horizontal Sync              GND ï‚©â”³â”€â”€â”€ï‚» 5
+''         470Î©                                          â”‚
+''  +2 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”³â”€ï‚» 3  Blue                              â”£â”€â”€â”€ï‚» 6
+''         240Î© â”‚                                        â”‚
+''  +3 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”˜                                        â”£â”€â”€â”€ï‚» 7
+''         470Î©                                          â”‚
+''  +4 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”³â”€ï‚» 2  Green                             â”£â”€â”€â”€ï‚» 8
+''         240Î© â”‚                                        â”‚
+''  +5 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”˜                                        â””â”€â”€â”€ï‚» 10
+''         470Î©                                         
+''  +6 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”³â”€ï‚» 1  Red
+''         240Î© â”‚
+''  +7 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”˜
 ''------------------------------------------------------------------------------------------------
 
 CON
@@ -108,25 +108,25 @@ CON
   BP = 14
 }
 
-{ 288x240
-  WIDTH  = 288
+'{ 288x240
+  WIDTH  = 288 '288
   HEIGHT = 240
-  FREQ_VALUE = 304104364
-  CTRA_VALUE = %0_00001_100
-  FP = 7
-  SP = 43
-  BP = 22
-}
+  FREQ_VALUE = 608207634 '304103817 '304104364
+  CTRA_VALUE = %0_00001_011 '%0_00001_100
+  FP = 7 '7
+  SP = 43'43
+  BP = 22'22
+'}
 
-'{ 320x240
+{ 320x240
   WIDTH  = 320
   HEIGHT = 240
-  FREQ_VALUE = 337893737
+  FREQ_VALUE = 337893130 '337893737
   CTRA_VALUE = %0_00001_100
   FP = 8' 9  '8
   SP = 48 '47 '48
   BP = 24 '25 '24
-'}
+}
 
 { 384x240
   WIDTH  = 384
@@ -1008,25 +1008,25 @@ C64CharMap
                         byte    $00, $00, $00, $00, $00, $00, $00, $00 ' 254 
                         byte    $3C, $42, $A5, $81, $A5, $99, $42, $3C ' 255 Smiley 
 {{
-┌────────────────────────────────────────────────────────────────────────────┐
-│                       TERMS OF USE: MIT License                            │                                                            
-├────────────────────────────────────────────────────────────────────────────┤
-│Permission is hereby granted, free of charge, to any person obtaining       │
-│a copy of this software and associated documentation files (the "Software"),│
-│to deal in the Software without restriction, including without limitation   │
-│the rights to use, copy, modify, merge, publish, distribute, sublicense,    │
-│and/or sell copies of the Software, and to permit persons to whom the       │
-│Software is furnished to do so, subject to the following conditions:        │                                                           │
-│                                                                            │                                                  │
-│The above copyright notice and this permission notice shall be included in  │
-│all copies or substantial portions of the Software.                         │
-│                                                                            │                                                  │
-│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  │
-│IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    │
-│FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL     │
-│THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  │
-│LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     │
-│FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         │
-│DEALINGS IN THE SOFTWARE.                                                   │
-└────────────────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                       TERMS OF USE: MIT License                            â”‚                                                            
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚Permission is hereby granted, free of charge, to any person obtaining       â”‚
+â”‚a copy of this software and associated documentation files (the "Software"),â”‚
+â”‚to deal in the Software without restriction, including without limitation   â”‚
+â”‚the rights to use, copy, modify, merge, publish, distribute, sublicense,    â”‚
+â”‚and/or sell copies of the Software, and to permit persons to whom the       â”‚
+â”‚Software is furnished to do so, subject to the following conditions:        â”‚                                                           â”‚
+â”‚                                                                            â”‚                                                  â”‚
+â”‚The above copyright notice and this permission notice shall be included in  â”‚
+â”‚all copies or substantial portions of the Software.                         â”‚
+â”‚                                                                            â”‚                                                  â”‚
+â”‚THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  â”‚
+â”‚IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    â”‚
+â”‚FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL     â”‚
+â”‚THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  â”‚
+â”‚LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     â”‚
+â”‚FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         â”‚
+â”‚DEALINGS IN THE SOFTWARE.                                                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 }}

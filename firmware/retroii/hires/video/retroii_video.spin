@@ -382,7 +382,6 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
                 
 PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_length, file_type, file_access
     cls
-    'cursor[2] := 0 
     C64.Cursor(FALSE)
     setPos(0,0)
     cat_count := 0
@@ -397,7 +396,6 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     i := 0
     repeat 16
         rx_char := rx_byte
-        'hex($07, $00, rx_char, 2)
         print($07, $00, rx_char)
         i++
     
@@ -414,17 +412,14 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     str($07, $00, string("CATALOG:"))
     setPos(0, 3)
     str($07, $03, string("   FILE                TYPE  PERM SIZE "))
-    
-    'dec($07, $00, cat_count)    
+      
     
     setPos(0,4)
     i := 1
     
-    'str($07, $00, string("1. "))
     repeat cat_count 'end of transmission
         index := rx_byte
-        'hex($07, $00, index, 2)
-        'if index <> $04 'end of transmission
+       
         dec($07, $00, i)
         str($07, $00, string(". "))
         print($07, $00, index - 128)
@@ -433,10 +428,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
             'print($07, $00, rx_byte) 
             index := rx_byte
             print($07, $00, index - 128)
-            'hex($07, $00, rx_byte, 2)
             
-            'index := rx_byte
-            'hex($07, $00, index, 2) 'file type
         
         index := rx_byte
         'hex($07, $00, index, 2)
@@ -444,7 +436,6 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
         file_access := index & $80 'bitwise and to mask lock bit
         file_type := index & $0F 'mask first nibble which holds the file type
         
-        'hex($07, $00, file_type, 2) 'file type
         if file_type == $04
             str($07, $00, string("BIN"))
         elseif file_type == $02
@@ -453,34 +444,20 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
             str($07, $00, string("NA "))
             
         str($07, $00, string("   "))
-        'hex($07, $00, file_access, 2) 'file access
-        
+       
         if file_access == $80
             str($07, $00, string(" R"))
         else
             str($07, $00, string("WR"))
         str($07, $00, string("   "))
         file_length := rx_byte 'file length ls byte (length in sectors)
-        'hex($07, $00, file_length, 2) 'file length ls
         
-        'index := rx_byte
-        'hex($07, $00, index, 2) 'file length ms
+        
         dec($07, $00, file_length * 256)
         
         setPos(0, i+4)
         i++
-        'read file name
-         
-        'if index == $03 'end of line
-        '    if i =< count_files_sent
-        '        setPos(0,i+1)
-        '        dec($07, $00, i)
-        '    
-        '        str($07, $00, string(". "))
-        'i++
-            
-        'if index <> $04 'end of transmission
-         '   print($07, $00, index)
+       
                                 
     rx_done 'rx finished
     
@@ -669,7 +646,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_r
                     mem_row := 0
                     repeat 8 '8 rows within box row
                         mem_loc := mem_page_start + mem_start + mem_box + mem_row
-                        col := 4 'moving column a little to the right to center within frame
+                        col := 1 'moving column a little to the right to center within frame
                         repeat 40 '40 columns/bytes per row
                             data := read_byte(mem_loc)
                         
