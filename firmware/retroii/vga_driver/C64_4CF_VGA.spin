@@ -38,22 +38,22 @@
 '' Video Circuit:
 ''
 '' Pin              VGA
-'' Group   240Î©
-''  +0 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”€â”€ï‚» 14 Vertical Sync                +5V ï‚©â”€â”€â”€â”€ï‚» 9
-''         240Î©
-''  +1 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”€â”€ï‚» 13 Horizontal Sync              GND ï‚©â”³â”€â”€â”€ï‚» 5
-''         470Î©                                          â”‚
-''  +2 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”³â”€ï‚» 3  Blue                              â”£â”€â”€â”€ï‚» 6
-''         240Î© â”‚                                        â”‚
-''  +3 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”˜                                        â”£â”€â”€â”€ï‚» 7
-''         470Î©                                          â”‚
-''  +4 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”³â”€ï‚» 2  Green                             â”£â”€â”€â”€ï‚» 8
-''         240Î© â”‚                                        â”‚
-''  +5 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”˜                                        â””â”€â”€â”€ï‚» 10
-''         470Î©                                         
-''  +6 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”³â”€ï‚» 1  Red
-''         240Î© â”‚
-''  +7 ï‚©â”€â”€â”€â”€ï‚½ï‚¾â”€â”€â”˜
+'' Group   240ÃŽÂ©
+''  +0 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 14 Vertical Sync                +5V Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 9
+''         240ÃŽÂ©
+''  +1 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 13 Horizontal Sync              GND Ã¯â€šÂ©Ã¢â€Â³Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 5
+''         470ÃŽÂ©                                          Ã¢â€â€š
+''  +2 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â³Ã¢â€â‚¬Ã¯â€šÂ» 3  Blue                              Ã¢â€Â£Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 6
+''         240ÃŽÂ© Ã¢â€â€š                                        Ã¢â€â€š
+''  +3 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ                                        Ã¢â€Â£Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 7
+''         470ÃŽÂ©                                          Ã¢â€â€š
+''  +4 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â³Ã¢â€â‚¬Ã¯â€šÂ» 2  Green                             Ã¢â€Â£Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 8
+''         240ÃŽÂ© Ã¢â€â€š                                        Ã¢â€â€š
+''  +5 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ                                        Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 10
+''         470ÃŽÂ©                                         
+''  +6 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â³Ã¢â€â‚¬Ã¯â€šÂ» 1  Red
+''         240ÃŽÂ© Ã¢â€â€š
+''  +7 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
 ''------------------------------------------------------------------------------------------------
 
 CON
@@ -121,8 +121,8 @@ CON
 '{ 288x240
   WIDTH  = 288 '288
   HEIGHT = 240
-  FREQ_VALUE = 304103817 '304104364
-  CTRA_VALUE = %0_00001_100
+  FREQ_VALUE = 608207634 '304103817 '304104364
+  CTRA_VALUE = %0_00001_011 '%0_00001_100
   FP = 7 '7
   SP = 43'43
   BP = 22'22
@@ -434,14 +434,76 @@ DAT
 '------------------------------------------------------------------------------------------------
                         org     0
 
-asm_start               mov     frqa, freq_reg
+asm_start               mov     frqa, freq_reg              'setup frequency, counter values, pin outputs etc.
                         movi    ctra, #CTRA_VALUE
                         mov     vcfg, vcfg_reg
                         mov     dira, output_enables
+{
+Timing taken from :http://tinyvga.com/vga-timing/640x480@60Hz
+
+                    640 X 480 VIDEO TIMING 
+                            HSYNC
+         ____________________________________________ _____16______ _____96_____ _____48____
+         |                 DISPLAY                   | FRONT PORCH | SYNC PULSE | BACK PORCH|
+         |                                           |
+         |                                           |
+         |                                           |
+         |                                           |
+         |                                           |
+      V  |                                           |
+      S  |                                           |
+      Y  |                                           |
+      N  |                                           |
+      C  |                                           |
+         |                                           |      
+         |                                           |      
+         |___________________________________________|                                                
+         |
+         |
+         |10 FRONT PORCH
+         |
+         |-
+         |
+         |2 SYNC PULSE
+         |                                      BLANKING AREA
+         |-
+         |
+         |33 BACK PORCH
+         |
+         |_
+         
+GENERAL TIMING
+    -SCREEN REFRESH RATE:   60HZ
+    -VERTICAL REFRESH:      31.46875KHZ
+    -PIXEL FREQ:            25.175MHZ
+    
+HORIZONTAL TIMING
+| SCANLINE PART | PIXELS | TIME uS 
+| VISIBLE AREA  | 640    | 25.422045680238
+| FRONT PORCH   | 16     | 0.63555114200596
+| SYNC PULSE    | 96     | 3.8133068520357
+| BACK PORCH    | 48     | 1.9066534260179
+| WHOLE LINE    | 800    | 31.777557100298
+
+VERTICAL TIMING
+| SCANLINE PART | PIXELS | TIME uS 
+| VISIBLE AREA  | 480    | 15.253227408143
+| FRONT PORCH   | 10     | 0.31777557100298
+| SYNC PULSE    | 2      | 0.063555114200596
+| BACK PORCH    | 33     | 1.0486593843098
+| WHOLE FRAME   | 525    | 16.683217477656
+
+
+below are the routines for the VGA driver. They consist of 4 main loops.
+These loops drive the vertical sync pulse (vsync_loop), the vertical sync
+back porch (vsbp_loop), the active video lines (video_loop1), and finally
+the vertical sync front porch (vsfp_loop). These loops provide the video signals
+for the VGA and are repeated indefinitely.
+}
 
 '--- Vertical Sync ------------------------------------------------------------------------------
-vsync_loop              mov     line_cntr, #2
-
+vsync_loop              mov     line_cntr, #2                       'sync pulse is 2 lines for 640x480 spec
+                                                            
 vs_loop                 mov     vscl, #PC_FP
                         waitvid vs_colors, #0
                         mov     vscl, #SP
@@ -451,7 +513,7 @@ vs_loop                 mov     vscl, #PC_FP
                         djnz    line_cntr, #vs_loop
 
 '--- Vertical Sync Back Porch -------------------------------------------------------------------
-                        mov     line_cntr, #33
+                        mov     line_cntr, #33                      'back porch is 33 lines
 
 vsbp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
@@ -465,7 +527,7 @@ vsbp_loop               mov     vscl, #PC_FP
                         mov     vscl, #PC_FP
 
                         mov     pixel_ptr0, par
-                        mov     line_cntr, #HEIGHT
+                        mov     line_cntr, #HEIGHT                  'active video lines = resolution height
                         rdlong  vid_colors, colors_ptr
                         or      vid_colors, blank_colors
 
@@ -508,7 +570,7 @@ video_loop3             rdlong  pixel_values, pixel_ptr1
                         djnz    line_cntr, #video_loop1
 
 '----Vertical Sync Front Porch ------------------------------------------------------------------
-                        mov     line_cntr, #10
+                        mov     line_cntr, #10                      'front porch is 10 lines
                         add     frame_cntr, #1
                         wrlong  frame_cntr, frame_cntr_ptr 
 
@@ -1019,25 +1081,25 @@ C64CharMap
                         byte    $00, $00, $00, $00, $00, $00, $00, $00 ' 254 
                         byte    $3C, $42, $A5, $81, $A5, $99, $42, $3C ' 255 Smiley 
 {{
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                       TERMS OF USE: MIT License                            â”‚                                                            
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚Permission is hereby granted, free of charge, to any person obtaining       â”‚
-â”‚a copy of this software and associated documentation files (the "Software"),â”‚
-â”‚to deal in the Software without restriction, including without limitation   â”‚
-â”‚the rights to use, copy, modify, merge, publish, distribute, sublicense,    â”‚
-â”‚and/or sell copies of the Software, and to permit persons to whom the       â”‚
-â”‚Software is furnished to do so, subject to the following conditions:        â”‚                                                           â”‚
-â”‚                                                                            â”‚                                                  â”‚
-â”‚The above copyright notice and this permission notice shall be included in  â”‚
-â”‚all copies or substantial portions of the Software.                         â”‚
-â”‚                                                                            â”‚                                                  â”‚
-â”‚THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  â”‚
-â”‚IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    â”‚
-â”‚FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL     â”‚
-â”‚THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  â”‚
-â”‚LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     â”‚
-â”‚FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         â”‚
-â”‚DEALINGS IN THE SOFTWARE.                                                   â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
+Ã¢â€â€š                       TERMS OF USE: MIT License                            Ã¢â€â€š                                                            
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
+Ã¢â€â€šPermission is hereby granted, free of charge, to any person obtaining       Ã¢â€â€š
+Ã¢â€â€ša copy of this software and associated documentation files (the "Software"),Ã¢â€â€š
+Ã¢â€â€što deal in the Software without restriction, including without limitation   Ã¢â€â€š
+Ã¢â€â€šthe rights to use, copy, modify, merge, publish, distribute, sublicense,    Ã¢â€â€š
+Ã¢â€â€šand/or sell copies of the Software, and to permit persons to whom the       Ã¢â€â€š
+Ã¢â€â€šSoftware is furnished to do so, subject to the following conditions:        Ã¢â€â€š                                                           Ã¢â€â€š
+Ã¢â€â€š                                                                            Ã¢â€â€š                                                  Ã¢â€â€š
+Ã¢â€â€šThe above copyright notice and this permission notice shall be included in  Ã¢â€â€š
+Ã¢â€â€šall copies or substantial portions of the Software.                         Ã¢â€â€š
+Ã¢â€â€š                                                                            Ã¢â€â€š                                                  Ã¢â€â€š
+Ã¢â€â€šTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  Ã¢â€â€š
+Ã¢â€â€šIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    Ã¢â€â€š
+Ã¢â€â€šFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL     Ã¢â€â€š
+Ã¢â€â€šTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  Ã¢â€â€š
+Ã¢â€â€šLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     Ã¢â€â€š
+Ã¢â€â€šFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         Ã¢â€â€š
+Ã¢â€â€šDEALINGS IN THE SOFTWARE.                                                   Ã¢â€â€š
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
 }}
