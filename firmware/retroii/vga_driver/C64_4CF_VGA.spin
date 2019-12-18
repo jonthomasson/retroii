@@ -175,7 +175,7 @@ CON
   PSIZE  = WIDTH * HEIGHT       'Total number of pixels
   LSIZE  = PSIZE / 16           'Size of screen buffer in longs
   LPROW  = COLS / 4             'Longs per screen line
-  WPROW  = COLS / 2             'Words per screen line
+  WPROW  = 18 'COLS / 2             'Words per screen line
   COLS2  = COLS * 2
 
   MAX_X  = WIDTH - 1            'Maximum value of x coordinate
@@ -386,10 +386,10 @@ PUB Start(pin_group) | hres, vres
 
   pin_group &= 3
   'output_enables := ($FF << (pin_group << 3))
-  'vcfg_reg := $30_00_00_FF | (pin_group << 9)
+  'vcfg_reg := $30_00_00_FF | (pin_group << 9) 
   
   output_enables := ($FF << (pin_group << 3))
-  vcfg_reg := $30_00_04_1F  'check prop manual for vcfg for more details on configuring video
+  vcfg_reg := $30_00_04_1F  '(four color, vga) check prop manual for vcfg for more details on configuring video
     
   colors_ptr := @pixel_colors
   frame_cntr_ptr := @frame_count
@@ -531,7 +531,7 @@ vsbp_loop               mov     vscl, #PC_FP
                         rdlong  vid_colors, colors_ptr
                         or      vid_colors, blank_colors
 
-                        mov     cursor_mask0, frame_cntr
+                        mov     cursor_mask0, frame_cntr            'mask off cursor, if cursor is in visible area?
                         and     cursor_mask0, #$20  wz
               if_nz     mov     cursor_mask0, #0
               if_z      rdlong  cursor_mask0, cursor_mask_ptr
@@ -544,20 +544,20 @@ vsbp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
 
 '--- Active Video Lines -------------------------------------------------------------------------
-video_loop1             mov     block_cntr, #BLKS
-video_loop2             mov     vscl, video_scale
-                        mov     pixel_cntr, #WPROW
+video_loop1             mov     block_cntr, #BLKS                       'will repeat each video line twice (480/240 height)
+video_loop2             mov     vscl, video_scale                       'video_scale is $000_01_010
+                        mov     pixel_cntr, #WPROW '18 for 36 col
                         mov     pixel_ptr1, pixel_ptr0
 
-video_loop3             rdlong  pixel_values, pixel_ptr1
+video_loop3             rdlong  pixel_values, pixel_ptr1                'main loop to display pixel buffer for a single line
                         cmp     pixel_ptr1, cursor_pos0  wz
               if_z      or      pixel_values, cursor_mask0
               if_z      and     pixel_values, cursor_mask0
-                        add     pixel_ptr1, #4
-                        waitvid vid_colors, pixel_values
-                        djnz    pixel_cntr, #video_loop3
+                        add     pixel_ptr1, #4                          'just reading 4 pixels per group at a time??
+                        waitvid vid_colors, pixel_values                'i think we're using 4 pixel groups since we are limited to 4 colors per group.
+                        djnz    pixel_cntr, #video_loop3                'so this lets us make any of the pixels any one of those 4 colors
 
-                        mov     vscl, #FP
+                        mov     vscl, #FP                               'write out FP/SP/BP
                         waitvid hs_colors, #0
                         mov     vscl, #SP
                         waitvid hs_colors, #1
@@ -565,7 +565,7 @@ video_loop3             rdlong  pixel_values, pixel_ptr1
                         waitvid hs_colors, #0
 
                         djnz    block_cntr, #video_loop2
-                        add     pixel_ptr0, #COLS
+                        add     pixel_ptr0, #COLS                       'adding cols twice to get to next row. each col is 8 bits. 4x2=8
                         add     pixel_ptr0, #COLS
                         djnz    line_cntr, #video_loop1
 
