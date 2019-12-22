@@ -77,9 +77,13 @@ VAR
     byte tslist_buffer[FILE_BUF_SIZE]
     byte line_buffer[LINE_BUF_SIZE]
     
-PUB main | soft_switches, i
+PUB main | soft_switches, i, frq
     init
     ser.Str(string("initializing keyboard..."))
+    
+    'frq := frqVal(6589440, clkfreq)
+    
+    'ser.Dec (frq)
     
     repeat     
         soft_switches := ina[SS_LOW..SS_HIGH]           'send soft switch to register 30 of video processor
@@ -150,6 +154,20 @@ PUB main | soft_switches, i
             if kb_output_data == true   'determine where to send key to data bus
                 kb_write(key)
 
+{{use this to get my frqa value to run the vga driver
+a = frequency desired
+b = clock frequency (CLKFREQ etc)
+
+f = returns frequency value to set frqa
+}}
+PRI frqVal(a, b) : f      ' return f = a/b * 2^32, given a<b, a<2^30, b<2^30
+  repeat 32                           ' 32 bits
+     a <<= 1
+     f <<= 1
+     if a => b
+        a -= b
+        f++
+        
 {{send the selected file to RAM}}                
 PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector
     'send file name, address, length, bytes

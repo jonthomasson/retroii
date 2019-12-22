@@ -86,7 +86,7 @@ VAR
 
 OBJ
 
-    C64 : "C64_4CF_VGA.spin"
+    C64 : "C64_2CF_VGA.spin"
     slave : "I2C slave v1.2"
 
 PUB Main | I, J, C
