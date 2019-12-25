@@ -42,48 +42,13 @@ PUB Main | I, J, C
   '    C += 1
 
   'Test String
-  'C64.Pos(0, 14)
-  'C64.Str(string(" String  "))
+  C64.Pos(0, 0)
+  'C64.StrA2(string(" String  "))
   C := 65
-  repeat J from 0 to 22
-    C64.CharA2(C, J, 1)
+  repeat J from 0 to 25
+    C64.CharA2(C)
     C += 1
     
-  'repeat J from 0 to 13
-  '  C64.CharA2(C, J, 3)
-  '  C += 1 
-  'C64.CharA2(82, 0, 5)
-  'C64.CharA2(82, 1, 5)
-  'C64.CharA2(82, 2, 5)
-  'C64.CharA2(82, 3, 5)
-  'C64.CharA2(82, 4, 5)
-  'C64.CharA2(82, 5, 5)
-  'C64.CharA2(82, 6, 5)
-  'C64.CharA2(82, 7, 5)
-  'C64.CharA2(82, 8, 5)
-  'C64.CharA2(82, 9, 5)
-  'C64.CharA2(82, 10, 5)
-  'C64.CharA2(82, 11, 5)
-  'C64.CharA2(82, 12, 5)
-  'C64.Pos(0,1)
-  'C64.Char(82)
-  'C64.Char(82)
-  'C64.Char(82)
- ' C64.Char(82)
-  'C64.Char(82)
-  'C64.Char(82)
-  'C64.Char(82)
-  'C64.Char(82)
-  'C64.Char(82)
-  'C64.Char(82)
-  'Reverse string
-  'C64.RChar(82)
-  'C64.RChar(101)
-  'C64.RChar(118)
-  'C64.RChar(101)
-  'C64.RChar(114)
-  'C64.RChar(115)
-  'C64.RChar(101)
 
   '4 pixels in a row
   'C64.Pixel(1, 140, 4)

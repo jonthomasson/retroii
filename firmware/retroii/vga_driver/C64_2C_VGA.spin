@@ -232,13 +232,11 @@ PUB Char(c) | idx, ptr, tmp
 
   UpdateCursor
 
-PUB CharA2(c,x,y) | idx, ptr, tmp, graphicx, offset
+PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Print an Apple ][ 7x8 character on the screen, then advance the cursor.
 ''
 '' c - Character to print.
-'' x - The 7x8 column to write to.
-'' y - The row to write to.
 '------------------------------------------------------------------------------------------------
   c &= 255
 
@@ -246,7 +244,7 @@ PUB CharA2(c,x,y) | idx, ptr, tmp, graphicx, offset
   if c > 31
     c := (c - 32) * 8
     'need to determine which 8x8 graphic tile(s) we need to update
-    x := x * 2
+    x := cursorx * 2
     graphicx := byte[@FontToGraphicMap][x]
     offset := byte[@FontToGraphicMap][x + 1]
     
@@ -301,19 +299,19 @@ PUB CharA2(c,x,y) | idx, ptr, tmp, graphicx, offset
     
   'elseif c == TAB
   '  cursorx := (cursorx + 4) & $FC
-
+  cursorx += 1
   'If at end of line, goto next line
-  'if cursorx => COLS
-  '  cursorx := 0
-  '  cursory += 1
+  if cursorx => COLS
+    cursorx := 0
+    cursory += 1
 
   'If at bottom of screen, scroll
-  'if cursory => ROWS
-  '  cursory -= 1
-  '  longmove(@pixel_bfr, @pixel_bfr + SCROFF, SCRCNT)
-  '  longfill(@pixel_bfr + constant(SCRCNT << 2), 0, constant(SCROFF >> 2))
+  if cursory => ROWS
+    cursory -= 1
+    longmove(@pixel_bfr, @pixel_bfr + SCROFF, SCRCNT)
+    longfill(@pixel_bfr + constant(SCRCNT << 2), 0, constant(SCROFF >> 2))
 
-  'UpdateCursor
+  UpdateCursor
 
 PRI prn(val) | dig
 
@@ -332,6 +330,16 @@ PUB RChar(c)
   reverse := 255
   Char(c)
   reverse := 0
+  
+PUB RCharA2(c)
+'------------------------------------------------------------------------------------------------
+'' Print a character on the screen, in reverse video, then advance the cursor.
+''
+'' c - Character to print.
+'------------------------------------------------------------------------------------------------
+  reverse := 255
+  CharA2(c)
+  reverse := 0
 
 PUB Str(s) | b
 '------------------------------------------------------------------------------------------------
@@ -345,13 +353,28 @@ PUB Str(s) | b
       return
     Char(b)
     s += 1
+    
+PUB StrA2(s) | b
+'------------------------------------------------------------------------------------------------
+'' Write a NULL terminated string starting at the current cursor position.
+''
+'' s - Address of a Null terminated string.
+'------------------------------------------------------------------------------------------------
+  repeat
+    b := byte[s]
+    if b == 0
+      return
+    CharA2(b)
+    s += 1
 
 PUB Pos(X, Y)
 '------------------------------------------------------------------------------------------------
 '' Set the XY position of the character cursor.
 '------------------------------------------------------------------------------------------------
-  cursorx := (X <# MAX_C) #> 0 
-  cursory := (Y <# MAX_R) #> 0 
+  cursorx := X
+  cursory := Y
+  'cursorx := (X <# MAX_C) #> 0 
+  'cursory := (Y <# MAX_R) #> 0 
   UpdateCursor
 
 PUB GetX
@@ -648,7 +671,7 @@ DAT
 '------------------------------------------------------------------------------------------------
 ' LUT To map between 7x8 font tiles and 8x8 graphic tiles ((xpos x 7) / 8)
 '------------------------------------------------------------------------------------------------
-'                      FONT COL, GRAPH COL, OFFSET
+'                      GRAPH COL, OFFSET
 FontToGraphicMap
                        byte     $00, $00   'col 0
                        byte     $00, $01   'col 1
