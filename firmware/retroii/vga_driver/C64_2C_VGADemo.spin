@@ -49,7 +49,11 @@ PUB Main | I, J, C
     C64.CharA2(C)
     C += 1
     
-
+  C64.Pos(39,2)
+  C64.CharA2(65)
+  C64.Pos(39,23)
+  C64.CharA2(65)
+  C64.Pos(17,0)
   '4 pixels in a row
   'C64.Pixel(1, 140, 4)
   'C64.Pixel(1, 142, 4)
@@ -63,14 +67,14 @@ PUB Main | I, J, C
   'C64.Pixel(1, C64#WIDTH - 1, C64#HEIGHT - 1)
 
   'Line Pattern
-  C64.Line(1, 140, 30, 158, 30)
-  C64.LineTo(1, 158, 48)
-  C64.LineTo(1, 140, 48)
-  C64.LineTo(1, 140, 30)
-  C64.LineTo(1, 149, 20)
-  C64.LineTo(1, 158, 30)
-  C64.LineTo(1, 149, 40)
-  C64.LineTo(1, 140, 30)
+  'C64.Line(1, 140, 30, 158, 30)
+  'C64.LineTo(1, 158, 48)
+  'C64.LineTo(1, 140, 48)
+  'C64.LineTo(1, 140, 30)
+  'C64.LineTo(1, 149, 20)
+  'C64.LineTo(1, 158, 30)
+  'C64.LineTo(1, 149, 40)
+  'C64.LineTo(1, 140, 30)
 
   C64.Cursor(TRUE)
 

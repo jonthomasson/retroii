@@ -56,7 +56,7 @@
 
 CON
 
-'{ 160x120
+{ 160x120
   WIDTH  = 160
   HEIGHT = 120
   FREQ_VALUE = 337893737
@@ -64,7 +64,7 @@ CON
   FP = 4
   SP = 24
   BP = 12
-'}
+}
 
 { 192x120
   WIDTH  = 192
@@ -106,7 +106,7 @@ CON
   BP = 14
 }
 
-{ 288x240
+'{ 288x240
   WIDTH  = 288
   HEIGHT = 240
   FREQ_VALUE = 304104364
@@ -114,7 +114,7 @@ CON
   FP = 7
   SP = 43
   BP = 22
-}
+'}
 
 { 320x240
   WIDTH  = 320
@@ -262,11 +262,14 @@ PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
         graphicx++
         
     ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
+    if offset > 0
+        offset++
+            
     repeat idx from 0 to 7 'y
       tmp := byte[@C64CharMap][idx + c]
       'only display right most offset
       
-      byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
+      byte[ptr] |= (tmp ^ reverse) >> (offset)
       ptr += COLS
       
     'ptr := @pixel_bfr + (cursorx + (cursory * WIDTH))
@@ -541,14 +544,21 @@ PUB Stop
   if cog > 0
     cogstop(cog - 1)
 
-PRI UpdateCursor | cpos
+PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
 '------------------------------------------------------------------------------------------------
+  x := cursorx * 2
+  cx := byte[@FontToGraphicMap][x]
+  offset := byte[@FontToGraphicMap][x + 1]
   if cursor_state
-    cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS)
-    cpos := cpos + (cursorx & $FFFC)
-    cursor_mask := $FF << ((cursorx & 3) << 3)
+    cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS) 'need to get rid of cols
+    cpos := cpos + (cx & $FFFC)
+    if offset > 0
+        cursor_mask := $FE << ((cx & 3) << 3) << (6 - offset)
+    else
+        cursor_mask := $FE << ((cx & 3) << 3) '>> (offset)
+    
     cursor_pos := cpos
 
 DAT
