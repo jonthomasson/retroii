@@ -107,13 +107,13 @@ CON
 }
 
 '{ 288x240
-  WIDTH  = 288
+  WIDTH  = 288 '288
   HEIGHT = 240
-  FREQ_VALUE = 304104364
-  CTRA_VALUE = %0_00001_100
-  FP = 7
-  SP = 43
-  BP = 22
+  FREQ_VALUE = 608207634 '304103817 '304104364
+  CTRA_VALUE = %0_00001_011 '%0_00001_100
+  FP = 7 '7
+  SP = 43'43
+  BP = 22'22
 '}
 
 { 320x240
@@ -247,15 +247,16 @@ PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
     x := cursorx * 2
     graphicx := byte[@FontToGraphicMap][x]
     offset := byte[@FontToGraphicMap][x + 1]
-    
+    'ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
     
     'prn(offset)
     if offset > 0
         ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
         repeat idx from 0 to 7 'y
             tmp := byte[@C64CharMap][idx + c]
+            'tmp := $7C '$54
             'only display left most offset
-      
+            byte[ptr] &= $FF >> offset 'mask to clear offset bits
             byte[ptr] |= (tmp ^ reverse) << (7 - offset)
             ptr += COLS
     
@@ -264,13 +265,28 @@ PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
     ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
     if offset > 0
         offset++
-            
+    else
+        offset := 1
+        
     repeat idx from 0 to 7 'y
-      tmp := byte[@C64CharMap][idx + c]
-      'only display right most offset
-      
-      byte[ptr] |= (tmp ^ reverse) >> (offset)
-      ptr += COLS
+        tmp := byte[@C64CharMap][idx + c]
+        'tmp := $7C '$54
+        'only display right most offset
+        if offset == 1
+            byte[ptr] &= $FF << 5 'mask to clear offset bits
+        else
+            byte[ptr] &= $FF << (offset + 2)
+            
+        byte[ptr] |= (tmp ^ reverse) >> (offset)
+        ptr += COLS
+                        
+    'repeat idx from 0 to 7 'y
+    '  'tmp := byte[@C64CharMap][idx + c]
+    '  tmp := $7C '$54
+    '  'only display right most offset
+    '  'byte[ptr] &= $FF << offset 'mask to clear offset bits
+    '  byte[ptr] |= (tmp ^ reverse) >> (offset)
+    '  ptr += COLS
       
     'ptr := @pixel_bfr + (cursorx + (cursory * WIDTH))
     'repeat idx from 0 to 7
@@ -304,9 +320,9 @@ PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
   '  cursorx := (cursorx + 4) & $FC
   cursorx += 1
   'If at end of line, goto next line
-  if cursorx => COLS
-    cursorx := 0
-    cursory += 1
+  'if cursorx => COLS
+  '  cursorx := 0
+  '  cursory += 1
 
   'If at bottom of screen, scroll
   if cursory => ROWS
@@ -558,7 +574,7 @@ PRI UpdateCursor | cpos, cx, offset, x
         cursor_mask := $FE << ((cx & 3) << 3) << (6 - offset)
     else
         cursor_mask := $FE << ((cx & 3) << 3) '>> (offset)
-    
+    'ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
     cursor_pos := cpos
 
 DAT

@@ -46,14 +46,21 @@ PUB Main | I, J, C
   'C64.StrA2(string(" String  "))
   C := 65
   repeat J from 0 to 25
-    C64.CharA2(C)
+    C64.CharA2(81)
     C += 1
     
   C64.Pos(39,2)
   C64.CharA2(65)
   C64.Pos(39,23)
   C64.CharA2(65)
-  C64.Pos(17,0)
+  C64.Pos(0,0)
+  C64.CharA2(65)
+  C64.Pos(1,0)
+  C64.CharA2(65)
+  C64.Pos(2,0)
+  C64.CharA2(65)
+  C64.Pos(3,0)
+  C64.CharA2(65)
   '4 pixels in a row
   'C64.Pixel(1, 140, 4)
   'C64.Pixel(1, 142, 4)
