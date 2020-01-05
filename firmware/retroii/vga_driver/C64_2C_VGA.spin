@@ -273,7 +273,7 @@ PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
         'tmp := $3E '$7C '$54
         'only display right most offset
         if offset == 1
-        '    byte[ptr] &= $FF << 5 'mask to clear offset bits
+            byte[ptr] &= $FF << 7 'mask to clear offset bits
         else
             byte[ptr] &= !($FF >> (offset))
             

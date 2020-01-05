@@ -75,6 +75,13 @@ PUB Main | I, J, C
   C64.CharA2(65)
   C64.Pos(9,0)
   C64.CharA2(65)
+  
+  C64.Pos(0, 0)
+  'C64.StrA2(string(" String  "))
+  C := 65
+  repeat J from 0 to 25
+    C64.CharA2(C)
+    C += 1
   '4 pixels in a row
   'C64.Pixel(1, 140, 4)
   'C64.Pixel(1, 142, 4)
