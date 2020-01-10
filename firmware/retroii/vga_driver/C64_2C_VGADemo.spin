@@ -76,12 +76,18 @@ PUB Main | I, J, C
   C64.Pos(9,0)
   C64.CharA2(65)
   
-  C64.Pos(0, 0)
-  'C64.StrA2(string(" String  "))
+  C64.Pos(10, 10)
+  C64.StrA2(string("HELLO WORLD"))
+  C64.Pos(15, 12)
+  C64.StrA2(string("APPLE ]["))
   C := 65
+  C64.Pos(0, 0)
   repeat J from 0 to 25
     C64.CharA2(C)
     C += 1
+  
+  'C64.Pos(20, 10)
+  'C64.CharA2(69)
   '4 pixels in a row
   'C64.Pixel(1, 140, 4)
   'C64.Pixel(1, 142, 4)

@@ -232,7 +232,7 @@ PUB Char(c) | idx, ptr, tmp
 
   UpdateCursor
 
-PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
+PUB CharA2(c) | idx, ptr, ptr2, tmp, graphicx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Print an Apple ][ 7x8 character on the screen, then advance the cursor.
 ''
@@ -245,79 +245,27 @@ PUB CharA2(c) | idx, ptr, tmp, graphicx, offset, x
     c := (c - 32) * 8
     'need to determine which 8x8 graphic tile(s) we need to update
     x := cursorx * 2
-    graphicx := byte[@FontToGraphicMap][x]
-    offset := byte[@FontToGraphicMap][x + 1]
-    'ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
+    graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
+    offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
     
-    'prn(offset)
-    if offset > 0
-        ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
-        repeat idx from 0 to 7 'y
-            tmp := byte[@C64CharMap][idx + c]
-            'tmp := $3E ' $7C '$54
-            'only display left most offset
-            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
-            byte[ptr] |= (tmp ^ reverse) << (7 - offset)
-            ptr += COLS
-    
-        graphicx++
-        
     ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
-    if offset > 0
-        offset++
-    else
-        offset := 1
-        
+    ptr2 := @pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
     repeat idx from 0 to 7 'y
-        tmp := byte[@C64CharMap][idx + c]
-        'tmp := $3E '$7C '$54
-        'only display right most offset
-        if offset == 1
+        tmp := byte[@C64CharMap][idx + c] 'pointer to our char in font rom
+        
+        if offset > 0 '7x8 font tile will take up 2 graphic tiles
+            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
+            byte[ptr] |= (tmp ^ reverse) << (7 - offset) 'write left part of char
+            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
+            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
+            ptr2 += COLS                                   
+        else 'font tile is encapsulated in one graphic tile
             byte[ptr] &= $FF << 7 'mask to clear offset bits
-        else
-            byte[ptr] &= !($FF >> (offset))
-            
-        byte[ptr] |= (tmp ^ reverse) >> (offset)
-        ptr += COLS
-                        
-    'repeat idx from 0 to 7 'y
-    '  'tmp := byte[@C64CharMap][idx + c]
-    '  tmp := $7C '$54
-    '  'only display right most offset
-    '  'byte[ptr] &= $FF << offset 'mask to clear offset bits
-    '  byte[ptr] |= (tmp ^ reverse) >> (offset)
-    '  ptr += COLS
-      
-    'ptr := @pixel_bfr + (cursorx + (cursory * WIDTH))
-    'repeat idx from 0 to 7
-    '  tmp := byte[@C64CharMap][idx + c]
-    '  byte[ptr] := tmp ^ reverse
-    '  ptr += COLS
-    'cursorx += 1
+            byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
+        
+        ptr += COLS 'increment ptr to go to next y coord of graphic tile
+        
 
-  'elseif c == CR
-  '  cursorx := 0
-  '  cursory += 1
-
-  'elseif c == BS
-  '  if cursorx > 0
-  '    cursorx -= 1
-  '    ptr := @pixel_bfr + (cursorx + (cursory * WIDTH))
-  '    repeat idx from 0 to 7
-  '      byte[ptr] := 0
-  '      ptr += COLS
-         
-  'elseif c == CLS
-  '  longfill(@pixel_bfr, 0, LSIZE)
-  '  cursorx := 0
-  '  cursory := 0
-
-  'elseif c == HOME
-  '  cursorx := 0
-  '  cursory := 0
-    
-  'elseif c == TAB
-  '  cursorx := (cursorx + 4) & $FC
   cursorx += 1
   'If at end of line, goto next line
   'if cursorx => COLS
