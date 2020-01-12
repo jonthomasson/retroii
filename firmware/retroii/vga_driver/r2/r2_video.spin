@@ -387,7 +387,7 @@ PUB Start(pin_group) | hres, vres
 
   draw_cmnd_ptr := @draw_command
   draw_map_ptr := @C64CharMap
-  draw_grahmap_ptr := @FontToGraphicMap
+  draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
 
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
@@ -637,12 +637,12 @@ draw_char               rdbyte  draw_reverse, draw_reverse_ptr
                         mov     draw_x, draw_xpos                       'copy xpos to x
                         shl     draw_x, #1                              'shift left one time to mult by 2
 '    graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
-                        mov     draw_ptr2, draw_graphmap_ptr
-                        add     draw_ptr2, draw_x                      
+                        mov     char_graphicx, draw_graphmap_ptr
+                        add     char_graphicx, draw_x                      
 '    offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
-                        mov     draw_ptr3, draw_graphmap_ptr
+                        mov     char_offset, draw_graphmap_ptr
                         add     draw_x, #1
-                        add     draw_ptr3, draw_x
+                        add     char_offset, draw_x
 '    ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
                         mov     draw_ptr0, #0                           '0 out pointer
                         mov     draw_ypos2, draw_ypos                   'save cursory before we start decrementing it
@@ -652,17 +652,18 @@ draw_char1              test    draw_ypos, #255  wz                     'mult cu
               if_nz     add     draw_ptr0, #WIDTH
               if_nz     jmp     #draw_char1
                         
-                        add     draw_ptr0, draw_xpos                    'add graphicx
+                        add     draw_ptr0, char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
 '    ptr2 := @pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
 draw_char2              test    draw_ypos2, #255  wz                    'mult cursory * width
 
               if_nz     sub     draw_ypos2, #1               
-              if_nz     add     draw_ptr4, #WIDTH
+              if_nz     add     draw_ptr2, #WIDTH
               if_nz     jmp     #draw_char2
                         
-                        add     draw_ptr4, draw_xpos                    'add graphicx
-                        add     draw_ptr4, par                          'add @pixel_bfr
+                        add     char_graphicx, #1
+                        add     draw_ptr2, char_graphicx                'add graphicx
+                        add     draw_ptr2, par                          'add @pixel_bfr
 '    repeat idx from 0 to 7 'y
 '        tmp := byte[@C64CharMap][idx + c] 'pointer to our char in font rom
         
@@ -846,7 +847,6 @@ draw_x                  res     1
 draw_ptr0               res     1
 draw_ptr1               res     1
 draw_ptr2               res     1
-draw_ptr3               res     1
 draw_cntr               res     1
 draw_reverse            res     1
 draw_a                  res     1
@@ -859,6 +859,8 @@ draw_dx                 res     1
 draw_dy                 res     1
 draw_d1                 res     1
 draw_df                 res     1
+char_graphicx           res     1
+char_offset             res     1
                         fit
 
 DAT
