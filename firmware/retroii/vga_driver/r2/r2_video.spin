@@ -665,20 +665,37 @@ draw_char2              test    draw_ypos2, #255  wz                    'mult cu
                         add     draw_ptr2, char_graphicx                'add graphicx
                         add     draw_ptr2, par                          'add @pixel_bfr
 '    repeat idx from 0 to 7 'y
+                        mov     draw_cntr, #8
 '        tmp := byte[@C64CharMap][idx + c] 'pointer to our char in font rom
-        
-'        if offset > 0 '7x8 font tile will take up 2 graphic tiles
+draw_char3              rdbyte  draw_xpos, draw_ptr1
+                        add     draw_ptr1, #1        
+                        
+                        tjnz    char_offset, #draw_char4
+                        'if offset is zero fall through to below code
+'        else 'font tile is encapsulated in one graphic tile
+'            byte[ptr] &= $FF << 7 'mask to clear offset bits
+'            byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
+                        add     char_offset, #1            
+                        xor     draw_xpos, draw_reverse
+                        shr     draw_xpos, char_offset
+                        wrbyte  draw_xpos, draw_ptr0                        
+                        jmp     #draw_char5
+                        
+'       if offset > 0 '7x8 font tile will take up 2 graphic tiles                  
+draw_char4
 '            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
 '            byte[ptr] |= (tmp ^ reverse) << (7 - offset) 'write left part of char
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
-'            ptr2 += COLS                                   
-'        else 'font tile is encapsulated in one graphic tile
-'            byte[ptr] &= $FF << 7 'mask to clear offset bits
-'            byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
-        
-'        ptr += COLS 'increment ptr to go to next y coord of graphic tile
+'            ptr2 += COLS 
 
+
+draw_char5
+'        ptr += COLS 'increment ptr to go to next y coord of graphic tile
+                        add     draw_ptr0, #COLS     
+                        
+                        djnz    draw_cntr, #draw_char3
+                        jmp     #draw_start                                 
 
 '    c := (c - 32) << 3
 'draw_char               rdbyte  draw_reverse, draw_reverse_ptr
