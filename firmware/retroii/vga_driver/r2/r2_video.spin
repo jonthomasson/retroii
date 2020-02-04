@@ -725,9 +725,9 @@ draw_char4              mov     char_t2, draw_xpos 'make copy of draw_xpos so we
                         'jmp     #draw_start  
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
-                        add     char_offset, #1            
+                        'add     char_offset, #1            
                         xor     char_t2, draw_reverse
-                        shr     char_t2, char_offset
+                        shr     char_t2, char_offset2
                         wrbyte  char_t2, draw_ptr2   
 '            ptr2 += COLS 
                         add     draw_ptr2, #COLS

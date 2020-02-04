@@ -85,7 +85,7 @@ PUB Main | I, J, C, frq
   C64.Cursor(FALSE)
 
   frq := frqVal(11014063, clkfreq)
-  C64.Pos(8,0)
+  C64.Pos(39,0)
   C64.Str(string("H"))
   'C64.Char (72)
   'dec(frq)
