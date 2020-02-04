@@ -87,7 +87,7 @@ PUB Main | I, J, C, frq
   frq := frqVal(11014063, clkfreq)
   C64.Pos(8,0)
   C64.Str(string("H"))
-  'C64.Char (48)
+  'C64.Char (72)
   'dec(frq)
   pst.Dec(C64.DebugOutput)
 {{use this to get my frqa value to run the vga driver

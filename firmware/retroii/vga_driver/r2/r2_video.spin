@@ -672,14 +672,8 @@ draw_char               'mov     draw_ptr0, #20
                         add     char_t1, #1
                         rdbyte  char_offset, char_t1
                         
-                        'start debug
-                        mov     debug_ptr, draw_ypos
-                        wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug 
 '    ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
                         mov     draw_ptr0, #0                           '0 out pointer
-                        mov     draw_ypos2, draw_ypos                   'save cursory before we start decrementing it
 draw_char1              test    draw_ypos, #255  wz                     'mult cursory * width
 
               if_nz     sub     draw_ypos, #1               
@@ -688,30 +682,30 @@ draw_char1              test    draw_ypos, #255  wz                     'mult cu
                         
                         add     draw_ptr0, char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
-'    ptr2 := @pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
-draw_char2              test    draw_ypos2, #255  wz                    'mult cursory * width
-
-              if_nz     sub     draw_ypos2, #1               
-              if_nz     add     draw_ptr2, #WIDTH
-              if_nz     jmp     #draw_char2
+'    ptr2 := ptr + 1 '@pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
+                        mov     draw_ptr2, draw_ptr0
+                        add     draw_ptr2, #1
                         
-                        add     char_graphicx, #1
-                        add     draw_ptr2, char_graphicx                'add graphicx
-                        add     draw_ptr2, par                          'add @pixel_bfr
 '    repeat idx from 0 to 7 'y
                         mov     draw_cntr, #8
+                        mov     char_offset2, char_offset
+                        add     char_offset2, #1                        
 '        tmp := byte[@C64CharMap][idx + c] 'pointer to our char in font rom
 draw_char3              rdbyte  draw_xpos, draw_ptr1
                         add     draw_ptr1, #1        
-                        
-                        tjnz    char_offset, #draw_char4
+                        tjnz    char_offset, #draw_char4    
                         'if offset is zero fall through to below code
 '        else 'font tile is encapsulated in one graphic tile
 '            byte[ptr] &= $FF << 7 'mask to clear offset bits
 '            byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
-                        add     char_offset, #1            
+                        'start debug
+                        mov     debug_ptr, #54
+                        wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
+                                  
                         xor     draw_xpos, draw_reverse
-                        shr     draw_xpos, char_offset
+                        shr     draw_xpos, char_offset2
                         wrbyte  draw_xpos, draw_ptr0                        
                         jmp     #draw_char5
                         
@@ -725,6 +719,10 @@ draw_char4              mov     char_t2, draw_xpos 'make copy of draw_xpos so we
                         xor     draw_xpos, draw_reverse
                         shl     draw_xpos, char_t1
                         wrbyte  draw_xpos, draw_ptr0 
+                        
+                        add     debug_ptr, #1
+                        wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
                         add     char_offset, #1            
@@ -905,7 +903,6 @@ draw_val                res     1
 draw_tmp                res     1
 draw_xpos               res     1
 draw_ypos               res     1
-draw_ypos2              res     1
 draw_x                  res     1
 draw_ptr0               res     1
 draw_ptr1               res     1
@@ -924,6 +921,7 @@ draw_d1                 res     1
 draw_df                 res     1
 char_graphicx           res     1
 char_offset             res     1
+char_offset2            res     1
 char_t1                 res     1
 char_t2                 res     1
                         fit
