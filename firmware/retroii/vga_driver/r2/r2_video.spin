@@ -178,10 +178,10 @@ CON
   CMD_START = $10_00_00_00
   CMD_LINE  = $20_00_00_00
   
-VAR
+VAR 
 
   long  pixel_bfr[LSIZE]
-  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command
+  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, debug_val
   byte  cursorx, cursory, cog1, cog2, reverse, cursor_state
 
 PUB Char(c) | idx, ptr, tmp
@@ -260,8 +260,10 @@ PUB Pos(X, Y)
 '------------------------------------------------------------------------------------------------
 '' Set the XY position of the character cursor.
 '------------------------------------------------------------------------------------------------
-  cursorx := (X <# MAX_C) #> 0 
-  cursory := (Y <# MAX_R) #> 0 
+  cursorx := X
+  cursory := Y
+  'cursorx := (X <# MAX_C) #> 0 
+  'cursory := (Y <# MAX_R) #> 0 
   UpdateCursor
 
 PUB GetX
@@ -380,6 +382,7 @@ PUB Start(pin_group) | hres, vres
   cursor_mask_ptr := @cursor_mask
   reverse := 0
   draw_command := 0
+  debug_val_ptr := @debug_val
    
   cog1 := cognew(@asm_start, @pixel_bfr) + 1
   if cog1 == 0
@@ -396,7 +399,10 @@ PUB Start(pin_group) | hres, vres
     return FALSE  
 
   return TRUE  
-   
+  
+PUB DebugOutput
+    return debug_val
+
 PUB Stop
 '------------------------------------------------------------------------------------------------
 '' Shuts down the C64 driver running on a cog.
@@ -407,14 +413,21 @@ PUB Stop
   if cog2 > 0
     cogstop(cog2 - 1)
 
-PRI UpdateCursor | cpos
+PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
 '------------------------------------------------------------------------------------------------
+  x := cursorx * 2
+  cx := byte[@FontToGraphicMap][x]
+  offset := byte[@FontToGraphicMap][x + 1]
   if cursor_state
-    cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS)
-    cpos := cpos + (cursorx & $FFFC)
-    cursor_mask := $FF << ((cursorx & 3) << 3)
+    cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS) 'need to get rid of cols
+    cpos := cpos + (cx & $FFFC)
+    if offset > 0
+        cursor_mask := $FE << ((cx & 3) << 3) << (6 - offset)
+    else
+        cursor_mask := $FE << ((cx & 3) << 3) '>> (offset)
+    'ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
     cursor_pos := cpos
 
 DAT
@@ -627,22 +640,43 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
 
 '---- Draw a character --------------------------------------------------------------------------
 '    c := (c - 32) << 3
-draw_char               rdbyte  draw_reverse, draw_reverse_ptr
+draw_char               'mov     draw_ptr0, #20
+                        'add     draw_ptr0, par
+                        
+                        'mov     draw_tmp, #5
+                       
+                        'wrbyte  draw_tmp, draw_ptr0
+                        'mov     debug_ptr, draw_val
+                        'wrlong  debug_ptr, debug_val_ptr
+                        
+                        
+                        
+                        'END EXPERIMENTAL
+                        rdbyte  draw_reverse, draw_reverse_ptr
                         sub     draw_val, #32
                         shl     draw_val, #3
                         mov     draw_ptr1, draw_map_ptr
                         add     draw_ptr1, draw_val
+                        
 '    'need to determine which 8x8 graphic tile(s) we need to update
 '    x := cursorx * 2
                         mov     draw_x, draw_xpos                       'copy xpos to x
                         shl     draw_x, #1                              'shift left one time to mult by 2
+
 '    graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
-                        mov     char_graphicx, draw_graphmap_ptr
-                        add     char_graphicx, draw_x                      
+                        mov     char_t1, draw_graphmap_ptr
+                        add     char_t1, draw_x  
+                        rdbyte  char_graphicx, char_t1  
+                 
 '    offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
-                        mov     char_offset, draw_graphmap_ptr
-                        add     draw_x, #1
-                        add     char_offset, draw_x
+                        add     char_t1, #1
+                        rdbyte  char_offset, char_t1
+                        
+                        'start debug
+                        mov     debug_ptr, draw_ypos
+                        wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug 
 '    ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
                         mov     draw_ptr0, #0                           '0 out pointer
                         mov     draw_ypos2, draw_ypos                   'save cursory before we start decrementing it
@@ -682,17 +716,27 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
                         jmp     #draw_char5
                         
 '       if offset > 0 '7x8 font tile will take up 2 graphic tiles                  
-draw_char4
+
 '            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
 '            byte[ptr] |= (tmp ^ reverse) << (7 - offset) 'write left part of char
+draw_char4              mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
+                        mov     char_t1, #7
+                        sub     char_t1, char_offset
+                        xor     draw_xpos, draw_reverse
+                        shl     draw_xpos, char_t1
+                        wrbyte  draw_xpos, draw_ptr0 
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
+                        add     char_offset, #1            
+                        xor     char_t2, draw_reverse
+                        shr     char_t2, char_offset
+                        wrbyte  char_t2, draw_ptr2   
 '            ptr2 += COLS 
+                        add     draw_ptr2, #COLS
 
 
-draw_char5
 '        ptr += COLS 'increment ptr to go to next y coord of graphic tile
-                        add     draw_ptr0, #COLS     
+draw_char5              add     draw_ptr0, #COLS     
                         
                         djnz    draw_cntr, #draw_char3
                         jmp     #draw_start                                 
@@ -853,6 +897,8 @@ draw_graphmap_ptr       long    0
 draw_reverse_ptr        long    0
 draw_lastx              long    0
 draw_lasty              long    0
+debug_ptr               long    0
+debug_val_ptr           long    0
 
 draw_cmnd               res     1
 draw_val                res     1
@@ -878,6 +924,8 @@ draw_d1                 res     1
 draw_df                 res     1
 char_graphicx           res     1
 char_offset             res     1
+char_t1                 res     1
+char_t2                 res     1
                         fit
 
 DAT

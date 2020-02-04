@@ -20,14 +20,15 @@ CON
 OBJ
 
   C64 : "r2_video.spin"
-  'pst : "Parallax Serial Terminal"
+  pst : "Parallax Serial Terminal"
 
 PUB Main | I, J, C, frq
 
-  'pst.Start(115200)
-
+  pst.Start(115200)
+  
   'Set the pin_group number for your board
   C64.Start(2)
+  
   'C64.Start(%010101)
   'Backgound and foreground colors
   C64.Color(0, C64#RED) 'BLACK
@@ -50,7 +51,7 @@ PUB Main | I, J, C, frq
   'C64.Char(48)
   'I := 0
   C64.Pos(1,10)
-  C64.Char(48)
+  'C64.Char(48)
   'repeat I from 0 to 24
     'C64.Pos(I, 15)
   '  C64.Char(48)
@@ -66,7 +67,10 @@ PUB Main | I, J, C, frq
   C64.Pixel(1, 0, C64#HEIGHT - 1)
   C64.Pixel(1, C64#WIDTH - 1, 0)
   C64.Pixel(1, C64#WIDTH - 1, C64#HEIGHT - 1)
-
+  'C64.Pos(0, 0)
+  'C64.Str(string("H"))
+  
+  
   'Line Pattern
   'C64.Line(1, 140, 30, 158, 30)
   'C64.LineTo(1, 158, 48)
@@ -81,9 +85,11 @@ PUB Main | I, J, C, frq
   C64.Cursor(FALSE)
 
   frq := frqVal(11014063, clkfreq)
-  C64.Pos(0,10)
+  C64.Pos(8,0)
+  C64.Str(string("H"))
+  'C64.Char (48)
   'dec(frq)
-  
+  pst.Dec(C64.DebugOutput)
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
 b = clock frequency (CLKFREQ etc)
