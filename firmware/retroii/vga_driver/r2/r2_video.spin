@@ -706,13 +706,9 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
                                   
                         xor     draw_xpos, draw_reverse
                         shr     draw_xpos, char_offset2
-                        'or      draw_xpos, draw_ptr0
                         rdbyte  char_ptr0, draw_ptr0
                         or      char_ptr0, draw_xpos
-                        
-                        wrbyte  char_ptr0, draw_ptr0      
-                        'or      char_ptr0, draw_ptr0  
-                        'wrbyte  char_ptr0, draw_ptr0                      
+                        wrbyte  char_ptr0, draw_ptr0                       
                         jmp     #draw_char5
                         
 '       if offset > 0 '7x8 font tile will take up 2 graphic tiles                  

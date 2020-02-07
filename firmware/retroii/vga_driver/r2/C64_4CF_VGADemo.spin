@@ -36,59 +36,51 @@ PUB Main | I, J, C, frq
   C64.Color(2, C64#RED)
   C64.Color(3, C64#BLUE) 'GREEN
 
-  'Character set from 32 to 255
-  C := 32
-  repeat J from 0 to 13
-    C64.Pos(1, J)
-    repeat I from 0 to 15
-      'C64.Char(C)
-      C += 1
-
   'Test String
-  C64.Pos(6, 14)
-  'C64.Str(string("DANGER"), 3, 2)
-  C64.Pos(0,15)
-  'C64.Char(48)
-  'I := 0
-  C64.Pos(1,10)
-  'C64.Char(48)
-  'repeat I from 0 to 24
-    'C64.Pos(I, 15)
-  '  C64.Char(48)
-  '  I++
-  '4 pixels in a row
-  'C64.Pixel(0, 140, 4)
-  'C64.Pixel(1, 142, 4)
-  'C64.Pixel(2, 144, 4)
-  'C64.Pixel(3, 146, 4)
-
-  'A pixel in each corner of the screen
-  C64.Pixel(1, 0, 0)
-  C64.Pixel(1, 0, C64#HEIGHT - 1)
-  C64.Pixel(1, C64#WIDTH - 1, 0)
-  C64.Pixel(1, C64#WIDTH - 1, C64#HEIGHT - 1)
-  'C64.Pos(0, 0)
-  'C64.Str(string("H"))
+  C64.Pos(0, 0)
+  'C64.StrA2(string(" String  "))
+  C := 65
+  repeat J from 0 to 25
+    C64.Char(156)
+    C += 1
   
+  'return  
+  C64.Pos(39,2)
+  C64.Char(65)
+  C64.Pos(39,23)
+  C64.Char(65)
+    
+  C64.Pos(0,0)
+  C64.Char(65)
+  C64.Pos(1,0)
+  C64.Char(65)
+  C64.Pos(2,0)
+  C64.Char(65)
+  C64.Pos(3,0)
+  C64.Char(65)
+  C64.Pos(4,0)
+  C64.Char(65)
+  C64.Pos(5,0)
+  C64.Char(65)
+  C64.Pos(6,0)
+  C64.Char(65)
+  C64.Pos(7,0)
+  C64.Char(65)
+  C64.Pos(8,0)
+  C64.Char(65)
+  C64.Pos(9,0)
+  C64.Char(65)
   
-  'Line Pattern
-  'C64.Line(1, 140, 30, 158, 30)
-  'C64.LineTo(1, 158, 48)
-  'C64.LineTo(1, 140, 48)
-  'C64.LineTo(1, 140, 30)
-  'C64.LineTo(2, 149, 20)
-  'C64.LineTo(2, 158, 30)
-  'C64.LineTo(2, 149, 40)
-  'C64.LineTo(2, 140, 30)
-  
-  'Turn on cursor
-  C64.Cursor(FALSE)
-
-  frq := frqVal(11014063, clkfreq)
-  C64.Pos(39,0)
-  C64.Str(string("H"))
-  'C64.Char (72)
-  'dec(frq)
+  C64.Pos(10, 10)
+  C64.Str(string("HELLO WORLDD"))
+  C64.Pos(15, 12)
+  C64.Str(string("APPLE ]["))
+  C := 65
+  C64.Pos(0, 0)
+  repeat J from 0 to 25
+    C64.Char(C)
+    C += 1
+    
   pst.Dec(C64.DebugOutput)
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
