@@ -708,7 +708,8 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
                         'end debug
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
-                        wrbyte  char_ptr0, draw_ptr0          
+                        wrbyte  char_ptr0, draw_ptr0  
+                                
                         xor     draw_xpos, draw_reverse
                         shr     draw_xpos, char_offset2
                         rdbyte  char_ptr0, draw_ptr0
@@ -720,7 +721,15 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
 
 '            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
 '            byte[ptr] |= (tmp ^ reverse) << (7 - offset) 'write left part of char
-draw_char4              mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
+draw_char4              mov     char_t1, #8
+                        sub     char_t1, char_offset
+                        mov     char_t2, #255
+                        shl     char_t2, char_t1
+                        rdbyte  char_ptr0, draw_ptr0
+                        andn    char_ptr0, char_t2
+                        wrbyte  char_ptr0, draw_ptr0
+                        
+                        mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
                         mov     char_t1, #7
                         sub     char_t1, char_offset
                         xor     draw_xpos, draw_reverse
@@ -731,7 +740,12 @@ draw_char4              mov     char_t2, draw_xpos 'make copy of draw_xpos so we
                          
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
-                        'add     char_offset, #1            
+                        mov     char_t1, #255
+                        shr     char_t1, char_offset2
+                        rdbyte  char_ptr0, draw_ptr2
+                        andn    char_ptr0, char_t1
+                        wrbyte  char_ptr0, draw_ptr2
+                                 
                         xor     char_t2, draw_reverse
                         shr     char_t2, char_offset2
                         rdbyte  char_ptr0, draw_ptr2
