@@ -698,12 +698,17 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
 '        else 'font tile is encapsulated in one graphic tile
 '            byte[ptr] &= $FF << 7 'mask to clear offset bits
 '            byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
+
+                        mov     char_t1, #255
+                        shl     char_t1, #7
                         'start debug
-                        mov     debug_ptr, #54
+                        mov     debug_ptr, char_t1
                         wrlong  debug_ptr, debug_val_ptr
                         'jmp     #draw_start  
                         'end debug
-                                  
+                        rdbyte  char_ptr0, draw_ptr0
+                        and     char_ptr0, char_t1
+                        wrbyte  char_ptr0, draw_ptr0          
                         xor     draw_xpos, draw_reverse
                         shr     draw_xpos, char_offset2
                         rdbyte  char_ptr0, draw_ptr0

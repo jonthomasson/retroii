@@ -81,7 +81,7 @@ PUB Main | I, J, C, frq
     C64.Char(C)
     C += 1
     
-  pst.Dec(C64.DebugOutput)
+  pst.Bin(C64.DebugOutput,32)
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
 b = clock frequency (CLKFREQ etc)
