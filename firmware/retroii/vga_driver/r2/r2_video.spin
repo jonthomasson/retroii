@@ -706,7 +706,13 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
                                   
                         xor     draw_xpos, draw_reverse
                         shr     draw_xpos, char_offset2
-                        wrbyte  draw_xpos, draw_ptr0                        
+                        'or      draw_xpos, draw_ptr0
+                        rdbyte  char_ptr0, draw_ptr0
+                        or      char_ptr0, draw_xpos
+                        
+                        wrbyte  char_ptr0, draw_ptr0      
+                        'or      char_ptr0, draw_ptr0  
+                        'wrbyte  char_ptr0, draw_ptr0                      
                         jmp     #draw_char5
                         
 '       if offset > 0 '7x8 font tile will take up 2 graphic tiles                  
@@ -718,17 +724,18 @@ draw_char4              mov     char_t2, draw_xpos 'make copy of draw_xpos so we
                         sub     char_t1, char_offset
                         xor     draw_xpos, draw_reverse
                         shl     draw_xpos, char_t1
-                        wrbyte  draw_xpos, draw_ptr0 
-                        
-                        add     debug_ptr, #1
-                        wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
+                        rdbyte  char_ptr0, draw_ptr0
+                        or      char_ptr0, draw_xpos
+                        wrbyte  char_ptr0, draw_ptr0 
+                         
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
                         'add     char_offset, #1            
                         xor     char_t2, draw_reverse
                         shr     char_t2, char_offset2
-                        wrbyte  char_t2, draw_ptr2   
+                        rdbyte  char_ptr0, draw_ptr2
+                        or      char_ptr0, char_t2
+                        wrbyte  char_ptr0, draw_ptr2   
 '            ptr2 += COLS 
                         add     draw_ptr2, #COLS
 
@@ -924,6 +931,7 @@ char_offset             res     1
 char_offset2            res     1
 char_t1                 res     1
 char_t2                 res     1
+char_ptr0               res     1
                         fit
 
 DAT
