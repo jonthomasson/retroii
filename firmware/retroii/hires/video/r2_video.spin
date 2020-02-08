@@ -221,9 +221,9 @@ PUB Char(c) | idx, ptr, tmp
   '  cursorx := (cursorx + 4) & $FC
 
   'If at end of line, goto next line
-  if cursorx => COLS
-    cursorx := 0
-    cursory += 1
+  'if cursorx => COLS
+  '  cursorx := 0
+  '  cursory += 1
 
   'If at bottom of screen, scroll
   if cursory => ROWS
@@ -1179,7 +1179,7 @@ C64CharMap
 			byte	$18, $18, $66, $66, $18, $18, $3C, $00 ' 216 Club 
 			byte	$60, $60, $60, $60, $60, $60, $60, $60 ' 217 
 			byte	$10, $38, $7C, $FE, $7C, $38, $10, $00 ' 218 Diamond 
-			byte	$18, $18, $18, $FF, $FF, $18, $18, $18 ' 219 
+			byte	$00, $7C, $7C, $7C, $7C, $7C, $7C, $7C ' 219 
 			byte	$03, $03, $0C, $0C, $03, $03, $0C, $0C ' 220 
 			byte	$18, $18, $18, $18, $18, $18, $18, $18 ' 221 
 			byte	$00, $00, $C0, $7C, $6E, $6C, $6C, $00 ' 222 PI 
@@ -1216,6 +1216,7 @@ C64CharMap
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 253 
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 254 
 			byte	$3C, $42, $A5, $81, $A5, $99, $42, $3C ' 255 Smiley 
+
 
 
 

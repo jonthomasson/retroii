@@ -189,6 +189,8 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
         y++
         ser.Hex (file_name,2)
         tx_byte(file_name)
+        
+    waitcnt(50000 + cnt) 'adding delay for video to catch up
     
     'address
     tslist_track := byte[@file_buffer][11 + offset]
@@ -224,7 +226,6 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
             ser.Dec (i)
             
             'transmit first 4 bytes of data sector (address, length)
-            
             y := 0
             repeat 4
                 ser.Hex (byte[@file_buffer][y], 2)
@@ -367,6 +368,7 @@ PRI sd_send_catalog(line_size) | dsk_idx, dsk_name,i, y,file_type, file_name, fi
         ser.Str (string("File Length:"))
         ser.Hex (file_length_ls, 2)
         ser.Hex (file_length_ms, 2)
+      
     'tx_byte($04) 'end of transmission
 
 PRI ascii_2bin(ascii) | binary
@@ -466,7 +468,7 @@ PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready
     'ser.Hex(count_files_sent,2)
     'stop_tx_ready 'stop rx for now
                   '
-    waitcnt(200000 + cnt) 'add delay for video to catch up              
+    waitcnt(250000 + cnt) 'add delay for video to catch up              
     repeat while count < RESULTS_PER_PAGE and (count2 < file_count - 1)
       count2 := page_count + count
       
