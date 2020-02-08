@@ -424,9 +424,71 @@ asm_start               mov     frqa, freq_reg
                         movi    ctra, #CTRA_VALUE
                         mov     vcfg, vcfg_reg
                         mov     dira, output_enables
+{
+Timing taken from :http://tinyvga.com/vga-timing/640x480@60Hz
+
+                    640 X 480 VIDEO TIMING 
+                            HSYNC
+         ____________________________________________ _____16______ _____96_____ _____48____
+         |                 DISPLAY                   | FRONT PORCH | SYNC PULSE | BACK PORCH|
+         |                                           |
+         |                                           |
+         |                                           |
+         |                                           |
+         |                                           |
+      V  |                                           |
+      S  |                                           |
+      Y  |                                           |
+      N  |                                           |
+      C  |                                           |
+         |                                           |      
+         |                                           |      
+         |___________________________________________|                                                
+         |
+         |
+         |10 FRONT PORCH
+         |
+         |-
+         |
+         |2 SYNC PULSE
+         |                                      BLANKING AREA
+         |-
+         |
+         |33 BACK PORCH
+         |
+         |_
+         
+GENERAL TIMING
+    -SCREEN REFRESH RATE:   60HZ
+    -VERTICAL REFRESH:      31.46875KHZ
+    -PIXEL FREQ:            25.175MHZ
+    
+HORIZONTAL TIMING
+| SCANLINE PART | PIXELS | TIME uS 
+| VISIBLE AREA  | 640    | 25.422045680238
+| FRONT PORCH   | 16     | 0.63555114200596
+| SYNC PULSE    | 96     | 3.8133068520357
+| BACK PORCH    | 48     | 1.9066534260179
+| WHOLE LINE    | 800    | 31.777557100298
+
+VERTICAL TIMING
+| SCANLINE PART | PIXELS | TIME uS 
+| VISIBLE AREA  | 480    | 15.253227408143
+| FRONT PORCH   | 10     | 0.31777557100298
+| SYNC PULSE    | 2      | 0.063555114200596
+| BACK PORCH    | 33     | 1.0486593843098
+| WHOLE FRAME   | 525    | 16.683217477656
+
+
+below are the routines for the VGA driver. They consist of 4 main loops.
+These loops drive the vertical sync pulse (vsync_loop), the vertical sync
+back porch (vsbp_loop), the active video lines (video_loop1), and finally
+the vertical sync front porch (vsfp_loop). These loops provide the video signals
+for the VGA and are repeated indefinitely.
+}
 
 '--- Vertical Sync ------------------------------------------------------------------------------
-vsync_loop              mov     line_cntr, #2
+vsync_loop              mov     line_cntr, #2                       'sync pulse is 2 lines for 640x480 spec
 
 vs_loop                 mov     vscl, #PC_FP
                         waitvid vs_colors, #0
@@ -437,7 +499,7 @@ vs_loop                 mov     vscl, #PC_FP
                         djnz    line_cntr, #vs_loop
 
 '--- Vertical Sync Back Porch -------------------------------------------------------------------
-                        mov     line_cntr, #33
+                        mov     line_cntr, #33                      'back porch is 33 lines
 
 vsbp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
@@ -451,11 +513,11 @@ vsbp_loop               mov     vscl, #PC_FP
                         mov     vscl, #PC_FP
 
                         mov     pixel_ptr0, par
-                        mov     line_cntr, #HEIGHT
+                        mov     line_cntr, #HEIGHT                  'active video lines = resolution height
                         rdlong  vid_colors, colors_ptr
                         or      vid_colors, blank_colors
 
-                        mov     cursor_mask0, frame_cntr
+                        mov     cursor_mask0, frame_cntr            'mask off cursor, if cursor is in visible area?
                         and     cursor_mask0, #$20  wz
               if_nz     mov     cursor_mask0, #0
               if_z      rdlong  cursor_mask0, cursor_mask_ptr
@@ -468,12 +530,12 @@ vsbp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
 
 '--- Active Video Lines -------------------------------------------------------------------------
-video_loop1             mov     block_cntr, #BLKS
-video_loop2             mov     vscl, video_scale
+video_loop1             mov     block_cntr, #BLKS                   'will repeat each video line twice (480/240 height)
+video_loop2             mov     vscl, video_scale                   'video_scale is $000_01_010
                         mov     pixel_cntr, #LPROW
                         mov     pixel_ptr1, pixel_ptr0
 
-video_loop3             rdlong  pixel_values, pixel_ptr1
+video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop to display pixel buffer for a single line
                         cmp     pixel_ptr1, cursor_pos0  wz
               if_z      or      pixel_values, cursor_mask0
                         add     pixel_ptr1, #4
@@ -492,7 +554,7 @@ video_loop3             rdlong  pixel_values, pixel_ptr1
                         djnz    line_cntr, #video_loop1
 
 '----Vertical Sync Front Porch ------------------------------------------------------------------
-                        mov     line_cntr, #10
+                        mov     line_cntr, #10                      'front porch is 10 lines
                         add     frame_cntr, #1
                         wrlong  frame_cntr, frame_cntr_ptr 
 

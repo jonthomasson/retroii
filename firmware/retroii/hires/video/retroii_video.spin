@@ -572,8 +572,8 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_r
     
 
     repeat while current_mode == MODE_RETROII
-        if retroii_mode <> retroii_mode_old
-            cls
+        'if retroii_mode <> retroii_mode_old
+        '    cls
         retroii_mode_old := retroii_mode 
         
         if ss_text == $FF 'TEXT MODE
