@@ -1,0 +1,5 @@
+ways to optimize:
+
+1. routine to display one byte of pixels at a time
+2. use routine for mix/text mode to reuse code
+3. use lookup table for multiply routines

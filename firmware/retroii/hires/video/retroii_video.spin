@@ -563,7 +563,7 @@ PRI rx_byte | tx_ready, data, i, new_data
     
     return data    
     
-PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls
     'cursor[2] := 0   
     C64.Cursor(FALSE)
@@ -596,36 +596,12 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_r
             repeat 3
                 mem_loc := mem_page_start + mem_start
                 repeat 8
-                    col := 0
-                    repeat 40 'columns
-                        data := read_byte(mem_loc)
-                        if data == $60 'cursor
-                            if cursor_toggle == true
-                                printxy(col, row, $07, $00, 219)   'print cursor
-                            else
-                                printxy(col, row, $07, $00, 32)    'print space   
-                        else
-                            printxy(col, row, $07, $00, data - 128)'convert high ascii to low ascii
-                        
-                        col++
-                        mem_loc++
+                    display_retroii_textrow(row, mem_loc, cursor_toggle)
                     row++
-                    mem_loc += $58
+                    mem_loc += $80
                 mem_start += $28
         
-            'display soft switches
-            'setPos(28, 26)
-            'str($07, $00, string("HIRES: "))
-            'hex($07, $00, ss_hires, 2)
-            'setPos(28, 27)
-            'str($07, $00, string("PAGE2: "))
-            'hex($07, $00, ss_page2, 2)
-            'setPos(28, 28)
-            'str($07, $00, string("MIX:   "))
-            'hex($07, $00, ss_mix, 2)
-            'setPos(28, 29)
-            'str($07, $00, string("TEXT:  "))
-            'hex($07, $00, ss_text, 2)
+            
         elseif ss_text == $00 and ss_hires == $FF 'HIRES MODE
             retroii_mode := RETROII_HIRES
             mem_loc := HIRES_PAGE1    'set starting address  
@@ -646,51 +622,49 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_r
                     mem_row := 0
                     repeat 8 '8 rows within box row
                         mem_loc := mem_page_start + mem_start + mem_box + mem_row
-                        col := 1 'moving column a little to the right to center within frame
+                        col := 1 '1'moving column a little to the right to center within frame
                         repeat 40 '40 columns/bytes per row
                             data := read_byte(mem_loc)
-                        
+                            col_7 := col * 7
                             'the msb is ignored since it's the color grouping bit
                             'the other bits are displayed opposite to where they appear
                             'ie the lsb bit appears on the left and each subsequent bit moves to the right.
                             'read Apple II Computer Graphics page 70ish for more details.
-                        
                             if ($01 & data) == $01
-                                C64.Pixel(1, (col * 7) - 6, row)
+                                C64.Pixel(1, col_7 - 6, row)
                             else
-                                C64.Pixel(0, (col * 7) - 6, row)    
+                                C64.Pixel(0, col_7 - 6, row)    
                         
                             if ($02 & data) == $02
-                                C64.Pixel(1, ((col * 7) - 5), row)
+                                C64.Pixel(1, col_7 - 5, row)
                             else
-                                C64.Pixel(0, ((col * 7) - 5), row) 
+                                C64.Pixel(0, col_7 - 5, row) 
                         
                             if ($04 & data) == $04
-                                C64.Pixel(1, ((col * 7) - 4), row)
+                                C64.Pixel(1, col_7 - 4, row)
                             else
-                                C64.Pixel(0, ((col * 7) - 4), row) 
+                                C64.Pixel(0, col_7 - 4, row) 
                         
                             if ($08 & data) == $08
-                                C64.Pixel(1, ((col * 7) - 3), row)
+                                C64.Pixel(1, col_7 - 3, row)
                             else
-                                C64.Pixel(0, ((col * 7) - 3), row)    
+                                C64.Pixel(0, col_7 - 3, row)    
                         
                             if ($10 & data) == $10
-                                C64.Pixel(1, ((col * 7) - 2), row)
+                                C64.Pixel(1, col_7 - 2, row)
                             else
-                                C64.Pixel(0, ((col * 7) - 2), row)   
+                                C64.Pixel(0, col_7 - 2, row)   
                         
                             if ($20 & data) == $20
-                                C64.Pixel(1, ((col * 7) - 1), row)
+                                C64.Pixel(1, col_7 - 1, row)
                             else
-                                C64.Pixel(0, ((col * 7) - 1), row)
+                                C64.Pixel(0, col_7 - 1, row)
                         
                             if ($40 & data) == $40
-                                C64.Pixel(1, ((col * 7)), row)
+                                C64.Pixel(1, col_7, row)
                             else
-                                C64.Pixel(0, ((col * 7)), row)
+                                C64.Pixel(0, col_7, row)
                         
-                                  
                             col++
                             mem_loc++
                         row++
@@ -698,12 +672,57 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, mem_loc, mem_box, mem_r
                         
                     mem_box += $80
                 mem_start += $28
+             
+            if ss_mix == $FF    'mix mode (eventually could make this a subroutine?)
+                'display last 4 lines of text
                 
+                display_retroii_mixed(cursor_toggle)
+                          
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES
             strxy(0, 0, $07, $00, string("lores mode..."))                                        
     
-                                                     
+        printDebug                                   
+
+PRI display_retroii_mixed(cursor_toggle) | row, mem_loc
+    mem_loc := $650
+    row := 20
+    repeat 4 '4 rows of text
+        display_retroii_textrow(row, mem_loc, cursor_toggle)
+        row++
+        mem_loc += $80
+
+PRI display_retroii_textrow(row, mem_loc, blink) | data, col
+    col := 0
+    repeat 40 'columns
+        data := read_byte(mem_loc)
+        if data == $60 'cursor
+            if blink == true
+                printxy(col, row, $07, $00, 219)   'print cursor
+            else
+                printxy(col, row, $07, $00, 32)    'print space   
+        else
+            printxy(col, row, $07, $00, data - 128)'convert high ascii to low ascii
+                            
+        col++
+        mem_loc++
+    
+
+
+PRI printDebug
+    'display soft switches
+    setPos(28, 26)
+    str($07, $00, string("HIRES: "))
+    hex($07, $00, ss_hires, 2)
+    setPos(28, 27)
+    str($07, $00, string("PAGE2: "))
+    hex($07, $00, ss_page2, 2)
+    setPos(28, 28)
+    str($07, $00, string("MIX:   "))
+    hex($07, $00, ss_mix, 2)
+    setPos(28, 29)
+    str($07, $00, string("TEXT:  "))
+    hex($07, $00, ss_text, 2)  
                                                   
 PRI cls
     C64.ClearScreen
