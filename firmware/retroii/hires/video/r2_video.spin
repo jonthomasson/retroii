@@ -392,7 +392,8 @@ PUB Start(pin_group) | hres, vres
   draw_map_ptr := @C64CharMap
   draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
-
+  draw_ymulwidth_ptr := @YMulWidth
+  
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
   if cog2 == 0
     cogstop(cog1 - 1)
@@ -664,9 +665,31 @@ draw_char               rdbyte  draw_reverse, draw_reverse_ptr
                         mov     draw_ptr0, #0                           '0 out pointer
 draw_char1              test    draw_ypos, #255  wz                     'mult cursory * width
 
+                         
+                        
               if_nz     sub     draw_ypos, #1               
               if_nz     add     draw_ptr0, #WIDTH
               if_nz     jmp     #draw_char1
+
+                        
+                        'new routine using lut to replace multiply
+                        'rdlong would be more efficient here, but 
+                        'there was a problem reading bytes since they weren't
+                        'long aligned...
+                        'mov     char_t1, draw_ymulwidth_ptr
+                        'shl     draw_ypos, #1
+                        'add     char_t1, draw_ypos  
+                        'rdbyte  draw_ptr0, char_t1 
+                        'add     char_t1, #1
+                        'shl     draw_ptr0, #8
+                        'rdbyte  char_t2, char_t1 
+                        'or      draw_ptr0, char_t2
+                        
+                        'start debug
+                        'mov     debug_ptr, draw_ptr0
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
                         
                         add     draw_ptr0, char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
@@ -689,11 +712,7 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
 
                         mov     char_t1, #255
                         shl     char_t1, #7
-                        'start debug
-                        'mov     debug_ptr, char_t1
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug
+
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
                         wrbyte  char_ptr0, draw_ptr0  
@@ -792,7 +811,20 @@ draw_pix1               test    draw_ypos, #255  wz
               if_nz     sub     draw_ypos, #1
               if_nz     add     draw_ptr0, #WIDTH
               if_nz     jmp     #draw_pix1
-
+                        'new routine using lut to replace multiply
+                        'rdlong would be more efficient here, but 
+                        'there was a problem reading bytes since they weren't
+                        'long aligned...
+                        
+                        'mov     char_t1, draw_ymulwidth_ptr
+                        'shl     draw_ypos, #1
+                        'add     char_t1, draw_ypos  
+                        'rdbyte  draw_ptr0, char_t1 
+                        'add     char_t1, #1
+                        'shl     draw_ptr0, #8
+                        'rdbyte  char_t2, char_t1 
+                        'or      draw_ptr0, char_t2
+                        
 '  x := |<(p & 7)
                         mov     draw_ypos, draw_ptr0
                         and     draw_ypos, #7
@@ -902,6 +934,7 @@ draw_line2
 draw_cmnd_ptr           long    0
 draw_map_ptr            long    0
 draw_graphmap_ptr       long    0
+draw_ymulwidth_ptr      long    0
 draw_reverse_ptr        long    0
 draw_lastx              long    0
 draw_lasty              long    0
@@ -939,6 +972,43 @@ char_ptr0               res     1
 
 DAT
 
+'------------------------------------------------------------------------------------------------
+'LUT to map multiplication table for char (y * width)
+'------------------------------------------------------------------------------------------------
+'max y is 30 (height/8) = (240/8) = 30.
+'width is 288
+YMulWidth
+                        byte    $00, $00      '0 (0)
+                        byte    $01, $20      '1 (288)
+                        byte    $02, $40      '2 (576)
+                        byte    $03, $60      '3 (864)
+                        byte    $04, $80      '4 (1152)
+                        byte    $05, $A0      '5 (1440)
+                        byte    $06, $C0      '6 (1728)
+                        byte    $07, $E0      '7 (2016)
+                        byte    $09, $00      '8 (2304)
+                        byte    $0A, $20      '9 (2592)
+                        byte    $0B, $40      '10(2880)
+                        byte    $0C, $60      '11(3168)
+                        byte    $0D, $80      '12(3456)
+                        byte    $0E, $A0      '13(3744)
+                        byte    $0F, $C0      '14(4032)
+                        byte    $10, $E0      '15(4320)
+                        byte    $12, $00      '16(4608)
+                        BYTE    $13, $20      '17(4896)
+                        BYTE    $14, $40      '18(5184)
+                        BYTE    $15, $60      '19(5472)
+                        BYTE    $16, $80      '20(5760)
+                        BYTE    $17, $A0      '21(6048)
+                        BYTE    $18, $C0      '22(6336)
+                        BYTE    $19, $E0      '23(6624)
+                        BYTE    $1B, $00      '24(6912)
+                        BYTE    $1C, $20      '25(7200)
+                        BYTE    $1D, $40      '26(7488)
+                        BYTE    $1E, $60      '27(7776)
+                        BYTE    $1F, $80      '28(8064)
+                        BYTE    $20, $A0      '29(8352)
+                                            
 '------------------------------------------------------------------------------------------------
 ' LUT To map between 7x8 font tiles and 8x8 graphic tiles ((xpos x 7) / 8)
 '------------------------------------------------------------------------------------------------
