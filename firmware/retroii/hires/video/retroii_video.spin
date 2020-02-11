@@ -630,40 +630,42 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                             'the other bits are displayed opposite to where they appear
                             'ie the lsb bit appears on the left and each subsequent bit moves to the right.
                             'read Apple II Computer Graphics page 70ish for more details.
-                            if ($01 & data) == $01
-                                C64.Pixel(1, col_7 - 6, row)
-                            else
-                                C64.Pixel(0, col_7 - 6, row)    
+                            C64.PixelByte (data, col_7, row)
+                            
+                            'if ($01 & data) == $01
+                            '    C64.Pixel(1, col_7 - 6, row)
+                            'else
+                            '    C64.Pixel(0, col_7 - 6, row)    
                         
-                            if ($02 & data) == $02
-                                C64.Pixel(1, col_7 - 5, row)
-                            else
-                                C64.Pixel(0, col_7 - 5, row) 
+                            'if ($02 & data) == $02
+                            '    C64.Pixel(1, col_7 - 5, row)
+                            'else
+                            '    C64.Pixel(0, col_7 - 5, row) 
                         
-                            if ($04 & data) == $04
-                                C64.Pixel(1, col_7 - 4, row)
-                            else
-                                C64.Pixel(0, col_7 - 4, row) 
+                            'if ($04 & data) == $04
+                            '    C64.Pixel(1, col_7 - 4, row)
+                            'else
+                            '    C64.Pixel(0, col_7 - 4, row) 
                         
-                            if ($08 & data) == $08
-                                C64.Pixel(1, col_7 - 3, row)
-                            else
-                                C64.Pixel(0, col_7 - 3, row)    
+                            'if ($08 & data) == $08
+                            '    C64.Pixel(1, col_7 - 3, row)
+                            'else
+                            '    C64.Pixel(0, col_7 - 3, row)    
                         
-                            if ($10 & data) == $10
-                                C64.Pixel(1, col_7 - 2, row)
-                            else
-                                C64.Pixel(0, col_7 - 2, row)   
+                            'if ($10 & data) == $10
+                            '    C64.Pixel(1, col_7 - 2, row)
+                            'else
+                            '    C64.Pixel(0, col_7 - 2, row)   
                         
-                            if ($20 & data) == $20
-                                C64.Pixel(1, col_7 - 1, row)
-                            else
-                                C64.Pixel(0, col_7 - 1, row)
+                            'if ($20 & data) == $20
+                            '    C64.Pixel(1, col_7 - 1, row)
+                            'else
+                            '    C64.Pixel(0, col_7 - 1, row)
                         
-                            if ($40 & data) == $40
-                                C64.Pixel(1, col_7, row)
-                            else
-                                C64.Pixel(0, col_7, row)
+                            'if ($40 & data) == $40
+                            '    C64.Pixel(1, col_7, row)
+                            'else
+                            '    C64.Pixel(0, col_7, row)
                         
                             col++
                             mem_loc++
@@ -673,10 +675,10 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                     mem_box += $80
                 mem_start += $28
              
-            if ss_mix == $FF    'mix mode (eventually could make this a subroutine?)
-                'display last 4 lines of text
-                
-                display_retroii_mixed(cursor_toggle)
+            'if ss_mix == $FF    'mix mode (eventually could make this a subroutine?)
+            '    'display last 4 lines of text
+            '    
+            '    display_retroii_mixed(cursor_toggle)
                           
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES

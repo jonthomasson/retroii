@@ -313,6 +313,25 @@ PUB Pixel(c, x, y) | p
 '------------------------------------------------------------------------------------------------
   repeat while draw_command <> 0
   draw_command := c | (x << 8) | (y << 17) | CMD_PIXEL
+
+PUB PixelByte(c, x, y) | p
+'------------------------------------------------------------------------------------------------
+'' Plots a single pixel on the screen.
+''
+'' c - Color number, 0 or 1.
+'' x - The X pixel coordinate.
+'' y - The Y pixel coordinate.
+'------------------------------------------------------------------------------------------------
+  'x := (x <# MAX_X) #> 0
+  'y := (y <# MAX_Y) #> 0
+
+  p := (WIDTH * y) + x
+  'x := |<(p & 7)
+  p := @pixel_bfr + (p >> 3)
+  'mask to clear out old values
+  '&=
+  byte[p] &= $80 'ignores msb since it will just hold the color bit data
+  byte[p] |= c
   
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
