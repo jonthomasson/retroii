@@ -314,7 +314,7 @@ PUB Pixel(c, x, y) | p
   repeat while draw_command <> 0
   draw_command := c | (x << 8) | (y << 17) | CMD_PIXEL
 
-PUB PixelByte(c, x, y) | p
+PUB PixelByte(data, col, row) | p, mask, data2, x
 '------------------------------------------------------------------------------------------------
 '' Plots a single pixel on the screen.
 ''
@@ -322,16 +322,24 @@ PUB PixelByte(c, x, y) | p
 '' x - The X pixel coordinate.
 '' y - The Y pixel coordinate.
 '------------------------------------------------------------------------------------------------
-  'x := (x <# MAX_X) #> 0
-  'y := (y <# MAX_Y) #> 0
-
-  p := (WIDTH * y) + x
-  'x := |<(p & 7)
-  p := @pixel_bfr + (p >> 3)
-  'mask to clear out old values
-  '&=
-  byte[p] &= $80 'ignores msb since it will just hold the color bit data
-  byte[p] |= c
+  
+  data &= $7F 'get rid of msb
+  x := (col * 7) - 7
+  p := (WIDTH * row) + x 'get byte location of our column of data
+  
+  'x := |<(p & 7) 'finds x coord in byte
+  x := (p & 7) 'find x position in byte
+  
+  p := @pixel_bfr + (p >> 3) ' find our byte inside the pixel buffer
+  data2 := data << (x)
+  
+  'write data to 1st byte
+  byte[p] |= data2
+  'return data2
+  if x > 1
+    data2 := data >> (8 - x) 'data for right most byte
+    'return data2
+    byte[p + 1] |= data2
   
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------

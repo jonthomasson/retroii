@@ -625,12 +625,12 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                         col := 1 '1'moving column a little to the right to center within frame
                         repeat 40 '40 columns/bytes per row
                             data := read_byte(mem_loc)
-                            col_7 := col * 7
+                            'col_7 := col * 7
                             'the msb is ignored since it's the color grouping bit
                             'the other bits are displayed opposite to where they appear
                             'ie the lsb bit appears on the left and each subsequent bit moves to the right.
                             'read Apple II Computer Graphics page 70ish for more details.
-                            C64.PixelByte (data, col_7, row)
+                            C64.PixelByte (data, col, row)
                             
                             'if ($01 & data) == $01
                             '    C64.Pixel(1, col_7 - 6, row)
