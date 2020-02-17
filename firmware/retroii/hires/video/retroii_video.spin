@@ -622,7 +622,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                     mem_row := 0
                     repeat 8 '8 rows within box row
                         mem_loc := mem_page_start + mem_start + mem_box + mem_row
-                        col := 1 '1'moving column a little to the right to center within frame
+                        col := 0 '1'moving column a little to the right to center within frame
                         repeat 40 '40 columns/bytes per row
                             data := read_byte(mem_loc)
                             'col_7 := col * 7

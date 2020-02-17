@@ -324,7 +324,7 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
 '------------------------------------------------------------------------------------------------
   
   data &= $7F 'get rid of msb
-  x := (col * 7) - 7
+  x := (col * 7) '- 7
   p := (WIDTH * row) + x 'get byte location of our column of data
   
   'x := |<(p & 7) 'finds x coord in byte
@@ -833,8 +833,11 @@ draw_char5              add     draw_ptr0, #COLS
 '                        jmp     #draw_start
 
 '---- Draw a pixel ------------------------------------------------------------------------------
+'  data &= $7F 'get rid of msb
+'  x := (col * 7) - 7
+draw_pixel_sub          
 '  p := (WIDTH * y) + x
-draw_pixel_sub          mov     draw_ptr0, draw_xpos
+                        mov     draw_ptr0, draw_xpos
 
 draw_pix1               test    draw_ypos, #255  wz
               if_nz     sub     draw_ypos, #1
@@ -866,11 +869,11 @@ draw_pix1               test    draw_ypos, #255  wz
 
 '  if c byte[p] |= x
 '  else byte[p] &= (!x)
-                        and     draw_val, #1  wz
-                        rdbyte  draw_tmp, draw_ptr0
-              if_nz     or      draw_tmp, draw_xpos
-              if_z      andn    draw_tmp, draw_xpos
-                        wrbyte  draw_tmp, draw_ptr0
+'                        and     draw_val, #1  wz
+'                        rdbyte  draw_tmp, draw_ptr0
+'              if_nz     or      draw_tmp, draw_xpos
+'              if_z      andn    draw_tmp, draw_xpos
+'                        wrbyte  draw_tmp, draw_ptr0
 draw_pixel_sub_ret      ret
 
 draw_pixel              call    #draw_pixel_sub
