@@ -332,13 +332,15 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
   
   p := @pixel_bfr + (p >> 3) ' find our byte inside the pixel buffer
   data2 := data << (x)
-  
+  mask := $FF000080 <- x
+  byte[p] &= mask
   'write data to 1st byte
   byte[p] |= data2
   'return data2
   if x > 1
     data2 := data >> (8 - x) 'data for right most byte
-    'return data2
+    mask := $FF << (x - 1)
+    byte[p + 1] &= mask
     byte[p + 1] |= data2
   
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
