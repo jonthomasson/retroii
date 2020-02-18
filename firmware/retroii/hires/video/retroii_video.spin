@@ -630,7 +630,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                             'the other bits are displayed opposite to where they appear
                             'ie the lsb bit appears on the left and each subsequent bit moves to the right.
                             'read Apple II Computer Graphics page 70ish for more details.
-                            C64.PixelByte (data, col, row)
+                            C64.Pixel (data, col, row)
                             
                             'if ($01 & data) == $01
                             '    C64.Pixel(1, col_7 - 6, row)

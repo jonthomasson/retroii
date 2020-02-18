@@ -832,12 +832,25 @@ draw_char5              add     draw_ptr0, #COLS
 '                        djnz    draw_cntr, #draw_char2
 '                        jmp     #draw_start
 
-'---- Draw a pixel ------------------------------------------------------------------------------
+'---- Draw a byte of pixels ------------------------------------------------------------------------------
 '  data &= $7F 'get rid of msb
-'  x := (col * 7) - 7
-draw_pixel_sub          
+'  x := (col * 7) '- 7
+draw_pixel_sub          and     draw_val, #127  'get rid of msb since we don't need color info
+                        mov     draw_val2, draw_val
+                        mov     char_t1, #0
+                                             
+draw_pix0               test    draw_xpos, #255  wz
+              if_nz     sub     draw_xpos, #1
+              if_nz     add     char_t1, #7
+              if_nz     jmp     #draw_pix0   
+              
+                        'start debug
+                        'mov     debug_ptr, char_t1
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug                                         
 '  p := (WIDTH * y) + x
-                        mov     draw_ptr0, draw_xpos
+                        mov     draw_ptr0, char_t1
 
 draw_pix1               test    draw_ypos, #255  wz
               if_nz     sub     draw_ypos, #1
@@ -857,16 +870,45 @@ draw_pix1               test    draw_ypos, #255  wz
                         'rdbyte  char_t2, char_t1 
                         'or      draw_ptr0, char_t2
                         
-'  x := |<(p & 7)
+'  x := (p & 7)'find x position in byte
                         mov     draw_ypos, draw_ptr0
                         and     draw_ypos, #7
-                        mov     draw_xpos, #1
-                        shl     draw_xpos, draw_ypos
-
+                        'mov     draw_xpos, #1
+                        'shl     draw_xpos, draw_ypos
+                        mov     char_t1, draw_ypos
+                        
 '  p := @pixel_bfr + (p >> 3)
                         shr     draw_ptr0, #3
                         add     draw_ptr0, par
-
+                        mov     draw_ptr1, draw_ptr0
+                        add     draw_ptr1, #1
+'  data2 := data << (x)
+                        shl     draw_val, char_t1
+                        mov     char_t2, draw_val
+                       
+'  mask := $FF000080 <- x
+'  byte[p] &= mask
+'  'write data to 1st byte
+'  byte[p] |= data2
+                        rdbyte  draw_tmp, draw_ptr0
+                        or      draw_tmp, char_t2
+                        wrbyte  draw_tmp, draw_ptr0
+'  if x > 1
+'    data2 := data >> (8 - x) 'data for right most byte
+'    mask := $FF << (x - 1)
+'    byte[p + 1] &= mask
+'    byte[p + 1] |= data2
+                        mov     char_t2, char_t1
+                        shr     char_t2, #1 wz
+                if_z    jmp     #draw_pixel_sub_ret
+                
+                        mov     char_t2, #8
+                        sub     char_t2, char_t1
+                        shr     draw_val2, char_t2
+                        
+                        rdbyte  draw_tmp, draw_ptr1
+                        or      draw_tmp, draw_val2
+                        wrbyte  draw_tmp, draw_ptr1                       
 '  if c byte[p] |= x
 '  else byte[p] &= (!x)
 '                        and     draw_val, #1  wz
@@ -975,6 +1017,7 @@ debug_val_ptr           long    0
 
 draw_cmnd               res     1
 draw_val                res     1
+draw_val2               res     1
 draw_tmp                res     1
 draw_xpos               res     1
 draw_ypos               res     1
