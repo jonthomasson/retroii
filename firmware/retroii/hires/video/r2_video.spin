@@ -832,6 +832,7 @@ draw_char5              add     draw_ptr0, #COLS
 '                        djnz    draw_cntr, #draw_char2
 '                        jmp     #draw_start
 
+
 '---- Draw a byte of pixels ------------------------------------------------------------------------------
 '  data &= $7F 'get rid of msb
 '  x := (col * 7) '- 7
@@ -844,11 +845,7 @@ draw_pix0               test    draw_xpos, #255  wz
               if_nz     add     char_t1, #7
               if_nz     jmp     #draw_pix0   
               
-                        'start debug
-                        'mov     debug_ptr, char_t1
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug                                         
+                                   
 '  p := (WIDTH * y) + x
                         mov     draw_ptr0, char_t1
 
@@ -891,8 +888,24 @@ draw_pix1               test    draw_ypos, #255  wz
 '  'write data to 1st byte
 '  byte[p] |= data2
                         rdbyte  draw_tmp, draw_ptr0
+                        'start debug
+                        'mov     debug_ptr, draw_tmp
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
+                        mov     draw_tmp2, char_t1
+                        mov     pixel_mask2, pixel_mask
+                        rol     pixel_mask2, draw_tmp2
+                        and     draw_tmp, pixel_mask2
+                        'start debug
+                        'mov     debug_ptr, draw_tmp
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
                         or      draw_tmp, char_t2
                         wrbyte  draw_tmp, draw_ptr0
+                        
+     
 '  if x > 1
 '    data2 := data >> (8 - x) 'data for right most byte
 '    mask := $FF << (x - 1)
@@ -907,6 +920,10 @@ draw_pix1               test    draw_ypos, #255  wz
                         shr     draw_val2, char_t2
                         
                         rdbyte  draw_tmp, draw_ptr1
+                        sub     char_t1, #1
+                        mov     draw_tmp2, #255
+                        shl     draw_tmp2, char_t1
+                        and     draw_tmp, draw_tmp2
                         or      draw_tmp, draw_val2
                         wrbyte  draw_tmp, draw_ptr1                       
 '  if c byte[p] |= x
@@ -1014,11 +1031,14 @@ draw_lastx              long    0
 draw_lasty              long    0
 debug_ptr               long    0
 debug_val_ptr           long    0
+pixel_mask              long    $FF_00_00_80
+pixel_mask2             long    0
 
 draw_cmnd               res     1
 draw_val                res     1
 draw_val2               res     1
 draw_tmp                res     1
+draw_tmp2               res     1
 draw_xpos               res     1
 draw_ypos               res     1
 draw_x                  res     1
