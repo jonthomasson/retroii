@@ -744,11 +744,11 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
 
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
-                        wrbyte  char_ptr0, draw_ptr0  
+                        'wrbyte  char_ptr0, draw_ptr0  
                                 
                         xor     draw_xpos, draw_reverse
                         shr     draw_xpos, char_offset2
-                        rdbyte  char_ptr0, draw_ptr0
+                        'rdbyte  char_ptr0, draw_ptr0
                         or      char_ptr0, draw_xpos
                         wrbyte  char_ptr0, draw_ptr0                       
                         jmp     #draw_char5
@@ -763,14 +763,14 @@ draw_char4              mov     char_t1, #8
                         shl     char_t2, char_t1
                         rdbyte  char_ptr0, draw_ptr0
                         andn    char_ptr0, char_t2
-                        wrbyte  char_ptr0, draw_ptr0
+                        'wrbyte  char_ptr0, draw_ptr0
                         
                         mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
                         mov     char_t1, #7
                         sub     char_t1, char_offset
                         xor     draw_xpos, draw_reverse
                         shl     draw_xpos, char_t1
-                        rdbyte  char_ptr0, draw_ptr0
+                        'rdbyte  char_ptr0, draw_ptr0
                         or      char_ptr0, draw_xpos
                         wrbyte  char_ptr0, draw_ptr0 
                          
@@ -780,11 +780,11 @@ draw_char4              mov     char_t1, #8
                         shr     char_t1, char_offset2
                         rdbyte  char_ptr0, draw_ptr2
                         andn    char_ptr0, char_t1
-                        wrbyte  char_ptr0, draw_ptr2
+                        'wrbyte  char_ptr0, draw_ptr2
                                  
                         xor     char_t2, draw_reverse
                         shr     char_t2, char_offset2
-                        rdbyte  char_ptr0, draw_ptr2
+                        'rdbyte  char_ptr0, draw_ptr2
                         or      char_ptr0, char_t2
                         wrbyte  char_ptr0, draw_ptr2   
 '            ptr2 += COLS 
