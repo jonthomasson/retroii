@@ -713,7 +713,8 @@ PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse,
                  
         elseif type == $00 'inverse
             inverse := true
-            data += $40  
+            if data < 32
+                data += $40  
         else
             data -= $80
                          
@@ -722,8 +723,10 @@ PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse,
                 printxy(col, row, $07, $00, data)   'print char
             else
                 printxy(col, row, $07, $00, 32)    'print space   
+        elseif inverse == true
+            printxy_inverse(col, row, $07, $00, data)
         else
-            printxy(col, row, $07, $00, data)'convert high ascii to low ascii
+            printxy(col, row, $07, $00, data)
                             
         col++
         mem_loc++
@@ -754,7 +757,9 @@ PRI setPos(x, y)
     C64.Pos(x, y)
     'pos := (x + y * vga#cols) * 2
 
-
+PRI print_inverse(fgc, bgc, char)
+    C64.RChar (char)
+    
 PRI print(fgc, bgc, char)
     C64.Char(char)
     'vgabuff[pos++] := char
@@ -766,7 +771,11 @@ PRI printxy(x, y, fgc, bgc, char)
     setPos(x, y)
     print(fgc, bgc, char)
 
+PRI printxy_inverse(x, y, fgc, bgc, char)
 
+    setPos(x, y)
+    print_inverse(fgc, bgc, char)
+    
 PRI str(fgc, bgc, string_ptr) 
 
     repeat strsize(string_ptr)
