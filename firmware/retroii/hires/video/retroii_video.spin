@@ -694,17 +694,36 @@ PRI display_retroii_mixed(cursor_toggle) | row, mem_loc
         row++
         mem_loc += $80
 
-PRI display_retroii_textrow(row, mem_loc, blink) | data, col
+PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse, type
     col := 0
+    
+    
     repeat 40 'columns
+        flashing := false
+        inverse := false
         data := read_byte(mem_loc)
-        if data == $60 'cursor
+        type := $C0 & data
+        if type == $40 'flashing text
+            flashing := true
+            if data == $60 'cursor
+                data := $DB
+            else
+                if data > 95
+                    data -= $40 
+                 
+        elseif type == $00 'inverse
+            inverse := true
+            data += $40  
+        else
+            data -= $80
+                         
+        if flashing == true 
             if blink == true
-                printxy(col, row, $07, $00, 219)   'print cursor
+                printxy(col, row, $07, $00, data)   'print char
             else
                 printxy(col, row, $07, $00, 32)    'print space   
         else
-            printxy(col, row, $07, $00, data - 128)'convert high ascii to low ascii
+            printxy(col, row, $07, $00, data)'convert high ascii to low ascii
                             
         col++
         mem_loc++
