@@ -563,7 +563,7 @@ PRI rx_byte | tx_ready, data, i, new_data
     
     return data    
     
-PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls
     'cursor[2] := 0   
     C64.Cursor(FALSE)
@@ -614,13 +614,22 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                 mem_page_start := HIRES_PAGE2
                
                 
-            repeat 3 '3 sections
+            repeat mem_section from 1 to 3 '3 sections
                 
                 mem_box := 0
                 repeat 8 '8 box rows per section
-                    
+                    'mix mode
+                    if ss_mix == $FF
+                        'when we're at row 5 and section 3, exec mix mode
+                        'check mem_box and mem_start
+                        if mem_section == 3 and mem_box == $200
+                            display_retroii_mixed(TRUE)
+                            'jump out of loops
+                            mem_section := 3
+                            quit
                     mem_row := 0
                     repeat 8 '8 rows within box row
+                           
                         mem_loc := mem_page_start + mem_start + mem_box + mem_row
                         col := 0 '1'moving column a little to the right to center within frame
                         repeat 40 '40 columns/bytes per row
@@ -632,40 +641,6 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                             'read Apple II Computer Graphics page 70ish for more details.
                             C64.Pixel (data, col, row)
                             
-                            'if ($01 & data) == $01
-                            '    C64.Pixel(1, col_7 - 6, row)
-                            'else
-                            '    C64.Pixel(0, col_7 - 6, row)    
-                        
-                            'if ($02 & data) == $02
-                            '    C64.Pixel(1, col_7 - 5, row)
-                            'else
-                            '    C64.Pixel(0, col_7 - 5, row) 
-                        
-                            'if ($04 & data) == $04
-                            '    C64.Pixel(1, col_7 - 4, row)
-                            'else
-                            '    C64.Pixel(0, col_7 - 4, row) 
-                        
-                            'if ($08 & data) == $08
-                            '    C64.Pixel(1, col_7 - 3, row)
-                            'else
-                            '    C64.Pixel(0, col_7 - 3, row)    
-                        
-                            'if ($10 & data) == $10
-                            '    C64.Pixel(1, col_7 - 2, row)
-                            'else
-                            '    C64.Pixel(0, col_7 - 2, row)   
-                        
-                            'if ($20 & data) == $20
-                            '    C64.Pixel(1, col_7 - 1, row)
-                            'else
-                            '    C64.Pixel(0, col_7 - 1, row)
-                        
-                            'if ($40 & data) == $40
-                            '    C64.Pixel(1, col_7, row)
-                            'else
-                            '    C64.Pixel(0, col_7, row)
                         
                             col++
                             mem_loc++
