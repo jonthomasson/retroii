@@ -76,6 +76,12 @@ VAR
     byte file_buffer[FILE_BUF_SIZE]
     byte tslist_buffer[FILE_BUF_SIZE]
     byte line_buffer[LINE_BUF_SIZE]
+    byte ss_override
+    byte ss_text
+    byte ss_mix
+    byte ss_page2
+    byte ss_hires
+    byte ss_mask
     
 PUB main | soft_switches, i, frq
     init
@@ -86,7 +92,9 @@ PUB main | soft_switches, i, frq
     'ser.Dec (frq)
     
     repeat     
-        soft_switches := ina[SS_LOW..SS_HIGH]           'send soft switch to register 30 of video processor
+        if ss_override == FALSE
+            soft_switches := ina[SS_LOW..SS_HIGH]           'send soft switch to register 30 of video processor
+        
         'only send soft_switches when their value changes
         if soft_switches_old <> soft_switches
             ser.Str (string("soft switches updated: "))
@@ -134,7 +142,58 @@ PUB main | soft_switches, i, frq
             current_mode := MODE_SD_CARD_1   
             kb_output_data := false
             sd_send_filenames(0)
-        if key < 128 and key > 0
+        if  key == 216 or key == 217 or key == 218 or key == 219 'F9-F12 manual soft switch override
+            if ss_override == FALSE
+                'populate overriden vars with current values
+                if ($08 & soft_switches) == $08
+                    ss_hires := TRUE
+                else
+                    ss_hires := FALSE
+            
+                if ($04 & soft_switches) == $04
+                    ss_page2 := TRUE
+                else
+                    ss_page2 := FALSE
+                
+                if ($02 & soft_switches) == $02
+                    ss_mix := TRUE
+                else
+                    ss_mix := FALSE 
+                
+                if ($01 & soft_switches) == $01
+                    ss_text := TRUE
+                else
+                    ss_text := FALSE 
+                
+                ss_override := TRUE
+            if key == 216 'hires
+                ss_hires := !ss_hires
+                ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
+                soft_switches &= $F7
+                soft_switches |= ss_mask
+                soft_switches := ss_mask
+            if key == 217 'page2
+                ss_page2 := !ss_page2
+                ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
+                soft_switches &= $FB
+                soft_switches |= ss_mask
+                soft_switches := ss_mask
+            if key == 218 'mix
+                ss_mix := !ss_mix
+                ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
+                soft_switches &= $FD
+                soft_switches |= ss_mask
+                soft_switches := ss_mask
+            if key == 219 'text
+                ss_text := !ss_text  
+                ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
+                soft_switches &= $FE
+                soft_switches |= ss_mask
+                soft_switches := ss_mask
+            
+        if  key == 215 'F8 turn off soft switch override
+            ss_override := FALSE          
+        if  key < 128 and key > 0
             if current_mode == MODE_SD_CARD_1
                 if key == $0D 'enter
                     I2C.writeByte($42,29,MODE_SD_CARD_2)  
@@ -593,6 +652,7 @@ PRI init
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
     current_mode := MODE_RETROII
     file_count := 0
+    ss_override := FALSE
     'cog_phi2 := cognew(process_phi2, @phi2_stack)   
     'cog_i2c := cognew(process_i2c, @i2c_stack)  
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
