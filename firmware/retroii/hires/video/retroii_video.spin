@@ -570,13 +570,13 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
     cursor_toggle := false
     cursor_timer := 0
     
-
+    'check out the Apple ][ Reference Manual Page 13 for details on soft switch configs and video modes.
     repeat while current_mode == MODE_RETROII
         'if retroii_mode <> retroii_mode_old
         '    cls
         retroii_mode_old := retroii_mode 
         
-        if ss_text == $FF 'TEXT MODE
+        if ss_text == $FF and ss_hires == $00 'TEXT MODE
             retroii_mode := RETROII_TEXT
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
@@ -602,7 +602,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old, index, col_7, mem_loc, mem_box
                 mem_start += $28
         
             
-        elseif ss_text == $00 and ss_hires == $FF 'HIRES MODE
+        elseif ss_hires == $FF 'HIRES MODE
             retroii_mode := RETROII_HIRES
             mem_loc := HIRES_PAGE1    'set starting address  
             mem_start := $00         
