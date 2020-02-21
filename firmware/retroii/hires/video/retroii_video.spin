@@ -608,8 +608,13 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
             mem_start := $00         
             mem_page_start := HIRES_PAGE1
             row := 0  
-            'col := 0 
             
+            if ss_mix == $FF
+                cursor_timer++
+                if cursor_timer == 1
+                    cursor_toggle := !cursor_toggle
+                    cursor_timer := 0
+        
             if ss_page2 == $FF
                 mem_page_start := HIRES_PAGE2
                
@@ -623,7 +628,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                         'when we're at row 5 and section 3, exec mix mode
                         'check mem_box and mem_start
                         if mem_section == 3 and mem_box == $200
-                            display_retroii_mixed(TRUE)
+                            display_retroii_mixed(cursor_toggle)
                             'jump out of loops
                             mem_section := 3
                             quit
