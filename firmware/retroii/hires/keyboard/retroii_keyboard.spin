@@ -110,6 +110,12 @@ PUB main | soft_switches, i, frq
         if key == 200 or key == 201 'backspace or delete
             if current_mode == MODE_RETROII
                 kb_write($88) 'sending left arrow
+        if key == 203 'send esc
+            kb_write($9B)
+        if key == 192 'send left arrow
+            kb_write($88)
+        if key == 193 'send right
+            kb_write($95)
         if key == 208 'f1 toggle kb to data bus
             kb_output_data := !kb_output_data
             ser.Str (string("toggling kb_output_data : "))
