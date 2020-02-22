@@ -662,10 +662,52 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                           
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES
-            strxy(0, 0, $07, $00, string("lores mode..."))                                        
+            mem_loc := TEXT_PAGE1    'set starting address  
+            mem_start := $00         
+            mem_page_start := TEXT_PAGE1
+            
+            cursor_timer++
+            if cursor_timer == 2
+                cursor_toggle := !cursor_toggle
+                cursor_timer := 0
+             
+            row := 0  
+            col := 0  
+        
+            if ss_page2 == $FF
+                mem_page_start := TEXT_PAGE2
+            
+            'read Apple II Computer Graphics page 41 for example memory map of text/lores graphics
+            repeat mem_section from 1 to 3 '3 sections
+                mem_loc := mem_page_start + mem_start
+                repeat 8
+                    'mix mode
+                    if ss_mix == $FF
+                        'when we're at row 5 and section 3, exec mix mode
+                        'check mem_box and mem_start
+                        if row > 19
+                            display_retroii_mixed(cursor_toggle)
+                            'jump out of loops
+                            mem_section := 3
+                            quit
+                    display_retroii_loresrow(row, mem_loc)
+                    row++
+                    mem_loc += $80
+                mem_start += $28                                      
     
-        printDebug                                   
-
+        printDebug   
+                                        
+PRI display_retroii_loresrow(row, mem_loc) | data, col
+    col := 0
+    
+    
+    repeat 40 'columns
+        data := read_byte(mem_loc)
+        C64.LowRes (data, col, row)                 
+                           
+        col++
+        mem_loc++
+        
 PRI display_retroii_mixed(cursor_toggle) | row, mem_loc
     mem_loc := $650
     row := 20

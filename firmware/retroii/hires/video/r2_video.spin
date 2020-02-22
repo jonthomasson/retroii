@@ -243,6 +243,40 @@ PUB RChar(c)
   Char(c)
   reverse := 0
 
+
+PUB LowRes(data, x, y)|bottom, top,idx, ptr, ptr2, graphicx, offset, tmp
+    'bottom block = left nibble
+    bottom := data >> 4
+    bottom |= (data & $F0) 'duplicate nibble on both s
+    'top block = right nibble
+    top := data << 4
+    top |= (data & $0F) 'duplicate nibble on both sides
+    
+    'need to determine which 8x8 graphic tile(s) we need to update
+    x := x << 1 'x * 2
+    graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
+    offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
+    
+    ptr := @pixel_bfr + (graphicx + (Y * WIDTH))
+    ptr2 := ptr + 1 '@pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
+    repeat idx from 0 to 7 'y
+        if idx < 4
+            tmp := top
+        else
+            tmp := bottom
+            
+        if offset > 0 '7x8 tile will take up 2 graphic tiles
+            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
+            byte[ptr] |= (tmp) << (7 - offset) 'write left part of char
+            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
+            byte[ptr2] |= (tmp) >> (offset + 1)'right part of char
+            ptr2 += COLS                                   
+        else 'font tile is encapsulated in one graphic tile
+            byte[ptr] &= $FF << 7 'mask to clear offset bits
+            byte[ptr] |= (tmp) >> (offset + 1)
+        
+        ptr += COLS 'increment ptr to go to next y coord of graphic tile
+
 PUB Str(s) | b
 '------------------------------------------------------------------------------------------------
 '' Write a NULL terminated string starting at the current cursor position.
