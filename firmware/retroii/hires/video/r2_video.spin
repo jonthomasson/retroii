@@ -226,10 +226,10 @@ PUB Char(c) | idx, ptr, tmp
   '  cursory += 1
 
   'If at bottom of screen, scroll
-  if cursory => ROWS
-    cursory -= 1
-    longmove(@pixel_bfr, @pixel_bfr + SCROFF, SCRCNT)
-    longfill(@pixel_bfr + constant(SCRCNT << 2), 0, constant(SCROFF >> 2))
+  'if cursory => ROWS
+  '  cursory -= 1
+  '  longmove(@pixel_bfr, @pixel_bfr + SCROFF, SCRCNT)
+  '  longfill(@pixel_bfr + constant(SCRCNT << 2), 0, constant(SCROFF >> 2))
 
   UpdateCursor
 
@@ -481,10 +481,12 @@ PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
 '------------------------------------------------------------------------------------------------
-  x := cursorx * 2
-  cx := byte[@FontToGraphicMap][x]
-  offset := byte[@FontToGraphicMap][x + 1]
+  
   if cursor_state
+    x := cursorx * 2
+    cx := byte[@FontToGraphicMap][x]
+    offset := byte[@FontToGraphicMap][x + 1]
+    
     cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS) 'need to get rid of cols
     cpos := cpos + (cx & $FFFC)
     if offset > 0

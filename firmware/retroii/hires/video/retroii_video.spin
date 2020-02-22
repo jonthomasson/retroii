@@ -234,7 +234,7 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
     '[address].[address] will print all values between those addresses
     '[address].[address]:[val] will write [val] to range of addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
-    
+    C64.Cursor (FALSE)
     line_no := 2
     setPos(0, line_no)
     
@@ -311,7 +311,7 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
     
     'after everything, make sure to clear line_buffer
     bytefill(@line_buffer, 0, Line_Buffer_Size)
-    
+    C64.Cursor (TRUE)
    
 PRI print_header
     cls
@@ -467,7 +467,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
 PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     cls
     'cursor[2] := 0 
-    C64.Cursor(TRUE)
+    C64.Cursor(FALSE)
     setPos(0,0)
     index := 0
     slave.flush 'clears all 32 registers to 0                
@@ -518,11 +518,13 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     rx_done 'rx finished
    
     setPos(13,0)
-                              
+    
+    C64.Cursor(TRUE)                          
     repeat while current_mode == MODE_SD_CARD_1
         index := slave.check_reg(31)
         if index > -1    
             print($07, $00, index)
+    
             
 PRI rx_done
     'clear flags
@@ -589,7 +591,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                 mem_page_start := TEXT_PAGE2
             
             cursor_timer++
-            if cursor_timer == 2
+            if cursor_timer > 1
                 cursor_toggle := !cursor_toggle
                 cursor_timer := 0
             'read Apple II Computer Graphics page 41 for example memory map of text/lores graphics
@@ -611,7 +613,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
             
             if ss_mix == $FF
                 cursor_timer++
-                if cursor_timer == 1
+                if cursor_timer > 0
                     cursor_toggle := !cursor_toggle
                     cursor_timer := 0
         
@@ -666,10 +668,11 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
             
-            cursor_timer++
-            if cursor_timer == 2
-                cursor_toggle := !cursor_toggle
-                cursor_timer := 0
+            if ss_mix == $FF
+                cursor_timer++
+                if cursor_timer > 0
+                    cursor_toggle := !cursor_toggle
+                    cursor_timer := 0
              
             row := 0  
             col := 0  
