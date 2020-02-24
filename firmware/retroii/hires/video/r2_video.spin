@@ -175,7 +175,7 @@ CON
 
   CMD_CHAR  = $00_00_00_00
   CMD_PIXEL = $04_00_00_00
-  CMD_START = $10_00_00_00
+  CMD_LORES = $10_00_00_00
   CMD_LINE  = $20_00_00_00
   
 VAR 
@@ -243,8 +243,18 @@ PUB RChar(c)
   Char(c)
   reverse := 0
 
+PUB LowRes(c, x, y) 
+'------------------------------------------------------------------------------------------------
+'' Plots a single pixel on the screen.
+''
+'' c - Color number, 0 or 1.
+'' x - The X pixel coordinate.
+'' y - The Y pixel coordinate.
+'------------------------------------------------------------------------------------------------
+  repeat while draw_command <> 0
+  draw_command := c | (x << 8) | (y << 17) | CMD_LORES
 
-PUB LowRes(data, x, y)|bottom, top,idx, ptr, ptr2, graphicx, offset, tmp
+PUB LowRes2(data, x, y)|bottom, top,idx, ptr, ptr2, graphicx, offset, tmp
     'bottom block = left nibble
     bottom := data >> 4
     bottom |= (data & $F0) 'duplicate nibble on both s
@@ -385,10 +395,10 @@ PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '' x1, y1 - XY coordinates of start of line.
 '' x2, y2 - XY coordinates of end of line.
 '------------------------------------------------------------------------------------------------
-  repeat while draw_command <> 0
-  draw_command := c | (x1 << 8) | (y1 << 17) | CMD_START
-  repeat while draw_command <> 0
-  draw_command := c | (x2 << 8) | (y2 << 17) | CMD_LINE
+  'repeat while draw_command <> 0
+  'draw_command := c | (x1 << 8) | (y1 << 17) | CMD_START
+  'repeat while draw_command <> 0
+  'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_LINE
 
 PUB LineTo(c, x, y)
 '------------------------------------------------------------------------------------------------
@@ -695,14 +705,14 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
                         and     draw_ypos, #511
                         shr     draw_cmnd, #9
 
-                        cmp     draw_cmnd, #8  wz
-              if_z      jmp     #draw_line
+                        'cmp     draw_cmnd, #8  wz
+              'if_z      jmp     #draw_line
 
                         cmp     draw_cmnd, #1  wz
               if_z      jmp     #draw_pixel
 
                         cmp     draw_cmnd, #4  wz
-              if_z      jmp     #draw_set
+              if_z      jmp     #draw_lores
 
 '---- Draw a character --------------------------------------------------------------------------
 '    c := (c - 32) << 3
@@ -974,10 +984,154 @@ draw_pixel_sub_ret      ret
 draw_pixel              call    #draw_pixel_sub
                         jmp     #draw_start
 
-'---- Set the coordinates of the start of a line ------------------------------------------------
-draw_set                mov     draw_lastx, draw_xpos
-                        mov     draw_lasty, draw_ypos
-                        jmp     #draw_start
+'---- draw a byte of lores mode ------------------------------------------------
+draw_lores       
+    'bottom block = left nibble
+    'bottom := data >> 4
+    'bottom |= (data & $F0) 'duplicate nibble on both s
+                        mov     draw_tmp, draw_val
+                        shr     draw_tmp, #4
+                        mov     lores_bottom, draw_tmp
+                        mov     draw_tmp, draw_val
+                        and     draw_tmp, #240
+                        or      lores_bottom, draw_tmp
+    'top block = right nibble
+    'top := data << 4
+    'top |= (data & $0F) 'duplicate nibble on both sides
+                        mov     draw_tmp, draw_val
+                        shl     draw_tmp, #4
+                        mov     lores_top, draw_tmp
+                        mov     draw_tmp, draw_val
+                        and     draw_tmp, #15
+                        or      lores_top, draw_tmp    
+    'need to determine which 8x8 graphic tile(s) we need to update
+    'x := x << 1 'x * 2
+                        mov     draw_x, draw_xpos                       'copy xpos to x
+                        shl     draw_x, #1                              'shift left one time to mult by 2
+
+    'graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
+                        mov     char_t1, draw_graphmap_ptr
+                        add     char_t1, draw_x  
+                        rdbyte  char_graphicx, char_t1  
+                 
+    'offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
+                        add     char_t1, #1
+                        rdbyte  char_offset, char_t1
+                        
+    'ptr := @pixel_bfr + (graphicx + (Y * WIDTH))
+                        mov     draw_ptr0, #0                           '0 out pointer
+draw_lores1             test    draw_ypos, #255  wz                     'mult cursory * width
+
+                         
+                        
+              if_nz     sub     draw_ypos, #1               
+              if_nz     add     draw_ptr0, #WIDTH
+              if_nz     jmp     #draw_lores1
+
+                        
+                        'new routine using lut to replace multiply
+                        'rdlong would be more efficient here, but 
+                        'there was a problem reading bytes since they weren't
+                        'long aligned...
+                        'mov     char_t1, draw_ymulwidth_ptr
+                        'shl     draw_ypos, #1
+                        'add     char_t1, draw_ypos  
+                        'rdbyte  draw_ptr0, char_t1 
+                        'add     char_t1, #1
+                        'shl     draw_ptr0, #8
+                        'rdbyte  char_t2, char_t1 
+                        'or      draw_ptr0, char_t2
+                        
+                        'start debug
+                        'mov     debug_ptr, draw_ypos
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
+                        
+                        add     draw_ptr0, char_graphicx                'add graphicx
+                        add     draw_ptr0, par                          'add @pixel_bfr
+    'ptr2 := ptr + 1 '@pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
+                        mov     draw_ptr2, draw_ptr0
+                        add     draw_ptr2, #1
+                        
+'    repeat idx from 0 to 7 'y
+                        mov     draw_cntr, #8
+                        mov     char_offset2, char_offset
+                        add     char_offset2, #1                        
+    '    if idx < 4
+    '        tmp := top
+    '    else
+    '        tmp := bottom
+draw_lores3             
+                        cmp     draw_cntr, #5  wc
+              if_nc     mov     draw_xpos, lores_top
+              if_c      mov     draw_xpos, lores_bottom
+              
+                        tjnz    char_offset, #draw_lores4    
+                        'if offset is zero fall through to below code
+'        else 'font tile is encapsulated in one graphic tile
+'            byte[ptr] &= $FF << 7 'mask to clear offset bits
+'            byte[ptr] |= (tmp) >> (offset + 1)
+
+                        mov     char_t1, #255
+                        shl     char_t1, #7
+
+                        rdbyte  char_ptr0, draw_ptr0
+                        and     char_ptr0, char_t1
+                        'wrbyte  char_ptr0, draw_ptr0  
+                                
+                        'xor     draw_xpos, draw_reverse
+                        shr     draw_xpos, char_offset2
+                        'rdbyte  char_ptr0, draw_ptr0
+                        or      char_ptr0, draw_xpos
+                        wrbyte  char_ptr0, draw_ptr0                       
+                        jmp     #draw_lores5
+                        
+'       if offset > 0 '7x8 font tile will take up 2 graphic tiles                  
+
+'            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
+'            byte[ptr] |= (tmp) << (7 - offset) 'write left part of char
+draw_lores4             mov     char_t1, #8
+                        sub     char_t1, char_offset
+                        mov     char_t2, #255
+                        shl     char_t2, char_t1
+                        rdbyte  char_ptr0, draw_ptr0
+                        andn    char_ptr0, char_t2
+                        'wrbyte  char_ptr0, draw_ptr0
+                        
+                        mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
+                        mov     char_t1, #7
+                        sub     char_t1, char_offset
+                        'xor     draw_val, draw_reverse
+                        shl     draw_xpos, char_t1
+                        'rdbyte  char_ptr0, draw_ptr0
+                        or      char_ptr0, draw_xpos
+                        wrbyte  char_ptr0, draw_ptr0 
+                         
+'            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
+'            byte[ptr2] |= (tmp) >> (offset + 1)'right part of char
+                        mov     char_t1, #255
+                        shr     char_t1, char_offset2
+                        rdbyte  char_ptr0, draw_ptr2
+                        andn    char_ptr0, char_t1
+                        'wrbyte  char_ptr0, draw_ptr2
+                                 
+                        xor     char_t2, draw_reverse
+                        shr     char_t2, char_offset2
+                        'rdbyte  char_ptr0, draw_ptr2
+                        or      char_ptr0, char_t2
+                        wrbyte  char_ptr0, draw_ptr2   
+'            ptr2 += COLS 
+                        add     draw_ptr2, #COLS
+
+
+'        ptr += COLS 'increment ptr to go to next y coord of graphic tile
+draw_lores5             add     draw_ptr0, #COLS     
+                        
+                        djnz    draw_cntr, #draw_lores3
+                        jmp     #draw_start          
+
+
 
 '---- Draw a line -------------------------------------------------------------------------------
 draw_line
@@ -1099,6 +1253,8 @@ char_offset2            res     1
 char_t1                 res     1
 char_t2                 res     1
 char_ptr0               res     1
+lores_bottom            res     1
+lores_top               res     1
                         fit
 
 DAT
