@@ -998,12 +998,14 @@ draw_lores
     'top block = right nibble
     'top := data << 4
     'top |= (data & $0F) 'duplicate nibble on both sides
+    'top &= $0FF
                         mov     draw_tmp, draw_val
                         shl     draw_tmp, #4
                         mov     lores_top, draw_tmp
                         mov     draw_tmp, draw_val
                         and     draw_tmp, #15
-                        or      lores_top, draw_tmp    
+                        or      lores_top, draw_tmp  
+                        and     lores_top, #255   
     'need to determine which 8x8 graphic tile(s) we need to update
     'x := x << 1 'x * 2
                         mov     draw_x, draw_xpos                       'copy xpos to x
