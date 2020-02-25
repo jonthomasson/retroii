@@ -591,7 +591,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                 mem_page_start := TEXT_PAGE2
             
             cursor_timer++
-            if cursor_timer > 1
+            if cursor_timer > 0
                 cursor_toggle := !cursor_toggle
                 cursor_timer := 0
             'read Apple II Computer Graphics page 41 for example memory map of text/lores graphics

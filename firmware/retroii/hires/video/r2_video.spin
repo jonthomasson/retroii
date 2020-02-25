@@ -258,10 +258,11 @@ PUB LowRes2(data, x, y)|bottom, top,idx, ptr, ptr2, graphicx, offset, tmp
     'bottom block = left nibble
     bottom := data >> 4
     bottom |= (data & $F0) 'duplicate nibble on both s
+    bottom &= $0FE
     'top block = right nibble
     top := data << 4
     top |= (data & $0F) 'duplicate nibble on both sides
-    
+    top &= $0FE
     'need to determine which 8x8 graphic tile(s) we need to update
     x := x << 1 'x * 2
     graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
@@ -989,23 +990,25 @@ draw_lores
     'bottom block = left nibble
     'bottom := data >> 4
     'bottom |= (data & $F0) 'duplicate nibble on both s
+    'bottom &= $0FE
                         mov     draw_tmp, draw_val
                         shr     draw_tmp, #4
                         mov     lores_bottom, draw_tmp
                         mov     draw_tmp, draw_val
                         and     draw_tmp, #240
                         or      lores_bottom, draw_tmp
+                        and     lores_bottom, #254
     'top block = right nibble
     'top := data << 4
     'top |= (data & $0F) 'duplicate nibble on both sides
-    'top &= $0FF
+    'top &= $0FE
                         mov     draw_tmp, draw_val
                         shl     draw_tmp, #4
                         mov     lores_top, draw_tmp
                         mov     draw_tmp, draw_val
                         and     draw_tmp, #15
                         or      lores_top, draw_tmp  
-                        and     lores_top, #255   
+                        and     lores_top, #254   
     'need to determine which 8x8 graphic tile(s) we need to update
     'x := x << 1 'x * 2
                         mov     draw_x, draw_xpos                       'copy xpos to x
@@ -1080,11 +1083,9 @@ draw_lores3
 
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
-                        'wrbyte  char_ptr0, draw_ptr0  
-                                
-                        'xor     draw_xpos, draw_reverse
+                        
                         shr     draw_xpos, char_offset2
-                        'rdbyte  char_ptr0, draw_ptr0
+                        
                         or      char_ptr0, draw_xpos
                         wrbyte  char_ptr0, draw_ptr0                       
                         jmp     #draw_lores5
@@ -1099,14 +1100,13 @@ draw_lores4             mov     char_t1, #8
                         shl     char_t2, char_t1
                         rdbyte  char_ptr0, draw_ptr0
                         andn    char_ptr0, char_t2
-                        'wrbyte  char_ptr0, draw_ptr0
                         
                         mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
                         mov     char_t1, #7
                         sub     char_t1, char_offset
-                        'xor     draw_val, draw_reverse
+                        
                         shl     draw_xpos, char_t1
-                        'rdbyte  char_ptr0, draw_ptr0
+                        
                         or      char_ptr0, draw_xpos
                         wrbyte  char_ptr0, draw_ptr0 
                          
@@ -1116,11 +1116,10 @@ draw_lores4             mov     char_t1, #8
                         shr     char_t1, char_offset2
                         rdbyte  char_ptr0, draw_ptr2
                         andn    char_ptr0, char_t1
-                        'wrbyte  char_ptr0, draw_ptr2
-                                 
+                                
                         xor     char_t2, draw_reverse
                         shr     char_t2, char_offset2
-                        'rdbyte  char_ptr0, draw_ptr2
+                        
                         or      char_ptr0, char_t2
                         wrbyte  char_ptr0, draw_ptr2   
 '            ptr2 += COLS 
@@ -1543,7 +1542,7 @@ C64CharMap
 			byte	$18, $18, $18, $18, $18, $18, $18, $18 ' 221 
 			byte	$00, $00, $C0, $7C, $6E, $6C, $6C, $00 ' 222 PI 
 			byte	$FF, $FE, $FC, $F8, $F0, $E0, $C0, $80 ' 223 
-			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 224 
+			byte	$FE, $FE, $FE, $FE, $FE, $FE, $FE, $FE ' 224 
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 225 
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 226 
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 227 
