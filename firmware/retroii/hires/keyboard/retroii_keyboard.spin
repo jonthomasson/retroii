@@ -572,39 +572,9 @@ PRI set_tx_ready | ready, i
             return 'timeout
 
 PRI tx_byte(data) | success, ready, i
-    'make sure receiver is ready
-    'ready := 0
-    'i := 0
-    'repeat while ready <> REG_FLAG
-    '    ready := I2C.readByte($42,RX_READY)
-    '    i++
-    '    if i > TXRX_TIMEOUT
-    '        ser.Str(string("rxtimed out"))
-    '        return 'timeout
-    'need to wait till tx_flag is cleared by video processor
-    'ready := REG_FLAG
-    'i := 0
-    'repeat while ready == REG_FLAG
-    '    ready := I2C.readByte($42,TX_FLAG)
-    '    i++
-    '    if i > TXRX_TIMEOUT
-    '        ser.Str(string("txtimed out"))
-    '        return 'timeout
-        
-    'I2C.writeByte($42,RX_FLAG,$00)      'clear rx flag
+    
     I2C.writeByte($42,TX_DATA,data)     'place data in tx_byte register  
-    'I2C.writeByte($42,TX_FLAG,REG_FLAG)      'set tx flag
-    'ser.Str (string("sending "))
-    'ser.Hex (data, 2)
-    'read rx_flag until the flag is set
-    'success := $00
-    'i := 0
-    'repeat while success <> REG_FLAG
-    '    success := I2C.readByte($42,RX_FLAG)
-    '    i++
-    '    if i > TXRX_TIMEOUT
-    '        ser.Str(string("noresponsetimed out"))
-    '        return 'timeout
+    
                                         
     
 PRI sd_load_files | index

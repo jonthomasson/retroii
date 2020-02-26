@@ -1,15 +1,8 @@
 ''------------------------------------------------------------------------------------------------
-'' Commodore 64 Two Color Fast VGA Display Demo
+'' RETRO ][ video driver
 ''
-'' Copyright (c) 2018 Mike Christle
-'' See end of file for terms of use.
+'' Copyright (c) 2020 Jon Thomasson
 ''
-'' History:
-'' 1.0.0 - 10/10/2018 - Original release.
-'' 1.1.0 - 10/31/2018 - Add CChar routine to better control character colors.
-'' 1.2.0 - 11/02/2018 - Add blinking cursor.
-'' 1.3.0 - 11/12/2018 - Add LineTo routine to draw a series of lines.
-'' 2.0.0 - 11/16/2018 - Add assembly routines to replace Pixel, Char and Line functions.
 ''------------------------------------------------------------------------------------------------
 
 CON
@@ -27,6 +20,7 @@ CON
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
     TXRX_TIMEOUT = 15_000
+    
     {DATA PINS}
     D0 = 0
     D7 = 7
@@ -61,9 +55,7 @@ CON
     HIRES_PAGE2 = $4000
 
 VAR
-                                            '                             
-'    byte vgabuff[vga#cols * vga#rows * 2]   ' VGA Text-Buffer 1. Byte = Character, 2. Byte = Color (bgc * 16 + fgc)           
-'    byte cursor[6]                          ' Cursor info array 
+                                                                         
     long sync                               ' sync used by VGA routine
 
     long pos                                ' Global Screen-Pointer
@@ -86,16 +78,12 @@ VAR
 
 OBJ
 
-    C64 : "r2_video.spin"
+    R2 : "r2_video.spin"
     slave : "I2C slave v1.2"
 
-PUB Main | I, J, C
+PUB Main 
     init
-    repeat
-        'index := slave.check_reg(29) 'check for new mode
-        'if index > -1
-        '    current_mode := index
-            
+    repeat 
         case current_mode
             MODE_MONITOR: 
                 run_monitor
@@ -107,10 +95,14 @@ PUB Main | I, J, C
                 run_sd_prog_select
             MODE_SD_CARD_3:
                 run_sd_file_download
-
+{{
+Summary: Converts an ASCII character into its binary equivalent
+Params: ascii: the ascii char to convert
+Returns: binary: the binary number for the ascii char
+}}
 PRI ascii_2bin(ascii) | binary
 
-    if ascii < 58                   'if ascii number (dec 48-57)
+    if ascii < 58           'if ascii number (dec 48-57)
         binary := ascii -48 'subtract 48 to get dec equivalent
     else
         binary := ascii -55 'else subtract 55 for ABCDEF 
@@ -129,22 +121,14 @@ PRI init | i, x, y
     row_num := 0
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,$42) 
-    C64.Start(2)
+    R2.Start(2)
     'Backgound and foreground colors
-    C64.Color(0, C64#RED) 'BLACK
-    C64.Color(1, C64#BLUE) 'GREEN
-    C64.Color(2, C64#RED)
-    C64.Color(3, C64#BLUE) 'GREEN
-'    vga.start(BasePin, @vgabuff, @cursor, @sync)
-'    cursor[2] := %010
-'    cursor[1] := 0
-'    cursor[0] := 0
-'    cursor_x := 0
+    R2.Color(0, R2#RED) 'BLACK
+    R2.Color(1, R2#BLUE) 'GREEN
     
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
     cls
-    
 
     'setup address/data/control lines
     dira[D0..D7]~~  'output
@@ -162,6 +146,11 @@ PRI init | i, x, y
     
     cog_soft_switches := cognew(check_soft_switches, @cog_ss_stack) 
 
+{{
+Summary: 
+    Runs in its own cog and continually checks for changes to the soft switches
+    or video modes.
+}}
 PRI check_soft_switches | index
    
     repeat
@@ -201,10 +190,13 @@ PRI check_soft_switches | index
             if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
                 current_mode := index
                 
-                
+{{
+Summary: 
+    Starts th memory monitor program.
+}}                
 PRI run_monitor | i, index
-    'cursor[2] := %010   
-    C64.Cursor(TRUE)
+    
+    R2.Cursor(TRUE)
     i := 0
     line_count := 0
    
@@ -229,12 +221,21 @@ PRI run_monitor | i, index
                 line_count++
                 i++
 
+{{
+Summary: 
+    Parses the input for the memory monitor program.
+Usage:
+    [address] will print value at that address
+    [address].[address] will print all values between those addresses
+    [address].[address]:[val] will write [val] to range of addresses
+    [address]:[val] will write values in consecutive memory locations starting at address
+}}
 PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val, line_no
     '[address] will print value at that address
     '[address].[address] will print all values between those addresses
     '[address].[address]:[val] will write [val] to range of addresses
     '[address]:[val] will write values in consecutive memory locations starting at address
-    C64.Cursor (FALSE)
+    R2.Cursor (FALSE)
     line_no := 2
     setPos(0, line_no)
     
@@ -311,8 +312,12 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
     
     'after everything, make sure to clear line_buffer
     bytefill(@line_buffer, 0, Line_Buffer_Size)
-    C64.Cursor (TRUE)
-   
+    R2.Cursor (TRUE)
+
+{{
+Summary:
+    Prints out the header row for the memory monitor program. 
+}} 
 PRI print_header
     cls
     setPos(0, 1)
@@ -320,12 +325,16 @@ PRI print_header
     setPos(0, 0)
     'cursor[0] := 0
     'cursor_x := 0
-    
+
+{{
+Summary:
+    Downloads the selected program from the DOS disk image on the 
+    sd card and writes it to the appropriate memory in RAM. 
+}}     
 PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, length_msb, length
     
     cls
-    'cursor[2] := 0
-    C64.Cursor(FALSE)
+    R2.Cursor(FALSE)
     setPos(0,0)
     
     'get file name/address location/length 
@@ -341,14 +350,10 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     
     'read address
     adr_lsb := rx_byte
-    'hex($07, $00, adr_lsb,2)
     adr_msb := rx_byte
-    'hex($07, $00, adr_msb,2)
     'read file length
     length_lsb := rx_byte
-    'hex($07, $00, length_lsb,2)
     length_msb := rx_byte
-    'hex($07, $00, length_msb,2)
     
     setPos(0,3)
     str($07, $00, string("ADDR: "))
@@ -370,7 +375,6 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
         index := rx_byte
         if rx_error == false 'only write valid data
             write_byte(index, address + i)
-            'hex($07, $00, index, 2) 
             i++     
     
     rx_done 'rx finished
@@ -379,15 +383,18 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     str($07, $00, string("STAT: COMPLETE"))
     repeat while current_mode == MODE_SD_CARD_3
                    
-                
+{{
+Summary:
+    Reads the DOS catalog from the selected disk image and displays the
+    contents of the disk. 
+}}                 
 PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_length, file_type, file_access
     cls
-    C64.Cursor(FALSE)
+    R2.Cursor(FALSE)
     setPos(0,0)
     cat_count := 0
     file_length := 0
-    
-    'slave.flush 'clears all 32 registers to 0                
+                 
     str($07, $00, string("DISK "))
     
     'read in catalog
@@ -425,14 +432,11 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
         print($07, $00, index - 128)
             
         repeat 19 'get rest of file name
-            'print($07, $00, rx_byte) 
             index := rx_byte
             print($07, $00, index - 128)
             
         
         index := rx_byte
-        'hex($07, $00, index, 2)
-        'str($07, $00, string("   "))
         file_access := index & $80 'bitwise and to mask lock bit
         file_type := index & $0F 'mask first nibble which holds the file type
         
@@ -463,11 +467,13 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     
     repeat while current_mode == MODE_SD_CARD_2
         
-
+{{
+Summary:
+    Displays a list of DOS formatted disk images from the sd card. 
+}} 
 PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     cls
-    'cursor[2] := 0 
-    C64.Cursor(FALSE)
+    R2.Cursor(FALSE)
     setPos(0,0)
     index := 0
     slave.flush 'clears all 32 registers to 0                
@@ -477,7 +483,6 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     
     
     'receive the header
-    'waitcnt(clkfreq * 1 + cnt)
     'tell kb processor we're ready to rx
     is_rx_ready 'setup receiver
     total_pages := rx_byte
@@ -492,7 +497,6 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     dec($07, $00, current_page)
     str($07, $00, string(" OF "))
     dec($07, $00, total_pages)
-    'hex($07, $00, count_files_sent,2)
     setPos(0,2)
     i := 2
     
@@ -519,63 +523,65 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
    
     setPos(13,0)
     
-    C64.Cursor(TRUE)                          
+    R2.Cursor(TRUE)                          
     repeat while current_mode == MODE_SD_CARD_1
         index := slave.check_reg(31)
         if index > -1    
             print($07, $00, index)
     
-            
+{{
+Summary: Used to tell keyboard/sd card controller that the data has been received.
+}}           
 PRI rx_done
     'clear flags
     slave.put(RX_FLAG,$00)
     slave.put(RX_READY,$00)
-    
+
+{{
+Summary: Used to tell keyboard/sd card controller that it is ready to receive data.
+}}   
 PRI is_rx_ready             
     'clear flags
     slave.put(RX_FLAG,$00)
     slave.put(RX_READY,REG_FLAG)
-                   
+
+{{
+Summary: receives a byte of data from the sd card controller
+}}                   
 PRI rx_byte | tx_ready, data, i, new_data
     'wait till tx_flag is set
     rx_error := false
     
     i := 0
-    'repeat while tx_ready <> REG_FLAG
-    '    i++
-    '    if i > TXRX_TIMEOUT
-    '        str($07, $03, string("timed out"))
-    '        return 'timeout
-    '    tx_ready := slave.check_reg(TX_FLAG)
     
     new_data := -1
     repeat while new_data == -1 'until we have something new
         i++
         if i > TXRX_TIMEOUT
             rx_error := true 'flag system we had an error receiving
-            'slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
-            'slave.put(TX_FLAG, $00) 'clear tx_flag
             str($07, $03, string("rx error"))
             return 'timeout
         new_data := slave.check_reg(TX_BYTE)
         
     data := new_data
-    'slave.put(RX_FLAG, REG_FLAG) 'set rx_flag
-    'slave.put(TX_FLAG, $00) 'clear tx_flag
     
     return data    
-    
+
+{{
+Summary: 
+    Entry point to run the Retro][ video mode. In this mode, the 
+    soft switches are monitored and the video ram is polled and displayed
+    in the appropriate video mode.
+}}   
 PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
-    cls
-    'cursor[2] := 0   
-    C64.Cursor(FALSE)
+    cls 
+    R2.Cursor(FALSE)
     cursor_toggle := false
     cursor_timer := 0
     
     'check out the Apple ][ Reference Manual Page 13 for details on soft switch configs and video modes.
     repeat while current_mode == MODE_RETROII
-        'if retroii_mode <> retroii_mode_old
-        '    cls
+
         retroii_mode_old := retroii_mode 
         
         if ss_text == $FF and ss_hires == $00 'TEXT MODE
@@ -646,7 +652,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                             'the other bits are displayed opposite to where they appear
                             'ie the lsb bit appears on the left and each subsequent bit moves to the right.
                             'read Apple II Computer Graphics page 70ish for more details.
-                            C64.Pixel (data, col, row)
+                            R2.Pixel (data, col, row)
                             
                         
                             col++
@@ -656,11 +662,6 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                         
                     mem_box += $80
                 mem_start += $28
-             
-            'if ss_mix == $FF    'mix mode (eventually could make this a subroutine?)
-            '    'display last 4 lines of text
-            '    
-            '    display_retroii_mixed(cursor_toggle)
                           
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES
@@ -699,18 +700,25 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                 mem_start += $28                                      
     
         printDebug   
-                                        
+
+{{
+Summary: sends a row of Lores pixels to the screen
+}}                                        
 PRI display_retroii_loresrow(row, mem_loc) | data, col
     col := 0
-    
-    
+      
     repeat 40 'columns
         data := read_byte(mem_loc)
-        C64.LowRes (data, col, row)                 
+        R2.LowRes (data, col, row)                 
                            
         col++
         mem_loc++
-        
+
+{{
+Summary: Routine called by Lores and Hires modes to display mixed text
+    when the ss_mixed soft switch is set to true. Mixed mode displays 4 columns
+    of text at the bottom of the screen. 
+}}         
 PRI display_retroii_mixed(cursor_toggle) | row, mem_loc
     mem_loc := $650
     row := 20
@@ -719,6 +727,9 @@ PRI display_retroii_mixed(cursor_toggle) | row, mem_loc
         row++
         mem_loc += $80
 
+{{
+Summary: displays a row of text. Used for the Retro][ text video mode.
+}} 
 PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse, type
     col := 0
     
@@ -757,7 +768,10 @@ PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse,
         mem_loc++
     
 
-
+{{
+Summary: Prints general debug info to the bottom of the screen. 
+    Right now this is only displaying the state of the soft switches.
+}} 
 PRI printDebug
     'display soft switches
     setPos(28, 26)
@@ -772,37 +786,34 @@ PRI printDebug
     setPos(28, 29)
     str($07, $00, string("TEXT:  "))
     hex($07, $00, ss_text, 2)  
-                                                  
+
+{{
+Summary: Clears the screen
+}}                                                   
 PRI cls
-    C64.ClearScreen
-    'wordfill(@vgabuff, $0720 , vga#cols * vga#rows)
+    R2.ClearScreen
 
-
+{{
+Summary: Sets the position of the text pointer on the screen. 
+}} 
 PRI setPos(x, y)
-    C64.Pos(x, y)
-    'pos := (x + y * vga#cols) * 2
+    R2.Pos(x, y)
 
 PRI print_inverse(fgc, bgc, char)
-    C64.RChar (char)
+    R2.RChar (char)
     
 PRI print(fgc, bgc, char)
-    C64.Char(char)
-    'vgabuff[pos++] := char
-    'vgabuff[pos++] := bgc * 16 + fgc
-
+    R2.Char(char)
 
 PRI printxy(x, y, fgc, bgc, char)
-
     setPos(x, y)
     print(fgc, bgc, char)
 
 PRI printxy_inverse(x, y, fgc, bgc, char)
-
     setPos(x, y)
     print_inverse(fgc, bgc, char)
     
 PRI str(fgc, bgc, string_ptr) 
-
     repeat strsize(string_ptr)
         print(fgc, bgc, byte[string_ptr++]) 
 
@@ -858,39 +869,46 @@ PRI hexxy(x, y, fgc, bgc, value, digits)
     setPos(x, y)
     hex(fgc, bgc, value, digits)
 
+{{
+Summary: writes a byte of memory to external RAM
+Params:
+    data_out:   the byte of data to write
+    address:    the address to write the data to
+}} 
 pri write_byte(data_out, address) | i, msb, lsb
     'to write:
     lsb := address 
     msb := address >> 8
-    'bin($07, $00, msb, 8)
-    'bin($07, $00, lsb, 8)
+
     'we should start high
     outa[WE]~~
     'set data pins as input
     dira[D0..D7]~  'input /avoid bus contention
     'set address pins
-    'outa[A0..A7] := address 
     outa[A7..A0] := lsb 
     outa[A14..A8] := msb
     outa[A15] := msb >> 7
     'set we pin low for specified time
     outa[WE]~
     dira[D0..D7]~~  'output /avoid bus contention
-    'i := 0
     'set data pins
     outa[D7..D0] := data_out
-    'i := 0
-    
     'bring we pin high to complete write
     outa[WE]~~
     dira[D0..D7]~  'input /avoid bus contention
-    'i := 0
     outa[A0..A7] := %00000000 'low
     outa[A8..A14] := %0000000 'low
     outa[A15]~ 'low
+
+{{
+Summary: reads a byte of memory from external RAM
+Params:
+    address:    the address to read from
+Returns:
+    byte of data read from memory address
+}} 
 pri read_byte(address) | data_in, i, msb, lsb
-    'to read:
-    
+    'to read:   
     lsb := address 
     msb := address >> 8
     'set we pin high
@@ -898,41 +916,14 @@ pri read_byte(address) | data_in, i, msb, lsb
     'set data pins as input
     dira[D0..D7]~
     'set address pins
-    'outa[A0..A7] := address 
     outa[A7..A0] := lsb
     outa[A14..A8] := msb
     outa[A15] := msb >> 7
     'wait specified time
-    'i := 0
     'read data pins
     data_in := ina[D7..D0]
-    'i := 0
     outa[A0..A7] := %00000000 'low
     outa[A8..A14] := %0000000 'low
     outa[A15]~ 'low                          
     return data_in
      
-
-{{
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                       TERMS OF USE: MIT License                          â”‚                                                            
-â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚Permission is hereby granted, free of charge, to any person obtaining a   â”‚
-â”‚copy of this software and associated documentation files (the "Software"),â”‚
-â”‚to deal in the Software without restriction, including without limitation â”‚
-â”‚the rights to use, copy, modify, merge, publish, distribute, sublicense,  â”‚
-â”‚and/or sell copies of the Software, and to permit persons to whom the     â”‚
-â”‚Software is furnished to do so, subject to the following conditions:      â”‚                                                           â”‚
-â”‚                                                                          â”‚                                                  â”‚
-â”‚The above copyright notice and this permission notice shall be included inâ”‚
-â”‚all copies or substantial portions of the Software.                       â”‚
-â”‚                                                                          â”‚                                                  â”‚
-â”‚THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORâ”‚
-â”‚IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  â”‚
-â”‚FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL   â”‚
-â”‚THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERâ”‚
-â”‚LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING   â”‚
-â”‚FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER       â”‚
-â”‚DEALINGS IN THE SOFTWARE.                                                 â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-}}

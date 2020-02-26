@@ -1,37 +1,10 @@
 ''------------------------------------------------------------------------------------------------
-'' Commodore 64 Two Color Fast VGA Display
+'' RETRO ][ video driver
 ''
-'' Copyright (c) 2018 Mike Christle
-'' See end of file for terms of use.
+'' Copyright (c) 2020 Jon Thomasson
 ''
-'' History:
-'' 1.0.0 - 10/10/2018 - Original release.
-'' 1.0.1 - 10/21/2018 - Fix errors in the character bit maps.
-'' 1.1.0 - 10/31/2018 - Add RChar routine to print in reverse.
-'' 1.2.0 - 11/02/2018 - Add blinking cursor.
-'' 1.2.1 - 11/05/2018 - Fix errors in Line routine.
-'' 1.3.0 - 11/12/2018 - Add LineTo routine to draw a series of lines.
-'' 1.4.0 - 11/14/2018 - Add four new resolutions.
-'' 1.5.0 - 11/15/2018 - Add support for back space char.
-'' 2.0.0 - 11/16/2018 - Add assembly routines to replace Pixel, Char and Line functions.
 ''------------------------------------------------------------------------------------------------
-'' Supported screen resolutions:
-''      160x120 Pixels, 20x15 Chars,  2400 Byte Buffer.
-''      192x120 Pixels, 24x15 Chars,  2880 Byte Buffer.
-''      224x120 Pixels, 28x15 Chars,  3360 Byte Buffer.
-''      256x120 Pixels, 32x15 Chars,  3840 Byte Buffer.
-''      256x240 Pixels, 32x30 Chars,  7680 Byte Buffer.
-''      288x240 Pixels, 36x30 Chars,  8640 Byte Buffer.
-''      320x240 Pixels, 40x30 Chars,  9600 Byte Buffer.
-''      384x240 Pixels, 48x30 Chars, 11520 Byte Buffer.
-'' To select, uncomment the desired section of constants below. 
-''
-'' The character value less than 32 are ignored, except for HOME, TAB, Carriage Return and
-'' Clear Screen. Constants have been defined for each of these values. Character vales from
-'' 32 to 127 implement the normal ASCII character set. Character values from 128 to 255
-'' implement the Commodore 64 graphics characters. There are numerus unused value in this
-'' range. The Python 3 program, make_char_set.py, can be used to add custom characters.
-''
+
 '' This version uses two cogs, one for the VGA output, and one for routines that draw
 '' on the bitmap.
 ''------------------------------------------------------------------------------------------------
@@ -58,58 +31,7 @@
 
 CON
 
-{ 160x120
-  WIDTH  = 160
-  HEIGHT = 120
-  FREQ_VALUE = 337893737
-  CTRA_VALUE = %0_00001_011
-  FP = 4
-  SP = 24
-  BP = 12
-}
-
-{ 192x120
-  WIDTH  = 192
-  HEIGHT = 120
-  FREQ_VALUE = 405472485
-  CTRA_VALUE = %0_00001_011
-  FP = 5
-  SP = 29
-  BP = 14
-}
-
-{ 224x120
-  WIDTH  = 224
-  HEIGHT = 120
-  FREQ_VALUE = 473051232
-  CTRA_VALUE = %0_00001_011
-  FP = 6
-  SP = 33
-  BP = 17
-}
-
-{ 256x120
-  WIDTH  = 256
-  HEIGHT = 120
-  FREQ_VALUE = 270314990
-  CTRA_VALUE = %0_00001_100
-  FP = 5
-  SP = 29
-  BP = 14
-}
-
-{ 256x240
-  WIDTH  = 256
-  HEIGHT = 240
-  FREQ_VALUE = 270314990
-  CTRA_VALUE = %0_00001_100
-  FP = 5
-  SP = 29
-  BP = 14
-}
-
-
-'{ 288x240
+  '288x240 resolution
   WIDTH  = 288 '288
   HEIGHT = 240
   FREQ_VALUE = 608207634 '304103817 '304104364
@@ -117,33 +39,6 @@ CON
   FP = 7 '7
   SP = 43'43
   BP = 22'22
-'}
-
-{ 320x240
-  WIDTH  = 320
-  HEIGHT = 240
-  FREQ_VALUE = 337893737
-  CTRA_VALUE = %0_00001_100
-  FP = 8
-  SP = 48
-  BP = 24
-}
-
-{ 384x240
-  WIDTH  = 384
-  HEIGHT = 240
-  FREQ_VALUE = 405472485
-  CTRA_VALUE = %0_00001_100
-  FP = 10
-  SP = 58
-  BP = 28
-}
-
-  HOME =   1    'Move cursor to 0, 0
-  BS   =   8    'Backspace
-  TAB  =   9    'Tab 4 spaces
-  CR   =  13    'Carrage Return
-  CLS  =  16    'Clear Screen
 
   'Color value constants
   #$FC, LT_GRAY, #$A8, GRAY, #$54, DK_GRAY
@@ -198,39 +93,6 @@ PUB Char(c) | idx, ptr, tmp
     draw_command := c | (cursorx << 8) | (cursory << 17)
     cursorx += 1
 
-  'elseif c == CR
-  '  cursorx := 0
-  '  cursory += 1
-
-  'elseif c == BS
-  '  if cursorx > 0
-  '    cursorx -= 1
-  '    repeat while draw_command <> 0
-  '    draw_command := 32 | (cursorx << 8) | (cursory << 17)
-       
-  'elseif c == HOME
-  '  cursorx := 0
-  '  cursory := 0
-    
-  'elseif c == CLS
-  '  longfill(@pixel_bfr, 0, LSIZE)
-  '  cursorx := 0
-  '  cursory := 0
-
-  'elseif c == TAB
-  '  cursorx := (cursorx + 4) & $FC
-
-  'If at end of line, goto next line
-  'if cursorx => COLS
-  '  cursorx := 0
-  '  cursory += 1
-
-  'If at bottom of screen, scroll
-  'if cursory => ROWS
-  '  cursory -= 1
-  '  longmove(@pixel_bfr, @pixel_bfr + SCROFF, SCRCNT)
-  '  longfill(@pixel_bfr + constant(SCRCNT << 2), 0, constant(SCROFF >> 2))
-
   UpdateCursor
 
 PUB RChar(c)
@@ -245,11 +107,11 @@ PUB RChar(c)
 
 PUB LowRes(c, x, y) 
 '------------------------------------------------------------------------------------------------
-'' Plots a single pixel on the screen.
+'' Plots a lores byte of data on the screen.
 ''
-'' c - Color number, 0 or 1.
-'' x - The X pixel coordinate.
-'' y - The Y pixel coordinate.
+'' c - data byte.
+'' x - The X coordinate.
+'' y - The Y coordinate.
 '------------------------------------------------------------------------------------------------
   repeat while draw_command <> 0
   draw_command := c | (x << 8) | (y << 17) | CMD_LORES
@@ -350,9 +212,9 @@ PUB ClearScreen
     
 PUB Pixel(c, x, y) | p
 '------------------------------------------------------------------------------------------------
-'' Plots a single pixel on the screen.
+'' Plots a byte of pixels on the screen.
 ''
-'' c - Color number, 0 or 1.
+'' c - byte containing pixel data.
 '' x - The X pixel coordinate.
 '' y - The Y pixel coordinate.
 '------------------------------------------------------------------------------------------------
@@ -361,9 +223,9 @@ PUB Pixel(c, x, y) | p
 
 PUB PixelByte(data, col, row) | p, mask, data2, x
 '------------------------------------------------------------------------------------------------
-'' Plots a single pixel on the screen.
+'' Plots a byte of pixels on the screen.
 ''
-'' c - Color number, 0 or 1.
+'' c - byte containing pixel data.
 '' x - The X pixel coordinate.
 '' y - The Y pixel coordinate.
 '------------------------------------------------------------------------------------------------
