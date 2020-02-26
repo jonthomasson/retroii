@@ -234,8 +234,9 @@ PRI frqVal(a, b) : f      ' return f = a/b * 2^32, given a<b, a<2^30, b<2^30
         f++
         
 {{send the selected file to RAM}}                
-PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector
+PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector, is_basic
     'send file name, address, length, bytes
+    is_basic := FALSE
     index := ascii_2bin(file_idx)
     dsk_name := sd_get_diskname_byindex(current_disk)
     ser.Str(string("disk: "))
@@ -261,6 +262,10 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
     tslist_track := byte[@file_buffer][11 + offset]
     tslist_sector := byte[@file_buffer][12 + offset]
     file_type := byte[@file_buffer][13 + offset]
+    
+    'if file_type = Applesoft BASIC ($02) or Integer BASIC ($01), set is_basic flag
+    if (($02 & file_type) == $02) or (($01 & file_type) == $01)
+        is_basic := TRUE
     
     'navigate to first tslist track/sector of file
     bytes_read := 0
@@ -291,13 +296,29 @@ PRI sd_send_file(file_idx) | bytes_read, file_name, y, i, index, next_data_track
             ser.Dec (i)
             
             'transmit first 4 bytes of data sector (address, length)
-            y := 0
-            repeat 4
-                ser.Hex (byte[@file_buffer][y], 2)
-                tx_byte(byte[@file_buffer][y])
-                y++    
+            if is_basic == TRUE
+                tx_byte($01) '$0801 start address for basic files
+                tx_byte($08)
+               
+                y := 0
+                repeat 2
+                    ser.Hex (byte[@file_buffer][y], 2)
+                    tx_byte(byte[@file_buffer][y])
+                    y++
+            else
+                y := 0 'bin file
+                       
+                repeat 4
+                    ser.Hex (byte[@file_buffer][y], 2)
+                    tx_byte(byte[@file_buffer][y])
+                    y++    
             'transmit data from this data sector
             waitcnt(450000 + cnt) 'adding delay for video to catch up
+            'if is_basic == TRUE
+            '    'send length again since it will be stored at the beginning of the program
+            '    tx_byte(byte[@file_buffer][2])
+            '    tx_byte(byte[@file_buffer][3])
+                
            ' y := 0
             repeat while y < bytes_read
                 ser.Hex (byte[@file_buffer][y], 2)
