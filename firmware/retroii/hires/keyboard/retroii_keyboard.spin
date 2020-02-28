@@ -43,7 +43,7 @@ CON
     MODE_SD_CARD_3 = 6 'program download            
     {SD CARD}
     SD_PINS  = 0
-    RESULTS_PER_PAGE = 29
+    RESULTS_PER_PAGE = 56
     ROWS_PER_FILE = 4 'number of longs it takes to store 1 file name
     MAX_FILES = 300 'limiting to 300 for now due to memory limits
     FILE_BUF_SIZE = 256 'size of file buffer. can optimize this later on.
@@ -299,7 +299,11 @@ PRI sd_send_file(file_idx) | ran_once, bytes_read, file_name, y, i, index, next_
             'transmit first 4 bytes of data sector (address, length)
             if ran_once == FALSE
                 if is_basic == TRUE
-                    tx_byte($01) '$0801 start address for basic files
+                    'for Applesoft Basic: start address is at $0801
+                    'for Integer Basic: start address is ($9600 - length)
+                    'unfortunately we will need a language card or some other way to 
+                    'expand memory to fit Int Basic.
+                    tx_byte($01) '$0801 start address for Applesoft basic files
                     tx_byte($08)
                
                     

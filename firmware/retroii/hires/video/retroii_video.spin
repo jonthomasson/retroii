@@ -53,6 +53,8 @@ CON
     TEXT_PAGE2 = $800
     HIRES_PAGE1 = $2000
     HIRES_PAGE2 = $4000
+    
+    ROWS_PER_PAGE = 28
 
 VAR
                                                                          
@@ -471,7 +473,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
 Summary:
     Displays a list of DOS formatted disk images from the sd card. 
 }} 
-PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
+PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, y
     cls
     R2.Cursor(FALSE)
     setPos(0,0)
@@ -499,7 +501,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
     dec($07, $00, total_pages)
     setPos(0,2)
     i := 2
-    
+    y := 1
     if count_files_sent == 0
         dec($07, $00, string("no disks found"))
         return
@@ -510,12 +512,17 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i
         index := rx_byte
         if index == $03 'end of line
             if i =< count_files_sent
-                setPos(0,i+1)
+                if i > ROWS_PER_PAGE
+                    setPos(20, y)
+                else
+                    setPos(0,i+1)
+                    
                 dec($07, $00, i)
             
                 str($07, $00, string(". "))
             i++
-            
+            if i > ROWS_PER_PAGE
+                y++
         elseif index <> $04 'end of transmission
             print($07, $00, index)
                                 
