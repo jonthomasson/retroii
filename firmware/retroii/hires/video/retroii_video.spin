@@ -216,7 +216,7 @@ PRI run_monitor | i, index
                 'cursor_x := 0
                 line_count := 0
             else   
-                print($07, $00, index)
+                print( index)
                 line_buffer[i] := index
                 'cursor_x++
                 'cursor[0] := cursor_x
@@ -267,12 +267,12 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
                     longfill(@ascii_buffer, 0, 4)
                     y := 0
                 
-                    hex($07, $03, j, 4)
-                    str($07, $03, string(":"))
+                    hex( j, 4)
+                    str( string(":"))
                     repeat 8 'display 8 bytes per line
                         data := read_byte(j)
-                        hex($07, $00, data, 2)
-                        str($07, $00, string(" "))
+                        hex( data, 2)
+                        str( string(" "))
                         if data > 128
                             ascii_buffer[y] := (data - 128) 'convert from high ascii to low ascii
                         else
@@ -283,7 +283,7 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
                     y := 0
                 
                     repeat 8 'display ascii
-                        print($07, $00, ascii_buffer[y])
+                        print( ascii_buffer[y])
                         y++
                     if line_no > 28
                         line_no := 2
@@ -293,10 +293,10 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
                         setPos(0, line_no)
                     
         else
-            hex($07, $03, addr, 4)
-            str($07, $03, string(":"))
+            hex( addr, 4)
+            str( string(":"))
             data := read_byte(addr)
-            hex($07, $00, data, 2)
+            hex( data, 2)
     elseif op == ":"
         'loop through rest of line_buffer and write each byte to incremental memory address
         l := 0
@@ -306,10 +306,10 @@ PUB parse_command | addr, op, val, data, i, j, y, k, l, m, bulk_write, bulk_val,
             write_byte(val, addr + l)
             l++
     else
-        hex($07, $03, addr, 4)
-        str($07, $03, string(":"))
+        hex( addr, 4)
+        str( string(":"))
         data := read_byte(addr)
-        hex($07, $00, data, 2)
+        hex( data, 2)
      
     
     'after everything, make sure to clear line_buffer
@@ -323,7 +323,7 @@ Summary:
 PRI print_header
     cls
     setPos(0, 1)
-    str($07, $03, string("ADDR| 0| 1| 2| 3| 4| 5| 6| 7| ASCII"))
+    str( string("ADDR| 0| 1| 2| 3| 4| 5| 6| 7| ASCII"))
     setPos(0, 0)
     'cursor[0] := 0
     'cursor_x := 0
@@ -341,14 +341,14 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     
     'get file name/address location/length 
     'start downloading to ram
-    str($07, $00, string("UPLOADING PROGRAM"))
+    str( string("UPLOADING PROGRAM"))
     setPos(0,2)
-    str($07, $00, string("NAME: "))
+    str( string("NAME: "))
     is_rx_ready 'setup receiver
     'receive file name
     repeat 30
         index := rx_byte                
-        print($07, $00, index - 128)
+        print( index - 128)
     
     'read address
     adr_lsb := rx_byte
@@ -358,18 +358,18 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     length_msb := rx_byte
     
     setPos(0,3)
-    str($07, $00, string("ADDR: "))
+    str( string("ADDR: "))
     
     address := adr_msb << 8 | adr_lsb
-    hex($07, $00, address,4)
+    hex( address,4)
     length := length_msb << 8 | length_lsb
     
     setPos(0,4)
-    str($07, $00, string("SIZE: "))
-    dec($07, $00, length)
+    str( string("SIZE: "))
+    dec( length)
     
     setPos(0,5)
-    str($07, $00, string("STAT: PENDING"))
+    str( string("STAT: PENDING"))
     'read data
     'start at address. for i = 0 to length: write_byte(rx_byte,addr + i)
     i := 0
@@ -382,7 +382,7 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     rx_done 'rx finished
     
     setPos(0,5)
-    str($07, $00, string("STAT: COMPLETE"))
+    str( string("STAT: COMPLETE"))
     repeat while current_mode == MODE_SD_CARD_3
                    
 {{
@@ -397,7 +397,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     cat_count := 0
     file_length := 0
                  
-    str($07, $00, string("DISK "))
+    str( string("DISK "))
     
     'read in catalog
     is_rx_ready 'setup receiver
@@ -405,25 +405,25 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     i := 0
     repeat 16
         rx_char := rx_byte
-        print($07, $00, rx_char)
+        print( rx_char)
         i++
     
    
             
-    str($07, $00, string(" DOS 3."))
-    dec($07, $00, rx_byte)
+    str( string(" DOS 3."))
+    dec( rx_byte)
     
-    str($07, $00, string(" VOL: "))
-    dec($07, $00, rx_byte)
+    str( string(" VOL: "))
+    dec( rx_byte)
     
     cat_count := rx_byte
     
     setPos(0,1)
     
-    str($07, $00, string("SELECT FILE:                 COUNT: "))
-    dec($07, $00, cat_count)
+    str( string("SELECT FILE:                 COUNT: "))
+    dec( cat_count)
     setPos(0, 2)
-    str($07, $03, string("   FILE                TYPE  PERM SIZE "))
+    str( string("   FILE                TYPE  PERM SIZE "))
       
     
     setPos(0,3)
@@ -432,15 +432,15 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     repeat cat_count 'end of transmission
         index := rx_byte
         if i < 10
-            dec($07, $00, 0)
+            dec( 0)
             
-        dec($07, $00, i)
-        str($07, $00, string(". "))
-        print($07, $00, index - 128)
+        dec( i)
+        str( string(". "))
+        print( index - 128)
             
         repeat 19 'get rest of file name
             index := rx_byte
-            print($07, $00, index - 128)
+            print( index - 128)
             
         
         index := rx_byte
@@ -448,23 +448,23 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
         file_type := index & $0F 'mask first nibble which holds the file type
         
         if file_type == $04
-            str($07, $00, string("BIN"))
+            str( string("BIN"))
         elseif file_type == $02
-            str($07, $00, string("BAS"))
+            str( string("BAS"))
         else    
-            str($07, $00, string("NA "))
+            str( string("NA "))
             
-        str($07, $00, string("   "))
+        str( string("   "))
        
         if file_access == $80
-            str($07, $00, string(" R"))
+            str( string(" R"))
         else
-            str($07, $00, string("WR"))
-        str($07, $00, string("   "))
+            str( string("WR"))
+        str( string("   "))
         file_length := rx_byte 'file length ls byte (length in sectors)
         
         
-        dec($07, $00, file_length * 256)
+        dec( file_length * 256)
         
         setPos(0, i+3)
         i++
@@ -478,7 +478,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     repeat while current_mode == MODE_SD_CARD_2
         index := slave.check_reg(31)
         if index > -1    
-            print($07, $00, index)
+            print( index)
         
 {{
 Summary:
@@ -490,7 +490,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
     setPos(0,0)
     index := 0
     slave.flush 'clears all 32 registers to 0                
-    str($07, $00, string("SELECT DISK: "))
+    str( string("SELECT DISK: "))
     
     
     
@@ -499,25 +499,25 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
     'tell kb processor we're ready to rx
     is_rx_ready 'setup receiver
     total_pages := rx_byte
-    str($07, $00, string(" "))
+    str( string(" "))
     current_page := rx_byte
-    str($07, $00, string(" "))
+    str( string(" "))
     count_files_sent := rx_byte
-    str($07, $00, string(" "))
+    str( string(" "))
      
     setPos(0,1)
-    str($07, $00, string("PAGE "))
-    dec($07, $00, current_page)
-    str($07, $00, string(" OF "))
-    dec($07, $00, total_pages)
+    str( string("PAGE "))
+    dec( current_page)
+    str( string(" OF "))
+    dec( total_pages)
     setPos(0,2)
     i := 2
     y := 1
     if count_files_sent == 0
-        dec($07, $00, string("no disks found"))
+        dec( string("no disks found"))
         return
         
-    str($07, $00, string("01. "))
+    str( string("01. "))
     repeat while index <> $04 'end of transmission
         
         index := rx_byte
@@ -529,16 +529,16 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
                     setPos(0,i+1)
                 
                 if i < 10
-                    dec($07, $00, 0)
+                    dec( 0)
                         
-                dec($07, $00, i)
+                dec( i)
             
-                str($07, $00, string(". "))
+                str( string(". "))
             i++
             if i > ROWS_PER_PAGE
                 y++
         elseif index <> $04 'end of transmission
-            print($07, $00, index)
+            print( index)
                                 
     rx_done 'rx finished
    
@@ -548,7 +548,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
     repeat while current_mode == MODE_SD_CARD_1
         index := slave.check_reg(31)
         if index > -1    
-            print($07, $00, index)
+            print( index)
     
 {{
 Summary: Used to tell keyboard/sd card controller that the data has been received.
@@ -580,7 +580,7 @@ PRI rx_byte | tx_ready, data, i, new_data
         i++
         if i > TXRX_TIMEOUT
             rx_error := true 'flag system we had an error receiving
-            str($07, $03, string("rx error"))
+            str( string("rx error"))
             return 'timeout
         new_data := slave.check_reg(TX_BYTE)
         
@@ -777,13 +777,13 @@ PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse,
                          
         if flashing == true 
             if blink == true
-                printxy(col, row, $07, $00, data)   'print char
+                printxy(col, row,  data)   'print char
             else
-                printxy(col, row, $07, $00, 32)    'print space   
+                printxy(col, row,  32)    'print space   
         elseif inverse == true
-            printxy_inverse(col, row, $07, $00, data)
+            printxy_inverse(col, row,  data)
         else
-            printxy(col, row, $07, $00, data)
+            printxy(col, row,  data)
                             
         col++
         mem_loc++
@@ -796,17 +796,17 @@ Summary: Prints general debug info to the bottom of the screen.
 PRI printDebug
     'display soft switches
     setPos(28, 26)
-    str($07, $00, string("HIRES: "))
-    hex($07, $00, ss_hires, 2)
+    str( string("HIRES: "))
+    hex( ss_hires, 2)
     setPos(28, 27)
-    str($07, $00, string("PAGE2: "))
-    hex($07, $00, ss_page2, 2)
+    str( string("PAGE2: "))
+    hex( ss_page2, 2)
     setPos(28, 28)
-    str($07, $00, string("MIX:   "))
-    hex($07, $00, ss_mix, 2)
+    str( string("MIX:   "))
+    hex( ss_mix, 2)
     setPos(28, 29)
-    str($07, $00, string("TEXT:  "))
-    hex($07, $00, ss_text, 2)  
+    str( string("TEXT:  "))
+    hex( ss_text, 2)  
 
 {{
 Summary: Clears the screen
@@ -820,75 +820,75 @@ Summary: Sets the position of the text pointer on the screen.
 PRI setPos(x, y)
     R2.Pos(x, y)
 
-PRI print_inverse(fgc, bgc, char)
+PRI print_inverse( char)
     R2.RChar (char)
     
-PRI print(fgc, bgc, char)
+PRI print( char)
     R2.Char(char)
 
-PRI printxy(x, y, fgc, bgc, char)
+PRI printxy(x, y,  char)
     setPos(x, y)
-    print(fgc, bgc, char)
+    print( char)
 
-PRI printxy_inverse(x, y, fgc, bgc, char)
+PRI printxy_inverse(x, y,  char)
     setPos(x, y)
-    print_inverse(fgc, bgc, char)
+    print_inverse( char)
     
-PRI str(fgc, bgc, string_ptr) 
+PRI str( string_ptr) 
     repeat strsize(string_ptr)
-        print(fgc, bgc, byte[string_ptr++]) 
+        print( byte[string_ptr++]) 
 
 
-PRI strxy(x, y, fgc, bgc, string_ptr)
+PRI strxy(x, y,  string_ptr)
  
     setPos(x, y)
-    str(fgc, bgc, string_ptr) 
+    str( string_ptr) 
 
 
-PRI dec(fgc, bgc, val) 
+PRI dec( val) 
  
-    prn(fgc, bgc, val)
+    prn( val)
 
 
-PRI prn(fgc, bgc, val) | dig
+PRI prn( val) | dig
 
     dig := 48 + (val // 10)
     val := val/10
     if val > 0
-        prn(fgc, bgc, val)
-    print(fgc, bgc, dig)
+        prn( val)
+    print( dig)
 
 
-PRI decxy(x, y, fgc, bgc, val)
+PRI decxy(x, y,  val)
 
     setPos(x, y)
-    dec(fgc, bgc, val)
+    dec( val)
 
 
-PRI bin(fgc, bgc, value, digits)
+PRI bin( value, digits)
   
     value <<= 32 - digits
     repeat digits
-        print(fgc, bgc, (value <-= 1) & 1 + "0") 
+        print( (value <-= 1) & 1 + "0") 
 
 
-PRI binxy(x, y, fgc, bgc, value, digits)
+PRI binxy(x, y,  value, digits)
 
     setPos(x, y)
-    bin(fgc, bgc, value, digits)
+    bin( value, digits)
 
 
-PRI hex(fgc, bgc, value, digits) 
+PRI hex( value, digits) 
 
     value <<= (8 - digits) << 2
     repeat digits
-        print(fgc, bgc, lookupz((value <-= 4) & $f : "0".."9", "A".."F")) 
+        print( lookupz((value <-= 4) & $f : "0".."9", "A".."F")) 
 
 
-PRI hexxy(x, y, fgc, bgc, value, digits)
+PRI hexxy(x, y,  value, digits)
 
     setPos(x, y)
-    hex(fgc, bgc, value, digits)
+    hex( value, digits)
 
 {{
 Summary: writes a byte of memory to external RAM
