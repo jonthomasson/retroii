@@ -19,7 +19,7 @@ CON
     TX_BYTE = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
-    TXRX_TIMEOUT = 15_000
+    TXRX_TIMEOUT = 35_000
     
     {DATA PINS}
     D0 = 0
@@ -416,19 +416,24 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     str($07, $00, string(" VOL: "))
     dec($07, $00, rx_byte)
     
-    setPos(0,2)
     cat_count := rx_byte
-    str($07, $00, string("CATALOG:"))
-    setPos(0, 3)
+    
+    setPos(0,1)
+    
+    str($07, $00, string("SELECT FILE:                 COUNT: "))
+    dec($07, $00, cat_count)
+    setPos(0, 2)
     str($07, $03, string("   FILE                TYPE  PERM SIZE "))
       
     
-    setPos(0,4)
+    setPos(0,3)
     i := 1
     
     repeat cat_count 'end of transmission
         index := rx_byte
-       
+        if i < 10
+            dec($07, $00, 0)
+            
         dec($07, $00, i)
         str($07, $00, string(". "))
         print($07, $00, index - 128)
@@ -461,13 +466,19 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
         
         dec($07, $00, file_length * 256)
         
-        setPos(0, i+4)
+        setPos(0, i+3)
         i++
        
                                 
     rx_done 'rx finished
     
+    setPos(13,1)
+    
+    R2.Cursor(TRUE)
     repeat while current_mode == MODE_SD_CARD_2
+        index := slave.check_reg(31)
+        if index > -1    
+            print($07, $00, index)
         
 {{
 Summary:
@@ -506,7 +517,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
         dec($07, $00, string("no disks found"))
         return
         
-    str($07, $00, string("1. "))
+    str($07, $00, string("01. "))
     repeat while index <> $04 'end of transmission
         
         index := rx_byte
@@ -516,7 +527,10 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
                     setPos(20, y)
                 else
                     setPos(0,i+1)
-                    
+                
+                if i < 10
+                    dec($07, $00, 0)
+                        
                 dec($07, $00, i)
             
                 str($07, $00, string(". "))

@@ -67,6 +67,8 @@ VAR
     long kb_output_data
     long current_mode
     long current_disk 'index of currently selected disk
+    long cat_track
+    long cat_sector
     {sd card}
     byte tbuf[14]   '
     long file_count'
@@ -204,16 +206,22 @@ PUB main | soft_switches, i, frq
                 if key == $0D 'enter
                     I2C.writeByte($42,29,MODE_SD_CARD_2)  
                     current_mode := MODE_SD_CARD_2   
-                    sd_send_catalog(i)                  
+                    sd_send_catalog(i)   
+                    i := 0 'start line buffer over               
                 else
                     'write to line buffer
                     line_buffer[i] := key
                     i++
                   
             elseif current_mode == MODE_SD_CARD_2
-                I2C.writeByte($42,29,MODE_SD_CARD_3)  
-                current_mode := MODE_SD_CARD_3   
-                sd_send_file(key)
+                if key == $0D 'enter
+                    I2C.writeByte($42,29,MODE_SD_CARD_3)  
+                    current_mode := MODE_SD_CARD_3   
+                    sd_send_file(i)
+                else
+                    'write to line buffer
+                    line_buffer[i] := key
+                    i++
                    
             I2C.writeByte($42,31,key)
             if kb_output_data == true   'determine where to send key to data bus
@@ -234,16 +242,54 @@ PRI frqVal(a, b) : f      ' return f = a/b * 2^32, given a<b, a<2^30, b<2^30
         f++
         
 {{send the selected file to RAM}}                
-PRI sd_send_file(file_idx) | ran_once, bytes_read, file_name, y, i, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector, is_basic
+PRI sd_send_file(line_size) | ran_once, bytes_read, file_name, y, i, next_cat_sector, next_cat_track, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector, is_basic
+        'populate dsk_idx from line_buffer
+    if line_size == 1
+        index := ascii_2bin(line_buffer[0])
+    
+    else '2
+        'multiply 2nd num entered by 10 and add to first number
+        index := (ascii_2bin(line_buffer[0]) * 10) + ascii_2bin(line_buffer[1])
+        
     'send file name, address, length, bytes
     is_basic := FALSE
     ran_once := FALSE
-    index := ascii_2bin(file_idx)
+    'index := ascii_2bin(file_idx)
     dsk_name := sd_get_diskname_byindex(current_disk)
     ser.Str(string("disk: "))
     ser.Str(dsk_name)
     
-    offset := 35 * (index - 1)
+    'start at first catalog sector so we can count to see where our index falls
+    bytes_read := 0
+    bytes_read := goto_sector(dsk_name, cat_track, cat_sector)
+    
+    'fast forward to sector that holds our index file
+    y := 0
+    repeat 
+        i := 0
+        repeat i from 0 to 6 'up to 7 total file descriptive entries per sector
+            if y + i == (index - 1)
+                next_cat_sector := $00 'get out of loop
+                quit
+            if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+                next_cat_sector := $00 'get out of loop
+                quit
+ 
+        y := y + i 
+            
+        if next_cat_sector == $00
+            quit
+         
+        next_cat_track := byte[@file_buffer][1]
+        next_cat_sector := byte[@file_buffer][2]
+        'ser.Str (string("next_cat_sector:"))
+        'ser.Dec (next_cat_sector)
+        if next_cat_sector <> $00
+            goto_sector(dsk_name, next_cat_track, next_cat_sector)
+        
+    while next_cat_sector <> $00
+    
+    offset := 35 * i '(index - 1)
     'ser.Dec (index)
     'file_name := sd_get_filename_byindex(index)
     ser.Str(string("sending file: "))
@@ -340,7 +386,7 @@ PRI sd_send_file(file_idx) | ran_once, bytes_read, file_name, y, i, index, next_
     
                     
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
-PRI sd_send_catalog(line_size) | dsk_idx, dsk_name,i, y,file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, cat_track, cat_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
+PRI sd_send_catalog(line_size) | dsk_idx, is_done, dsk_name,i, y, file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
     'populate dsk_idx from line_buffer
     if line_size == 1
         dsk_idx := ascii_2bin(line_buffer[0])
@@ -405,60 +451,97 @@ PRI sd_send_catalog(line_size) | dsk_idx, dsk_name,i, y,file_type, file_name, fi
     bytes_read := 0
     bytes_read := goto_sector(dsk_name, cat_track, cat_sector)
     
-    next_cat_track := byte[@file_buffer][1]
-    next_cat_sector := byte[@file_buffer][2]
+    'next_cat_track := byte[@file_buffer][1]
+    'next_cat_sector := byte[@file_buffer][2]
     
     'get count of catalog contents
-    i := 0
-    repeat i from 0 to 6
-        if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+    'loop through all of the catalog tracks/sectors to get total count of files
+    
+    y := 0
+    repeat 
+        i := 0
+        repeat i from 0 to 6 'up to 7 total file descriptive entries per sector
+            
+            if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+                next_cat_sector := $00 'get out of loop
+                quit
+ 
+        y := y + i  
+        if next_cat_sector == $00
             quit
-        'i++
-            
-    tx_byte(i) 'send count of files
-                       
-    'loop through catalog and print file info
-    i := 0    
-    repeat i from 0 to 6
-        if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
-            next
-            
-        tslist_track := byte[@file_buffer][11 + (35 * i)]
-        tslist_sector := byte[@file_buffer][12 + (35 * i)]
-        file_type := byte[@file_buffer][13 + (35 * i)]
-        file_name := byte[@file_buffer][14 + (35 * i)]
-        file_length_ls := byte[@file_buffer][44 + (35 * i)]
-        file_length_ms := byte[@file_buffer][45 + (35 * i)]
+         
+        next_cat_track := byte[@file_buffer][1]
+        next_cat_sector := byte[@file_buffer][2]
+        'ser.Str (string("next_cat_sector:"))
+        'ser.Dec (next_cat_sector)
+        if next_cat_sector <> $00
+            goto_sector(dsk_name, next_cat_track, next_cat_sector)
         
-        ser.Str (string("File Track:"))
-        ser.Hex (tslist_track, 2)
-        ser.Str (string("File Sector:"))
-        ser.Hex (tslist_sector, 2)
-        ser.Str (string("File Type:"))
-        ser.Hex (file_type, 2)
-        ser.Str (string("File Name:"))
-        'ser.Hex (file_name, 2)
-        waitcnt(150000 + cnt)
-        y := 0
-        repeat 20 'sending 20 of 30 chars of filename
-            waitcnt(150000 + cnt) 'add delay for video to catch up
-            file_name := byte[@file_buffer][14 + y + (35 * i)]
-            y++
+    while next_cat_sector <> $00
+    tx_byte(y) 'send count of files           
+    'rewind back to the first sector of the catalog track
+    bytes_read := 0
+    bytes_read := goto_sector(dsk_name, cat_track, cat_sector)
+    
+                    
+    is_done := false
+    'loop through catalog and print file info
+    i := 0  
+    repeat  
+        
+        repeat i from 0 to 6 'up to 7 total file descriptive entries per sector
+            if byte[@file_buffer][11 + (35 * i)] == $00 'if tslist_track is 0 then skip
+                is_done := true
+                next
+                'next_cat_sector := $00 'get out of loop
+                'quit
             
-            ser.Hex (file_name,2)
-            tx_byte(file_name)
+            tslist_track := byte[@file_buffer][11 + (35 * i)]
+            tslist_sector := byte[@file_buffer][12 + (35 * i)]
+            file_type := byte[@file_buffer][13 + (35 * i)]
+            file_name := byte[@file_buffer][14 + (35 * i)]
+            file_length_ls := byte[@file_buffer][44 + (35 * i)]
+            file_length_ms := byte[@file_buffer][45 + (35 * i)]
+        
+            ser.Str (string("File Track:"))
+            ser.Hex (tslist_track, 2)
+            ser.Str (string("File Sector:"))
+            ser.Hex (tslist_sector, 2)
+            ser.Str (string("File Type:"))
+            ser.Hex (file_type, 2)
+            ser.Str (string("File Name:"))
+            'ser.Hex (file_name, 2)
+            waitcnt(150000 + cnt)
+            y := 0
+            repeat 20 'sending 20 of 30 chars of filename
+                waitcnt(150000 + cnt) 'add delay for video to catch up
+                file_name := byte[@file_buffer][14 + y + (35 * i)]
+                y++
+            
+                ser.Hex (file_name,2)
+                tx_byte(file_name)
             
                                  
-        tx_byte(file_type)
-        waitcnt(50000 + cnt)
-        tx_byte(file_length_ls)
-        'tx_byte(file_length_ms)
+            tx_byte(file_type)
+            waitcnt(50000 + cnt)
+            tx_byte(file_length_ls)
             
-        ser.Str (string("File Length:"))
-        ser.Hex (file_length_ls, 2)
-        ser.Hex (file_length_ms, 2)
-      
-    'tx_byte($04) 'end of transmission
+            
+            ser.Str (string("File Length:"))
+            ser.Hex (file_length_ls, 2)
+            ser.Hex (file_length_ms, 2)
+        
+        if is_done == true
+            quit
+           
+        next_cat_track := byte[@file_buffer][1]
+        next_cat_sector := byte[@file_buffer][2]
+        ser.Str (string("next_cat_sector:"))
+        ser.Dec (next_cat_sector) 
+        if next_cat_sector <> $00
+            goto_sector(dsk_name, next_cat_track, next_cat_sector)
+            
+    while next_cat_sector <> $00 
 
 PRI ascii_2bin(ascii) | binary
 
