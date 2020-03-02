@@ -109,31 +109,55 @@ PUB main | soft_switches, i, frq
         
         key := kb.key
         
-        if key == 200 or key == 201 'backspace or delete
-            if current_mode == MODE_RETROII
-                kb_write($88) 'sending left arrow
-        if key == 203 'send esc
-            kb_write($9B)
-        if key == 192 'send left arrow
+        if  key < 128 and key > 0
+            if current_mode == MODE_SD_CARD_1
+                if key == $0D 'enter
+                    I2C.writeByte($42,29,MODE_SD_CARD_2)  
+                    current_mode := MODE_SD_CARD_2   
+                    sd_send_catalog(i)   
+                    i := 0 'start line buffer over               
+                else
+                    'write to line buffer
+                    line_buffer[i] := key
+                    i++
+                  
+            elseif current_mode == MODE_SD_CARD_2
+                if key == $0D 'enter
+                    I2C.writeByte($42,29,MODE_SD_CARD_3)  
+                    current_mode := MODE_SD_CARD_3   
+                    sd_send_file(i)
+                else
+                    'write to line buffer
+                    line_buffer[i] := key
+                    i++
+                   
+            I2C.writeByte($42,31,key)
+            if kb_output_data == true   'determine where to send key to data bus
+                kb_write(key)
+        elseif key == 200 or key == 201 'backspace or delete
+            kb_write($88) 'sending left arrow
+        elseif key == 203 'send esc
+            kb_write($9B) 'sending left arrow
+        elseif key == 192 'send left arrow
             kb_write($88)
-        if key == 193 'send right
+        elseif key == 193 'send right
             kb_write($95)
-        if key == 208 'f1 toggle kb to data bus
+        elseif key == 208 'f1 toggle kb to data bus
             kb_output_data := !kb_output_data
             ser.Str (string("toggling kb_output_data : "))
             ser.Dec (kb_output_data)
-        if key == 209 'f2 toggle clock speed
+        elseif key == 209 'f2 toggle clock speed
         
-        if key == 210 'f3 mode monitor
+        elseif key == 210 'f3 mode monitor
             'send i2c to video processor to tell it to switch modes
+            kb_output_data := false
             I2C.writeByte($42,29,MODE_MONITOR)  
             current_mode := MODE_MONITOR
-            kb_output_data := false
-        if key == 211 'f4 mode RETROII
+        elseif key == 211 'f4 mode RETROII
+            kb_output_data := true 
             I2C.writeByte($42,29,MODE_RETROII)  
             current_mode := MODE_RETROII    
-            kb_output_data := true   
-        if  key == 212 'f5 reset
+        elseif  key == 212 'f5 reset
             'toggle reset line
             outa[RESET_pin] := 0
             dira[RESET_pin] := 1 'set reset pin as output
@@ -143,14 +167,14 @@ PUB main | soft_switches, i, frq
             waitcnt(RESET_PERIOD + cnt)
             dira[RESET_pin] := 0 
             'ser.Str (string("reset pressed"))
-        if  key == 213 'f6 sd card
+        elseif  key == 213 'f6 sd card
+            kb_output_data := false
             i := 0 'start line buffer over
             ser.Str (string("entering sd card mode"))
             I2C.writeByte($42,29,MODE_SD_CARD_1)  
             current_mode := MODE_SD_CARD_1   
-            kb_output_data := false
             sd_send_filenames(0)
-        if  key == 216 or key == 217 or key == 218 or key == 219 'F9-F12 manual soft switch override
+        elseif  key == 216 or key == 217 or key == 218 or key == 219 'F9-F12 manual soft switch override
             if ss_override == FALSE
                 'populate overriden vars with current values
                 if ($08 & soft_switches) == $08
@@ -198,34 +222,11 @@ PUB main | soft_switches, i, frq
                 soft_switches &= $FE
                 soft_switches |= ss_mask
                 soft_switches := ss_mask
-            
-        if  key == 215 'F8 turn off soft switch override
+        elseif  key == 214 'F7 clear kb 
+            kb_write($00)        
+        elseif  key == 215 'F8 turn off soft switch override
             ss_override := FALSE          
-        if  key < 128 and key > 0
-            if current_mode == MODE_SD_CARD_1
-                if key == $0D 'enter
-                    I2C.writeByte($42,29,MODE_SD_CARD_2)  
-                    current_mode := MODE_SD_CARD_2   
-                    sd_send_catalog(i)   
-                    i := 0 'start line buffer over               
-                else
-                    'write to line buffer
-                    line_buffer[i] := key
-                    i++
-                  
-            elseif current_mode == MODE_SD_CARD_2
-                if key == $0D 'enter
-                    I2C.writeByte($42,29,MODE_SD_CARD_3)  
-                    current_mode := MODE_SD_CARD_3   
-                    sd_send_file(i)
-                else
-                    'write to line buffer
-                    line_buffer[i] := key
-                    i++
-                   
-            I2C.writeByte($42,31,key)
-            if kb_output_data == true   'determine where to send key to data bus
-                kb_write(key)
+
 
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
@@ -710,12 +711,11 @@ PRI sd_load_files | index
   sd.unmount 'unmount the sd card
              '
 PRI kb_write(data_out) | i
-    outa[K6..K0] := data_out 'had to reverse order for it to show on data bus correctly
-    
-    outa[Strobe]~~ 'strobe high should set K7 high
-    
-    'clear strobe
-    outa[Strobe]~
+    if current_mode == MODE_RETROII
+        outa[K6..K0] := data_out 'had to reverse order for it to show on data bus correctly
+        outa[Strobe]~~ 'strobe high should set K7 high   
+        'clear strobe
+        outa[Strobe]~
     
 PRI init 
     'dira[Prop_Phi2]~~  'output
