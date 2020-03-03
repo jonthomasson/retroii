@@ -105,12 +105,14 @@ PUB main | soft_switches, i, frq
             soft_switches_old := soft_switches
             
         'key := kb.getkey 
-        'ser.Dec (key) 
+        'ser.Hex (key,2) 
         
         key := kb.key
         
         if  key < 128 and key > 0
-            if current_mode == MODE_SD_CARD_1
+            if current_mode == MODE_RETROII
+                kb_write(key)
+            elseif current_mode == MODE_SD_CARD_1
                 if key == $0D 'enter
                     I2C.writeByte($42,29,MODE_SD_CARD_2)  
                     current_mode := MODE_SD_CARD_2   
@@ -118,8 +120,10 @@ PUB main | soft_switches, i, frq
                     i := 0 'start line buffer over               
                 else
                     'write to line buffer
-                    line_buffer[i] := key
-                    i++
+                    if key > 47 and key < 58 'valid number 0-9
+                        line_buffer[i] := key
+                        i++
+                        
                   
             elseif current_mode == MODE_SD_CARD_2
                 if key == $0D 'enter
@@ -128,12 +132,13 @@ PUB main | soft_switches, i, frq
                     sd_send_file(i)
                 else
                     'write to line buffer
-                    line_buffer[i] := key
-                    i++
+                    if key > 47 and key < 58 'valid number 0-9
+                        line_buffer[i] := key
+                        i++
                    
             I2C.writeByte($42,31,key)
-            if kb_output_data == true   'determine where to send key to data bus
-                kb_write(key)
+            'if kb_output_data == true   'determine where to send key to data bus
+            '    kb_write(key)
         elseif key == 200 or key == 201 'backspace or delete
             kb_write($88) 'sending left arrow
         elseif key == 203 'send esc
@@ -365,7 +370,9 @@ PRI sd_send_file(line_size) | ran_once, bytes_read, file_name, y, i, next_cat_se
                         ser.Hex (byte[@file_buffer][y], 2)
                         tx_byte(byte[@file_buffer][y])
                         y++  
-                      
+                
+                waitcnt(150000 + cnt)      
+                
             ran_once := TRUE
             'transmit data from this data sector
             waitcnt(450000 + cnt) 'adding delay for video to catch up
@@ -711,12 +718,12 @@ PRI sd_load_files | index
   sd.unmount 'unmount the sd card
              '
 PRI kb_write(data_out) | i
-    if current_mode == MODE_RETROII
-        outa[K6..K0] := data_out 'had to reverse order for it to show on data bus correctly
-        outa[Strobe]~~ 'strobe high should set K7 high   
-        'clear strobe
-        outa[Strobe]~
-    
+    'if current_mode == MODE_RETROII
+    outa[K6..K0] := data_out 'had to reverse order for it to show on data bus correctly
+    outa[Strobe]~~ 'strobe high should set K7 high   
+    'clear strobe
+    outa[Strobe]~
+
 PRI init 
     'dira[Prop_Phi2]~~  'output
     'outa[Prop_Phi2]~   'low

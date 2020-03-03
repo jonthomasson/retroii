@@ -42,7 +42,11 @@ CON
     MODE_SD_CARD_1 = 4 'disk selection
     MODE_SD_CARD_2 = 5 'program selection
     MODE_SD_CARD_3 = 6 'program download 
-                       '
+    
+    {FILE OPTIONS FOR MODE_SD_CARD_3}
+    FILE_LOAD = 1
+    FILE_RUN = 2   
+                    '
     {RETROII_MODES}
     RETROII_TEXT = 1
     RETROII_HIRES = 2
@@ -77,6 +81,7 @@ VAR
     byte soft_switches_updated 
     long cog_soft_switches
     long cog_ss_stack[20]
+    long prog_download_option
 
 OBJ
 
@@ -333,7 +338,7 @@ Summary:
     Downloads the selected program from the DOS disk image on the 
     sd card and writes it to the appropriate memory in RAM. 
 }}     
-PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, length_msb, length
+PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, length_msb, length, reset_vector_check
     
     cls
     R2.Cursor(FALSE)
@@ -341,7 +346,13 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     
     'get file name/address location/length 
     'start downloading to ram
-    str( string("UPLOADING PROGRAM"))
+    if prog_download_option == FILE_LOAD
+        str( string("LOADING FILE"))
+    else
+        str( string("RUNNING PROGRAM"))
+    
+    'str( string("LOADING PROGRAM"))
+    
     setPos(0,2)
     str( string("NAME: "))
     is_rx_ready 'setup receiver
@@ -358,10 +369,13 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     length_msb := rx_byte
     
     setPos(0,3)
-    str( string("ADDR: "))
+    str( string("ADDR: $"))
     
     address := adr_msb << 8 | adr_lsb
     hex( address,4)
+    str( string("("))
+    dec( address)
+    str( string(")"))
     length := length_msb << 8 | length_lsb
     
     setPos(0,4)
@@ -369,7 +383,7 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     dec( length)
     
     setPos(0,5)
-    str( string("STAT: PENDING"))
+    str( string("STAT: DOWNLOADING FROM DISK"))
     'read data
     'start at address. for i = 0 to length: write_byte(rx_byte,addr + i)
     i := 0
@@ -382,7 +396,22 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     rx_done 'rx finished
     
     setPos(0,5)
-    str( string("STAT: COMPLETE"))
+    if prog_download_option == FILE_LOAD
+        str( string("STAT: COMPLETE                        "))
+    else
+        str( string("STAT: RUNNING...PLEASE WAIT"))
+        'steps to auto-run program:
+        '1. store address to jump to on reset to: $03F2(lsb), $03F3(msb)
+        write_byte(adr_lsb, $03F2)
+        write_byte(adr_msb, $03F3)
+        '2. $03F4 = BYTE STORED AT $3F3 XOR CONSTANT $A5
+        reset_vector_check := read_byte($03F3) ^ $A5
+        write_byte(reset_vector_check, $03F4)
+        '3. Clear memory between $0000 and $D000?
+        '4. Toggle Reset
+        '5. Switch video mode to Retro_II
+        
+        
     repeat while current_mode == MODE_SD_CARD_3
                    
 {{
@@ -396,6 +425,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     setPos(0,0)
     cat_count := 0
     file_length := 0
+    prog_download_option := 0
                  
     str( string("DISK "))
     
@@ -420,7 +450,8 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     
     setPos(0,1)
     
-    str( string("SELECT FILE:                 COUNT: "))
+    'str( string("SELECT FILE:                 COUNT: "))
+    str( string("(L)OAD or (R)UN?:            COUNT: "))
     dec( cat_count)
     setPos(0, 2)
     str( string("   FILE                TYPE  PERM SIZE "))
@@ -472,12 +503,38 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
                                 
     rx_done 'rx finished
     
-    setPos(13,1)
+    'setPos(21,1)
     
+    'R2.Cursor(FALSE)
+    'get download option to run or load file
+    repeat while current_mode == MODE_SD_CARD_2 and prog_download_option == 0
+        index := slave.check_reg(31)
+        if index > -1  
+            if index == "L" or index == "R" 'load or run
+                if index == "L"
+                    prog_download_option := FILE_LOAD
+                else
+                    prog_download_option := FILE_RUN   
+            'else 
+                 
+            '    print( index)
+    
+    setPos(0,1)
+    str( string("SELECT FILE TO "))
+    
+    if prog_download_option == FILE_LOAD
+        str( string("LOAD: "))
+        setPos(21,1)
+    else
+        str( string("RUN: "))
+        setPos(20,1)
+    
+    
+    'get file index to load/run
     R2.Cursor(TRUE)
     repeat while current_mode == MODE_SD_CARD_2
         index := slave.check_reg(31)
-        if index > -1    
+        if index > -1  
             print( index)
         
 {{
