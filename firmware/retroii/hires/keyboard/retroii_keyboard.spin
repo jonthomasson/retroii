@@ -85,7 +85,7 @@ VAR
     byte ss_hires
     byte ss_mask
     
-PUB main | soft_switches, i, frq
+PUB main | soft_switches, i, frq, file_mode
     init
     ser.Str(string("initializing keyboard..."))
     
@@ -117,7 +117,8 @@ PUB main | soft_switches, i, frq
                     I2C.writeByte($42,29,MODE_SD_CARD_2)  
                     current_mode := MODE_SD_CARD_2   
                     sd_send_catalog(i)   
-                    i := 0 'start line buffer over               
+                    i := 0 'start line buffer over    
+                    file_mode := FALSE           
                 else
                     'write to line buffer
                     if key > 47 and key < 58 'valid number 0-9
@@ -130,11 +131,18 @@ PUB main | soft_switches, i, frq
                     I2C.writeByte($42,29,MODE_SD_CARD_3)  
                     current_mode := MODE_SD_CARD_3   
                     sd_send_file(i)
+                    i := 0 'start line buffer over  
+                    file_mode := FALSE    
                 else
                     'write to line buffer
-                    if key > 47 and key < 58 'valid number 0-9
-                        line_buffer[i] := key
-                        i++
+                    if file_mode == FALSE
+                        'check to make sure we get either a R or L
+                        if key == "L" or key == "R"
+                            file_mode := TRUE
+                    else
+                        if key > 47 and key < 58 'valid number 0-9
+                            line_buffer[i] := key
+                            i++
                    
             I2C.writeByte($42,31,key)
             'if kb_output_data == true   'determine where to send key to data bus
