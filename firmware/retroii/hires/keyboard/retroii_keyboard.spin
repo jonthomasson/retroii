@@ -433,14 +433,15 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
         ser.Str(string("computer reset"))
         I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
         
-        ready := $00
-        repeat while ready <> CMD_RETROII
-            ready := I2C.readByte($42,CMD_FLAG)   
-            'ser.Hex (ready, 2)
-        I2C.writeByte($42,29,MODE_RETROII) 
-        current_mode := MODE_RETROII    
-        ser.Str(string("mode set to retroii"))
-        'I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+        if is_basic == FALSE
+            ready := $00
+            repeat while ready <> CMD_RETROII
+                ready := I2C.readByte($42,CMD_FLAG)   
+                'ser.Hex (ready, 2)
+            I2C.writeByte($42,29,MODE_RETROII) 
+            current_mode := MODE_RETROII    
+            ser.Str(string("mode set to retroii"))
+            'I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
                                                           
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
 PRI sd_send_catalog(line_size) | dsk_idx, is_done, dsk_name,i, y, file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
