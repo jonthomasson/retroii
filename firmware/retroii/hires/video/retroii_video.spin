@@ -16,6 +16,10 @@ CON
     Line_Buffer_Size = 60
     TX_FLAG = 26    'I2C register set when there's a byte being transmitted
     RX_FLAG = 27    'I2C register set when byte is received at video processor
+    CMD_FLAG = 24   'I2C register used to send commands to video processor
+    CMD_RESET = $EA 'this value tells the video processor to reset the 6502
+    CMD_DONE = $AC  'this value is an acknowledgement that the command has finished
+    CMD_RETROII = $BD 'command to set video mode to retroii mode
     TX_BYTE = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
@@ -338,11 +342,13 @@ Summary:
     Downloads the selected program from the DOS disk image on the 
     sd card and writes it to the appropriate memory in RAM. 
 }}     
-PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, length_msb, length, reset_vector_check
+PRI run_sd_file_download | addr, done, index, i, adr_lsb, adr_msb,address, length_lsb, length_msb, length, reset_vector_check
     
     cls
     R2.Cursor(FALSE)
     setPos(0,0)
+    done := 0
+    slave.flush 'clears all 32 registers to 0    
     
     'get file name/address location/length 
     'start downloading to ram
@@ -350,9 +356,20 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
         str( string("LOADING FILE"))
     else
         str( string("RUNNING PROGRAM"))
-    
-    'str( string("LOADING PROGRAM"))
-    
+        '1. clear ram 0000-BFFF
+        setPos(0,5)
+        str( string("STAT: CLEARING MEMORY SPACE"))
+        repeat addr from 0 to 49151 '48KB
+            write_byte($00, addr)
+        '2. reset (send command to keyboard controller)
+        setPos(0,5)
+        str( string("STAT: SENDING RESET         "))
+        slave.put(CMD_FLAG,CMD_RESET)
+        
+        'wait till we know there's been a reset
+        repeat while done <> CMD_DONE
+            done := slave.check_reg(CMD_FLAG)
+        slave.put(CMD_FLAG, $00)'reset flag    
     setPos(0,2)
     str( string("NAME: "))
     is_rx_ready 'setup receiver
@@ -398,8 +415,9 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
     setPos(0,5)
     if prog_download_option == FILE_LOAD
         str( string("STAT: COMPLETE                        "))
-    else
+    else 
         str( string("STAT: RUNNING...PLEASE WAIT"))
+        slave.flush 'clears all 32 registers to 0 
         'steps to auto-run program:
         '1. store address to jump to on reset to: $03F2(lsb), $03F3(msb)
         write_byte(adr_lsb, $03F2)
@@ -407,9 +425,20 @@ PRI run_sd_file_download | index, i, adr_lsb, adr_msb,address, length_lsb, lengt
         '2. $03F4 = BYTE STORED AT $3F3 XOR CONSTANT $A5
         reset_vector_check := read_byte($03F3) ^ $A5
         write_byte(reset_vector_check, $03F4)
-        '3. Clear memory between $0000 and $D000?
-        '4. Toggle Reset
-        '5. Switch video mode to Retro_II
+        '4. Toggle Reset (send command to keyboard controller)
+        slave.put(CMD_FLAG,CMD_RESET)
+        
+        'wait till we know there's been a reset
+        done := 0
+        repeat while done <> CMD_DONE
+            done := slave.check_reg(CMD_FLAG)
+        slave.put(CMD_FLAG, $00)'reset flag
+        '5. Restore reset vectors
+        write_byte($03, $03F2)
+        write_byte($E0, $03F3)
+        write_byte($45, $03F4)
+        '6. Switch video mode to Retro_II (send command to keyboard controller)
+        slave.put(CMD_FLAG,CMD_RETROII)
         
         
     repeat while current_mode == MODE_SD_CARD_3

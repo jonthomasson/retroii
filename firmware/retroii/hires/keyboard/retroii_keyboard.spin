@@ -20,6 +20,10 @@ CON
     TX_DATA = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set
     RX_READY = 25   'this register set when video processor ready to receive
+    CMD_FLAG = 24   'I2C register used to send commands to video processor
+    CMD_RESET = $EA 'this value tells the video processor to reset the 6502
+    CMD_RETROII = $BD 'command to set video mode to retroii mode
+    CMD_DONE = $AC  'this value is an acknowledgement that the command has finished
     TXRX_TIMEOUT = 10_000
     {CLOCK}
     Btn_Phi2 = 11
@@ -48,6 +52,9 @@ CON
     MAX_FILES = 300 'limiting to 300 for now due to memory limits
     FILE_BUF_SIZE = 256 'size of file buffer. can optimize this later on.
     LINE_BUF_SIZE = 10
+    {FILE OPTIONS FOR MODE_SD_CARD_3}
+    FILE_LOAD = 1
+    FILE_RUN = 2  
 OBJ 
     sd: "fsrw" 
     kb:   "keyboard"  
@@ -60,7 +67,8 @@ DAT
 
 
 VAR
-    word key               
+    word key          
+    long prog_download_option     
     long phi2_stack[20]  
     long cog_phi2 
     long soft_switches_old                                         
@@ -85,7 +93,7 @@ VAR
     byte ss_hires
     byte ss_mask
     
-PUB main | soft_switches, i, frq, file_mode
+PUB main | soft_switches, i, frq
     init
     ser.Str(string("initializing keyboard..."))
     
@@ -118,7 +126,8 @@ PUB main | soft_switches, i, frq, file_mode
                     current_mode := MODE_SD_CARD_2   
                     sd_send_catalog(i)   
                     i := 0 'start line buffer over    
-                    file_mode := FALSE           
+                    
+                    prog_download_option := 0          
                 else
                     'write to line buffer
                     if key > 47 and key < 58 'valid number 0-9
@@ -132,13 +141,16 @@ PUB main | soft_switches, i, frq, file_mode
                     current_mode := MODE_SD_CARD_3   
                     sd_send_file(i)
                     i := 0 'start line buffer over  
-                    file_mode := FALSE    
+                       
+                    prog_download_option := 0
                 else
                     'write to line buffer
-                    if file_mode == FALSE
+                    if prog_download_option == 0
                         'check to make sure we get either a R or L
-                        if key == "L" or key == "R"
-                            file_mode := TRUE
+                        if key == "L" 
+                            prog_download_option := FILE_LOAD
+                        elseif key == "R"
+                            prog_download_option := FILE_RUN
                     else
                         if key > 47 and key < 58 'valid number 0-9
                             line_buffer[i] := key
@@ -172,14 +184,7 @@ PUB main | soft_switches, i, frq, file_mode
             current_mode := MODE_RETROII    
         elseif  key == 212 'f5 reset
             'toggle reset line
-            outa[RESET_pin] := 0
-            dira[RESET_pin] := 1 'set reset pin as output
-            waitcnt(RESET_PERIOD + cnt)
-            outa[RESET_pin] := 1
-            dira[RESET_pin] := 1
-            waitcnt(RESET_PERIOD + cnt)
-            dira[RESET_pin] := 0 
-            'ser.Str (string("reset pressed"))
+            reset
         elseif  key == 213 'f6 sd card
             kb_output_data := false
             i := 0 'start line buffer over
@@ -254,9 +259,19 @@ PRI frqVal(a, b) : f      ' return f = a/b * 2^32, given a<b, a<2^30, b<2^30
      if a => b
         a -= b
         f++
-        
+
+PRI reset
+    'toggle reset line
+    outa[RESET_pin] := 0
+    dira[RESET_pin] := 1 'set reset pin as output
+    waitcnt(RESET_PERIOD + cnt)
+    outa[RESET_pin] := 1
+    dira[RESET_pin] := 1
+    waitcnt(RESET_PERIOD + cnt)
+    dira[RESET_pin] := 0 
+                    
 {{send the selected file to RAM}}                
-PRI sd_send_file(line_size) | ran_once, bytes_read, file_name, y, i, next_cat_sector, next_cat_track, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector, is_basic
+PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next_cat_sector, next_cat_track, index, next_data_track,next_data_sector, tslist_track, tslist_sector, file_type, offset, dsk_name, next_tslist_track, next_tslist_sector, is_basic
         'populate dsk_idx from line_buffer
     if line_size == 1
         index := ascii_2bin(line_buffer[0])
@@ -273,6 +288,15 @@ PRI sd_send_file(line_size) | ran_once, bytes_read, file_name, y, i, next_cat_se
     ser.Str(string("disk: "))
     ser.Str(dsk_name)
     
+    ready := $00
+    if prog_download_option == FILE_RUN 'if file is being run, wait for command to reset
+        repeat while ready <> CMD_RESET
+            ready := I2C.readByte($42,CMD_FLAG)   
+        
+        reset 'reset computer    
+        ser.Str(string("computer reset"))
+        I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+         
     'start at first catalog sector so we can count to see where our index falls
     bytes_read := 0
     bytes_read := goto_sector(dsk_name, cat_track, cat_sector)
@@ -400,7 +424,24 @@ PRI sd_send_file(line_size) | ran_once, bytes_read, file_name, y, i, next_cat_se
         '
     while next_tslist_track <> $00 'track will read 0 when we are at the end of the file data
     
-                    
+    ready := $00
+    if prog_download_option == FILE_RUN 'if file is being run, wait for command to reset
+        repeat while ready <> CMD_RESET
+            ready := I2C.readByte($42,CMD_FLAG)   
+            'ser.Hex (ready, 2)
+        reset 'reset computer    
+        ser.Str(string("computer reset"))
+        I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+        
+        ready := $00
+        repeat while ready <> CMD_RETROII
+            ready := I2C.readByte($42,CMD_FLAG)   
+            'ser.Hex (ready, 2)
+        I2C.writeByte($42,29,MODE_RETROII) 
+        current_mode := MODE_RETROII    
+        ser.Str(string("mode set to retroii"))
+        'I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+                                                          
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
 PRI sd_send_catalog(line_size) | dsk_idx, is_done, dsk_name,i, y, file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
     'populate dsk_idx from line_buffer
@@ -751,6 +792,7 @@ PRI init
     current_mode := MODE_RETROII
     file_count := 0
     ss_override := FALSE
+    prog_download_option := 0
     'cog_phi2 := cognew(process_phi2, @phi2_stack)   
     'cog_i2c := cognew(process_i2c, @i2c_stack)  
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
