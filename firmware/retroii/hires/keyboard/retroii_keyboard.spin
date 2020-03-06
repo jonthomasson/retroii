@@ -117,7 +117,11 @@ PUB main | soft_switches, i, frq
         
         key := kb.key
         
+        
         if  key < 128 and key > 0
+            if key > 96 and key < 123 'convert to uppercase
+                key -= $20 'subtract 32
+                               
             if current_mode == MODE_RETROII
                 kb_write(key)
             elseif current_mode == MODE_SD_CARD_1
