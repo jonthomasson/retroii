@@ -585,7 +585,8 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     repeat while current_mode == MODE_SD_CARD_2
         index := slave.check_reg(31)
         if index > -1  
-            print( index)
+            if index > 47 and index < 58
+                print( index)
         
 {{
 Summary:
@@ -654,8 +655,9 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
     R2.Cursor(TRUE)                          
     repeat while current_mode == MODE_SD_CARD_1
         index := slave.check_reg(31)
-        if index > -1    
-            print( index)
+        if index > -1 
+            if index > 47 and index < 58 'valid number 0-9   
+                print( index)
     
 {{
 Summary: Used to tell keyboard/sd card controller that the data has been received.
