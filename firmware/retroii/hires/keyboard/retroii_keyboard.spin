@@ -159,8 +159,8 @@ PUB main | soft_switches, i, frq
                         if key > 47 and key < 58 'valid number 0-9
                             line_buffer[i] := key
                             i++
-                   
-            I2C.writeByte($42,31,key)
+            if current_mode <> MODE_RETROII       
+                I2C.writeByte($42,31,key)
             'if kb_output_data == true   'determine where to send key to data bus
             '    kb_write(key)
         elseif key == 200 or key == 201 'backspace or delete
