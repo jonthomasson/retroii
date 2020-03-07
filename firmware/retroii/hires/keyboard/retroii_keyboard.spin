@@ -126,12 +126,13 @@ PUB main | soft_switches, i, frq
                 kb_write(key)
             elseif current_mode == MODE_SD_CARD_1
                 if key == $0D 'enter
-                    I2C.writeByte($42,29,MODE_SD_CARD_2)  
-                    current_mode := MODE_SD_CARD_2   
-                    sd_send_catalog(i)   
-                    i := 0 'start line buffer over    
+                    if i > 0 'valid input
+                        I2C.writeByte($42,29,MODE_SD_CARD_2)  
+                        current_mode := MODE_SD_CARD_2   
+                        sd_send_catalog(i)   
+                        i := 0 'start line buffer over    
                     
-                    prog_download_option := 0          
+                        prog_download_option := 0          
                 else
                     'write to line buffer
                     if key > 47 and key < 58 'valid number 0-9
@@ -141,12 +142,13 @@ PUB main | soft_switches, i, frq
                   
             elseif current_mode == MODE_SD_CARD_2
                 if key == $0D 'enter
-                    I2C.writeByte($42,29,MODE_SD_CARD_3)  
-                    current_mode := MODE_SD_CARD_3   
-                    sd_send_file(i)
-                    i := 0 'start line buffer over  
+                    if i > 0 'valid input
+                        I2C.writeByte($42,29,MODE_SD_CARD_3)  
+                        current_mode := MODE_SD_CARD_3   
+                        sd_send_file(i)
+                        i := 0 'start line buffer over  
                        
-                    prog_download_option := 0
+                        prog_download_option := 0
                 else
                     'write to line buffer
                     if prog_download_option == 0
