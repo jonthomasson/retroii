@@ -29,6 +29,9 @@ CON
     D0 = 0
     D7 = 7
     
+    {CLOCK}
+    CLOCK_REG = 23 'i2c register to hold clock value
+    
     {ADDRESS PINS}
     A0 = 8
     A7 = 15
@@ -86,7 +89,8 @@ VAR
     long cog_soft_switches
     long cog_ss_stack[20]
     long prog_download_option
-
+    long current_clock 'current frequency in Hz for clock feeding the 6502
+    long clock_freqs[10]
 OBJ
 
     R2 : "r2_video.spin"
@@ -122,6 +126,20 @@ PRI ascii_2bin(ascii) | binary
    
     
 PRI init | i, x, y
+    current_clock := 1
+    'init clock freq array
+    clock_freqs[0]  := 0
+    clock_freqs[1]  := 1_000
+    clock_freqs[2]  := 10_000
+    clock_freqs[3]  := 50_000
+    clock_freqs[4]  := 100_000
+    clock_freqs[5]  := 250_000
+    clock_freqs[6]  := 500_000
+    clock_freqs[7]  := 1_000_000
+    clock_freqs[8]  := 2_000_000
+    clock_freqs[9]  := 3_000_000
+    clock_freqs[10] := 4_000_000
+    
     soft_switches_updated := FALSE
     ss_hires := FALSE
     ss_page2 := FALSE
@@ -201,6 +219,11 @@ PRI check_soft_switches | index
             if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
                 current_mode := index
                 
+        index := -1
+        index := slave.check_reg(CLOCK_REG)   
+        
+        if index > -1
+            current_clock := index             
 {{
 Summary: 
     Starts th memory monitor program.
@@ -903,6 +926,13 @@ Summary: Prints general debug info to the bottom of the screen.
     Right now this is only displaying the state of the soft switches.
 }} 
 PRI printDebug
+    'display current clock freq
+    setPos(0, 29)
+    str( string("CLOCK(HZ): "))
+    str( string("           ")) 'clear screen value
+    setPos(10, 29)
+    dec( clock_freqs[current_clock])
+    'str( string(" HZ"))
     'display soft switches
     setPos(28, 26)
     str( string("HIRES: "))

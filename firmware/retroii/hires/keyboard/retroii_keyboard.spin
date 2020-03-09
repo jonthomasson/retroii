@@ -28,6 +28,8 @@ CON
     {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
+    MAX_CLOCK = 8 'the maximum frequency in MHz that we'll overclock
+    CLOCK_REG = 23 'i2c register to hold clock value
     {SOFT SWITCHES}
     SS_LOW = 4
     SS_HIGH = 7
@@ -75,6 +77,7 @@ VAR
     long kb_output_data
     long current_mode
     long current_disk 'index of currently selected disk
+    long current_clock 'current frequency in MHz for clock feeding the 6502
     long cat_track
     long cat_sector
     {sd card}
@@ -92,6 +95,7 @@ VAR
     byte ss_page2
     byte ss_hires
     byte ss_mask
+    long clock_freqs[10]
     
 PUB main | soft_switches, i, frq
     init
@@ -250,8 +254,21 @@ PUB main | soft_switches, i, frq
             kb_write($00)        
         elseif  key == 215 'F8 turn off soft switch override
             ss_override := FALSE          
-
-
+        elseif  key == 194 'up arrow = increase prop clock frequency
+            if current_clock < 10
+                current_clock++
+                'call set frequency function
+                set_clock("A",Prop_Phi2,clock_freqs[current_clock])
+                'pass current_clock to video processor for debug screen
+                I2C.writeByte($42,CLOCK_REG,current_clock) 
+        elseif  key == 195 'down arrow = decrease prop clock frequency
+            if current_clock > 0
+                current_clock--           
+                'call set frequency function 
+                set_clock("A",Prop_Phi2,clock_freqs[current_clock])
+                'pass current_clock to video processor for debug screen
+                I2C.writeByte($42,CLOCK_REG,current_clock)
+                           
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
 b = clock frequency (CLKFREQ etc)
@@ -265,6 +282,47 @@ PRI frqVal(a, b) : f      ' return f = a/b * 2^32, given a<b, a<2^30, b<2^30
      if a => b
         a -= b
         f++
+
+PUB set_clock(CTR_AB, Pin, Freq) | s, d, ctr, frq
+
+  Freq := Freq #> 0 <# 128_000_000     'limit frequency range
+  
+  if Freq < 500_000                    'if 0 to 499_999 Hz,
+    ctr := constant(%00100 << 26)      '..set NCO mode
+    s := 1                             '..shift = 1
+  else                                 'if 500_000 to 128_000_000 Hz,
+    ctr := constant(%00010 << 26)      '..set PLL mode
+    d := >|((Freq - 1) / 1_000_000)    'determine PLLDIV
+    s := 4 - d                         'determine shift
+    ctr |= d << 23                     'set PLLDIV
+    
+  frq := fraction(Freq, CLKFREQ, s)    'Compute FRQA/FRQB value
+  ctr |= Pin                           'set PINA to complete CTRA/CTRB value
+
+  if CTR_AB == "A"
+     CTRA := ctr                        'set CTRA
+     FRQA := frq                        'set FRQA                   
+     DIRA[Pin]~~                        'make pin output
+     
+  if CTR_AB == "B"
+     CTRB := ctr                        'set CTRB
+     FRQB := frq                        'set FRQB                   
+     DIRA[Pin]~~                        'make pin output
+
+PRI fraction(a, b, shift) : f
+
+  if shift > 0                         'if shift, pre-shift a or b left
+    a <<= shift                        'to maintain significant bits while 
+  if shift < 0                         'insuring proper result
+    b <<= -shift
+ 
+  repeat 32                            'perform long division of a/b
+    f <<= 1
+    if a => b
+      a -= b
+      f++           
+    a <<= 1
+
 
 PRI reset
     'toggle reset line
@@ -781,9 +839,7 @@ PRI kb_write(data_out) | i
     outa[Strobe]~
 
 PRI init 
-    'dira[Prop_Phi2]~~  'output
-    'outa[Prop_Phi2]~   'low
-    'dira[Btn_Phi2]~  'input
+
     dira[K0..K6]~~ 'set keyboard data pins to output
     dira[Strobe]~~ 'set strobe pin to output
     outa[K0..K6] := %0000000 'low
@@ -794,7 +850,27 @@ PRI init
     'outa[RESET_pin]~~ 'high           
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
-    kb.startx(26, 27, NUM, RepeatRate)  
+    kb.startx(26, 27, NUM, RepeatRate) 
+    
+    'init clock freq array
+    clock_freqs[0]  := 0
+    clock_freqs[1]  := 1_000
+    clock_freqs[2]  := 10_000
+    clock_freqs[3]  := 50_000
+    clock_freqs[4]  := 100_000
+    clock_freqs[5]  := 250_000
+    clock_freqs[6]  := 500_000
+    clock_freqs[7]  := 1_000_000
+    clock_freqs[8]  := 2_000_000
+    clock_freqs[9]  := 3_000_000
+    clock_freqs[10] := 4_000_000
+    
+    dira[Prop_Phi2]~~  'output
+    outa[Prop_Phi2]~   'low 
+    set_clock("A",Prop_Phi2,clock_freqs[7])
+    current_clock := 7 'default to 1MHz
+    I2C.writeByte($42,CLOCK_REG,current_clock) 
+    
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
     current_mode := MODE_RETROII
     file_count := 0
