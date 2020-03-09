@@ -126,7 +126,7 @@ PRI ascii_2bin(ascii) | binary
    
     
 PRI init | i, x, y
-    current_clock := 1
+    current_clock := 7
     'init clock freq array
     clock_freqs[0]  := 0
     clock_freqs[1]  := 1_000
@@ -135,7 +135,7 @@ PRI init | i, x, y
     clock_freqs[4]  := 100_000
     clock_freqs[5]  := 250_000
     clock_freqs[6]  := 500_000
-    clock_freqs[7]  := 1_000_000
+    clock_freqs[7]  := 1_020_500 'original clock speed of the Apple ][. Taken from "Understanding The Apple" page 3-3.
     clock_freqs[8]  := 2_000_000
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000

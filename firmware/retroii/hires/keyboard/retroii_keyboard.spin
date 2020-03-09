@@ -860,7 +860,7 @@ PRI init
     clock_freqs[4]  := 100_000
     clock_freqs[5]  := 250_000
     clock_freqs[6]  := 500_000
-    clock_freqs[7]  := 1_000_000
+    clock_freqs[7]  := 1_020_500 'original clock speed of the Apple ][. Taken from "Understanding The Apple" page 3-3.
     clock_freqs[8]  := 2_000_000
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000
