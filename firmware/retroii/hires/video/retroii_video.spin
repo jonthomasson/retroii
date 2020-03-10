@@ -81,6 +81,7 @@ VAR
     byte cursor_x
     byte line_count
     long current_mode
+    long old_mode
     byte rx_error  
     long soft_switches
     byte ss_text
@@ -959,8 +960,9 @@ PRI printDebug
     else
         
         'display current clock freq
-        if old_clock <> current_clock or old_display_debug == FALSE 'only run when the clock value has changed to avoid flicker.
+        if old_clock <> current_clock or old_display_debug == FALSE or old_mode <> current_mode 'only run when the clock value has changed to avoid flicker.
             old_clock := current_clock
+            old_mode := current_mode
             setPos(0, 29)
             str( string("CLOCK(HZ): "))
             str( string("           ")) 'clear screen value
