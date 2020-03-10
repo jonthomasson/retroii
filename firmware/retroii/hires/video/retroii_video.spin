@@ -90,6 +90,7 @@ VAR
     long cog_ss_stack[20]
     long prog_download_option
     long current_clock 'current frequency in Hz for clock feeding the 6502
+    long old_clock 
     long clock_freqs[10]
 OBJ
 
@@ -927,12 +928,14 @@ Summary: Prints general debug info to the bottom of the screen.
 }} 
 PRI printDebug
     'display current clock freq
-    setPos(0, 29)
-    str( string("CLOCK(HZ): "))
-    str( string("           ")) 'clear screen value
-    setPos(10, 29)
-    dec( clock_freqs[current_clock])
-    'str( string(" HZ"))
+    if old_clock <> current_clock 'only run when the clock value has changed to avoid flicker.
+        old_clock := current_clock
+        setPos(0, 29)
+        str( string("CLOCK(HZ): "))
+        str( string("           ")) 'clear screen value
+        setPos(10, 29)
+        dec( clock_freqs[current_clock])
+  
     'display soft switches
     setPos(28, 26)
     str( string("HIRES: "))
