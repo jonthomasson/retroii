@@ -16,14 +16,16 @@ CON
     Line_Buffer_Size = 60
     TX_FLAG = 26    'I2C register set when there's a byte being transmitted
     RX_FLAG = 27    'I2C register set when byte is received at video processor
-    CMD_FLAG = 24   'I2C register used to send commands to video processor
-    CMD_RESET = $EA 'this value tells the video processor to reset the 6502
+    CMD_FLAG = 24   'I2C register used to send commands to other processor
+    CMD_RESET = $EA 'this value tells the processor to reset the 6502
     CMD_DONE = $AC  'this value is an acknowledgement that the command has finished
     CMD_RETROII = $BD 'command to set video mode to retroii mode
     TX_BYTE = 28    'I2C register which holds the byte being transmitted
     REG_FLAG = $FA  'this value indicates that the tx_flag or rx_flag is set                                  ' 
     RX_READY = 25   'I2C register set when ready  to receive from keyboard
     TXRX_TIMEOUT = 35_000
+    CMD_REG = 22    'register for receiving commands from the other processor
+    CMD_DEBUG = $F1 'command tells video processor to toggle the debug screen
     
     {DATA PINS}
     D0 = 0
@@ -92,6 +94,8 @@ VAR
     long current_clock 'current frequency in Hz for clock feeding the 6502
     long old_clock 
     long clock_freqs[10]
+    byte display_debug
+    byte old_display_debug
 OBJ
 
     R2 : "r2_video.spin"
@@ -146,6 +150,8 @@ PRI init | i, x, y
     ss_page2 := FALSE
     ss_mix := FALSE
     ss_text := TRUE
+    
+    display_debug := FALSE
     
     current_mode := MODE_RETROII
     row_num := 0
@@ -224,7 +230,15 @@ PRI check_soft_switches | index
         index := slave.check_reg(CLOCK_REG)   
         
         if index > -1
-            current_clock := index             
+            current_clock := index     
+            
+        index := -1
+        index := slave.check_reg(CMD_REG)   'check for commands issued from the other processor
+        
+        if index > -1
+            if index == CMD_DEBUG
+                'toggle debug
+                display_debug := !display_debug         
 {{
 Summary: 
     Starts th memory monitor program.
@@ -927,28 +941,46 @@ Summary: Prints general debug info to the bottom of the screen.
     Right now this is only displaying the state of the soft switches.
 }} 
 PRI printDebug
-    'display current clock freq
-    if old_clock <> current_clock 'only run when the clock value has changed to avoid flicker.
-        old_clock := current_clock
+    
+    if display_debug == FALSE
+        'if old_display_debug == TRUE 'need to clear debug screen
+     
         setPos(0, 29)
-        str( string("CLOCK(HZ): "))
-        str( string("           ")) 'clear screen value
-        setPos(10, 29)
-        dec( clock_freqs[current_clock])
-  
-    'display soft switches
-    setPos(28, 26)
-    str( string("HIRES: "))
-    hex( ss_hires, 2)
-    setPos(28, 27)
-    str( string("PAGE2: "))
-    hex( ss_page2, 2)
-    setPos(28, 28)
-    str( string("MIX:   "))
-    hex( ss_mix, 2)
-    setPos(28, 29)
-    str( string("TEXT:  "))
-    hex( ss_text, 2)  
+        str( string("                   ")) 'clear screen value
+        setPos(28, 26)
+        str( string("         "))
+        setPos(28, 27)
+        str( string("         "))
+        setPos(28, 28)
+        str( string("         "))
+        setPos(28, 29)
+        str( string("         "))
+        old_display_debug := FALSE
+    else
+        
+        'display current clock freq
+        if old_clock <> current_clock or old_display_debug == FALSE 'only run when the clock value has changed to avoid flicker.
+            old_clock := current_clock
+            setPos(0, 29)
+            str( string("CLOCK(HZ): "))
+            str( string("           ")) 'clear screen value
+            setPos(10, 29)
+            dec( clock_freqs[current_clock])
+            
+        old_display_debug := TRUE
+        'display soft switches
+        setPos(28, 26)
+        str( string("HIRES: "))
+        hex( ss_hires, 2)
+        setPos(28, 27)
+        str( string("PAGE2: "))
+        hex( ss_page2, 2)
+        setPos(28, 28)
+        str( string("MIX:   "))
+        hex( ss_mix, 2)
+        setPos(28, 29)
+        str( string("TEXT:  "))
+        hex( ss_text, 2)  
 
 {{
 Summary: Clears the screen

@@ -25,6 +25,8 @@ CON
     CMD_RETROII = $BD 'command to set video mode to retroii mode
     CMD_DONE = $AC  'this value is an acknowledgement that the command has finished
     TXRX_TIMEOUT = 10_000
+    CMD_REG = 22    'register for sending commands to the other processor
+    CMD_DEBUG = $F1 'command tells video processor to toggle the debug screen
     {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
@@ -181,8 +183,8 @@ PUB main | soft_switches, i, frq
             kb_output_data := !kb_output_data
             ser.Str (string("toggling kb_output_data : "))
             ser.Dec (kb_output_data)
-        elseif key == 209 'f2 toggle clock speed
-        
+        elseif key == 209 'f2 toggle debug screen
+            I2C.writeByte($42,CMD_REG,CMD_DEBUG)
         elseif key == 210 'f3 mode monitor
             'send i2c to video processor to tell it to switch modes
             kb_output_data := false
