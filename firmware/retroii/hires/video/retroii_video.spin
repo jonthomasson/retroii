@@ -26,6 +26,9 @@ CON
     TXRX_TIMEOUT = 35_000
     CMD_REG = 22    'register for receiving commands from the other processor
     CMD_DEBUG = $F1 'command tells video processor to toggle the debug screen
+    SS_REG = 30
+    KEY_REG = 31
+    SLAVE_ID = $42
     
     {DATA PINS}
     D0 = 0
@@ -45,6 +48,7 @@ CON
     WE = 30
     
     {MODES}
+    MODE_REG = 29
     MODE_MONITOR = 1
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
@@ -157,7 +161,7 @@ PRI init | i, x, y
     current_mode := MODE_RETROII
     row_num := 0
     dira[21..23]~~
-    slave.start(SCL_pin,SDA_pin,$42) 
+    slave.start(SCL_pin,SDA_pin,SLAVE_ID) 
     R2.Start(2)
     'Backgound and foreground colors
     R2.Color(0, R2#RED) 'BLACK
@@ -192,7 +196,7 @@ PRI check_soft_switches | index
    
     repeat
         waitcnt(500000 + cnt)
-        index := slave.check_reg(30) 'check for soft switch changes
+        index := slave.check_reg(SS_REG) 'check for soft switch changes
     
         if index > -1
             soft_switches := index
@@ -221,7 +225,7 @@ PRI check_soft_switches | index
               
         index := -1
         
-        index := slave.check_reg(29) 'check for new mode
+        index := slave.check_reg(MODE_REG) 'check for new mode
     
         if index > -1
             if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
@@ -253,7 +257,7 @@ PRI run_monitor | i, index
     print_header
     
     repeat while current_mode == MODE_MONITOR
-        index := slave.check_reg(31)
+        index := slave.check_reg(KEY_REG)
         if index > -1
             if index == $0D 'enter key detected
                 
@@ -597,7 +601,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     'R2.Cursor(FALSE)
     'get download option to run or load file
     repeat while current_mode == MODE_SD_CARD_2 and prog_download_option == 0
-        index := slave.check_reg(31)
+        index := slave.check_reg(KEY_REG)
         if index > -1  
             if index == "L" or index == "R" 'load or run
                 if index == "L"
@@ -622,7 +626,7 @@ PRI run_sd_prog_select | index, i, rx_char, dos_ver, vol_num, cat_count, file_le
     'get file index to load/run
     R2.Cursor(TRUE)
     repeat while current_mode == MODE_SD_CARD_2
-        index := slave.check_reg(31)
+        index := slave.check_reg(KEY_REG)
         if index > -1  
             if index > 47 and index < 58
                 print( index)
@@ -693,7 +697,7 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
     
     R2.Cursor(TRUE)                          
     repeat while current_mode == MODE_SD_CARD_1
-        index := slave.check_reg(31)
+        index := slave.check_reg(KEY_REG)
         if index > -1 
             if index > 47 and index < 58 'valid number 0-9   
                 print( index)
@@ -753,7 +757,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
 
         retroii_mode_old := retroii_mode 
         
-        if ss_text == $FF and ss_hires == $00 'TEXT MODE
+        if ss_text == $FF 'and ss_hires == $00 'TEXT MODE
             retroii_mode := RETROII_TEXT
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         

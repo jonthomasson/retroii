@@ -15,6 +15,8 @@ CON
     SDA_pin = 14
     SCL_pin = 13
     Bitrate = 400_000
+    SLAVE_ID = $42
+    MODE_REG = 29
     TX_FLAG = 26    'I2C register set when there's a byte being transmitted
     RX_FLAG = 27    'I2C register set when byte is received at video processor
     TX_DATA = 28    'I2C register which holds the byte being transmitted
@@ -35,6 +37,7 @@ CON
     {SOFT SWITCHES}
     SS_LOW = 4
     SS_HIGH = 7
+    SS_REG = 30
     {RESET}
     RESET_pin = 24
     RESET_PERIOD  = 20_000_000 '1/2 second
@@ -42,6 +45,7 @@ CON
     Strobe = 25
     K0 = 17
     K6 = 23
+    KEY_REG = 31
     {MODES}
     MODE_MONITOR = 1
     MODE_RETROII = 2
@@ -115,7 +119,7 @@ PUB main | soft_switches, i, frq
         if soft_switches_old <> soft_switches
             ser.Str (string("soft switches updated: "))
             ser.Hex (soft_switches, 2)
-            I2C.writeByte($42,30,soft_switches) 
+            I2C.writeByte(SLAVE_ID,SS_REG,soft_switches) 
             soft_switches_old := soft_switches
             
         'key := kb.getkey 
@@ -133,7 +137,7 @@ PUB main | soft_switches, i, frq
             elseif current_mode == MODE_SD_CARD_1
                 if key == $0D 'enter
                     if i > 0 'valid input
-                        I2C.writeByte($42,29,MODE_SD_CARD_2)  
+                        I2C.writeByte(SLAVE_ID,MODE_REG,MODE_SD_CARD_2)  
                         current_mode := MODE_SD_CARD_2   
                         sd_send_catalog(i)   
                         i := 0 'start line buffer over    
@@ -149,7 +153,7 @@ PUB main | soft_switches, i, frq
             elseif current_mode == MODE_SD_CARD_2
                 if key == $0D 'enter
                     if i > 0 'valid input
-                        I2C.writeByte($42,29,MODE_SD_CARD_3)  
+                        I2C.writeByte(SLAVE_ID,MODE_REG,MODE_SD_CARD_3)  
                         current_mode := MODE_SD_CARD_3   
                         sd_send_file(i)
                         i := 0 'start line buffer over  
@@ -168,7 +172,7 @@ PUB main | soft_switches, i, frq
                             line_buffer[i] := key
                             i++
             if current_mode <> MODE_RETROII       
-                I2C.writeByte($42,31,key)
+                I2C.writeByte(SLAVE_ID,KEY_REG,key)
             'if kb_output_data == true   'determine where to send key to data bus
             '    kb_write(key)
         elseif key == 200 or key == 201 'backspace or delete
@@ -184,15 +188,15 @@ PUB main | soft_switches, i, frq
             ser.Str (string("toggling kb_output_data : "))
             ser.Dec (kb_output_data)
         elseif key == 209 'f2 toggle debug screen
-            I2C.writeByte($42,CMD_REG,CMD_DEBUG)
+            I2C.writeByte(SLAVE_ID,CMD_REG,CMD_DEBUG)
         elseif key == 210 'f3 mode monitor
             'send i2c to video processor to tell it to switch modes
             kb_output_data := false
-            I2C.writeByte($42,29,MODE_MONITOR)  
+            I2C.writeByte(SLAVE_ID,MODE_REG,MODE_MONITOR)  
             current_mode := MODE_MONITOR
         elseif key == 211 'f4 mode RETROII
             kb_output_data := true 
-            I2C.writeByte($42,29,MODE_RETROII)  
+            I2C.writeByte(SLAVE_ID,MODE_REG,MODE_RETROII)  
             current_mode := MODE_RETROII    
         elseif  key == 212 'f5 reset
             'toggle reset line
@@ -201,7 +205,7 @@ PUB main | soft_switches, i, frq
             kb_output_data := false
             i := 0 'start line buffer over
             ser.Str (string("entering sd card mode"))
-            I2C.writeByte($42,29,MODE_SD_CARD_1)  
+            I2C.writeByte(SLAVE_ID,MODE_REG,MODE_SD_CARD_1)  
             current_mode := MODE_SD_CARD_1   
             sd_send_filenames(0)
         elseif  key == 216 or key == 217 or key == 218 or key == 219 'F9-F12 manual soft switch override
@@ -262,14 +266,14 @@ PUB main | soft_switches, i, frq
                 'call set frequency function
                 set_clock("A",Prop_Phi2,clock_freqs[current_clock])
                 'pass current_clock to video processor for debug screen
-                I2C.writeByte($42,CLOCK_REG,current_clock) 
+                I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
         elseif  key == 195 'down arrow = decrease prop clock frequency
             if current_clock > 0
                 current_clock--           
                 'call set frequency function 
                 set_clock("A",Prop_Phi2,clock_freqs[current_clock])
                 'pass current_clock to video processor for debug screen
-                I2C.writeByte($42,CLOCK_REG,current_clock)
+                I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock)
                            
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
@@ -357,11 +361,11 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
     ready := $00
     if prog_download_option == FILE_RUN 'if file is being run, wait for command to reset
         repeat while ready <> CMD_RESET
-            ready := I2C.readByte($42,CMD_FLAG)   
+            ready := I2C.readByte(SLAVE_ID,CMD_FLAG)   
         
         reset 'reset computer    
         ser.Str(string("computer reset"))
-        I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+        I2C.writeByte(SLAVE_ID,CMD_FLAG, CMD_DONE) 'send ack back to video processor
          
     'start at first catalog sector so we can count to see where our index falls
     bytes_read := 0
@@ -493,21 +497,21 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
     ready := $00
     if prog_download_option == FILE_RUN 'if file is being run, wait for command to reset
         repeat while ready <> CMD_RESET
-            ready := I2C.readByte($42,CMD_FLAG)   
+            ready := I2C.readByte(SLAVE_ID,CMD_FLAG)   
             'ser.Hex (ready, 2)
         reset 'reset computer    
         ser.Str(string("computer reset"))
-        I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+        I2C.writeByte(SLAVE_ID,CMD_FLAG, CMD_DONE) 'send ack back to video processor
         
         if is_basic == FALSE
             ready := $00
             repeat while ready <> CMD_RETROII
-                ready := I2C.readByte($42,CMD_FLAG)   
+                ready := I2C.readByte(SLAVE_ID,CMD_FLAG)   
                 'ser.Hex (ready, 2)
-            I2C.writeByte($42,29,MODE_RETROII) 
+            I2C.writeByte(SLAVE_ID,MODE_REG,MODE_RETROII) 
             current_mode := MODE_RETROII    
             ser.Str(string("mode set to retroii"))
-            'I2C.writeByte($42,CMD_FLAG, CMD_DONE) 'send ack back to video processor
+            'I2C.writeByte(SLAVE_ID,CMD_FLAG, CMD_DONE) 'send ack back to video processor
                                                           
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
 PRI sd_send_catalog(line_size) | dsk_idx, is_done, dsk_name,i, y, file_type, file_name, file_length_ls, file_length_ms, bytes_read,tslist_track, tslist_sector, dos_ver, dsk_vol, next_cat_track, next_cat_sector
@@ -787,16 +791,16 @@ PRI sd_send_filenames(page) | count, page_count, count2, count_files_sent, ready
     'stop_tx_ready
     
 PRI stop_tx_ready 
-    I2C.writeByte($42,RX_READY,$00) 'put rx back in non receiving state
+    I2C.writeByte(SLAVE_ID,RX_READY,$00) 'put rx back in non receiving state
                                     
 PRI set_tx_ready | ready, i
     'clear flags
-    I2C.writeByte($42,TX_FLAG,$00)
-    I2C.writeByte($42,RX_FLAG,$00)
+    I2C.writeByte(SLAVE_ID,TX_FLAG,$00)
+    I2C.writeByte(SLAVE_ID,RX_FLAG,$00)
     i := 0
     'wait for receiver to be ready
     repeat while ready <> REG_FLAG
-        ready := I2C.readByte($42,RX_READY)
+        ready := I2C.readByte(SLAVE_ID,RX_READY)
         i++
         if i > TXRX_TIMEOUT
             ser.Str(string("timed out"))
@@ -804,7 +808,7 @@ PRI set_tx_ready | ready, i
 
 PRI tx_byte(data) | success, ready, i
     
-    I2C.writeByte($42,TX_DATA,data)     'place data in tx_byte register  
+    I2C.writeByte(SLAVE_ID,TX_DATA,data)     'place data in tx_byte register  
     
                                         
     
@@ -871,7 +875,7 @@ PRI init
     outa[Prop_Phi2]~   'low 
     set_clock("A",Prop_Phi2,clock_freqs[7])
     current_clock := 7 'default to 1MHz
-    I2C.writeByte($42,CLOCK_REG,current_clock) 
+    I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
     
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
     current_mode := MODE_RETROII
