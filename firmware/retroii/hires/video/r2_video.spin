@@ -41,13 +41,9 @@ CON
   BP = 22'22
 
   'Color value constants
-  #$FC, LT_GRAY, #$A8, GRAY, #$54, DK_GRAY
-  #$C0, LT_RED, #$80, RED, #$40, DK_RED
-  #$30, LT_GREEN, #$20, GREEN, #$10, DK_GREEN
-  #$0C, LT_BLUE, #$08, BLUE, #$04, DK_BLUE
-  #$F0, LT_ORANGE, #$A0, ORANGE, #$50, DK_ORANGE
-  #$CC, LT_PURPLE, #$88, PURPLE, #$44, DK_PURPLE
-  #$3C, LT_TEAL, #$28, TEAL, #$14, DK_TEAL
+  #$04, BLUE, #$08, GREEN
+  #$10, RED, #$0C, LT_BLUE
+  #$18, YELLOW, #$14, LT_RED
   #$FF, WHITE, #$00, BLACK
 
   PC_FP  = WIDTH + FP

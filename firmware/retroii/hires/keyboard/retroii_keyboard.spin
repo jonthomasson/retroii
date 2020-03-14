@@ -29,6 +29,8 @@ CON
     TXRX_TIMEOUT = 10_000
     CMD_REG = 22    'register for sending commands to the other processor
     CMD_DEBUG = $F1 'command tells video processor to toggle the debug screen
+    COLOR_REG = 21
+    CMD_CHANGE_COLOR = $B3
     {CLOCK}
     Btn_Phi2 = 11
     Prop_Phi2 = 12
@@ -183,10 +185,11 @@ PUB main | soft_switches, i, frq
             kb_write($88)
         elseif key == 193 'send right
             kb_write($95)
-        elseif key == 208 'f1 toggle kb to data bus
-            kb_output_data := !kb_output_data
-            ser.Str (string("toggling kb_output_data : "))
-            ser.Dec (kb_output_data)
+        elseif key == 208 'f1 toggle monochrome color
+            I2C.writeByte(SLAVE_ID,COLOR_REG,CMD_CHANGE_COLOR)
+            'kb_output_data := !kb_output_data
+            'ser.Str (string("toggling kb_output_data : "))
+            'ser.Dec (kb_output_data)
         elseif key == 209 'f2 toggle debug screen
             I2C.writeByte(SLAVE_ID,CMD_REG,CMD_DEBUG)
         elseif key == 210 'f3 mode monitor

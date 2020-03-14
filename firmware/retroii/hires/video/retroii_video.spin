@@ -29,6 +29,8 @@ CON
     SS_REG = 30
     KEY_REG = 31
     SLAVE_ID = $42
+    COLOR_REG = 21
+    CMD_CHANGE_COLOR = $B3
     
     {DATA PINS}
     D0 = 0
@@ -99,6 +101,8 @@ VAR
     long current_clock 'current frequency in Hz for clock feeding the 6502
     long old_clock 
     long clock_freqs[10]
+    byte colors[6]
+    long current_color
     byte display_debug
     byte old_display_debug
 OBJ
@@ -150,6 +154,16 @@ PRI init | i, x, y
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000
     
+    'init color array
+    colors[0] := R2#GREEN
+    colors[1] := R2#BLUE
+    colors[2] := R2#LT_BLUE
+    colors[3] := R2#RED
+    colors[4] := R2#LT_RED
+    colors[5] := R2#YELLOW
+    colors[6] := R2#WHITE
+    current_color := 0 'GREEN
+    
     soft_switches_updated := FALSE
     ss_hires := FALSE
     ss_page2 := FALSE
@@ -164,8 +178,8 @@ PRI init | i, x, y
     slave.start(SCL_pin,SDA_pin,SLAVE_ID) 
     R2.Start(2)
     'Backgound and foreground colors
-    R2.Color(0, R2#RED) 'BLACK
-    R2.Color(1, R2#BLUE) 'GREEN
+    R2.Color(0, R2#BLACK) 'BLACK
+    R2.Color(1, R2#GREEN) 'GREEN
     
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
@@ -243,7 +257,20 @@ PRI check_soft_switches | index
         if index > -1
             if index == CMD_DEBUG
                 'toggle debug
-                display_debug := !display_debug         
+                display_debug := !display_debug  
+                
+        index := -1
+        index := slave.check_reg(COLOR_REG)   'check for commands issued from the other processor
+        
+        if index > -1
+            if index == CMD_CHANGE_COLOR
+                'toggle COLOR
+                if current_color > 5
+                    current_color := 0
+                else
+                    current_color++
+                R2.Color(1, colors[current_color])
+      
 {{
 Summary: 
     Starts th memory monitor program.
@@ -987,6 +1014,7 @@ PRI printDebug
         setPos(28, 29)
         str( string("TEXT:  "))
         hex( ss_text, 2)  
+         
 
 {{
 Summary: Clears the screen
