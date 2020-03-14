@@ -264,12 +264,17 @@ PRI check_soft_switches | index
         
         if index > -1
             if index == CMD_CHANGE_COLOR
+                
                 'toggle COLOR
                 if current_color > 5
                     current_color := 0
                 else
                     current_color++
-                R2.Color(1, colors[current_color])
+                 
+                if current_color == 6 and display_debug == FALSE   'weird bug where color is white and display_debug is false, it just displays black
+                    R2.Color(1, R2#WHITE)
+                else
+                    R2.Color(1, colors[current_color])
       
 {{
 Summary: 

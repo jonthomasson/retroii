@@ -44,7 +44,7 @@ CON
   #$04, BLUE, #$08, GREEN
   #$10, RED, #$0C, LT_BLUE
   #$18, YELLOW, #$14, LT_RED
-  #$FF, WHITE, #$00, BLACK
+  #$00, BLACK, #$1C, WHITE 
 
   PC_FP  = WIDTH + FP
   BLKS   = 480 / HEIGHT         'Number of times to repeat each video line
