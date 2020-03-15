@@ -19,70 +19,169 @@ CON
 
 OBJ
 
-  C64 : "C64_4CF_VGA.spin"
-  'pst : "Parallax Serial Terminal"
+  C64 : "r2_video.spin"
+  pst : "Parallax Serial Terminal"
 
 PUB Main | I, J, C, frq
 
-  'pst.Start(115200)
-
+  pst.Start(115200)
+  
   'Set the pin_group number for your board
   C64.Start(2)
+  
   'C64.Start(%010101)
   'Backgound and foreground colors
-  C64.Color(0, C64#RED) 'BLACK
-  C64.Color(1, C64#BLUE) 'GREEN
+  C64.Color(0, C64#BLACK) 'BLACK
+  C64.Color(1, C64#GREEN) 'GREEN
   C64.Color(2, C64#RED)
   C64.Color(3, C64#BLUE) 'GREEN
 
-  'Character set from 32 to 255
-  C := 32
-  repeat J from 0 to 13
-    C64.Pos(1, J)
-    repeat I from 0 to 15
-      'C64.Char(C)
-      C += 1
-
   'Test String
-  C64.Pos(6, 14)
-  'C64.Str(string("DANGER"), 3, 2)
-  C64.Pos(0,15)
-  'C64.Char(48)
-  'I := 0
-  C64.Pos(35,15)
-  C64.Char(48)
-  'repeat I from 0 to 24
-    'C64.Pos(I, 15)
-  '  C64.Char(48)
-  '  I++
-  '4 pixels in a row
-  'C64.Pixel(0, 140, 4)
-  'C64.Pixel(1, 142, 4)
-  'C64.Pixel(2, 144, 4)
-  'C64.Pixel(3, 146, 4)
-
-  'A pixel in each corner of the screen
-  C64.Pixel(1, 0, 0)
-  C64.Pixel(1, 0, C64#HEIGHT - 1)
-  C64.Pixel(1, C64#WIDTH - 1, 0)
-  C64.Pixel(1, C64#WIDTH - 1, C64#HEIGHT - 1)
-
-  'Line Pattern
-  'C64.Line(1, 140, 30, 158, 30)
-  'C64.LineTo(1, 158, 48)
-  'C64.LineTo(1, 140, 48)
-  'C64.LineTo(1, 140, 30)
-  'C64.LineTo(2, 149, 20)
-  'C64.LineTo(2, 158, 30)
-  'C64.LineTo(2, 149, 40)
-  'C64.LineTo(2, 140, 30)
+  'C64.Pos(0, 0)
+  'C64.StrA2(string(" String  "))
+  'C := 65
+  'repeat J from 0 to 25
+  '  C64.Char(156)
+  '  C += 1
+  I := C64.LowRes2 ($CF, 5, 10)
+  pst.Hex(I,8)
+  'return
+  C64.Pos (6,11)
+  C64.Char ($E0)
+  C64.LowRes2 ($FF, 6, 12)
+  C64.LowRes2 ($FF, 6, 9)
+  C64.LowRes2 ($FF, 4, 9)
+  'C64.LowRes2 ($FF, 4, 10)
+  'pst.Hex(C64.DebugOutput,2)
+  return  
+  'C64.Pos(0,0)
+  'C64.Char(65)
+  'pst.Hex(C64.DebugOutput,8)
+  repeat 1
+    repeat I from 0 to 39
+        C64.PixelByte ($7F, I, 0)
+  'repeat 1
+  '  repeat I from 0 to 39
+  '      C64.Pixel ($7F, I, 0)
+        
+  C64.PixelByte($43, 2, 1)
   
-  'Turn on cursor
-  C64.Cursor(FALSE)
+  C64.Pixel($83, 2, 0)
+  C64.Pixel($7F, 2, 0)
+  C64.Pixel($43, 2, 0)
+  pst.Hex(C64.DebugOutput, 8)
+  
+  return
+  
+  I := C64.PixelByte($FF, 5, 0)
+  pst.Hex(I,8)
+  return
+  
+  repeat J from 1 to 40
+    C64.PixelByte($00, J, 0)
+  
+  repeat J from 1 to 40
+    C64.PixelByte($FF, J, 0)  
 
-  frq := frqVal(11328750, clkfreq)
-  C64.Pos(0,10)
-  dec(frq)
+  repeat J from 1 to 40
+    C64.PixelByte($2A, J, 5)
+    
+  return
+  I := C64.PixelByte($7F, 7, 0) 'COL 1
+  'pst.Dec(I)
+  'return
+  C64.PixelByte($7F, 14, 2) 'COL 2
+  C64.PixelByte($7F, 21, 3) 'COL 2
+  C64.PixelByte($7F, 28, 4) 'COL 2
+  C64.PixelByte($7F, 35, 5) 'COL 2
+  C64.PixelByte($7F, 42, 6) 'COL 2
+  C64.PixelByte($7F, 49, 7) 'COL 2
+  C64.PixelByte($7F, 56, 8) 'COL 2
+  C64.PixelByte($7F, 63, 9) 'COL 2
+  C64.PixelByte($7F, 70, 10) 'COL 2
+  C64.PixelByte($7F, 77, 11) 'COL 2
+  C64.PixelByte($7F, 84, 12) 'COL 2
+  C64.PixelByte($7F, 91, 13) 'COL 2
+  C64.PixelByte($7F, 98, 14) 'COL 2
+  C64.PixelByte($7F, 105, 15) 'COL 2
+  C64.PixelByte($7F, 112, 16) 'COL 2
+  C64.PixelByte($7F, 119, 17) 'COL 2
+  C64.PixelByte($7F, 126, 18) 'COL 2
+  C64.PixelByte($7F, 133, 19)
+  C64.PixelByte($7F, 140, 20)
+  C64.PixelByte($7F, 147, 21)
+  C64.PixelByte($7F, 154, 22)
+  C64.PixelByte($7F, 161, 23)
+  C64.PixelByte($7F, 168, 24)
+  C64.PixelByte($7F, 175, 25)
+  C64.PixelByte($7F, 182, 26)
+  C64.PixelByte($7F, 189, 27)
+  C64.PixelByte($7F, 196, 28)
+  C64.PixelByte($7F, 203, 29)
+  C64.PixelByte($7F, 210, 30)
+  C64.PixelByte($7F, 217, 31)
+  C64.PixelByte($7F, 224, 32)
+  C64.PixelByte($7F, 231, 33)
+  C64.PixelByte($7F, 238, 34)
+  C64.PixelByte($7F, 245, 35)
+  C64.PixelByte($7F, 252, 36)
+  C64.PixelByte($7F, 259, 37)
+  C64.PixelByte($7F, 266, 38)
+  C64.PixelByte($7F, 273, 39)
+  C64.PixelByte($7F, 280, 40)
+  C64.PixelByte($7F, 287, 41)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  'C64.PixelByte($04, 0, 0)
+  'pst.Dec(C64.DebugOutput)
+  'C64.Pos(39,23)
+  'C64.Char(65)
+    
+  'C64.Pos(0,0)
+  'C64.Char(65)
+  'C64.Pos(1,0)
+  'C64.Char(65)
+  'C64.Pos(2,0)
+  'C64.Char(65)
+  'C64.Pos(3,0)
+  'C64.Char(65)
+  'C64.Pos(4,0)
+  'C64.Char(65)
+  'C64.Pos(5,0)
+  'C64.Char(65)
+  'C64.Pos(6,0)
+  'C64.Char(65)
+  'C64.Pos(7,0)
+  'C64.Char(65)
+  'C64.Pos(8,0)
+  'C64.Char(65)
+  'C64.Pos(9,0)
+  'C64.Char(65)
+  
+  'C64.Pos(10, 10)
+  'C64.Str(string("HELLO WORLDD"))
+  'C64.Pos(15, 12)
+  'C64.Str(string("APPLE ]["))
+  'C := 65
+  'C64.Pos(0, 0)
+  'repeat J from 0 to 25
+  '  C64.Char(C)
+  '  C += 1
+    
+  
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
 b = clock frequency (CLKFREQ etc)

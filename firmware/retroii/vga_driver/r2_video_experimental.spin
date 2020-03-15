@@ -1,5 +1,5 @@
 ''------------------------------------------------------------------------------------------------
-'' Commodore 64 Four Color Fast VGA Display
+'' Commodore 64 Two Color Fast VGA Display
 ''
 '' Copyright (c) 2018 Mike Christle
 '' See end of file for terms of use.
@@ -7,7 +7,7 @@
 '' History:
 '' 1.0.0 - 10/10/2018 - Original release.
 '' 1.0.1 - 10/21/2018 - Fix errors in the character bit maps.
-'' 1.1.0 - 10/31/2018 - Add CChar routine to better control character colors.
+'' 1.1.0 - 10/31/2018 - Add RChar routine to print in reverse.
 '' 1.2.0 - 11/02/2018 - Add blinking cursor.
 '' 1.2.1 - 11/05/2018 - Fix errors in Line routine.
 '' 1.3.0 - 11/12/2018 - Add LineTo routine to draw a series of lines.
@@ -16,14 +16,14 @@
 '' 2.0.0 - 11/16/2018 - Add assembly routines to replace Pixel, Char and Line functions.
 ''------------------------------------------------------------------------------------------------
 '' Supported screen resolutions:
-''      160x120 Pixels, 20x15 Chars,  4800 Byte Buffer.
-''      192x120 Pixels, 24x15 Chars,  5760 Byte Buffer.
-''      224x120 Pixels, 28x15 Chars,  6720 Byte Buffer.
-''      256x120 Pixels, 32x15 Chars,  7680 Byte Buffer.
-''      256x240 Pixels, 32x30 Chars, 15360 Byte Buffer.
-''      288x240 Pixels, 36x30 Chars, 17280 Byte Buffer.
-''      320x240 Pixels, 40x30 Chars, 19200 Byte Buffer.
-''      384x240 Pixels, 48x30 Chars, 23040 Byte Buffer.
+''      160x120 Pixels, 20x15 Chars,  2400 Byte Buffer.
+''      192x120 Pixels, 24x15 Chars,  2880 Byte Buffer.
+''      224x120 Pixels, 28x15 Chars,  3360 Byte Buffer.
+''      256x120 Pixels, 32x15 Chars,  3840 Byte Buffer.
+''      256x240 Pixels, 32x30 Chars,  7680 Byte Buffer.
+''      288x240 Pixels, 36x30 Chars,  8640 Byte Buffer.
+''      320x240 Pixels, 40x30 Chars,  9600 Byte Buffer.
+''      384x240 Pixels, 48x30 Chars, 11520 Byte Buffer.
 '' To select, uncomment the desired section of constants below. 
 ''
 '' The character value less than 32 are ignored, except for HOME, TAB, Carriage Return and
@@ -38,22 +38,22 @@
 '' Video Circuit:
 ''
 '' Pin              VGA
-'' Group   240ÃŽÂ©
-''  +0 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 14 Vertical Sync                +5V Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 9
-''         240ÃŽÂ©
-''  +1 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 13 Horizontal Sync              GND Ã¯â€šÂ©Ã¢â€Â³Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 5
-''         470ÃŽÂ©                                          Ã¢â€â€š
-''  +2 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â³Ã¢â€â‚¬Ã¯â€šÂ» 3  Blue                              Ã¢â€Â£Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 6
-''         240ÃŽÂ© Ã¢â€â€š                                        Ã¢â€â€š
-''  +3 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ                                        Ã¢â€Â£Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 7
-''         470ÃŽÂ©                                          Ã¢â€â€š
-''  +4 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â³Ã¢â€â‚¬Ã¯â€šÂ» 2  Green                             Ã¢â€Â£Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 8
-''         240ÃŽÂ© Ã¢â€â€š                                        Ã¢â€â€š
-''  +5 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ                                        Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ» 10
-''         470ÃŽÂ©                                         
-''  +6 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â³Ã¢â€â‚¬Ã¯â€šÂ» 1  Red
-''         240ÃŽÂ© Ã¢â€â€š
-''  +7 Ã¯â€šÂ©Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¯â€šÂ½Ã¯â€šÂ¾Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
+'' Group   240Ω
+''  +0 ──────── 14 Vertical Sync                +5V ──── 9
+''         240Ω
+''  +1 ──────── 13 Horizontal Sync              GND ┳─── 5
+''         470Ω                                          │
+''  +2 ──────┳─ 3  Blue                              ┣─── 6
+''         240Ω │                                        │
+''  +3 ──────┘                                        ┣─── 7
+''         470Ω                                          │
+''  +4 ──────┳─ 2  Green                             ┣─── 8
+''         240Ω │                                        │
+''  +5 ──────┘                                        └─── 10
+''         470Ω                                         
+''  +6 ──────┳─ 1  Red
+''         240Ω │
+''  +7 ──────┘
 ''------------------------------------------------------------------------------------------------
 
 CON
@@ -108,15 +108,6 @@ CON
   BP = 14
 }
 
-{ 280x240
-  WIDTH  = 280 
-  HEIGHT = 240
-  FREQ_VALUE = 295656502 
-  CTRA_VALUE = %0_00001_100
-  FP = 7 
-  SP = 42
-  BP = 21
-}
 
 '{ 288x240
   WIDTH  = 288 '288
@@ -131,11 +122,11 @@ CON
 { 320x240
   WIDTH  = 320
   HEIGHT = 240
-  FREQ_VALUE = 337893130 '337893737
+  FREQ_VALUE = 337893737
   CTRA_VALUE = %0_00001_100
-  FP = 8' 9  '8
-  SP = 48 '47 '48
-  BP = 24 '25 '24
+  FP = 8
+  SP = 48
+  BP = 24
 }
 
 { 384x240
@@ -167,85 +158,66 @@ CON
   PC_FP  = WIDTH + FP
   BLKS   = 480 / HEIGHT         'Number of times to repeat each video line
 
-  COLS   = WIDTH / 8 '8            'Width of screen in characters
+  COLS   = WIDTH / 8            'Width of screen in characters
   ROWS   = HEIGHT / 8           'Height of screen in characters
   MAX_C  = COLS - 1             'Maximum column
   MAX_R  = ROWS - 1             'Maximum row
 
   PSIZE  = WIDTH * HEIGHT       'Total number of pixels
-  LSIZE  = PSIZE / 16           'Size of screen buffer in longs
+  LSIZE  = PSIZE / 32           'Size of screen buffer in longs
   LPROW  = COLS / 4             'Longs per screen line
-  WPROW  = COLS / 2             'Words per screen line
-  COLS2  = COLS * 2
 
   MAX_X  = WIDTH - 1            'Maximum value of x coordinate
   MAX_Y  = HEIGHT - 1           'Maximum value of y coordinate
 
-  SCROFF = WIDTH * 2            'Scroll offset
+  SCROFF = WIDTH                'Scroll offset
   SCRCNT = LSIZE - (SCROFF / 4) 'Scroll long count
 
-  'char       8       0
-  'xpos       9       8
-  'ypos       8       17
-  'fg color   2       25
-  'bg color   2       27
-  'command    3       29
   CMD_CHAR  = $00_00_00_00
-  CMD_PIXEL = $20_00_00_00
-  CMD_START = $40_00_00_00
-  CMD_LINE  = $60_00_00_00
-
+  CMD_PIXEL = $04_00_00_00
+  CMD_START = $10_00_00_00
+  CMD_LINE  = $20_00_00_00
+  
 VAR
 
   long  pixel_bfr[LSIZE]
-  long  pixel_colors, frame_count, draw_command
-  long  cursor_pos, cursor_mask
-  byte  cursorx, cursory, cog0, cog1, cursor_state
+  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command
+  byte  cursorx, cursory, cog1, cog2, reverse, cursor_state
 
-PUB Char(ch)
+PUB Char(c) | idx, ptr, tmp
 '------------------------------------------------------------------------------------------------
 '' Print a character on the screen, then advance the cursor.
-'' Used 0 for background color and 1 for foreground color.
 ''
-'' ch - Character to print.
+'' c - Character to print.
 '------------------------------------------------------------------------------------------------
-  CChar(ch, 1, 0)
+  c &= 255
 
-PUB CChar(ch, fg, bg) | i, j, ptr, val, pix
-'------------------------------------------------------------------------------------------------
-'' Print a character on the screen, in the fg and bg colors, then advance the cursor.
-''
-'' ch - Character to print, 0 to 255.
-'' fg - Foreground color number, 0 to 3.
-'' bg - Background color number, 0 to 3.
-'------------------------------------------------------------------------------------------------
   'If a printable character
-  if ch > 31
+  if c > 31
     repeat while draw_command <> 0
-    draw_command := ch | (cursorx << 8) | (cursory << 17) | (fg << 25) | (bg << 27)
-    'draw_command := ch | (cursorx << 8) | (cursory << 17) | (fg << 25) | (bg << 27)
+    draw_command := c | (cursorx << 8) | (cursory << 17)
     cursorx += 1
 
-  'elseif ch == CR
+  'elseif c == CR
   '  cursorx := 0
   '  cursory += 1
 
-  'elseif ch == BS
+  'elseif c == BS
   '  if cursorx > 0
   '    cursorx -= 1
   '    repeat while draw_command <> 0
-  '  draw_command := 32 | (cursorx << 8) | (cursory << 17) | (bg << 27)
+  '    draw_command := 32 | (cursorx << 8) | (cursory << 17)
        
-  'elseif ch == CLS
+  'elseif c == HOME
+  '  cursorx := 0
+  '  cursory := 0
+    
+  'elseif c == CLS
   '  longfill(@pixel_bfr, 0, LSIZE)
   '  cursorx := 0
   '  cursory := 0
 
-  'elseif ch == HOME
-  '  cursorx := 0
-  '  cursory := 0
-    
-  'elseif ch == TAB
+  'elseif c == TAB
   '  cursorx := (cursorx + 4) & $FC
 
   'If at end of line, goto next line
@@ -261,19 +233,27 @@ PUB CChar(ch, fg, bg) | i, j, ptr, val, pix
 
   UpdateCursor
 
-PUB Str(s, fg, bg) | b
+PUB RChar(c)
+'------------------------------------------------------------------------------------------------
+'' Print a character on the screen, in reverse video, then advance the cursor.
+''
+'' c - Character to print.
+'------------------------------------------------------------------------------------------------
+  reverse := 255
+  Char(c)
+  reverse := 0
+
+PUB Str(s) | b
 '------------------------------------------------------------------------------------------------
 '' Write a NULL terminated string starting at the current cursor position.
 ''
-'' s  - Address of a Null terminated string.
-'' fg - Foreground color number, 0 to 3.
-'' bg - Background color number, 0 to 3.
+'' s - Address of a Null terminated string.
 '------------------------------------------------------------------------------------------------
   repeat
     b := byte[s]
     if b == 0
       return
-    CChar(b, fg, bg)
+    Char(b)
     s += 1
 
 PUB Pos(X, Y)
@@ -316,27 +296,27 @@ PUB Clear(first_line, line_count)
   first_line := (first_line <# MAX_Y) #> 0 
   line_count := (line_count <# HEIGHT) #> 0 
 
-  longfill(@pixel_bfr + (COLS2 * first_line), 0, line_count * WPROW)
+  longfill(@pixel_bfr + (COLS * first_line), 0, line_count * LPROW)
 
 PUB ClearScreen
     longfill(@pixel_bfr, 0, LSIZE)
     
-PUB Pixel(c, x, y) | p, q
+PUB Pixel(c, x, y) | p
 '------------------------------------------------------------------------------------------------
 '' Plots a single pixel on the screen.
 ''
-'' c - Color number, 0 to 3.
+'' c - Color number, 0 or 1.
 '' x - The X pixel coordinate.
 '' y - The Y pixel coordinate.
 '------------------------------------------------------------------------------------------------
   repeat while draw_command <> 0
-  draw_command := (c & 3) | (x << 8) | (y << 17) | CMD_PIXEL
-
-PUB Line(c, x1, y1, x2, y2) | dx, dy, df, a, b, d1, d2
+  draw_command := c | (x << 8) | (y << 17) | CMD_PIXEL
+  
+PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen.
 ''
-'' c      - Color number, 0 to 3.
+'' c      - Color number, 0 or 1.
 '' x1, y1 - XY coordinates of start of line.
 '' x2, y2 - XY coordinates of end of line.
 '------------------------------------------------------------------------------------------------
@@ -367,10 +347,10 @@ PUB Color(color_num, new_color)
 '------------------------------------------------------------------------------------------------
 '' Change a color value.
 ''
-'' color_num - The color number to change for the whole screen, 0 to 3.
+'' color_num - The color number to change for the whole screen, 0 or 1.
 '' new_color - A color byte (%RR_GG_BB_xx) describing the pixel's new color.
 '------------------------------------------------------------------------------------------------
-  color_num &= 3
+  color_num &= 1
   pixel_colors.byte[color_num] := new_color
 
 PUB Start(pin_group) | hres, vres
@@ -385,12 +365,9 @@ PUB Start(pin_group) | hres, vres
   colors_ptr := @pixel_colors 
 
   pin_group &= 3
-  'output_enables := ($FF << (pin_group << 3))
-  'vcfg_reg := $30_00_00_FF | (pin_group << 9) 
-  
   output_enables := ($FF << (pin_group << 3))
-  vcfg_reg := $30_00_04_1F  '(four color, vga) check prop manual for vcfg for more details on configuring video
-    
+  vcfg_reg := $20_00_04_1F '| (pin_group << 9)
+   
   colors_ptr := @pixel_colors
   frame_cntr_ptr := @frame_count
    
@@ -401,109 +378,56 @@ PUB Start(pin_group) | hres, vres
   cursor_pos_ptr := @cursor_pos
   cursor_mask := 0
   cursor_mask_ptr := @cursor_mask
-
-  cog0 := cognew(@asm_start, @pixel_bfr) + 1
+  reverse := 0
+  draw_command := 0
+   
+  cog1 := cognew(@asm_start, @pixel_bfr) + 1
+  if cog1 == 0
+    return FALSE
 
   draw_cmnd_ptr := @draw_command
   draw_map_ptr := @C64CharMap
-  cog1 := cognew(@draw_start, @pixel_bfr) + 1
+  draw_reverse_ptr := @reverse
 
-  return cog0 <> 0 and cog1 <> 0
+  cog2 := cognew(@draw_start, @pixel_bfr) + 1
+  if cog2 == 0
+    cogstop(cog1 - 1)
+    return FALSE  
+
+  return TRUE  
    
 PUB Stop
 '------------------------------------------------------------------------------------------------
 '' Shuts down the C64 driver running on a cog.
 '------------------------------------------------------------------------------------------------
-  if cog0 > 0
-    cogstop(cog0 - 1)
-
   if cog1 > 0
     cogstop(cog1 - 1)
+
+  if cog2 > 0
+    cogstop(cog2 - 1)
 
 PRI UpdateCursor | cpos
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
 '------------------------------------------------------------------------------------------------
   if cursor_state
-    cpos := @pixel_bfr + (cursory * WIDTH * 2) + constant(14 * COLS)
-    cpos := cpos + ((cursorx & $FFFE) << 1)
-    cursor_mask := $5555 << ((cursorx & 1) << 4)
+    cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS)
+    cpos := cpos + (cursorx & $FFFC)
+    cursor_mask := $FF << ((cursorx & 3) << 3)
     cursor_pos := cpos
 
 DAT
 '------------------------------------------------------------------------------------------------
                         org     0
 
-asm_start               mov     frqa, freq_reg              'setup frequency, counter values, pin outputs etc.
+asm_start               mov     frqa, freq_reg
                         movi    ctra, #CTRA_VALUE
                         mov     vcfg, vcfg_reg
                         mov     dira, output_enables
-{
-Timing taken from :http://tinyvga.com/vga-timing/640x480@60Hz
-
-                    640 X 480 VIDEO TIMING 
-                            HSYNC
-         ____________________________________________ _____16______ _____96_____ _____48____
-         |                 DISPLAY                   | FRONT PORCH | SYNC PULSE | BACK PORCH|
-         |                                           |
-         |                                           |
-         |                                           |
-         |                                           |
-         |                                           |
-      V  |                                           |
-      S  |                                           |
-      Y  |                                           |
-      N  |                                           |
-      C  |                                           |
-         |                                           |      
-         |                                           |      
-         |___________________________________________|                                                
-         |
-         |
-         |10 FRONT PORCH
-         |
-         |-
-         |
-         |2 SYNC PULSE
-         |                                      BLANKING AREA
-         |-
-         |
-         |33 BACK PORCH
-         |
-         |_
-         
-GENERAL TIMING
-    -SCREEN REFRESH RATE:   60HZ
-    -VERTICAL REFRESH:      31.46875KHZ
-    -PIXEL FREQ:            25.175MHZ
-    
-HORIZONTAL TIMING
-| SCANLINE PART | PIXELS | TIME uS 
-| VISIBLE AREA  | 640    | 25.422045680238
-| FRONT PORCH   | 16     | 0.63555114200596
-| SYNC PULSE    | 96     | 3.8133068520357
-| BACK PORCH    | 48     | 1.9066534260179
-| WHOLE LINE    | 800    | 31.777557100298
-
-VERTICAL TIMING
-| SCANLINE PART | PIXELS | TIME uS 
-| VISIBLE AREA  | 480    | 15.253227408143
-| FRONT PORCH   | 10     | 0.31777557100298
-| SYNC PULSE    | 2      | 0.063555114200596
-| BACK PORCH    | 33     | 1.0486593843098
-| WHOLE FRAME   | 525    | 16.683217477656
-
-
-below are the routines for the VGA driver. They consist of 4 main loops.
-These loops drive the vertical sync pulse (vsync_loop), the vertical sync
-back porch (vsbp_loop), the active video lines (video_loop1), and finally
-the vertical sync front porch (vsfp_loop). These loops provide the video signals
-for the VGA and are repeated indefinitely.
-}
 
 '--- Vertical Sync ------------------------------------------------------------------------------
-vsync_loop              mov     line_cntr, #2                       'sync pulse is 2 lines for 640x480 spec
-                                                            
+vsync_loop              mov     line_cntr, #2
+
 vs_loop                 mov     vscl, #PC_FP
                         waitvid vs_colors, #0
                         mov     vscl, #SP
@@ -513,7 +437,7 @@ vs_loop                 mov     vscl, #PC_FP
                         djnz    line_cntr, #vs_loop
 
 '--- Vertical Sync Back Porch -------------------------------------------------------------------
-                        mov     line_cntr, #33                      'back porch is 33 lines
+                        mov     line_cntr, #33
 
 vsbp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
@@ -527,11 +451,11 @@ vsbp_loop               mov     vscl, #PC_FP
                         mov     vscl, #PC_FP
 
                         mov     pixel_ptr0, par
-                        mov     line_cntr, #HEIGHT                  'active video lines = resolution height
+                        mov     line_cntr, #HEIGHT
                         rdlong  vid_colors, colors_ptr
                         or      vid_colors, blank_colors
 
-                        mov     cursor_mask0, frame_cntr            'mask off cursor, if cursor is in visible area?
+                        mov     cursor_mask0, frame_cntr
                         and     cursor_mask0, #$20  wz
               if_nz     mov     cursor_mask0, #0
               if_z      rdlong  cursor_mask0, cursor_mask_ptr
@@ -544,20 +468,19 @@ vsbp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
 
 '--- Active Video Lines -------------------------------------------------------------------------
-video_loop1             mov     block_cntr, #BLKS                       'will repeat each video line twice (480/240 height)
-video_loop2             mov     vscl, video_scale                       'video_scale is $000_01_010
-                        mov     pixel_cntr, #WPROW '18 for 36 col
+video_loop1             mov     block_cntr, #BLKS
+video_loop2             mov     vscl, video_scale
+                        mov     pixel_cntr, #LPROW
                         mov     pixel_ptr1, pixel_ptr0
 
-video_loop3             rdlong  pixel_values, pixel_ptr1                'main loop to display pixel buffer for a single line
+video_loop3             rdlong  pixel_values, pixel_ptr1
                         cmp     pixel_ptr1, cursor_pos0  wz
               if_z      or      pixel_values, cursor_mask0
-              if_z      and     pixel_values, cursor_mask0
-                        add     pixel_ptr1, #4                          'just reading 4 pixels per group at a time??
-                        waitvid vid_colors, pixel_values                'i think we're using 4 pixel groups since we are limited to 4 colors per group.
-                        djnz    pixel_cntr, #video_loop3                'so this lets us make any of the pixels any one of those 4 colors
+                        add     pixel_ptr1, #4
+                        waitvid vid_colors, pixel_values
+                        djnz    pixel_cntr, #video_loop3
 
-                        mov     vscl, #FP                               'write out FP/SP/BP
+                        mov     vscl, #FP
                         waitvid hs_colors, #0
                         mov     vscl, #SP
                         waitvid hs_colors, #1
@@ -565,12 +488,11 @@ video_loop3             rdlong  pixel_values, pixel_ptr1                'main lo
                         waitvid hs_colors, #0
 
                         djnz    block_cntr, #video_loop2
-                        add     pixel_ptr0, #COLS                       'adding cols twice to get to next row. each col is 8 bits. 4x2=8
                         add     pixel_ptr0, #COLS
                         djnz    line_cntr, #video_loop1
 
 '----Vertical Sync Front Porch ------------------------------------------------------------------
-                        mov     line_cntr, #10                      'front porch is 10 lines
+                        mov     line_cntr, #10
                         add     frame_cntr, #1
                         wrlong  frame_cntr, frame_cntr_ptr 
 
@@ -584,7 +506,6 @@ vsfp_loop               mov     vscl, #PC_FP
 
                         jmp     #vsync_loop
 
-
 hs_colors               long    $01_03_01_03
 vs_colors               long    $00_02_00_02
 blank_colors            long    $03_03_03_03
@@ -595,7 +516,7 @@ freq_reg                long    FREQ_VALUE
 vcfg_reg                long    0
 output_enables          long    0
 frame_cntr_ptr          long    0
-video_scale             long    $000_01_010
+video_scale             long    $000_01_020
 
 vid_colors              res     1
 pixel_ptr0              res     1
@@ -607,6 +528,7 @@ block_cntr              res     1
 frame_cntr              res     1
 cursor_pos0             res     1
 cursor_mask0            res     1
+                        fit
 
 '------------------------------------------------------------------------------------------------
 ' Routines to draw on the bitmap
@@ -614,123 +536,90 @@ cursor_mask0            res     1
                         org     0
 
 '---- Wait for a command, then decode -----------------------------------------------------------
-draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz 'read command from pointer location. if result is 0, z flag will be set.
-              if_z      jmp     #draw_start                  'if z flag is set (0) then loop back to draw_start
+draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
+              if_z      jmp     #draw_start
 
-                        mov     draw_cntr0, #0               'set draw_cntr0 to 0
-                        wrlong  draw_cntr0, draw_cmnd_ptr    'setting draw_cmnd_ptr to 0 (frees up calling procedure)
+                        mov     draw_cntr, #0
+                        wrlong  draw_cntr, draw_cmnd_ptr
 
-                        mov     draw_val, draw_cmnd          'set draw_val to draw_cmnd
-                        and     draw_val, #255               'and draw_val by 255 (1111_1111) mask
-                        shr     draw_cmnd, #8                'shift 8 bits over to the right
-                        mov     draw_xpos, draw_cmnd         'set draw_xpos to draw_cmnd
-                        and     draw_xpos, #511              'and draw_xpos with 511(1_1111_1111) 9 bits mask
-                        shr     draw_cmnd, #9                'shift 9 bits right for draw_cmnd
-                        mov     draw_ypos, draw_cmnd         'set draw_ypos = draw_cmnd
-                        and     draw_ypos, #255              'apply 8 bit mask to draw_ypos
-                        shr     draw_cmnd, #8                '...
-                        mov     draw_fg, draw_cmnd
-                        and     draw_fg, #3
-                        shr     draw_cmnd, #2
-                        mov     draw_bg, draw_cmnd
-                        and     draw_bg, #3
-                        shr     draw_cmnd, #2                'get command, go to appropriate routine
+                        mov     draw_val, draw_cmnd
+                        and     draw_val, #255
+                        shr     draw_cmnd, #8
+                        mov     draw_xpos, draw_cmnd
+                        and     draw_xpos, #511
+                        shr     draw_cmnd, #9
+                        mov     draw_ypos, draw_cmnd
+                        and     draw_ypos, #511
+                        shr     draw_cmnd, #9
 
-                        cmp     draw_cmnd, #3  wz
+                        cmp     draw_cmnd, #8  wz
               if_z      jmp     #draw_line
 
                         cmp     draw_cmnd, #1  wz
               if_z      jmp     #draw_pixel
 
-                        cmp     draw_cmnd, #2  wz
-              if_z      jmp     #draw_set                    'if command is char, will just fall through to below routine
+                        cmp     draw_cmnd, #4  wz
+              if_z      jmp     #draw_set
 
 '---- Draw a character --------------------------------------------------------------------------
-'    ch := (ch - 32) << 3
-draw_char               sub     draw_val, #32                'draw_val just holds the char value from draw_start routine
+'    c := (c - 32) << 3
+draw_char               rdbyte  draw_reverse, draw_reverse_ptr
+                        sub     draw_val, #32
                         shl     draw_val, #3
+                        mov     draw_ptr1, draw_map_ptr
+                        add     draw_ptr1, draw_val
 
-'    ptr1 := @C64CharMap + ch
-                        mov     draw_ptr1, draw_map_ptr      'take value and add it to map pointer to get pointer to char rom
-                        add     draw_ptr1, draw_val          'draw_ptr1 is the pointer to the char rom
-
-'    ptr0 := @pixel_bfr + ((cursorx + (cursory * WIDTH)) << 1)
-                        mov     draw_ptr0, draw_xpos         'draw_ptr0 is the x,y pointer to the pixel buffer
-
-draw_char1              test    draw_ypos, #255  wz          'AND 255 with draw_ypos
-              if_nz     sub     draw_ypos, #1                'if Z flag not set, subtract 1 from draw_ypos and add #width to draw_ptr0
-              if_nz     add     draw_ptr0, #WIDTH            'finds the y starting point for the char
+'    ptr := @pixel_bfr + (cursorx + (cursory * WIDTH))
+                        mov     draw_ptr0, #0
+draw_char1              test    draw_ypos, #255  wz
+              if_nz     sub     draw_ypos, #1
+              if_nz     add     draw_ptr0, #WIDTH
               if_nz     jmp     #draw_char1
 
-                        shl     draw_ptr0, #1
-                        add     draw_ptr0, par               'once y is found, store the pointer to shared ram (pixel buf)
+                        add     draw_ptr0, draw_xpos
+                        add     draw_ptr0, par
 
-'    repeat i from 0 to 7
-                        mov     draw_cntr0, #8               'counter to hold num rows to iterate
+'    repeat idx from 0 to 7
+                        mov     draw_cntr, #8
 
-'      pix := byte[ptr1 + i]
-draw_char2              rdbyte  draw_pix, draw_ptr1          'reads one byte from font rom char
-                        add     draw_ptr1, #1 '#1            'increment font rom pointer by 1
+'      tmp := byte[@C64CharMap][idx + c]
+draw_char2              rdbyte  draw_xpos, draw_ptr1
+                        add     draw_ptr1, #1
 
-'      val := 0 
-                        mov     draw_val, #0 '#0
-'      repeat j from 0 to 7
-                        mov     draw_cntr1, #7 '#8           'counter to hold num cols to iterate
-
-'        val <<= 2
-draw_char3              shl     draw_val, #2                 'iterates font row
-                                                             'draw fg or bg depending on whether bit is set in font rom
-'        if pix & $80 val |= fg
-                        test    draw_pix, #$80  wz
-              if_nz     or      draw_val, draw_fg
-
-'        else val |= bg
-              if_z      or      draw_val, draw_bg
-
-'        pix <<= 1
-                        shl     draw_pix, #1
-                        djnz    draw_cntr1, #draw_char3     'decrement x counter, go to next column
-
-'      word[ptr0] := val
-'      ptr += COLS2
-                        wrword  draw_val, draw_ptr0         'write value to pixel buffer
-                        add     draw_ptr0, #COLS2           'updates pix buffer pointer to next column?
-
-                        djnz    draw_cntr0, #draw_char2     'decrement y counter, go to next row
-                        jmp     #draw_start                 'if done, go to draw_start routine
+'      byte[ptr] := tmp ^ reverse
+'      ptr += COLS
+                        xor     draw_xpos, draw_reverse
+                        wrbyte  draw_xpos, draw_ptr0
+                        add     draw_ptr0, #COLS     
+                        djnz    draw_cntr, #draw_char2
+                        jmp     #draw_start
 
 '---- Draw a pixel ------------------------------------------------------------------------------
-'  p1 := (WIDTH * y) + x
-draw_pixel_sub          mov     draw_ptr1, draw_xpos
+'  p := (WIDTH * y) + x
+draw_pixel_sub          mov     draw_ptr0, draw_xpos
 
-draw_pixel1             test    draw_ypos, #255  wz
+draw_pix1               test    draw_ypos, #255  wz
               if_nz     sub     draw_ypos, #1
-              if_nz     add     draw_ptr1, #WIDTH
-              if_nz     jmp     #draw_pixel1
+              if_nz     add     draw_ptr0, #WIDTH
+              if_nz     jmp     #draw_pix1
 
-'  p0 := (p1 & 3) << 1
-                        mov     draw_ptr0, draw_ptr1
-                        and     draw_ptr0, #3
-                        shl     draw_ptr0, #1
-'  t := c << p0
-                        mov     draw_tmp, draw_val
-                        shl     draw_tmp, draw_ptr0
+'  x := |<(p & 7)
+                        mov     draw_ypos, draw_ptr0
+                        and     draw_ypos, #7
+                        mov     draw_xpos, #1
+                        shl     draw_xpos, draw_ypos
 
-'  y := 3 << p0
-                        mov     draw_ypos, #3
-                        shl     draw_ypos, draw_ptr0
+'  p := @pixel_bfr + (p >> 3)
+                        shr     draw_ptr0, #3
+                        add     draw_ptr0, par
 
-'  p1 := p1 >> 2
-                        shr     draw_ptr1, #2
-
-'  p1 := @pixel_bfr + p1
-                        add     draw_ptr1, par
-
-'  byte[p1] := (byte[p1] & !y) | t
-                        rdbyte  draw_pix, draw_ptr1
-                        andn    draw_pix, draw_ypos
-                        or      draw_pix, draw_tmp
-                        wrbyte  draw_pix, draw_ptr1
+'  if c byte[p] |= x
+'  else byte[p] &= (!x)
+                        and     draw_val, #1  wz
+                        rdbyte  draw_tmp, draw_ptr0
+              if_nz     or      draw_tmp, draw_xpos
+              if_z      andn    draw_tmp, draw_xpos
+                        wrbyte  draw_tmp, draw_ptr0
 draw_pixel_sub_ret      ret
 
 draw_pixel              call    #draw_pixel_sub
@@ -743,7 +632,6 @@ draw_set                mov     draw_lastx, draw_xpos
 
 '---- Draw a line -------------------------------------------------------------------------------
 draw_line
-
 '  dy := y2 - y1
                         mov     draw_dy, draw_ypos
                         sub     draw_dy, draw_lasty
@@ -790,7 +678,6 @@ draw_line
 
 '  repeat
 draw_line1
-
 '    Pixel(c, x1, y1)
                         mov     draw_xpos, draw_x1
                         mov     draw_ypos, draw_y1
@@ -829,17 +716,14 @@ draw_lastx              long    0
 draw_lasty              long    0
 
 draw_cmnd               res     1
-draw_fg                 res     1
-draw_bg                 res     1
 draw_val                res     1
 draw_tmp                res     1
 draw_xpos               res     1
 draw_ypos               res     1
 draw_ptr0               res     1
 draw_ptr1               res     1
-draw_cntr0              res     1
-draw_cntr1              res     1
-draw_pix                res     1
+draw_cntr               res     1
+draw_reverse            res     1
 draw_a                  res     1
 draw_b                  res     1
 draw_x1                 res     1
@@ -852,6 +736,7 @@ draw_d1                 res     1
 draw_df                 res     1
                         fit
 
+DAT
 '------------------------------------------------------------------------------------------------
 ' C64 Character Map
 '------------------------------------------------------------------------------------------------
@@ -1081,25 +966,25 @@ C64CharMap
                         byte    $00, $00, $00, $00, $00, $00, $00, $00 ' 254 
                         byte    $3C, $42, $A5, $81, $A5, $99, $42, $3C ' 255 Smiley 
 {{
-Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
-Ã¢â€â€š                       TERMS OF USE: MIT License                            Ã¢â€â€š                                                            
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤
-Ã¢â€â€šPermission is hereby granted, free of charge, to any person obtaining       Ã¢â€â€š
-Ã¢â€â€ša copy of this software and associated documentation files (the "Software"),Ã¢â€â€š
-Ã¢â€â€što deal in the Software without restriction, including without limitation   Ã¢â€â€š
-Ã¢â€â€šthe rights to use, copy, modify, merge, publish, distribute, sublicense,    Ã¢â€â€š
-Ã¢â€â€šand/or sell copies of the Software, and to permit persons to whom the       Ã¢â€â€š
-Ã¢â€â€šSoftware is furnished to do so, subject to the following conditions:        Ã¢â€â€š                                                           Ã¢â€â€š
-Ã¢â€â€š                                                                            Ã¢â€â€š                                                  Ã¢â€â€š
-Ã¢â€â€šThe above copyright notice and this permission notice shall be included in  Ã¢â€â€š
-Ã¢â€â€šall copies or substantial portions of the Software.                         Ã¢â€â€š
-Ã¢â€â€š                                                                            Ã¢â€â€š                                                  Ã¢â€â€š
-Ã¢â€â€šTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  Ã¢â€â€š
-Ã¢â€â€šIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    Ã¢â€â€š
-Ã¢â€â€šFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL     Ã¢â€â€š
-Ã¢â€â€šTHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  Ã¢â€â€š
-Ã¢â€â€šLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     Ã¢â€â€š
-Ã¢â€â€šFROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         Ã¢â€â€š
-Ã¢â€â€šDEALINGS IN THE SOFTWARE.                                                   Ã¢â€â€š
-Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
+┌────────────────────────────────────────────────────────────────────────────┐
+│                       TERMS OF USE: MIT License                            │                                                            
+├────────────────────────────────────────────────────────────────────────────┤
+│Permission is hereby granted, free of charge, to any person obtaining       │
+│a copy of this software and associated documentation files (the "Software"),│
+│to deal in the Software without restriction, including without limitation   │
+│the rights to use, copy, modify, merge, publish, distribute, sublicense,    │
+│and/or sell copies of the Software, and to permit persons to whom the       │
+│Software is furnished to do so, subject to the following conditions:        │                                                           │
+│                                                                            │                                                  │
+│The above copyright notice and this permission notice shall be included in  │
+│all copies or substantial portions of the Software.                         │
+│                                                                            │                                                  │
+│THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  │
+│IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    │
+│FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL     │
+│THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  │
+│LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     │
+│FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         │
+│DEALINGS IN THE SOFTWARE.                                                   │
+└────────────────────────────────────────────────────────────────────────────┘
 }}
