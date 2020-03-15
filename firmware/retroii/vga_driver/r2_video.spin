@@ -245,7 +245,11 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
     mask := $FF << (x - 1)
     byte[p + 1] &= mask
     byte[p + 1] |= data2
-  
+
+PUB HiRes
+  repeat while draw_command <> 0
+  draw_command := CMD_LINE
+    
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen.
@@ -259,6 +263,7 @@ PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
   'repeat while draw_command <> 0
   'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_LINE
 
+  
 PUB LineTo(c, x, y)
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen starting from the end of the last line.
@@ -564,8 +569,8 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
                         and     draw_ypos, #511
                         shr     draw_cmnd, #9
 
-                        'cmp     draw_cmnd, #8  wz
-              'if_z      jmp     #draw_line
+                        cmp     draw_cmnd, #8  wz
+              if_z      jmp     #draw_hires
 
                         cmp     draw_cmnd, #1  wz
               if_z      jmp     #draw_pixel
@@ -995,23 +1000,23 @@ draw_lores5             add     draw_ptr0, #COLS
 draw_hires
                         mov     draw_row, #0
 '            repeat mem_section from 1 to 3 '3 sections
-                        mov     draw_cntr, #2  
+                        mov     draw_cntr, #3  
 hires_section  
 '                mem_box := 0     
                         mov     draw_mem_box, #0
 '                repeat 8 '8 box rows per section                             
-                        mov     draw_cntr2, #7  
+                        mov     draw_cntr2, #8  
 hires_boxrow                     
 '                    mem_row := 0
                         mov     draw_mem_row, #0   
 '                    repeat 8 '8 rows within box row
-                        mov     draw_cntr3, #7   
+                        mov     draw_cntr3, #8   
 hires_row
 '                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
 '                        col := 0 '1'moving column a little to the right to center within frame
                         mov     draw_col, #0
 '                        repeat 40 '40 columns/bytes per row
-                        mov     draw_cntr4, #39
+                        mov     draw_cntr4, #40
 hires_col
 '                            data := read_byte(mem_loc)
 '                            'the msb is ignored since it's the color grouping bit
@@ -1019,6 +1024,7 @@ hires_col
 '                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
 '                            'read Apple II Computer Graphics page 70ish for more details.
 '                            R2.Pixel (data, col, row)     
+                        mov     draw_val, #1 'test data for now
                         mov     draw_xpos, draw_col
                         mov     draw_ypos, draw_row
                         call    #draw_pixel_sub                                                                           

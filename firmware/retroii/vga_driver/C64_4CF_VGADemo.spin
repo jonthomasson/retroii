@@ -43,6 +43,8 @@ PUB Main | I, J, C, frq
   'repeat J from 0 to 25
   '  C64.Char(156)
   '  C += 1
+  C64.HiRes
+  return
   I := C64.LowRes2 ($CF, 5, 10)
   pst.Hex(I,8)
   'return
