@@ -997,7 +997,7 @@ draw_lores5             add     draw_ptr0, #COLS
 
 
 '---- Draw HiRes screen--------------------------------------------------------------------------
-draw_hires
+draw_hires              
                         mov     draw_row, #0
 '            repeat mem_section from 1 to 3 '3 sections
                         mov     draw_cntr, #3  
@@ -1024,7 +1024,10 @@ hires_col
 '                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
 '                            'read Apple II Computer Graphics page 70ish for more details.
 '                            R2.Pixel (data, col, row)     
-                        mov     draw_val, #1 'test data for now
+                        'mov     draw_val, #255 'test data for now
+                        
+                        'call routine to get data byte from ram. routine will write data to draw_val
+                        
                         mov     draw_xpos, draw_col
                         mov     draw_ypos, draw_row
                         call    #draw_pixel_sub                                                                           
@@ -1040,6 +1043,8 @@ hires_col
                         djnz    draw_cntr2, #hires_boxrow
 '                mem_start += $28                       
                         djnz    draw_cntr, #hires_section
+                        
+                        jmp     draw_hires
 '---- Draw a line -------------------------------------------------------------------------------
 'draw_line
 '  dy := y2 - y1
@@ -1119,6 +1124,44 @@ hires_col
 '                        call    #draw_pixel_sub
 '                        jmp     #draw_start
 
+'reads a byte from RAM------------------------------------------------------------------
+'ram_address should have the address you want to read from
+'will place byte read into var ram_read
+read_byte
+'   'to read:   
+'    lsb := address 
+                        mov     ram_lsb, ram_address
+'    msb := address >> 8
+                        shr     ram_address, #8
+                        mov     ram_msb, ram_address
+'    'set we pin high
+'    outa[WE]~~
+                        or      outa, ram_we_mask 
+'    'set data pins as input
+'    dira[D0..D7]~
+                        andn dira,$FF
+'    'set address pins
+'    outa[A7..A0] := lsb
+'    outa[A14..A8] := msb
+'    outa[A15] := msb >> 7
+'    'wait specified time
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+'    'read data pins
+'    data_in := ina[D7..D0]
+'    outa[A0..A7] := %00000000 'low
+                        andn outa, ram_lsb_mask
+'    outa[A8..A14] := %0000000 'low
+                        andn outa, ram_msb_mask
+'    outa[A15]~ 'low                          
+                        andn outa, ram_a15_mask
+'    return data_in                       
+                        
+                        ret  'return to caller
+
 draw_cmnd_ptr           long    0
 draw_map_ptr            long    0
 draw_graphmap_ptr       long    0
@@ -1130,7 +1173,12 @@ debug_ptr               long    0
 debug_val_ptr           long    0
 pixel_mask              long    $FF_00_00_80
 pixel_mask2             long    0
+ram_we_mask             long    $40_00_00_00
 
+ram_read                res     1
+ram_address             res     1
+ram_lsb                 res     1
+ram_msb                 res     1
 draw_mem_box            res     1
 draw_mem_row            res     1
 draw_col                res     1
