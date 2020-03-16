@@ -1139,11 +1139,18 @@ read_byte
                         or      outa, ram_we_mask 
 '    'set data pins as input
 '    dira[D0..D7]~
-                        andn dira,$FF
+                        andn    dira,#255
 '    'set address pins
 '    outa[A7..A0] := lsb
+                        andn    outa, ram_lsb_mask   'clear first
+                        or      outa, ram_lsb 
 '    outa[A14..A8] := msb
+                        andn    outa, ram_msb_mask   'clear first
+                        or      outa, ram_msb 
 '    outa[A15] := msb >> 7
+                        shr     ram_msb, #7
+                        andn    outa, ram_a15_mask   'clear first
+                        or      outa, ram_msb 
 '    'wait specified time
                         nop
                         nop
@@ -1152,12 +1159,15 @@ read_byte
                         nop
 '    'read data pins
 '    data_in := ina[D7..D0]
+                        mov     draw_tmp, ina
+                        and     draw_tmp, #255        
+                        mov     ram_read, draw_tmp     
 '    outa[A0..A7] := %00000000 'low
-                        andn outa, ram_lsb_mask
+                        andn    outa, ram_lsb_mask
 '    outa[A8..A14] := %0000000 'low
-                        andn outa, ram_msb_mask
+                        andn    outa, ram_msb_mask
 '    outa[A15]~ 'low                          
-                        andn outa, ram_a15_mask
+                        andn    outa, ram_a15_mask
 '    return data_in                       
                         
                         ret  'return to caller
@@ -1174,6 +1184,9 @@ debug_val_ptr           long    0
 pixel_mask              long    $FF_00_00_80
 pixel_mask2             long    0
 ram_we_mask             long    $40_00_00_00
+ram_lsb_mask            long    $00_00_FF_00
+ram_msb_mask            long    $0F_E0_00_00
+ram_a15_mask            long    $80_00_00_00
 
 ram_read                res     1
 ram_address             res     1
