@@ -16,6 +16,23 @@ CON
 
   _clkmode = xtal1 + pll16x
   _xinfreq = 5_000_000
+  
+    {DATA PINS}
+    D0 = 0
+    D7 = 7
+    
+    {CLOCK}
+    CLOCK_REG = 23 'i2c register to hold clock value
+    
+    {ADDRESS PINS}
+    A0 = 8
+    A7 = 15
+    A8 = 21
+    A14 = 27
+    A15 = 31
+    
+    {WRITE ENABLE PIN}
+    WE = 30
 
 OBJ
 
@@ -23,8 +40,8 @@ OBJ
   pst : "Parallax Serial Terminal"
 
 PUB Main | I, J, C, frq
-
-  pst.Start(115200)
+  init
+  'pst.Start(115200)
   
   'Set the pin_group number for your board
   C64.Start(2)
@@ -43,7 +60,15 @@ PUB Main | I, J, C, frq
   'repeat J from 0 to 25
   '  C64.Char(156)
   '  C += 1
+  write_byte($FF, $0000)
+  I := read_byte($0000)
+  dec(I)
+  return
+  
   C64.HiRes
+  C64.Pos (0,1)
+  dec(C64.DebugOutput)
+  'pst.Dec(C64.DebugOutput)
   return
   I := C64.LowRes2 ($CF, 5, 10)
   pst.Hex(I,8)
@@ -183,7 +208,21 @@ PUB Main | I, J, C, frq
   '  C64.Char(C)
   '  C += 1
     
-  
+PUB init
+    'setup address/data/control lines
+    dira[D0..D7]~~  'output
+    outa[D0..D7] := %00000000   'low
+    
+    dira[A0..A7]~~  'output
+    outa[A0..A7] := %00000000   'low
+    dira[A8..A14]~~ 'output
+    outa[A8..A14] := %0000000 'low
+    dira[A15]~~ 'output
+    outa[A15]~ 'low
+                              
+    dira[WE]~~      'output
+    outa[WE]~~      'set we high to avoid writing data
+                      
 {{use this to get my frqa value to run the vga driver
 a = frequency desired
 b = clock frequency (CLKFREQ etc)
@@ -213,6 +252,65 @@ PRI prn(val) | dig
     
 PRI print(char)
     C64.Char(char)        
+{{
+Summary: writes a byte of memory to external RAM
+Params:
+    data_out:   the byte of data to write
+    address:    the address to write the data to
+}} 
+pri write_byte(data_out, address) | i, msb, lsb
+    'to write:
+    lsb := address 
+    msb := address >> 8
+
+    'we should start high
+    outa[WE]~~
+    'set data pins as input
+    dira[D0..D7]~  'input /avoid bus contention
+    'set address pins
+    outa[A7..A0] := lsb 
+    outa[A14..A8] := msb
+    outa[A15] := msb >> 7
+    'set we pin low for specified time
+    outa[WE]~
+    dira[D0..D7]~~  'output /avoid bus contention
+    'set data pins
+    outa[D7..D0] := data_out
+    'bring we pin high to complete write
+    outa[WE]~~
+    dira[D0..D7]~  'input /avoid bus contention
+    outa[A0..A7] := %00000000 'low
+    outa[A8..A14] := %0000000 'low
+    outa[A15]~ 'low
+
+{{
+Summary: reads a byte of memory from external RAM
+Params:
+    address:    the address to read from
+Returns:
+    byte of data read from memory address
+}} 
+pri read_byte(address) | data_in, i, msb, lsb
+    'to read:   
+    lsb := address 
+    msb := address >> 8
+    'set we pin high
+    outa[WE]~~
+    'set data pins as input
+    dira[D0..D7]~
+    'set address pins
+    outa[A7..A0] := lsb
+    outa[A14..A8] := msb
+    outa[A15] := msb >> 7
+    'wait specified time
+    'read data pins
+    data_in := ina[D7..D0]
+    outa[A0..A7] := %00000000 'low
+    outa[A8..A14] := %0000000 'low
+    outa[A15]~ 'low                          
+    return data_in
+     
+
 {{
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                       TERMS OF USE: MIT License                          │                                                            

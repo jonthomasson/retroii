@@ -624,11 +624,7 @@ draw_char1              test    draw_ypos, #255  wz                     'mult cu
                         'rdbyte  char_t2, char_t1 
                         'or      draw_ptr0, char_t2
                         
-                        'start debug
-                        'mov     debug_ptr, draw_ptr0
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug
+                        
                         
                         add     draw_ptr0, char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
@@ -997,7 +993,17 @@ draw_lores5             add     draw_ptr0, #COLS
 
 
 '---- Draw HiRes screen--------------------------------------------------------------------------
-draw_hires              
+draw_hires 
+                        mov     ram_address, ram_address_test
+                        call    #read_byte 
+                        
+                        'start debug
+                        'mov     debug_ptr, ram_read
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
+                        
+                        
                         mov     draw_row, #0
 '            repeat mem_section from 1 to 3 '3 sections
                         mov     draw_cntr, #3  
@@ -1128,12 +1134,15 @@ hires_col
 'ram_address should have the address you want to read from
 'will place byte read into var ram_read
 read_byte
+
 '   'to read:   
 '    lsb := address 
                         mov     ram_lsb, ram_address
 '    msb := address >> 8
                         shr     ram_address, #8
                         mov     ram_msb, ram_address
+                        
+                        
 '    'set we pin high
 '    outa[WE]~~
                         or      outa, ram_we_mask 
@@ -1152,14 +1161,48 @@ read_byte
                         andn    outa, ram_a15_mask   'clear first
                         or      outa, ram_msb 
 '    'wait specified time
+                        
                         nop
                         nop
                         nop
                         nop
                         nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        
 '    'read data pins
 '    data_in := ina[D7..D0]
                         mov     draw_tmp, ina
+                        'start debug
+                        mov     debug_ptr, ina
+                        wrlong  debug_ptr, debug_val_ptr
+                        jmp     #draw_start  
+                        'end debug
                         and     draw_tmp, #255        
                         mov     ram_read, draw_tmp     
 '    outa[A0..A7] := %00000000 'low
@@ -1169,8 +1212,9 @@ read_byte
 '    outa[A15]~ 'low                          
                         andn    outa, ram_a15_mask
 '    return data_in                       
-                        
-                        ret  'return to caller
+                        'mov     ram_read, #127
+read_byte_ret           ret  'return to caller
+
 
 draw_cmnd_ptr           long    0
 draw_map_ptr            long    0
@@ -1187,6 +1231,7 @@ ram_we_mask             long    $40_00_00_00
 ram_lsb_mask            long    $00_00_FF_00
 ram_msb_mask            long    $0F_E0_00_00
 ram_a15_mask            long    $80_00_00_00
+ram_address_test        long    $00_00
 
 ram_read                res     1
 ram_address             res     1
