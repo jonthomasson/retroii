@@ -998,9 +998,9 @@ draw_hires
                         call    #read_byte 
                         
                         'start debug
-                        'mov     debug_ptr, ram_read
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
+                        mov     debug_ptr, ram_read
+                        wrlong  debug_ptr, debug_val_ptr
+                        jmp     #draw_start  
                         'end debug
                         
                         
@@ -1198,11 +1198,7 @@ read_byte
 '    'read data pins
 '    data_in := ina[D7..D0]
                         mov     draw_tmp, ina
-                        'start debug
-                        mov     debug_ptr, ina
-                        wrlong  debug_ptr, debug_val_ptr
-                        jmp     #draw_start  
-                        'end debug
+                        
                         and     draw_tmp, #255        
                         mov     ram_read, draw_tmp     
 '    outa[A0..A7] := %00000000 'low

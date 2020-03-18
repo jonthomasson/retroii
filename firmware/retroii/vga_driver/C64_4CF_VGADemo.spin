@@ -60,10 +60,10 @@ PUB Main | I, J, C, frq
   'repeat J from 0 to 25
   '  C64.Char(156)
   '  C += 1
-  write_byte($FF, $0000)
-  I := read_byte($0000)
-  dec(I)
-  return
+  write_byte($EA, $0000)
+  'I := read_byte($0000)
+  'dec(I)
+  'return
   
   C64.HiRes
   C64.Pos (0,1)
