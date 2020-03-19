@@ -60,18 +60,18 @@ PUB Main | I, J, C, frq
   'repeat J from 0 to 25
   '  C64.Char(156)
   '  C += 1
-  write_byte($EB, $0000)
-  write_byte($BA, $0001)
-  write_byte($CD, $0DDD)
-  write_byte($AC, $DDDD)
-  outa[D0..D7]~
+  'write_byte($EB, $0000)
+  'write_byte($BA, $0001)
+  'write_byte($CD, $0DDD)
+  'write_byte($AC, $DDDD)
+  'outa[D0..D7]~
   'I := read_byte($0DDD)
   'dec(I)
   'return
-  outa[D0..D7]~
+  'outa[D0..D7]~
   C64.HiRes
-  C64.Pos (0,1)
-  dec(C64.DebugOutput)
+  'C64.Pos (0,1)
+  'dec(C64.DebugOutput)
   'pst.Dec(C64.DebugOutput)
   return
   'I := read_byte($0001)

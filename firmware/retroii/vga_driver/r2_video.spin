@@ -994,16 +994,22 @@ draw_lores5             add     draw_ptr0, #COLS
 
 '---- Draw HiRes screen--------------------------------------------------------------------------
 draw_hires 
-                        mov     ram_address, ram_address_test
-                        call    #read_byte 
+                        'mov     ram_address, ram_address_test
+                        'call    #read_byte 
                         
                         'start debug
-                        mov     debug_ptr, ram_read
-                        wrlong  debug_ptr, debug_val_ptr
-                        jmp     #draw_start  
+                        'mov     debug_ptr, ram_read
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
                         'end debug                        
-                        
-                        
+
+'            mem_loc := HIRES_PAGE1    'set starting address  
+'            mem_start := $00         
+'            mem_page_start := HIRES_PAGE1
+'            row := 0                          
+                        mov     mem_loc, hires_page1
+                        mov     mem_start, #0
+                        mov     mem_page_start, hires_page1
                         mov     draw_row, #0
 '            repeat mem_section from 1 to 3 '3 sections
                         mov     draw_cntr, #3  
@@ -1019,6 +1025,11 @@ hires_boxrow
                         mov     draw_cntr3, #8   
 hires_row
 '                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
+                        mov     mem_loc, #0
+                        add     mem_loc, mem_page_start
+                        add     mem_loc, mem_start
+                        add     mem_loc, draw_mem_box
+                        add     mem_loc, draw_mem_row
 '                        col := 0 '1'moving column a little to the right to center within frame
                         mov     draw_col, #0
 '                        repeat 40 '40 columns/bytes per row
@@ -1033,6 +1044,9 @@ hires_col
                         'mov     draw_val, #255 'test data for now
                         
                         'call routine to get data byte from ram. routine will write data to draw_val
+                        mov     ram_address, mem_loc
+                        call    #read_byte
+                        mov     draw_val, ram_read
                         
                         mov     draw_xpos, draw_col
                         mov     draw_ypos, draw_row
@@ -1040,14 +1054,18 @@ hires_col
 '                            col++
                         add     draw_col, #1    
 '                            mem_loc++
+                        add     mem_loc, #1
                         djnz    draw_cntr4, #hires_col
 '                        row++
                         add     draw_row, #1
 '                        mem_row += $400
+                        add     draw_mem_row, mem_row_inc
                         djnz    draw_cntr3, #hires_row
 '                    mem_box += $80
+                        add     draw_mem_box, #128
                         djnz    draw_cntr2, #hires_boxrow
-'                mem_start += $28                       
+'                mem_start += $28  
+                        add     mem_start,#40   
                         djnz    draw_cntr, #hires_section
                         
                         jmp     draw_hires
@@ -1173,17 +1191,13 @@ read_byte
                         'jmp     #draw_start  
                         'end debug                       
                         andn    dira, ram_dira_mask
-                        or      dira, ram_dira_mask 'set proper outputs
+                        or      dira, ram_dira_mask 'set proper input/outputs
 '    'wait specified time
 '    'can adjust the amount of nops here to optimize performance a bit
                         nop
                         nop
                         nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop 
+                        
 '    'read data pins
 '    data_in := ina[D7..D0]
                         mov     draw_tmp, ina                      
@@ -1218,7 +1232,12 @@ ram_msb_mask            long    $0F_E0_00_00
 ram_a15_mask            long    $80_00_00_00
 ram_dira_mask           long    $8F_E0_FF_00
 ram_address_test        long    $DD_DD
+hires_page1             long    $20_00
+mem_row_inc             long    $400
 
+mem_loc                 res     1
+mem_start               res     1
+mem_page_start          res     1
 ram_read                res     1
 ram_address             res     1
 ram_lsb                 res     1
