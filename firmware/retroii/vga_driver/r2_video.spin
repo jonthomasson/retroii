@@ -1175,42 +1175,7 @@ read_byte
                         andn    dira, ram_dira_mask
                         or      dira, ram_dira_mask 'set proper outputs
 '    'wait specified time
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
-                        nop
+'    'can adjust the amount of nops here to optimize performance a bit
                         nop
                         nop
                         nop
