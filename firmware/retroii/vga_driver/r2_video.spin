@@ -1001,7 +1001,7 @@ draw_hires
                         mov     debug_ptr, ram_read
                         wrlong  debug_ptr, debug_val_ptr
                         jmp     #draw_start  
-                        'end debug
+                        'end debug                        
                         
                         
                         mov     draw_row, #0
@@ -1134,12 +1134,12 @@ hires_col
 'ram_address should have the address you want to read from
 'will place byte read into var ram_read
 read_byte
-
 '   'to read:   
 '    lsb := address 
                         mov     ram_lsb, ram_address
+                        mov     ram_a15, ram_address
 '    msb := address >> 8
-                        shr     ram_address, #8
+                        shl     ram_address, #13
                         mov     ram_msb, ram_address
                         
                         
@@ -1148,20 +1148,33 @@ read_byte
                         or      outa, ram_we_mask 
 '    'set data pins as input
 '    dira[D0..D7]~
-                        andn    dira,#255
+                        'andn    dira,#255
+                        'updating dira to ram_dira_mask below        
 '    'set address pins
 '    outa[A7..A0] := lsb
+                        shl     ram_lsb, #8 
+                        and     ram_lsb, ram_lsb_mask  
                         andn    outa, ram_lsb_mask   'clear first
                         or      outa, ram_lsb 
+                       
 '    outa[A14..A8] := msb
+                        and     ram_msb, ram_msb_mask     
                         andn    outa, ram_msb_mask   'clear first
                         or      outa, ram_msb 
+
 '    outa[A15] := msb >> 7
-                        shr     ram_msb, #7
+                        shl     ram_a15, #17
+                        and     ram_a15, ram_a15_mask
                         andn    outa, ram_a15_mask   'clear first
-                        or      outa, ram_msb 
+                        or      outa, ram_a15 
+                        'start debug
+                        'mov     debug_ptr, outa
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug                       
+                        andn    dira, ram_dira_mask
+                        or      dira, ram_dira_mask 'set proper outputs
 '    'wait specified time
-                        
                         nop
                         nop
                         nop
@@ -1194,11 +1207,21 @@ read_byte
                         nop
                         nop
                         nop
-                        
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop
+                        nop 
 '    'read data pins
 '    data_in := ina[D7..D0]
-                        mov     draw_tmp, ina
-                        
+                        mov     draw_tmp, ina                      
                         and     draw_tmp, #255        
                         mov     ram_read, draw_tmp     
 '    outa[A0..A7] := %00000000 'low
@@ -1207,6 +1230,7 @@ read_byte
                         andn    outa, ram_msb_mask
 '    outa[A15]~ 'low                          
                         andn    outa, ram_a15_mask
+ 
 '    return data_in                       
                         'mov     ram_read, #127
 read_byte_ret           ret  'return to caller
@@ -1227,12 +1251,14 @@ ram_we_mask             long    $40_00_00_00
 ram_lsb_mask            long    $00_00_FF_00
 ram_msb_mask            long    $0F_E0_00_00
 ram_a15_mask            long    $80_00_00_00
-ram_address_test        long    $00_00
+ram_dira_mask           long    $8F_E0_FF_00
+ram_address_test        long    $DD_DD
 
 ram_read                res     1
 ram_address             res     1
 ram_lsb                 res     1
 ram_msb                 res     1
+ram_a15                 res     1
 draw_mem_box            res     1
 draw_mem_row            res     1
 draw_col                res     1
