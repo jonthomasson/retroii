@@ -275,7 +275,9 @@ PRI check_soft_switches | index
                     R2.Color(1, R2#WHITE)
                 else
                     R2.Color(1, colors[current_color])
-      
+        
+        'send mode to cog
+        R2.UpdateRegs (current_mode, soft_switches, display_debug, current_clock)
 {{
 Summary: 
     Starts th memory monitor program.
@@ -817,56 +819,59 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
             
         elseif ss_hires == $FF 'HIRES MODE
             retroii_mode := RETROII_HIRES
-            mem_loc := HIRES_PAGE1    'set starting address  
-            mem_start := $00         
-            mem_page_start := HIRES_PAGE1
-            row := 0  
+            R2.HiRes
             
-            if ss_mix == $FF
-                cursor_timer++
-                if cursor_timer > 0
-                    cursor_toggle := !cursor_toggle
-                    cursor_timer := 0
-        
-            if ss_page2 == $FF
-                mem_page_start := HIRES_PAGE2
-               
-                
-            repeat mem_section from 1 to 3 '3 sections
-                
-                mem_box := 0
-                repeat 8 '8 box rows per section
-                    'mix mode
-                    if ss_mix == $FF
-                        'when we're at row 5 and section 3, exec mix mode
-                        'check mem_box and mem_start
-                        if mem_section == 3 and mem_box == $200
-                            display_retroii_mixed(cursor_toggle)
-                            'jump out of loops
-                            mem_section := 3
-                            quit
-                    mem_row := 0
-                    repeat 8 '8 rows within box row
-                           
-                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
-                        col := 0 '1'moving column a little to the right to center within frame
-                        repeat 40 '40 columns/bytes per row
-                            data := read_byte(mem_loc)
-                            'col_7 := col * 7
-                            'the msb is ignored since it's the color grouping bit
-                            'the other bits are displayed opposite to where they appear
-                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
-                            'read Apple II Computer Graphics page 70ish for more details.
-                            R2.Pixel (data, col, row)
-                            
-                        
-                            col++
-                            mem_loc++
-                        row++
-                        mem_row += $400
-                        
-                    mem_box += $80
-                mem_start += $28
+            'repeat while ss_hires == $FF and current_mode == MODE_RETROII
+            'mem_loc := HIRES_PAGE1    'set starting address  
+            'mem_start := $00         
+            'mem_page_start := HIRES_PAGE1
+            'row := 0  
+            '
+            'if ss_mix == $FF
+            '    cursor_timer++
+            '    if cursor_timer > 0
+            '        cursor_toggle := !cursor_toggle
+            '        cursor_timer := 0
+            '       
+            'if ss_page2 == $FF
+            '    mem_page_start := HIRES_PAGE2
+            '   
+            '    
+            'repeat mem_section from 1 to 3 '3 sections
+            '    
+            '    mem_box := 0
+            '    repeat 8 '8 box rows per section
+            '        'mix mode
+            '        if ss_mix == $FF
+            '            'when we're at row 5 and section 3, exec mix mode
+            '            'check mem_box and mem_start
+            '            if mem_section == 3 and mem_box == $200
+            '                display_retroii_mixed(cursor_toggle)
+            '                'jump out of loops
+            '                mem_section := 3
+            '                quit
+            '        mem_row := 0
+            '        repeat 8 '8 rows within box row
+            '               
+            '            mem_loc := mem_page_start + mem_start + mem_box + mem_row
+            '            col := 0 '1'moving column a little to the right to center within frame
+            '            repeat 40 '40 columns/bytes per row
+            '                data := read_byte(mem_loc)
+            '                'col_7 := col * 7
+            '                'the msb is ignored since it's the color grouping bit
+            '                'the other bits are displayed opposite to where they appear
+            '                'ie the lsb bit appears on the left and each subsequent bit moves to the right.
+            '                'read Apple II Computer Graphics page 70ish for more details.
+            '                R2.Pixel (data, col, row)
+            '                
+            '            
+            '                col++
+            '                mem_loc++
+            '            row++
+            '            mem_row += $400
+            '            
+            '        mem_box += $80
+            '    mem_start += $28
                           
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES

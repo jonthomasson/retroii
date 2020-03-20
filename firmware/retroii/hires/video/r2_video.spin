@@ -72,7 +72,7 @@ CON
 VAR 
 
   long  pixel_bfr[LSIZE]
-  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, debug_val
+  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, debug_val, mode_retroii, soft_switches, display_debug, current_clock
   byte  cursorx, cursory, cog1, cog2, reverse, cursor_state
 
 PUB Char(c) | idx, ptr, tmp
@@ -245,7 +245,11 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
     mask := $FF << (x - 1)
     byte[p + 1] &= mask
     byte[p + 1] |= data2
-  
+
+PUB HiRes
+  repeat while draw_command <> 0
+  draw_command := CMD_LINE
+   
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen.
@@ -259,6 +263,7 @@ PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
   'repeat while draw_command <> 0
   'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_LINE
 
+  
 PUB LineTo(c, x, y)
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen starting from the end of the last line.
@@ -315,7 +320,8 @@ PUB Start(pin_group) | hres, vres
   reverse := 0
   draw_command := 0
   debug_val_ptr := @debug_val
-   
+  mode_retroii := 2 'default to true
+  mode_retroii_ptr := @mode_retroii 
   cog1 := cognew(@asm_start, @pixel_bfr) + 1
   if cog1 == 0
     return FALSE
@@ -345,7 +351,15 @@ PUB Stop
 
   if cog2 > 0
     cogstop(cog2 - 1)
-
+'------------------------------------------------------------------------------------------------
+''Set registers for current mode, soft switches, debug display, and clock speed
+'------------------------------------------------------------------------------------------------
+PUB UpdateRegs(mode, switches, debug, clock)
+    mode_retroii := mode
+    soft_switches := switches
+    display_debug := debug
+    current_clock := clock
+    
 PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
@@ -564,8 +578,8 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
                         and     draw_ypos, #511
                         shr     draw_cmnd, #9
 
-                        'cmp     draw_cmnd, #8  wz
-              'if_z      jmp     #draw_line
+                        cmp     draw_cmnd, #8  wz
+              if_z      jmp     #draw_hires
 
                         cmp     draw_cmnd, #1  wz
               if_z      jmp     #draw_pixel
@@ -619,11 +633,7 @@ draw_char1              test    draw_ypos, #255  wz                     'mult cu
                         'rdbyte  char_t2, char_t1 
                         'or      draw_ptr0, char_t2
                         
-                        'start debug
-                        'mov     debug_ptr, draw_ptr0
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug
+                        
                         
                         add     draw_ptr0, char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
@@ -991,85 +1001,234 @@ draw_lores5             add     draw_ptr0, #COLS
                         jmp     #draw_start          
 
 
+'---- Draw HiRes screen--------------------------------------------------------------------------
+draw_hires 
+                        'mov     mode_retroii_ptr, #2 'in retroii mode
+                        'mov     ram_address, ram_address_test
+                        'call    #read_byte 
+                        
+                        'start debug
+                        'mov     debug_ptr, #2
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug                        
 
+'            mem_loc := HIRES_PAGE1    'set starting address  
+'            mem_start := $00         
+'            mem_page_start := HIRES_PAGE1
+'            row := 0                          
+hires_start                        
+                        mov     mem_loc, hires_page1
+                        mov     mem_start, #0
+                        mov     mem_page_start, hires_page1
+                        mov     draw_row, #0
+'            repeat mem_section from 1 to 3 '3 sections
+                        mov     draw_cntr, #3  
+hires_section  
+'                mem_box := 0     
+                        mov     draw_mem_box, #0
+'                repeat 8 '8 box rows per section                             
+                        mov     draw_cntr2, #8  
+hires_boxrow                     
+'                    mem_row := 0
+                        mov     draw_mem_row, #0   
+'                    repeat 8 '8 rows within box row
+                        mov     draw_cntr3, #8   
+hires_row
+'                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
+                        mov     mem_loc, #0
+                        add     mem_loc, mem_page_start
+                        add     mem_loc, mem_start
+                        add     mem_loc, draw_mem_box
+                        add     mem_loc, draw_mem_row
+'                        col := 0 '1'moving column a little to the right to center within frame
+                        mov     draw_col, #0
+'                        repeat 40 '40 columns/bytes per row
+                        mov     draw_cntr4, #40
+hires_col
+'                            data := read_byte(mem_loc)
+'                            'the msb is ignored since it's the color grouping bit
+'                            'the other bits are displayed opposite to where they appear
+'                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
+'                            'read Apple II Computer Graphics page 70ish for more details.
+'                            R2.Pixel (data, col, row)     
+                        'mov     draw_val, #255 'test data for now
+                        
+                        'call routine to get data byte from ram. routine will write data to draw_val
+                        mov     ram_address, mem_loc
+                        call    #read_byte
+                        mov     draw_val, ram_read
+                        
+                        mov     draw_xpos, draw_col
+                        mov     draw_ypos, draw_row
+                        call    #draw_pixel_sub                                                                           
+'                            col++
+                        add     draw_col, #1    
+'                            mem_loc++
+                        add     mem_loc, #1
+                        djnz    draw_cntr4, #hires_col
+'                        row++
+                        add     draw_row, #1
+'                        mem_row += $400
+                        add     draw_mem_row, mem_row_inc
+                        djnz    draw_cntr3, #hires_row
+'                    mem_box += $80
+                        add     draw_mem_box, #128
+                        djnz    draw_cntr2, #hires_boxrow
+'                mem_start += $28  
+                        add     mem_start,#40   
+                        djnz    draw_cntr, #hires_section wz
+                       
+                        cmp     mode_retroii_ptr, #2  wz 'repeat loop while in retroii hires mode
+              if_z      jmp     #hires_start
+              
+                        jmp     #draw_start 'jump out of retroii mode and return control
+                        
 '---- Draw a line -------------------------------------------------------------------------------
-draw_line
+'draw_line
 '  dy := y2 - y1
-                        mov     draw_dy, draw_ypos
-                        sub     draw_dy, draw_lasty
-
+ '                       mov     draw_dy, draw_ypos
+ '                       sub     draw_dy, draw_lasty
+'
 '  dx := x2 - x1
-                        mov     draw_dx, draw_xpos
-                        sub     draw_dx, draw_lastx  wc
-
+'                        mov     draw_dx, draw_xpos
+'                        sub     draw_dx, draw_lastx  wc
+'
 '  if dx >= 0
-              if_nc     mov     draw_x1, draw_lastx
-              if_nc     mov     draw_x2, draw_xpos
-              if_nc     mov     draw_y1, draw_lasty
-              if_nc     mov     draw_y2, draw_ypos
-
+'              if_nc     mov     draw_x1, draw_lastx
+'              if_nc     mov     draw_x2, draw_xpos
+'              if_nc     mov     draw_y1, draw_lasty
+'              if_nc     mov     draw_y2, draw_ypos
+'
 '  else dx < 0
-              if_c      mov     draw_x1, draw_xpos
-              if_c      mov     draw_x2, draw_lastx
-              if_c      mov     draw_y1, draw_ypos
-              if_c      mov     draw_y2, draw_lasty
-              if_c      neg     draw_dx, draw_dx
-              if_c      neg     draw_dy, draw_dy
-
+'              if_c      mov     draw_x1, draw_xpos
+'              if_c      mov     draw_x2, draw_lastx
+'              if_c      mov     draw_y1, draw_ypos
+'              if_c      mov     draw_y2, draw_lasty
+'              if_c      neg     draw_dx, draw_dx
+'              if_c      neg     draw_dy, draw_dy
+'
 '  lastx := xpos
 '  lasty := ypos
-                        mov     draw_lastx, draw_xpos
-                        mov     draw_lasty, draw_ypos
-
+'                        mov     draw_lastx, draw_xpos
+'                        mov     draw_lasty, draw_ypos
+'
 '  d1 := 1
 '  if dy < 0
 '    d1 := -1
 '    dy := -dy
-                        mov     draw_d1, #1
-                        neg     draw_dy, draw_dy  wc, nr
-              if_c      neg     draw_d1, draw_d1
-              if_c      neg     draw_dy, draw_dy
+'                        mov     draw_d1, #1
+'                        neg     draw_dy, draw_dy  wc, nr
+'              if_c      neg     draw_d1, draw_d1
+'              if_c      neg     draw_dy, draw_dy
 
 '  a := b := 0
 
 '  if dx > dy df := 1
 '  else       df := -1
-                        cmp     draw_dy, draw_dx  wc
-              if_c      mov     draw_df, #1
-              if_nc     neg     draw_df, #1
+'                        cmp     draw_dy, draw_dx  wc
+'              if_c      mov     draw_df, #1
+'              if_nc     neg     draw_df, #1
 
 '  repeat
-draw_line1
+'draw_line1
 '    Pixel(c, x1, y1)
-                        mov     draw_xpos, draw_x1
-                        mov     draw_ypos, draw_y1
-                        call    #draw_pixel_sub
+'                        mov     draw_xpos, draw_x1
+'                        mov     draw_ypos, draw_y1
+'                        call    #draw_pixel_sub
 
 '    if df < 0
 '      y1 += d1
 '      df += dx
-                        neg     draw_df, draw_df  wc, nr
-              if_c      add     draw_y1, draw_d1
-              if_c      add     draw_df, draw_dx
+'                        neg     draw_df, draw_df  wc, nr
+'              if_c      add     draw_y1, draw_d1
+'              if_c      add     draw_df, draw_dx
 
 '    else df >= 0
 '      x1 += 1
 '      df -= dy
-              if_nc     add     draw_x1, #1
-              if_nc     sub     draw_df, draw_dy
+'              if_nc     add     draw_x1, #1
+'              if_nc     sub     draw_df, draw_dy
 
 '  until (x1 >= x2) and (y1 == y2)
-                        cmp     draw_x2, draw_x1  wz
-        if_nz_and_nc    jmp     #draw_line1
-                        cmp     draw_y1, draw_y2  wz
-        if_nz           jmp     #draw_line1
+'                        cmp     draw_x2, draw_x1  wz
+'        if_nz_and_nc    jmp     #draw_line1
+'                        cmp     draw_y1, draw_y2  wz
+'        if_nz           jmp     #draw_line1
 
-draw_line2
+'draw_line2
 '  Pixel(c, x1 + a, y1 + b)
-                        mov     draw_xpos, draw_x1
-                        mov     draw_ypos, draw_y1
-                        call    #draw_pixel_sub
-                        jmp     #draw_start
+'                        mov     draw_xpos, draw_x1
+'                        mov     draw_ypos, draw_y1
+'                        call    #draw_pixel_sub
+'                        jmp     #draw_start
+
+'reads a byte from RAM------------------------------------------------------------------
+'ram_address should have the address you want to read from
+'will place byte read into var ram_read
+read_byte
+'   'to read:   
+'    lsb := address 
+                        mov     ram_lsb, ram_address
+                        mov     ram_a15, ram_address
+'    msb := address >> 8
+                        shl     ram_address, #13
+                        mov     ram_msb, ram_address
+                        
+                        
+'    'set we pin high
+'    outa[WE]~~
+                        or      outa, ram_we_mask 
+'    'set data pins as input
+'    dira[D0..D7]~
+                        'andn    dira,#255
+                        'updating dira to ram_dira_mask below        
+'    'set address pins
+'    outa[A7..A0] := lsb
+                        shl     ram_lsb, #8 
+                        and     ram_lsb, ram_lsb_mask  
+                        andn    outa, ram_lsb_mask   'clear first
+                        or      outa, ram_lsb 
+                       
+'    outa[A14..A8] := msb
+                        and     ram_msb, ram_msb_mask     
+                        andn    outa, ram_msb_mask   'clear first
+                        or      outa, ram_msb 
+
+'    outa[A15] := msb >> 7
+                        shl     ram_a15, #17
+                        and     ram_a15, ram_a15_mask
+                        andn    outa, ram_a15_mask   'clear first
+                        or      outa, ram_a15 
+                        'start debug
+                        'mov     debug_ptr, outa
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug                       
+                        andn    dira, ram_dira_mask
+                        or      dira, ram_dira_mask 'set proper input/outputs
+'    'wait specified time
+'    'can adjust the amount of nops here to optimize performance a bit
+                        'nop
+                        'nop
+                        'nop
+                        
+'    'read data pins
+'    data_in := ina[D7..D0]
+                        mov     draw_tmp, ina                      
+                        and     draw_tmp, #255        
+                        mov     ram_read, draw_tmp     
+'    outa[A0..A7] := %00000000 'low
+                        andn    outa, ram_lsb_mask
+'    outa[A8..A14] := %0000000 'low
+                        andn    outa, ram_msb_mask
+'    outa[A15]~ 'low                          
+                        andn    outa, ram_a15_mask
+ 
+'    return data_in                       
+                        'mov     ram_read, #127
+read_byte_ret           ret  'return to caller
+
 
 draw_cmnd_ptr           long    0
 draw_map_ptr            long    0
@@ -1082,7 +1241,28 @@ debug_ptr               long    0
 debug_val_ptr           long    0
 pixel_mask              long    $FF_00_00_80
 pixel_mask2             long    0
+ram_we_mask             long    $40_00_00_00
+ram_lsb_mask            long    $00_00_FF_00
+ram_msb_mask            long    $0F_E0_00_00
+ram_a15_mask            long    $80_00_00_00
+ram_dira_mask           long    $8F_E0_FF_00
+ram_address_test        long    $DD_DD
+hires_page1             long    $20_00
+mem_row_inc             long    $400
 
+mode_retroii_ptr        res     1
+mem_loc                 res     1
+mem_start               res     1
+mem_page_start          res     1
+ram_read                res     1
+ram_address             res     1
+ram_lsb                 res     1
+ram_msb                 res     1
+ram_a15                 res     1
+draw_mem_box            res     1
+draw_mem_row            res     1
+draw_col                res     1
+draw_row                res     1
 draw_cmnd               res     1
 draw_val                res     1
 draw_val2               res     1
@@ -1095,6 +1275,9 @@ draw_ptr0               res     1
 draw_ptr1               res     1
 draw_ptr2               res     1
 draw_cntr               res     1
+draw_cntr2              res     1
+draw_cntr3              res     1
+draw_cntr4              res     1
 draw_reverse            res     1
 draw_a                  res     1
 draw_b                  res     1
