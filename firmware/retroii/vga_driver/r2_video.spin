@@ -249,7 +249,7 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
 PUB HiRes
   repeat while draw_command <> 0
   draw_command := CMD_LINE
-    
+   
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen.
@@ -994,11 +994,12 @@ draw_lores5             add     draw_ptr0, #COLS
 
 '---- Draw HiRes screen--------------------------------------------------------------------------
 draw_hires 
+                        mov     current_mode, #2 'in retroii mode
                         'mov     ram_address, ram_address_test
                         'call    #read_byte 
                         
                         'start debug
-                        'mov     debug_ptr, ram_read
+                        'mov     debug_ptr, #2
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #draw_start  
                         'end debug                        
@@ -1007,6 +1008,7 @@ draw_hires
 '            mem_start := $00         
 '            mem_page_start := HIRES_PAGE1
 '            row := 0                          
+hires_start                        
                         mov     mem_loc, hires_page1
                         mov     mem_start, #0
                         mov     mem_page_start, hires_page1
@@ -1066,9 +1068,16 @@ hires_col
                         djnz    draw_cntr2, #hires_boxrow
 '                mem_start += $28  
                         add     mem_start,#40   
-                        djnz    draw_cntr, #hires_section
+                        djnz    draw_cntr, #hires_section wz
+                       
+                        mov     draw_cntr, #0
+                        mov     draw_cntr2, #0
+                        mov     draw_cntr3, #0
+                        mov     draw_cntr4, #0
                         
-                        jmp     draw_hires
+                        cmp     current_mode, #2  wz 'repeat loop while in retroii hires mode
+              if_z      jmp     #hires_start
+                        
 '---- Draw a line -------------------------------------------------------------------------------
 'draw_line
 '  dy := y2 - y1
@@ -1194,9 +1203,9 @@ read_byte
                         or      dira, ram_dira_mask 'set proper input/outputs
 '    'wait specified time
 '    'can adjust the amount of nops here to optimize performance a bit
-                        nop
-                        nop
-                        nop
+                        'nop
+                        'nop
+                        'nop
                         
 '    'read data pins
 '    data_in := ina[D7..D0]
@@ -1235,6 +1244,7 @@ ram_address_test        long    $DD_DD
 hires_page1             long    $20_00
 mem_row_inc             long    $400
 
+current_mode            res     1
 mem_loc                 res     1
 mem_start               res     1
 mem_page_start          res     1

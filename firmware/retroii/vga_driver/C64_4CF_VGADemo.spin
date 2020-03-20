@@ -70,104 +70,35 @@ PUB Main | I, J, C, frq
   'return
   'outa[D0..D7]~
   C64.HiRes
+  return
   'C64.Pos (0,1)
   'dec(C64.DebugOutput)
   'pst.Dec(C64.DebugOutput)
-  return
+  'return
   'I := read_byte($0001)
   'dec(I)
   'return
-  I := C64.LowRes2 ($CF, 5, 10)
-  pst.Hex(I,8)
+  'I := C64.LowRes2 ($CF, 5, 10)
+  'pst.Hex(I,8)
   'return
-  C64.Pos (6,11)
-  C64.Char ($E0)
-  C64.LowRes2 ($FF, 6, 12)
-  C64.LowRes2 ($FF, 6, 9)
-  C64.LowRes2 ($FF, 4, 9)
+  'C64.Pos (6,11)
+  'C64.Char ($E0)
+  'C64.LowRes2 ($FF, 6, 12)
+  'C64.LowRes2 ($FF, 6, 9)
+  'C64.LowRes2 ($FF, 4, 9)
   'C64.LowRes2 ($FF, 4, 10)
   'pst.Hex(C64.DebugOutput,2)
-  return  
+  'return  
   'C64.Pos(0,0)
   'C64.Char(65)
   'pst.Hex(C64.DebugOutput,8)
-  repeat 1
-    repeat I from 0 to 39
-        C64.PixelByte ($7F, I, 0)
+  'repeat 1
+  '  repeat I from 0 to 39
+  '      C64.PixelByte ($7F, I, 0)
   'repeat 1
   '  repeat I from 0 to 39
   '      C64.Pixel ($7F, I, 0)
         
-  C64.PixelByte($43, 2, 1)
-  
-  C64.Pixel($83, 2, 0)
-  C64.Pixel($7F, 2, 0)
-  C64.Pixel($43, 2, 0)
-  pst.Hex(C64.DebugOutput, 8)
-  
-  return
-  
-  I := C64.PixelByte($FF, 5, 0)
-  pst.Hex(I,8)
-  return
-  
-  repeat J from 1 to 40
-    C64.PixelByte($00, J, 0)
-  
-  repeat J from 1 to 40
-    C64.PixelByte($FF, J, 0)  
-
-  repeat J from 1 to 40
-    C64.PixelByte($2A, J, 5)
-    
-  return
-  I := C64.PixelByte($7F, 7, 0) 'COL 1
-  'pst.Dec(I)
-  'return
-  C64.PixelByte($7F, 14, 2) 'COL 2
-  C64.PixelByte($7F, 21, 3) 'COL 2
-  C64.PixelByte($7F, 28, 4) 'COL 2
-  C64.PixelByte($7F, 35, 5) 'COL 2
-  C64.PixelByte($7F, 42, 6) 'COL 2
-  C64.PixelByte($7F, 49, 7) 'COL 2
-  C64.PixelByte($7F, 56, 8) 'COL 2
-  C64.PixelByte($7F, 63, 9) 'COL 2
-  C64.PixelByte($7F, 70, 10) 'COL 2
-  C64.PixelByte($7F, 77, 11) 'COL 2
-  C64.PixelByte($7F, 84, 12) 'COL 2
-  C64.PixelByte($7F, 91, 13) 'COL 2
-  C64.PixelByte($7F, 98, 14) 'COL 2
-  C64.PixelByte($7F, 105, 15) 'COL 2
-  C64.PixelByte($7F, 112, 16) 'COL 2
-  C64.PixelByte($7F, 119, 17) 'COL 2
-  C64.PixelByte($7F, 126, 18) 'COL 2
-  C64.PixelByte($7F, 133, 19)
-  C64.PixelByte($7F, 140, 20)
-  C64.PixelByte($7F, 147, 21)
-  C64.PixelByte($7F, 154, 22)
-  C64.PixelByte($7F, 161, 23)
-  C64.PixelByte($7F, 168, 24)
-  C64.PixelByte($7F, 175, 25)
-  C64.PixelByte($7F, 182, 26)
-  C64.PixelByte($7F, 189, 27)
-  C64.PixelByte($7F, 196, 28)
-  C64.PixelByte($7F, 203, 29)
-  C64.PixelByte($7F, 210, 30)
-  C64.PixelByte($7F, 217, 31)
-  C64.PixelByte($7F, 224, 32)
-  C64.PixelByte($7F, 231, 33)
-  C64.PixelByte($7F, 238, 34)
-  C64.PixelByte($7F, 245, 35)
-  C64.PixelByte($7F, 252, 36)
-  C64.PixelByte($7F, 259, 37)
-  C64.PixelByte($7F, 266, 38)
-  C64.PixelByte($7F, 273, 39)
-  C64.PixelByte($7F, 280, 40)
-  C64.PixelByte($7F, 287, 41)
-
-  
-  
-  
   
   
   
