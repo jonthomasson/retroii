@@ -277,7 +277,7 @@ PRI check_soft_switches | index
                     R2.Color(1, colors[current_color])
         
         'send mode to cog
-        R2.UpdateRegs (current_mode, soft_switches, display_debug, current_clock)
+        R2.UpdateRegs ( soft_switches, display_debug, current_clock)
 {{
 Summary: 
     Starts th memory monitor program.
@@ -788,9 +788,10 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
     
     'check out the Apple ][ Reference Manual Page 13 for details on soft switch configs and video modes.
     repeat while current_mode == MODE_RETROII
-
-        retroii_mode_old := retroii_mode 
-        
+        if retroii_mode_old <> retroii_mode
+            retroii_mode_old := retroii_mode 
+            R2.UpdateRetroIIMode (retroii_mode)
+            
         if ss_text == $FF 'and ss_hires == $00 'TEXT MODE
             retroii_mode := RETROII_TEXT
             mem_loc := TEXT_PAGE1    'set starting address  
@@ -818,8 +819,10 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
         
             
         elseif ss_hires == $FF 'HIRES MODE
-            retroii_mode := RETROII_HIRES
+            'if retroii_mode <> RETROII_HIRES
             R2.HiRes
+            retroii_mode := RETROII_HIRES
+            
             
             'repeat while ss_hires == $FF and current_mode == MODE_RETROII
             'mem_loc := HIRES_PAGE1    'set starting address  

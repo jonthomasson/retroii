@@ -67,7 +67,7 @@ CON
   CMD_CHAR  = $00_00_00_00
   CMD_PIXEL = $04_00_00_00
   CMD_LORES = $10_00_00_00
-  CMD_LINE  = $20_00_00_00
+  CMD_HIRES  = $20_00_00_00
   
 VAR 
 
@@ -248,7 +248,7 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
 
 PUB HiRes
   repeat while draw_command <> 0
-  draw_command := CMD_LINE
+  draw_command := CMD_HIRES
    
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
@@ -261,7 +261,7 @@ PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
   'repeat while draw_command <> 0
   'draw_command := c | (x1 << 8) | (y1 << 17) | CMD_START
   'repeat while draw_command <> 0
-  'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_LINE
+  'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_HIRES
 
   
 PUB LineTo(c, x, y)
@@ -272,7 +272,7 @@ PUB LineTo(c, x, y)
 '' x, y - XY coordinates of end of line.
 '------------------------------------------------------------------------------------------------
   repeat while draw_command <> 0
-  draw_command := c | (x << 8) | (y << 17) | CMD_LINE
+  draw_command := c | (x << 8) | (y << 17) | CMD_HIRES
 
 PUB FrameCount
 '------------------------------------------------------------------------------------------------
@@ -354,11 +354,14 @@ PUB Stop
 '------------------------------------------------------------------------------------------------
 ''Set registers for current mode, soft switches, debug display, and clock speed
 '------------------------------------------------------------------------------------------------
-PUB UpdateRegs(mode, switches, debug, clock)
-    mode_retroii := mode
-    soft_switches := switches
+PUB UpdateRegs(switches, debug, clock)
+    'mode_retroii := mode
+    soft_switches := switches 
     display_debug := debug
     current_clock := clock
+
+PUB UpdateRetroIIMode(mode)
+    mode_retroii := mode
     
 PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
@@ -1017,7 +1020,9 @@ draw_hires
 '            mem_start := $00         
 '            mem_page_start := HIRES_PAGE1
 '            row := 0                          
-hires_start                        
+hires_start             
+                        'mov     draw_cmnd_ptr, #2
+                           
                         mov     mem_loc, hires_page1
                         mov     mem_start, #0
                         mov     mem_page_start, hires_page1
