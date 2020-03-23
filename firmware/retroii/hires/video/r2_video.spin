@@ -70,10 +70,10 @@ CON
   CMD_HIRES  = $20_00_00_00
   
 VAR 
-
+  byte  cursorx, cursory, cog1, cog2, reverse, cursor_state, mode_retroii, ss_page2, ss_mix
   long  pixel_bfr[LSIZE]
-  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, debug_val, mode_retroii, soft_switches, display_debug, current_clock
-  byte  cursorx, cursory, cog1, cog2, reverse, cursor_state
+  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, debug_val, display_debug, current_clock
+  
 
 PUB Char(c) | idx, ptr, tmp
 '------------------------------------------------------------------------------------------------
@@ -320,8 +320,9 @@ PUB Start(pin_group) | hres, vres
   reverse := 0
   draw_command := 0
   debug_val_ptr := @debug_val
-  mode_retroii := 2 'default to true
   mode_retroii_ptr := @mode_retroii 
+  ss_page2_ptr := @ss_page2
+  ss_mix_ptr := @ss_mix
   cog1 := cognew(@asm_start, @pixel_bfr) + 1
   if cog1 == 0
     return FALSE
@@ -331,6 +332,7 @@ PUB Start(pin_group) | hres, vres
   draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
   draw_ymulwidth_ptr := @YMulWidth
+  
   
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
   if cog2 == 0
@@ -354,9 +356,10 @@ PUB Stop
 '------------------------------------------------------------------------------------------------
 ''Set registers for current mode, soft switches, debug display, and clock speed
 '------------------------------------------------------------------------------------------------
-PUB UpdateRegs(switches, debug, clock)
+PUB UpdateRegs(page2, mix, debug, clock)
     'mode_retroii := mode
-    soft_switches := switches 
+    ss_page2 := page2
+    ss_mix := mix 
     display_debug := debug
     current_clock := clock
 
@@ -569,7 +572,7 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
               if_z      jmp     #draw_start
 
                         mov     draw_cntr, #0
-                        wrlong  draw_cntr, draw_cmnd_ptr
+                        wrlong  draw_cntr, draw_cmnd_ptr 'reset draw_command to 0 accept new command
 
                         mov     draw_val, draw_cmnd
                         and     draw_val, #255
@@ -1011,7 +1014,7 @@ draw_hires
                         'call    #read_byte 
                         
                         'start debug
-                        'mov     debug_ptr, #2
+                        'mov     debug_ptr, ram_read
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #draw_start  
                         'end debug                        
@@ -1023,10 +1026,17 @@ draw_hires
 hires_start             
                         'mov     draw_cmnd_ptr, #2
                            
-                        mov     mem_loc, hires_page1
+                        'mov     mem_loc, hires_page1
                         mov     mem_start, #0
                         mov     mem_page_start, hires_page1
                         mov     draw_row, #0
+                        
+'            if ss_page2 == $FF
+'                mem_page_start := HIRES_PAGE2
+                        rdbyte  draw_tmp, ss_page2_ptr
+                        xor     draw_tmp, #255 wz
+                if_z    mov     mem_page_start, hires_page2   
+     
 '            repeat mem_section from 1 to 3 '3 sections
                         mov     draw_cntr, #3  
 hires_section  
@@ -1066,7 +1076,7 @@ hires_col
                         
                         mov     draw_xpos, draw_col
                         mov     draw_ypos, draw_row
-                        call    #draw_pixel_sub                                                                           
+                        call    #draw_pixel_sub       'call routine to draw our byte of pixels                                                                    
 '                            col++
                         add     draw_col, #1    
 '                            mem_loc++
@@ -1084,9 +1094,15 @@ hires_col
                         add     mem_start,#40   
                         djnz    draw_cntr, #hires_section wz
                        
-                        cmp     mode_retroii_ptr, #2  wz 'repeat loop while in retroii hires mode
+                        'get updated value for mode_retroii
+                        rdbyte  draw_tmp, mode_retroii_ptr
+                        cmp     draw_tmp, #2  wz 'repeat loop while in retroii hires mode
               if_z      jmp     #hires_start
-              
+                        'start debug
+                        'mov     debug_ptr, draw_tmp
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #draw_start  
+                        'end debug
                         jmp     #draw_start 'jump out of retroii mode and return control
                         
 '---- Draw a line -------------------------------------------------------------------------------
@@ -1199,17 +1215,17 @@ read_byte
                         and     ram_msb, ram_msb_mask     
                         andn    outa, ram_msb_mask   'clear first
                         or      outa, ram_msb 
-
+  
 '    outa[A15] := msb >> 7
-                        shl     ram_a15, #17
-                        and     ram_a15, ram_a15_mask
-                        andn    outa, ram_a15_mask   'clear first
-                        or      outa, ram_a15 
+                        'shl     ram_a15, #17 'these lines that set a15 were causing page2 hires to not work, so commenting out until I can look at it further
+                        'and     ram_a15, ram_a15_mask
+                        'andn    outa, ram_a15_mask   'clear first
+                        'or      outa, ram_a15 
                         'start debug
-                        'mov     debug_ptr, outa
+                        'mov     debug_ptr, ram_a15
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #draw_start  
-                        'end debug                       
+                        'end debug                     
                         andn    dira, ram_dira_mask
                         or      dira, ram_dira_mask 'set proper input/outputs
 '    'wait specified time
@@ -1244,6 +1260,9 @@ draw_lastx              long    0
 draw_lasty              long    0
 debug_ptr               long    0
 debug_val_ptr           long    0
+ss_page2_ptr            long    0
+ss_mix_ptr              long    0
+mode_retroii_ptr        long    0
 pixel_mask              long    $FF_00_00_80
 pixel_mask2             long    0
 ram_we_mask             long    $40_00_00_00
@@ -1251,11 +1270,13 @@ ram_lsb_mask            long    $00_00_FF_00
 ram_msb_mask            long    $0F_E0_00_00
 ram_a15_mask            long    $80_00_00_00
 ram_dira_mask           long    $8F_E0_FF_00
-ram_address_test        long    $DD_DD
+ram_address_test        long    $40_00
 hires_page1             long    $20_00
+hires_page2             long    $40_00
 mem_row_inc             long    $400
 
-mode_retroii_ptr        res     1
+
+
 mem_loc                 res     1
 mem_start               res     1
 mem_page_start          res     1
@@ -1302,6 +1323,7 @@ char_t2                 res     1
 char_ptr0               res     1
 lores_bottom            res     1
 lores_top               res     1
+
                         fit
 
 DAT

@@ -209,7 +209,7 @@ Summary:
 PRI check_soft_switches | index
    
     repeat
-        waitcnt(500000 + cnt)
+       ' waitcnt(500000 + cnt)
         index := slave.check_reg(SS_REG) 'check for soft switch changes
     
         if index > -1
@@ -277,7 +277,8 @@ PRI check_soft_switches | index
                     R2.Color(1, colors[current_color])
         
         'send mode to cog
-        R2.UpdateRegs ( soft_switches, display_debug, current_clock)
+        R2.UpdateRegs ( ss_page2, ss_mix, display_debug, current_clock)
+        R2.UpdateRetroIIMode (current_mode)
 {{
 Summary: 
     Starts th memory monitor program.
@@ -780,7 +781,7 @@ Summary:
     soft switches are monitored and the video ram is polled and displayed
     in the appropriate video mode.
 }}   
-PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | x, y, retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls 
     R2.Cursor(FALSE)
     cursor_toggle := false
@@ -790,10 +791,11 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
     repeat while current_mode == MODE_RETROII
         if retroii_mode_old <> retroii_mode
             retroii_mode_old := retroii_mode 
-            R2.UpdateRetroIIMode (retroii_mode)
+            'R2.UpdateRetroIIMode (retroii_mode)
             
         if ss_text == $FF 'and ss_hires == $00 'TEXT MODE
             retroii_mode := RETROII_TEXT
+            R2.UpdateRetroIIMode (RETROII_TEXT)
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
@@ -819,9 +821,15 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
         
             
         elseif ss_hires == $FF 'HIRES MODE
-            'if retroii_mode <> RETROII_HIRES
-            R2.HiRes
-            retroii_mode := RETROII_HIRES
+            if retroii_mode <> RETROII_HIRES
+                retroii_mode := RETROII_HIRES
+                R2.UpdateRetroIIMode (RETROII_HIRES)
+               
+                R2.HiRes
+                'R2.Pos (0,0)
+                'hex(R2.DebugOutput,4)
+                'hex(HIRES_PAGE2,4)
+            
             
             
             'repeat while ss_hires == $FF and current_mode == MODE_RETROII
@@ -878,6 +886,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                           
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES
+            R2.UpdateRetroIIMode (RETROII_LORES)
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
