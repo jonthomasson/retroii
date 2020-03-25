@@ -781,21 +781,26 @@ Summary:
     soft switches are monitored and the video ram is polled and displayed
     in the appropriate video mode.
 }}   
-PRI run_retroii | x, y, retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | hires_started, x, y, retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls 
     R2.Cursor(FALSE)
     cursor_toggle := false
     cursor_timer := 0
-    
+
     'check out the Apple ][ Reference Manual Page 13 for details on soft switch configs and video modes.
     repeat while current_mode == MODE_RETROII
+        
         if retroii_mode_old <> retroii_mode
+            'if retroii_mode_old == RETROII_HIRES
+            '    if cog_hires > 0
+            '        cogstop(cog_hires)
+                
             retroii_mode_old := retroii_mode 
-            'R2.UpdateRetroIIMode (retroii_mode)
+            R2.UpdateRetroIIMode (retroii_mode)
             
         if ss_text == $FF 'and ss_hires == $00 'TEXT MODE
             retroii_mode := RETROII_TEXT
-            R2.UpdateRetroIIMode (RETROII_TEXT)
+            'R2.UpdateRetroIIMode (RETROII_TEXT)
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
@@ -824,10 +829,12 @@ PRI run_retroii | x, y, retroii_mode, retroii_mode_old,mem_section, index, col_7
             if retroii_mode <> RETROII_HIRES
                 retroii_mode := RETROII_HIRES
                 R2.UpdateRetroIIMode (RETROII_HIRES)
-               
+                'hires_started := 0
                 R2.HiRes
-                'R2.Pos (0,0)
-                'hex(R2.DebugOutput,4)
+                'cog_hires := cognew(run_hires, @cog_hires_stack) 
+                'if cog_hires == 0
+                '    return FALSE
+                
                 'hex(HIRES_PAGE2,4)
             
             
@@ -886,7 +893,7 @@ PRI run_retroii | x, y, retroii_mode, retroii_mode_old,mem_section, index, col_7
                           
         elseif ss_text == $00 and ss_hires == $00 'LORES MODE
             retroii_mode := RETROII_LORES
-            R2.UpdateRetroIIMode (RETROII_LORES)
+            'R2.UpdateRetroIIMode (RETROII_LORES)
             mem_loc := TEXT_PAGE1    'set starting address  
             mem_start := $00         
             mem_page_start := TEXT_PAGE1
@@ -919,9 +926,16 @@ PRI run_retroii | x, y, retroii_mode, retroii_mode_old,mem_section, index, col_7
                     display_retroii_loresrow(row, mem_loc)
                     row++
                     mem_loc += $80
-                mem_start += $28                                      
-    
+                mem_start += $28    
+                                                  
+        'if hires_started > 0
+        '    repeat
+        '        cls
+        '        setPos(1, 1)
+        '        dec(hires_started)
+        '        str( string("test"))
         printDebug   
+
 
 {{
 Summary: sends a row of Lores pixels to the screen
