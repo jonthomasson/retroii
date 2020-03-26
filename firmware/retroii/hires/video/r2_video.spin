@@ -69,10 +69,15 @@ CON
   CMD_LORES = $10_00_00_00
   CMD_HIRES  = $20_00_00_00
   
+  MODE_HIRES = 2
+  MODE_TEXT = 1
+  MODE_LORES = 3
+  
+  
 VAR 
-  byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, ss_page2, ss_mix
+  byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix
   long  pixel_bfr[LSIZE]
-  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, hires_command, debug_val, display_debug, current_clock
+  long  pixel_colors, frame_count, cursor_pos, cursor_mask, hires_busy, draw_command, hires_command, debug_val, display_debug, current_clock
   'long cog_hires
   'long cog_hires_stack[20]
 
@@ -323,6 +328,8 @@ PUB Start(pin_group) | hres, vres
   reverse := 0
   draw_command := 0
   hires_command := 0
+  hires_busy := 0
+  hires_busy_ptr := @hires_busy
   debug_val_ptr := @debug_val
   mode_retroii_ptr := @mode_retroii 
   ss_page2_ptr := @ss_page2
@@ -373,9 +380,16 @@ PUB UpdateRegs(page2, mix, debug, clock)
     current_clock := clock
 
 PUB UpdateRetroIIMode(mode)
+    
     mode_retroii := mode
-    'if mode_retroii <> 2 'not hires
-    '    ClearScreen
+    'check with old mode to see if we're going from hires to something else
+    if mode_retroii_old <> mode_retroii 'new mode
+    'while loop that waits for hires to stop?
+        if mode_retroii_old == MODE_HIRES
+            repeat while hires_busy == 1    'if switching from hires, need to wait till hires is done running
+    
+    mode_retroii_old := mode_retroii
+            
         
 PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
@@ -971,6 +985,8 @@ hires_cmd_start         rdlong  hires_cmnd, hires_cmnd_ptr  wz
                         mov     hires_cntr, #0
                         wrlong  hires_cntr, hires_cmnd_ptr 'reset hires_command to 0 accept new command
                        
+                        
+                        wrlong  hires_is_busy, hires_busy_ptr 'hires is busy
 			'jmp #hires
 '---- draw HiRes screen--------------------------------------------------------------------------
 hires_hires 
@@ -1065,6 +1081,9 @@ hires_draw_column
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #hires_start  
                         'end debug
+                        
+                        
+                        wrlong  hires_not_busy, hires_busy_ptr 'let other applications know we're not busy
                         jmp     #hires_cmd_start 'jump out of retroii mode and return control                        
 
 'reads a byte from RAM------------------------------------------------------------------
@@ -1255,6 +1274,9 @@ ram_address_test        long    $40_00
 hires_page1             long    $20_00
 hires_page2             long    $40_00
 mem_row_inc             long    $400
+hires_busy_ptr          long    0
+hires_is_busy           long    1
+hires_not_busy          long    0
 
 hires_xpos              res     1
 hires_ypos              res     1
