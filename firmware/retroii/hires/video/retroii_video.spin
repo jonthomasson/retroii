@@ -66,6 +66,7 @@ CON
     RETROII_TEXT = 1
     RETROII_HIRES = 2
     RETROII_LORES = 3
+    RETROII_OFF = 0
     
     {PAGE_LOCATIONS}
     TEXT_PAGE1 = $400
@@ -243,6 +244,10 @@ PRI check_soft_switches | index
     
         if index > -1
             if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
+                if old_mode <> index
+                    if old_mode == MODE_RETROII
+                        r2.UpdateRetroIIMode (RETROII_OFF)
+                    old_mode := index    
                 current_mode := index
                 
         index := -1
@@ -790,9 +795,9 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
     'check out the Apple ][ Reference Manual Page 13 for details on soft switch configs and video modes.
     repeat while current_mode == MODE_RETROII
         
-        if retroii_mode_old <> retroii_mode
+        'if retroii_mode_old <> retroii_mode
                 
-            retroii_mode_old := retroii_mode 
+        '    retroii_mode_old := retroii_mode 
             'R2.UpdateRetroIIMode (retroii_mode)
             
         if ss_text == $FF 'and ss_hires == $00 'TEXT MODE
