@@ -1115,37 +1115,40 @@ mix_mode_row
 '        display_retroii_textrow(row, mem_loc, cursor_toggle)
  '   col := 0
                         mov     hires_col, #0        
+                        mov     hires_tmp2, mem_loc 'don't want to change mem_loc when iterating the columns
 '    repeat 40 'columns
                         mov     hires_cntr2, #40
 mix_mode_col
 '        data := read_byte(mem_loc)
-                        mov     ram_address, mem_loc
+                        mov     ram_address, hires_tmp2
                         call    #read_byte
                         mov     hires_val, ram_read
                         
+                        'mov     ram_read, #65 'testing
 '        data -= $80    'for now not worrying about inverse/flashing text
                         sub     hires_val, #128
-                        
+              
 '        printxy(col, row,  data)                        
                         'ideally I could invoke the char method running on the other cog here.
-                       
+'        c &= 255                        
+                        and     hires_val, #255
     '    repeat while draw_command <> 0
     '        draw_command := c | (cursorx << 8) | (cursory << 17)
     '        'construct draw_command value first, then wait for draw_command to be available
                         mov     hires_tmp, hires_col
                         shl     hires_tmp, #8
-                        or      ram_read, hires_tmp
+                        or      hires_val, hires_tmp
                         mov     hires_tmp, hires_mem_row
                         shl     hires_tmp, #17
-                        or      ram_read, hires_tmp
+                        or      hires_val, hires_tmp
                         
 mix_mode_wait           rdlong  hires_tmp, draw_cmnd_ptr2  wz 'wait for draw_command to be free
               if_nz     jmp     #mix_mode_wait
-                        wrlong  ram_read, draw_cmnd_ptr2
+                        wrlong  hires_val, draw_cmnd_ptr2
 '        col++
                         add     hires_col, #1
 '        mem_loc++
-                        add     mem_loc, #1
+                        add     hires_tmp2, #1
                         djnz    hires_cntr2, #mix_mode_col wz
 '        row++
                         add     hires_mem_row, #1
@@ -1164,9 +1167,7 @@ read_byte
                         mov     ram_a15, ram_address
 '    msb := address >> 8
                         shl     ram_address, #13
-                        mov     ram_msb, ram_address
-                        
-                        
+                        mov     ram_msb, ram_address   
 '    'set we pin high
 '    outa[WE]~~
                         or      outa, ram_we_mask 
