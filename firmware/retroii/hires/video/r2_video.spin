@@ -339,6 +339,7 @@ PUB Start(pin_group) | hres, vres
     return FALSE
 
   draw_cmnd_ptr := @draw_command
+  draw_cmnd_ptr2 := @draw_command
   hires_cmnd_ptr := @hires_command
   draw_map_ptr := @C64CharMap
   draw_graphmap_ptr := @FontToGraphicMap
@@ -1022,7 +1023,24 @@ hires_section
                         mov     hires_mem_box, #0
 '                repeat 8 '8 box rows per section                             
                         mov     hires_cntr2, #8  
-hires_boxrow                     
+hires_boxrow          
+            '        'mix mode
+            '        if ss_mix == $FF
+                        rdbyte  hires_tmp, ss_mix_ptr
+                        xor     hires_tmp, #255 wz
+                if_nz   jmp     #hires_start_row 'not in mixed mode, else fall through to below code                  
+            '            'when we're at row 5 and section 3, exec mix mode
+            '            'check mem_box and mem_start
+            '            if mem_section == 3 and mem_box == $200
+                        cmp     hires_cntr, #1  wz 'comparing 1 because we're counting down here, not up
+                if_nz   jmp     #hires_start_row
+                        cmp     hires_mem_box, mem_box_mix wz
+                if_z    jmp     #mix_mode_start
+            '                display_retroii_mixed(cursor_toggle)
+            '                'jump out of loops
+            '                mem_section := 3
+            '                quit           
+hires_start_row
 '                    mem_row := 0
                         mov     hires_mem_row, #0   
 '                    repeat 8 '8 rows within box row
@@ -1073,7 +1091,7 @@ hires_draw_column
                         djnz    hires_cntr, #hires_section wz
                        
                         'get updated value for mode_retroii
-                        rdbyte  hires_tmp, mode_retroii_ptr
+hires_check_mode        rdbyte  hires_tmp, mode_retroii_ptr
                         cmp     hires_tmp, #2  wz 'repeat loop while in retroii hires mode
               if_z      jmp     #hires_start
                         'start debug
@@ -1085,6 +1103,56 @@ hires_draw_column
                         
                         wrlong  hires_not_busy, hires_busy_ptr 'let other applications know we're not busy
                         jmp     #hires_cmd_start 'jump out of retroii mode and return control                        
+
+mix_mode_start
+'    mem_loc := $650
+                        mov     mem_loc, mem_mix_start   
+'    row := 20
+                        mov     hires_mem_row, #20
+'    repeat 4 '4 rows of text
+                        mov     hires_cntr, #4
+mix_mode_row  
+'        display_retroii_textrow(row, mem_loc, cursor_toggle)
+ '   col := 0
+                        mov     hires_col, #0        
+'    repeat 40 'columns
+                        mov     hires_cntr2, #40
+mix_mode_col
+'        data := read_byte(mem_loc)
+                        mov     ram_address, mem_loc
+                        call    #read_byte
+                        mov     hires_val, ram_read
+                        
+'        data -= $80    'for now not worrying about inverse/flashing text
+                        sub     hires_val, #128
+                        
+'        printxy(col, row,  data)                        
+                        'ideally I could invoke the char method running on the other cog here.
+                       
+    '    repeat while draw_command <> 0
+    '        draw_command := c | (cursorx << 8) | (cursory << 17)
+    '        'construct draw_command value first, then wait for draw_command to be available
+                        mov     hires_tmp, hires_col
+                        shl     hires_tmp, #8
+                        or      ram_read, hires_tmp
+                        mov     hires_tmp, hires_mem_row
+                        shl     hires_tmp, #17
+                        or      ram_read, hires_tmp
+                        
+mix_mode_wait           rdlong  hires_tmp, draw_cmnd_ptr2  wz 'wait for draw_command to be free
+              if_nz     jmp     #mix_mode_wait
+                        wrlong  ram_read, draw_cmnd_ptr2
+'        col++
+                        add     hires_col, #1
+'        mem_loc++
+                        add     mem_loc, #1
+                        djnz    hires_cntr2, #mix_mode_col wz
+'        row++
+                        add     hires_mem_row, #1
+'        mem_loc += $80                        
+                        add     mem_loc, #128
+                        djnz    hires_cntr, #mix_mode_row wz
+                        jmp     #hires_check_mode
 
 'reads a byte from RAM------------------------------------------------------------------
 'ram_address should have the address you want to read from
@@ -1257,6 +1325,7 @@ hires_pixel_sub_ret     ret
 hires_pixel             call    #hires_pixel_sub
                         jmp     #hires_cmd_start
 
+draw_cmnd_ptr2          long    0
 hires_cmnd_ptr          long    0
 debug_ptr               long    0
 debug_val_ptr           long    0
@@ -1277,6 +1346,8 @@ mem_row_inc             long    $400
 hires_busy_ptr          long    0
 hires_is_busy           long    1
 hires_not_busy          long    0
+mem_box_mix             long    $200
+mem_mix_start           long    $650
 
 hires_xpos              res     1
 hires_ypos              res     1

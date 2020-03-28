@@ -835,8 +835,13 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                 R2.HiRes
                 
             
-            
-            
+            'if ss_mix == $FF
+            '    cursor_timer++
+            '    if cursor_timer > 0
+            '        cursor_toggle := !cursor_toggle
+            '        cursor_timer := 0
+            '    display_retroii_mixed(cursor_toggle)
+                
             'repeat while ss_hires == $FF and current_mode == MODE_RETROII
             'mem_loc := HIRES_PAGE1    'set starting address  
             'mem_start := $00         
