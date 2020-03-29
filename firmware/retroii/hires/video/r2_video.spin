@@ -1153,7 +1153,12 @@ mix_mode_flashing
 '                    data -= $40
               if_nc     sub     hires_val, #64
               if_z      mov     hires_val, #219 'cursor
-                        
+              
+              'check flash_counter, if 0 then toggle is_flashing and reset counter
+                        sub     flash_counter, #1 wz
+              if_z      andn    is_flashing, is_flashing wz 'invert is_flashing
+              if_z      mov     hires_val, #32 'space
+              if_z      mov     flash_counter, #5 'reset counter          
                         'mov     hires_tmp, #0
                         'wrbyte  hires_tmp, draw_reverse_ptr2
                         jmp     #mix_mode_print
@@ -1400,6 +1405,8 @@ hires_is_busy           long    1
 hires_not_busy          long    0
 mem_box_mix             long    $200
 mem_mix_start           long    $650
+is_flashing             long    $FF
+flash_counter           long    5
 
 text_type               res     1
 mix_flashing            res     1
