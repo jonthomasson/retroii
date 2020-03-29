@@ -182,9 +182,21 @@ PUB main | soft_switches, i, frq
         elseif key == 203 'send esc
             kb_write($9B) 'sending left arrow
         elseif key == 192 'send left arrow
-            kb_write($88)
+            if current_mode == MODE_RETROII
+                kb_write($88)
+            elseif current_mode == MODE_SD_CARD_1
+                if current_page > 0
+                    current_page--
+                    I2C.writeByte(SLAVE_ID,KEY_REG,key)
+                    sd_send_filenames(current_page)
         elseif key == 193 'send right
-            kb_write($95)
+            if current_mode == MODE_RETROII
+                kb_write($95)
+            elseif current_mode == MODE_SD_CARD_1
+                if current_page < last_page
+                    current_page++
+                    I2C.writeByte(SLAVE_ID,KEY_REG,key)
+                    sd_send_filenames(current_page)
         elseif key == 208 'f1 toggle monochrome color
             I2C.writeByte(SLAVE_ID,COLOR_REG,CMD_CHANGE_COLOR)
             'kb_output_data := !kb_output_data
@@ -210,7 +222,7 @@ PUB main | soft_switches, i, frq
             ser.Str (string("entering sd card mode"))
             I2C.writeByte(SLAVE_ID,MODE_REG,MODE_SD_CARD_1)  
             current_mode := MODE_SD_CARD_1   
-            sd_send_filenames(0)
+            sd_send_filenames(current_page)
         elseif  key == 216 or key == 217 or key == 218 or key == 219 'F9-F12 manual soft switch override
             if ss_override == FALSE
                 'populate overriden vars with current values

@@ -741,7 +741,12 @@ PRI run_sd_disk_select | index, total_pages, current_page, count_files_sent, i, 
         if index > -1 
             if index > 47 and index < 58 'valid number 0-9   
                 print( index)
-    
+            elseif index == 192 'left arrow
+                if current_page > 1
+                    run_sd_disk_select  
+            elseif index == 193 'right arrow
+                if current_page < total_pages
+                    run_sd_disk_select
 {{
 Summary: Used to tell keyboard/sd card controller that the data has been received.
 }}           
