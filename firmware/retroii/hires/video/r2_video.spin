@@ -88,13 +88,13 @@ PUB Char(c) | idx, ptr, tmp
 '' c - Character to print.
 '------------------------------------------------------------------------------------------------
   c &= 255
-
+  
   'If a printable character
   if c > 31
     repeat while draw_command <> 0
     draw_command := c | (cursorx << 8) | (cursory << 17)
     cursorx += 1
-
+ 
   UpdateCursor
 
 PUB RChar(c)
@@ -344,6 +344,7 @@ PUB Start(pin_group) | hres, vres
   draw_map_ptr := @C64CharMap
   draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
+  'draw_reverse_ptr2 := @reverse
   draw_ymulwidth_ptr := @YMulWidth
   
   
@@ -1123,11 +1124,60 @@ mix_mode_col
                         mov     ram_address, hires_tmp2
                         call    #read_byte
                         mov     hires_val, ram_read
+'        flashing := false                       
+                        mov     mix_flashing, #0
+'        inverse := false                        
+                        mov     mix_inverse, #0
+'        type := $C0 & data                        
+                        mov     hires_tmp, hires_val
+                        and     hires_tmp, #192
+'        if type == $40 'flashing text                        
+                        cmp     hires_tmp, #64  wz 'flashing
+              if_z      jmp     #mix_mode_flashing
+'        elseif type == $00 'inverse
+                        cmp     hires_tmp, #0   wz 'inverse
+              if_z      jmp     #mix_mode_inverse
+'        else
+                        jmp     #mix_mode_normal   'else normal
+mix_mode_flashing
+'           flashing := true
+                        mov     mix_flashing, #1
+'           if data == $60 'cursor
+'                        cmp     hires_val, #96  wz 'cursor
+'                data := $DB
+'              if_z      mov     hires_val, #219
+
+'           else
+'                if data > 95
+                        cmp     hires_val, #96  wc,wz
+'                    data -= $40
+              if_nc     sub     hires_val, #64
+              if_z      mov     hires_val, #219 'cursor
                         
-                        'mov     ram_read, #65 'testing
-'        data -= $80    'for now not worrying about inverse/flashing text
-                        sub     hires_val, #128
+                        'mov     hires_tmp, #0
+                        'wrbyte  hires_tmp, draw_reverse_ptr2
+                        jmp     #mix_mode_print
+mix_mode_inverse
+                        mov     mix_inverse, #1
+'           if data < 32
+                        cmp     hires_val, #32  wc
+'                data += $40 
+              if_c      add     hires_val, #64
               
+              'set reverse ptr flag
+                        'mov     hires_tmp, #255
+                        'wrbyte  hires_tmp, draw_reverse_ptr2
+                        'will need to rethink inverse, since setting this
+                        'flag will also make any other calls to char set inverse.
+                        'will possibly want to pass the inverse param through
+                        'the draw command instead?...
+                        jmp     #mix_mode_print
+mix_mode_normal
+                        'mov     hires_tmp, #0
+                        'wrbyte  hires_tmp, draw_reverse_ptr2
+'        data -= $80    
+                        sub     hires_val, #128
+mix_mode_print              
 '        printxy(col, row,  data)                        
                         'ideally I could invoke the char method running on the other cog here.
 '        c &= 255                        
@@ -1326,6 +1376,7 @@ hires_pixel_sub_ret     ret
 hires_pixel             call    #hires_pixel_sub
                         jmp     #hires_cmd_start
 
+'draw_reverse_ptr2       long    0
 draw_cmnd_ptr2          long    0
 hires_cmnd_ptr          long    0
 debug_ptr               long    0
@@ -1350,6 +1401,9 @@ hires_not_busy          long    0
 mem_box_mix             long    $200
 mem_mix_start           long    $650
 
+text_type               res     1
+mix_flashing            res     1
+mix_inverse             res     1
 hires_xpos              res     1
 hires_ypos              res     1
 hires_ptr0              res     1
