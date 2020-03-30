@@ -106,6 +106,7 @@ VAR
     long current_color
     byte display_debug
     byte old_display_debug
+    byte update_debug
 OBJ
 
     R2 : "r2_video.spin"
@@ -141,6 +142,7 @@ PRI ascii_2bin(ascii) | binary
    
     
 PRI init | i, x, y
+    update_debug := TRUE
     current_clock := 7
     'init clock freq array
     clock_freqs[0]  := 0
@@ -249,6 +251,7 @@ PRI check_soft_switches | index
                         r2.UpdateRetroIIMode (RETROII_OFF)
                     old_mode := index    
                 current_mode := index
+                update_debug := TRUE    
                 
         index := -1
         index := slave.check_reg(CLOCK_REG)   
@@ -1030,15 +1033,15 @@ PRI printDebug
     else
         
         'display current clock freq
-        if old_clock <> current_clock or old_display_debug == FALSE or old_mode <> current_mode 'only run when the clock value has changed to avoid flicker.
+        if old_clock <> current_clock or old_display_debug == FALSE or update_debug == 255 'only run when the clock value has changed to avoid flicker.
             old_clock := current_clock
-            old_mode := current_mode
+            update_debug := FALSE
             setPos(0, 29)
             str( string("CLOCK(HZ): "))
             str( string("           ")) 'clear screen value
             setPos(10, 29)
             dec( clock_freqs[current_clock])
-            
+           
         old_display_debug := TRUE
         'display soft switches
         setPos(28, 26)
