@@ -88,6 +88,7 @@ VAR
     byte cursor_x
     byte line_count
     long current_mode
+    long retroii_mode
     long old_mode
     byte rx_error  
     long soft_switches
@@ -107,6 +108,11 @@ VAR
     byte display_debug
     byte old_display_debug
     byte update_debug
+    byte frame_rate_started
+    byte frame_rate_clear
+    byte frame_rate_old
+    byte frame_rate_new
+    byte frame_counter
 OBJ
 
     R2 : "r2_video.spin"
@@ -126,6 +132,8 @@ PUB Main
                 run_sd_prog_select
             MODE_SD_CARD_3:
                 run_sd_file_download
+                
+    
 {{
 Summary: Converts an ASCII character into its binary equivalent
 Params: ascii: the ascii char to convert
@@ -142,6 +150,9 @@ PRI ascii_2bin(ascii) | binary
    
     
 PRI init | i, x, y
+    frame_counter := 0
+    frame_rate_started := FALSE
+    frame_rate_clear := 0
     update_debug := TRUE
     current_clock := 7
     'init clock freq array
@@ -176,6 +187,7 @@ PRI init | i, x, y
     display_debug := FALSE
     
     current_mode := MODE_RETROII
+    old_mode := MODE_RETROII  
     row_num := 0
     dira[21..23]~~
     slave.start(SCL_pin,SDA_pin,SLAVE_ID) 
@@ -203,6 +215,7 @@ PRI init | i, x, y
     outa[WE]~~      'set we high to avoid writing data
     
     cog_soft_switches := cognew(check_soft_switches, @cog_ss_stack) 
+   
 
 {{
 Summary: 
@@ -247,8 +260,9 @@ PRI check_soft_switches | index
         if index > -1
             if index == MODE_MONITOR or index == MODE_SD_CARD_3 or index == MODE_RETROII or index == MODE_SD_CARD_1 or index == MODE_SD_CARD_2
                 if old_mode <> index
-                    if old_mode == MODE_RETROII
+                    if old_mode == MODE_RETROII    
                         r2.UpdateRetroIIMode (RETROII_OFF)
+                        stopFrameRateClock
                     old_mode := index    
                 current_mode := index
                 update_debug := TRUE    
@@ -435,6 +449,7 @@ PRI run_sd_file_download | addr, done, index, i, adr_lsb, adr_msb,address, lengt
     setPos(0,0)
     done := 0
     slave.flush 'clears all 32 registers to 0    
+    stopFrameRateClock 'this was causing things to go wonky for some reason, so stop the clock
     
     'get file name/address location/length 
     'start downloading to ram
@@ -794,11 +809,12 @@ Summary:
     soft switches are monitored and the video ram is polled and displayed
     in the appropriate video mode.
 }}   
-PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
+PRI run_retroii | retroii_mode_old,mem_section, index, col_7, mem_loc, mem_box, mem_row, mem_start, mem_page_start, data, row, col, cursor_toggle, cursor_timer
     cls 
     R2.Cursor(FALSE)
     cursor_toggle := false
     cursor_timer := 0
+    retroii_mode := 0
 
     'check out the Apple ][ Reference Manual Page 13 for details on soft switch configs and video modes.
     repeat while current_mode == MODE_RETROII
@@ -939,7 +955,7 @@ PRI run_retroii | retroii_mode, retroii_mode_old,mem_section, index, col_7, mem_
                     mem_loc += $80
                 mem_start += $28    
                                                   
-      
+        frame_counter++
         printDebug   
 
 
@@ -1014,11 +1030,12 @@ PRI display_retroii_textrow(row, mem_loc, blink) | data, col, flashing, inverse,
 Summary: Prints general debug info to the bottom of the screen. 
     Right now this is only displaying the state of the soft switches.
 }} 
-PRI printDebug
+PRI printDebug 
     
     if display_debug == FALSE
         'if old_display_debug == TRUE 'need to clear debug screen
-     
+        setPos(0,28)
+        str( string("       "))
         setPos(0, 29)
         str( string("                   ")) 'clear screen value
         setPos(28, 26)
@@ -1030,6 +1047,7 @@ PRI printDebug
         setPos(28, 29)
         str( string("         "))
         old_display_debug := FALSE
+        stopFrameRateClock
     else
         
         'display current clock freq
@@ -1043,6 +1061,37 @@ PRI printDebug
             dec( clock_freqs[current_clock])
            
         old_display_debug := TRUE
+        if frame_rate_started == FALSE
+            setFrameRateClock
+       
+        
+        if phsb[31] == 1
+            if frame_rate_clear == 0
+                frame_rate_clear := 1
+            elseif frame_rate_clear == 2
+                frame_rate_clear := 0
+                if retroii_mode == RETROII_HIRES
+                    frame_rate_new := R2.FrameCountHires
+                else
+                    frame_rate_new := frame_counter
+                    
+                if frame_rate_new <> frame_rate_old   
+                    frame_rate_old := frame_rate_new 
+                    setPos(0,28)
+                    str( string("FPS:   "))
+                    setPos(4,28)
+                    dec(frame_rate_new)   
+                R2.ClearFrameCountHires  
+                frame_counter := 0           
+        elseif phsb[31] == 0
+            if frame_rate_clear == 1
+                frame_rate_clear := 2
+            
+                
+        'dec(frqb) '53
+        'dec(ctrb) '268435456
+        'dec(phsb[31])
+        'dec(R2.FrameCountHires)
         'display soft switches
         setPos(28, 26)
         str( string("HIRES: "))
@@ -1056,7 +1105,18 @@ PRI printDebug
         setPos(28, 29)
         str( string("TEXT:  "))
         hex( ss_text, 2)  
-         
+
+{{Summary: Sets the clock which is used to count the interval between frames in the RETROII modes}}         
+PRI setFrameRateClock
+    frqb := 53 'set for 1Hz
+    ctrb := 268435456
+    frame_rate_started := TRUE
+
+PRI stopFrameRateClock
+    'stop frame rate clock
+    ctrb := 0
+    frqb := 0
+    frame_rate_started := FALSE
 
 {{
 Summary: Clears the screen

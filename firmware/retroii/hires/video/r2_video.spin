@@ -78,6 +78,7 @@ VAR
   byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix
   long  pixel_bfr[LSIZE]
   long  pixel_colors, frame_count, cursor_pos, cursor_mask, hires_busy, draw_command, hires_command, debug_val, display_debug, current_clock
+  long  frame_count_hires
   'long cog_hires
   'long cog_hires_stack[20]
 
@@ -290,6 +291,12 @@ PUB FrameCount
 '------------------------------------------------------------------------------------------------
   return frame_count
 
+PUB FrameCountHires
+    return frame_count_hires
+    
+PUB ClearFrameCountHires
+    frame_count_hires := 0
+
 PUB Color(color_num, new_color)
 '------------------------------------------------------------------------------------------------
 '' Change a color value.
@@ -317,7 +324,8 @@ PUB Start(pin_group) | hres, vres
    
   colors_ptr := @pixel_colors
   frame_cntr_ptr := @frame_count
-   
+  frame_count_hires := 0
+  frame_cnt_hres_ptr := @frame_count_hires 
   cursorx := 0
   cursory := 0
   cursor_state := FALSE
@@ -1093,6 +1101,11 @@ hires_draw_column
                        
                         'get updated value for mode_retroii
 hires_check_mode        rdbyte  hires_tmp, mode_retroii_ptr
+                        'update frame counter
+                        rdlong  hires_val, frame_cnt_hres_ptr
+                        add     hires_val, #1
+                        wrlong  hires_val, frame_cnt_hres_ptr
+                        
                         cmp     hires_tmp, #2  wz 'repeat loop while in retroii hires mode
               if_z      jmp     #hires_start
                         'start debug
@@ -1386,6 +1399,7 @@ draw_cmnd_ptr2          long    0
 hires_cmnd_ptr          long    0
 debug_ptr               long    0
 debug_val_ptr           long    0
+frame_cnt_hres_ptr      long    0
 ss_page2_ptr            long    0
 ss_mix_ptr              long    0
 mode_retroii_ptr        long    0
