@@ -1000,6 +1000,9 @@ hires_cmd_start         rdlong  hires_cmnd, hires_cmnd_ptr  wz
 			'jmp #hires
 '---- draw HiRes screen--------------------------------------------------------------------------
 hires_hires 
+                        andn    dira, ram_dira_mask
+                        or      dira, ram_dira_mask 'set proper input/outputs
+                        or      outa, ram_we_mask                             
                         'mov     mode_retroii_ptr, #2 'in retroii mode
                         'mov     ram_address, ram_address_test
                         'call    #read_byte 
@@ -1232,13 +1235,13 @@ read_byte
 '   'to read:   
 '    lsb := address 
                         mov     ram_lsb, ram_address
-                        mov     ram_a15, ram_address
+                        'mov     ram_a15, ram_address
 '    msb := address >> 8
                         shl     ram_address, #13
-                        mov     ram_msb, ram_address   
+                        'mov     ram_msb, ram_address   
 '    'set we pin high
 '    outa[WE]~~
-                        or      outa, ram_we_mask 
+                        'or      outa, ram_we_mask 
 '    'set data pins as input
 '    dira[D0..D7]~
                         'andn    dira,#255
@@ -1247,14 +1250,16 @@ read_byte
 '    outa[A7..A0] := lsb
                         shl     ram_lsb, #8 
                         and     ram_lsb, ram_lsb_mask  
-                        andn    outa, ram_lsb_mask   'clear first
-                        or      outa, ram_lsb 
+                        'andn    outa, ram_lsb_mask   'clear first
+                        'or      outa, ram_lsb 
                        
 '    outa[A14..A8] := msb
-                        and     ram_msb, ram_msb_mask     
-                        andn    outa, ram_msb_mask   'clear first
-                        or      outa, ram_msb 
-  
+                        and     ram_address, ram_msb_mask     
+                        'andn    outa, ram_msb_mask   'clear first
+                        'or      outa, ram_address 
+                        andn    outa, ram_mask
+                        or      outa, ram_lsb
+                        or      outa, ram_address
 '    outa[A15] := msb >> 7
                         'shl     ram_a15, #17 'these lines that set a15 were causing page2 hires to not work, so commenting out until I can look at it further
                         'and     ram_a15, ram_a15_mask
@@ -1265,8 +1270,8 @@ read_byte
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #hires_start  
                         'end debug                     
-                        andn    dira, ram_dira_mask
-                        or      dira, ram_dira_mask 'set proper input/outputs
+                        'andn    dira, ram_dira_mask
+                        'or      dira, ram_dira_mask 'set proper input/outputs
 '    'wait specified time
 '    'can adjust the amount of nops here to optimize performance a bit
                         'nop
@@ -1275,16 +1280,17 @@ read_byte
                         
 '    'read data pins
 '    data_in := ina[D7..D0]
-                        mov     hires_tmp, ina                      
-                        and     hires_tmp, #255        
-                        mov     ram_read, hires_tmp     
+                        mov     ram_read, ina
+                        'mov     hires_tmp, ina                      
+                        'and     hires_tmp, #255        
+                        'mov     ram_read, hires_tmp     
 '    outa[A0..A7] := %00000000 'low
-                        andn    outa, ram_lsb_mask
+                        'andn    outa, ram_lsb_mask
 '    outa[A8..A14] := %0000000 'low
-                        andn    outa, ram_msb_mask
+                        'andn    outa, ram_msb_mask
 '    outa[A15]~ 'low                          
-                        andn    outa, ram_a15_mask
- 
+                        'andn    outa, ram_a15_mask
+                        andn    outa, ram_mask 'clear 
 '    return data_in                       
                         'mov     ram_read, #127
 read_byte_ret           ret  'return to caller
@@ -1408,6 +1414,7 @@ pixel_mask2             long    0
 ram_we_mask             long    $40_00_00_00
 ram_lsb_mask            long    $00_00_FF_00
 ram_msb_mask            long    $0F_E0_00_00
+ram_mask                long    $0F_E0_FF_00
 ram_a15_mask            long    $80_00_00_00
 ram_dira_mask           long    $8F_E0_FF_00
 ram_address_test        long    $40_00
