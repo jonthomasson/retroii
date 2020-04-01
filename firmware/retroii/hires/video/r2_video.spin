@@ -1281,6 +1281,7 @@ read_byte
 '    'read data pins
 '    data_in := ina[D7..D0]
                         mov     ram_read, ina
+                        and     ram_read, #255 'clean the data
                         'mov     hires_tmp, ina                      
                         'and     hires_tmp, #255        
                         'mov     ram_read, hires_tmp     
