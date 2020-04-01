@@ -118,7 +118,7 @@ PUB main | soft_switches, i, frq
     'ser.Dec (frq)
     
     repeat     
-        'if ss_override == FALSE
+        
         soft_switches := ina[SS_LOW..SS_HIGH]           'send soft switch to register 30 of video processor
         
         if ss_override == 255
@@ -127,22 +127,22 @@ PUB main | soft_switches, i, frq
                 ss_mask := (ss_text & $01)
                 soft_switches &= $FE
                 soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             if ss_mix_override == 255
                 ss_mask :=(ss_mix & $02)
                 soft_switches &= $FD
                 soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             if ss_page2_override == 255
                 ss_mask := (ss_page2 & $04)
                 soft_switches &= $FB
                 soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             if ss_hires_override == 255
                 ss_mask := (ss_hires & $08)
                 soft_switches &= $F7
                 soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             
         'only send soft_switches when their value changes
         if soft_switches_old <> soft_switches
@@ -277,31 +277,19 @@ PUB main | soft_switches, i, frq
             if key == 216 'hires
                 ss_hires_override := TRUE
                 ss_hires := !ss_hires
-                'ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
-                'soft_switches &= $F7
-                'soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             if key == 217 'page2
                 ss_page2_override := TRUE
                 ss_page2 := !ss_page2
-                'ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
-                'soft_switches &= $FB
-                'soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             if key == 218 'mix
                 ss_mix_override := TRUE
                 ss_mix := !ss_mix
-                'ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
-                'soft_switches &= $FD
-                'soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
             if key == 219 'text
                 ss_text_override := TRUE
                 ss_text := !ss_text  
-                'ss_mask := (ss_hires & $08)|(ss_page2 & $04)|(ss_mix & $02)|(ss_text & $01)
-                'soft_switches &= $FE
-                'soft_switches |= ss_mask
-                'soft_switches := ss_mask
+                
         elseif  key == 214 'F7 clear kb 
             kb_write($00)        
         elseif  key == 215 'F8 turn off soft switch override
