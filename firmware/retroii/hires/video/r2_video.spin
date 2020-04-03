@@ -78,7 +78,7 @@ VAR
   byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix
   long  pixel_bfr[LSIZE]
   long  pixel_colors, frame_count, cursor_pos, cursor_mask, hires_busy, draw_command, hires_command, debug_val, display_debug, current_clock
-  long  frame_count_hires
+  long  frame_count_hires', ram_lock
   'long cog_hires
   'long cog_hires_stack[20]
 
@@ -334,6 +334,7 @@ PUB Start(pin_group) | hres, vres
   cursor_mask := 0
   cursor_mask_ptr := @cursor_mask
   reverse := 0
+  'ram_lock := 0
   draw_command := 0
   hires_command := 0
   hires_busy := 0
@@ -354,7 +355,7 @@ PUB Start(pin_group) | hres, vres
   draw_reverse_ptr := @reverse
   'draw_reverse_ptr2 := @reverse
   draw_ymulwidth_ptr := @YMulWidth
-  
+  'hires_ram_lock_ptr := @ram_lock
   
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
   if cog2 == 0
@@ -999,7 +1000,7 @@ hires_cmd_start         rdlong  hires_cmnd, hires_cmnd_ptr  wz
                         wrlong  hires_is_busy, hires_busy_ptr 'hires is busy
 			'jmp #hires
 '---- draw HiRes screen--------------------------------------------------------------------------
-hires_hires 
+hires_hires             'setup input/output for ram once
                         andn    dira, ram_dira_mask
                         or      dira, ram_dira_mask 'set proper input/outputs
                         or      outa, ram_we_mask                             
@@ -1020,13 +1021,13 @@ hires_hires
 hires_start             
                         mov     mem_start, #0
                         mov     mem_page_start, hires_page1
-                        mov     hires_row, #0
+                        mov     hires_row, hires_row_start
                         
 '            if ss_page2 == $FF
 '                mem_page_start := HIRES_PAGE2
-                        rdbyte  hires_tmp, ss_page2_ptr
-                        xor     hires_tmp, #255 wz
-                if_z    mov     mem_page_start, hires_page2   
+                        rdbyte  hires_tmp, ss_page2_ptr wz
+                        'xor     hires_tmp, #255 wz
+                if_nz   mov     mem_page_start, hires_page2   
      
 '            repeat mem_section from 1 to 3 '3 sections
                         mov     hires_cntr, #3  
@@ -1038,9 +1039,9 @@ hires_section
 hires_boxrow          
             '        'mix mode
             '        if ss_mix == $FF
-                        rdbyte  hires_tmp, ss_mix_ptr
-                        xor     hires_tmp, #255 wz
-                if_nz   jmp     #hires_start_row 'not in mixed mode, else fall through to below code                  
+                        rdbyte  hires_tmp, ss_mix_ptr wz
+                        'xor     hires_tmp, #255 wz
+                if_z    jmp     #hires_start_row 'not in mixed mode, else fall through to below code                  
             '            'when we're at row 5 and section 3, exec mix mode
             '            'check mem_box and mem_start
             '            if mem_section == 3 and mem_box == $200
@@ -1232,46 +1233,39 @@ mix_mode_wait           rdlong  hires_tmp, draw_cmnd_ptr2  wz 'wait for draw_com
 'ram_address should have the address you want to read from
 'will place byte read into var ram_read
 read_byte
+                        'lock ram first to prevent other cogs from reading at same time
+'read_byte_wait_lock     
+'                        rdlong  hires_tmp, hires_ram_lock_ptr  wz 'wait for ram to be free
+'              if_nz     jmp     #read_byte_wait_lock   
+'                        wrlong  cog_num, hires_ram_lock_ptr 'lock ram with our unique cog number.      
 '   'to read:   
 '    lsb := address 
                         mov     ram_lsb, ram_address
-                        'mov     ram_a15, ram_address
+                       
 '    msb := address >> 8
                         shl     ram_address, #13
-                        'mov     ram_msb, ram_address   
+                        
 '    'set we pin high
 '    outa[WE]~~
-                        'or      outa, ram_we_mask 
+                       
 '    'set data pins as input
 '    dira[D0..D7]~
-                        'andn    dira,#255
+                       
                         'updating dira to ram_dira_mask below        
 '    'set address pins
 '    outa[A7..A0] := lsb
                         shl     ram_lsb, #8 
                         and     ram_lsb, ram_lsb_mask  
-                        'andn    outa, ram_lsb_mask   'clear first
-                        'or      outa, ram_lsb 
+                       
                        
 '    outa[A14..A8] := msb
                         and     ram_address, ram_msb_mask     
-                        'andn    outa, ram_msb_mask   'clear first
-                        'or      outa, ram_address 
+                       
                         andn    outa, ram_mask
                         or      outa, ram_lsb
                         or      outa, ram_address
 '    outa[A15] := msb >> 7
-                        'shl     ram_a15, #17 'these lines that set a15 were causing page2 hires to not work, so commenting out until I can look at it further
-                        'and     ram_a15, ram_a15_mask
-                        'andn    outa, ram_a15_mask   'clear first
-                        'or      outa, ram_a15 
-                        'start debug
-                        'mov     debug_ptr, ram_a15
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #hires_start  
-                        'end debug                     
-                        'andn    dira, ram_dira_mask
-                        'or      dira, ram_dira_mask 'set proper input/outputs
+                       
 '    'wait specified time
 '    'can adjust the amount of nops here to optimize performance a bit
                         'nop
@@ -1282,18 +1276,15 @@ read_byte
 '    data_in := ina[D7..D0]
                         mov     ram_read, ina
                         and     ram_read, #255 'clean the data
-                        'mov     hires_tmp, ina                      
-                        'and     hires_tmp, #255        
-                        'mov     ram_read, hires_tmp     
-'    outa[A0..A7] := %00000000 'low
-                        'andn    outa, ram_lsb_mask
-'    outa[A8..A14] := %0000000 'low
-                        'andn    outa, ram_msb_mask
+                        
+'    outa[A0..A7] := %00000000 'lo
+'    outa[A8..A14] := %0000000 'lo
 '    outa[A15]~ 'low                          
-                        'andn    outa, ram_a15_mask
+                      
                         andn    outa, ram_mask 'clear 
 '    return data_in                       
-                        'mov     ram_read, #127
+                        'unlock ram so other cogs can use it
+                        'wrlong  ram_release, hires_ram_lock_ptr
 read_byte_ret           ret  'return to caller
 
 '---- drawa byte of pixels ------------------------------------------------------------------------------
@@ -1401,7 +1392,7 @@ hires_pixel_sub_ret     ret
 hires_pixel             call    #hires_pixel_sub
                         jmp     #hires_cmd_start
 
-'draw_reverse_ptr2       long    0
+'hires_ram_lock_ptr      long    0
 draw_cmnd_ptr2          long    0
 hires_cmnd_ptr          long    0
 debug_ptr               long    0
@@ -1419,8 +1410,9 @@ ram_mask                long    $0F_E0_FF_00
 ram_a15_mask            long    $80_00_00_00
 ram_dira_mask           long    $8F_E0_FF_00
 ram_address_test        long    $40_00
-hires_page1             long    $20_00
-hires_page2             long    $40_00
+hires_page1             long    $20_00'$20_28 '$20_50 '$20_00
+hires_page2             long    $40_00'$40_28 '$40_50 '$40_00
+hires_row_start         long    0'0'64'128
 mem_row_inc             long    $400
 hires_busy_ptr          long    0
 hires_is_busy           long    1
@@ -1429,6 +1421,8 @@ mem_box_mix             long    $200
 mem_mix_start           long    $650
 is_flashing             long    $FF
 flash_counter           long    5
+cog_num                 long    1
+ram_release             long    0
 
 text_type               res     1
 mix_flashing            res     1
