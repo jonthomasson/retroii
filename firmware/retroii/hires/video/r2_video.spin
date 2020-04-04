@@ -355,6 +355,7 @@ PUB Start(pin_group) | hres, vres
   draw_reverse_ptr := @reverse
   'draw_reverse_ptr2 := @reverse
   draw_ymulwidth_ptr := @YMulWidth
+  hires_ymulwidth_ptr := @YMulWidth
   'hires_ram_lock_ptr := @ram_lock
   
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
@@ -1301,26 +1302,28 @@ hires_pix0              test    hires_xpos, #255  wz
               
                                    
 '  p := (WIDTH * y) + x
-                        mov     hires_ptr0, hires_t1
-
-hires_pix1              test    hires_ypos, #255  wz
-              if_nz     sub     hires_ypos, #1
-              if_nz     add     hires_ptr0, #WIDTH
-              if_nz     jmp     #hires_pix1
+                        'mov     hires_ptr0, hires_t1
+                        mov     hires_tmp2, hires_t1
+'hires_pix1              test    hires_ypos, #255  wz
+'              if_nz     sub     hires_ypos, #1
+'              if_nz     add     hires_ptr0, #WIDTH
+'              if_nz     jmp     #hires_pix1
+                        
                         'new routine using lut to replace multiply
                         'rdlong would be more efficient here, but 
                         'there was a problem reading bytes since they weren't
                         'long aligned...
                         
-                        'mov     hires_t1, hires_ymulwidth_ptr
-                        'shl     hires_ypos, #1
-                        'add     hires_t1, hires_ypos  
-                        'rdbyte  hires_ptr0, hires_t1 
-                        'add     hires_t1, #1
-                        'shl     hires_ptr0, #8
-                        'rdbyte  hires_t2, hires_t1 
-                        'or      hires_ptr0, hires_t2
+                        mov     hires_t1, hires_ymulwidth_ptr
+                        shl     hires_ypos, #1
+                        add     hires_t1, hires_ypos  
+                        rdbyte  hires_ptr0, hires_t1 
+                        add     hires_t1, #1
+                        shl     hires_ptr0, #8
+                        rdbyte  hires_t2, hires_t1 
+                        or      hires_ptr0, hires_t2
                         
+                        add     hires_ptr0, hires_tmp2 'add x
 '  x := (p & 7)'find x position in byte
                         mov     hires_ypos, hires_ptr0
                         and     hires_ypos, #7
@@ -1393,6 +1396,7 @@ hires_pixel             call    #hires_pixel_sub
                         jmp     #hires_cmd_start
 
 'hires_ram_lock_ptr      long    0
+hires_ymulwidth_ptr     long    0
 draw_cmnd_ptr2          long    0
 hires_cmnd_ptr          long    0
 debug_ptr               long    0
@@ -1462,7 +1466,6 @@ DAT
 '------------------------------------------------------------------------------------------------
 'LUT to map multiplication table for char (y * width)
 '------------------------------------------------------------------------------------------------
-'max y is 30 (height/8) = (240/8) = 30.
 'width is 288
 YMulWidth
                         byte    $00, $00      '0 (0)
@@ -1475,27 +1478,191 @@ YMulWidth
                         byte    $07, $E0      '7 (2016)
                         byte    $09, $00      '8 (2304)
                         byte    $0A, $20      '9 (2592)
-                        byte    $0B, $40      '10(2880)
-                        byte    $0C, $60      '11(3168)
-                        byte    $0D, $80      '12(3456)
-                        byte    $0E, $A0      '13(3744)
-                        byte    $0F, $C0      '14(4032)
-                        byte    $10, $E0      '15(4320)
-                        byte    $12, $00      '16(4608)
-                        BYTE    $13, $20      '17(4896)
-                        BYTE    $14, $40      '18(5184)
-                        BYTE    $15, $60      '19(5472)
-                        BYTE    $16, $80      '20(5760)
-                        BYTE    $17, $A0      '21(6048)
-                        BYTE    $18, $C0      '22(6336)
-                        BYTE    $19, $E0      '23(6624)
-                        BYTE    $1B, $00      '24(6912)
-                        BYTE    $1C, $20      '25(7200)
-                        BYTE    $1D, $40      '26(7488)
-                        BYTE    $1E, $60      '27(7776)
-                        BYTE    $1F, $80      '28(8064)
-                        BYTE    $20, $A0      '29(8352)
-                                            
+                        byte    $0B, $40      '10 (2880)
+                        byte    $0C, $60      '11 (3168)
+                        byte    $0D, $80      '12 (3456)
+                        byte    $0E, $A0      '13 (3744)
+                        byte    $0F, $C0      '14 (4032)
+                        byte    $10, $E0      '15 (4320)
+                        byte    $12, $00      '16 (4608)
+                        byte    $13, $20      '17 (4896)
+                        byte    $14, $40      '18 (5184)
+                        byte    $15, $60      '19 (5472)
+                        byte    $16, $80      '20 (5760)
+                        byte    $17, $A0      '21 (6048)
+                        byte    $18, $C0      '22 (6336)
+                        byte    $19, $E0      '23 (6624)
+                        byte    $1B, $00      '24 (6912)
+                        byte    $1C, $20      '25 (7200)
+                        byte    $1D, $40      '26 (7488)
+                        byte    $1E, $60      '27 (7776)
+                        byte    $1F, $80      '28 (8064)
+                        byte    $20, $A0      '29 (8352)
+                        byte    $21, $C0      '30 (8640)
+                        byte    $22, $E0      '31 (8928)
+                        byte    $24, $00      '32 (9216)
+                        byte    $25, $20      '33 (9504)
+                        byte    $26, $40      '34 (9792)
+                        byte    $27, $60      '35 (10080)
+                        byte    $28, $80      '36 (10368)
+                        byte    $29, $A0      '37 (10656)
+                        byte    $2A, $C0      '38 (10944)
+                        byte    $2B, $E0      '39 (11232)
+                        byte    $2D, $00      '40 (11520)
+                        byte    $2E, $20      '41 (11808)
+                        byte    $2F, $40      '42 (12096)
+                        byte    $30, $60      '43 (12384)
+                        byte    $31, $80      '44 (12672)
+                        byte    $32, $A0      '45 (12960)
+                        byte    $33, $C0      '46 (13248)
+                        byte    $34, $E0      '47 (13536)
+                        byte    $36, $00      '48 (13824)
+                        byte    $37, $20      '49 (14112)
+                        byte    $38, $40      '50 (14400)
+                        byte    $39, $60      '51 (14688)
+                        byte    $3A, $80      '52 (14976)
+                        byte    $3B, $A0      '53 (15264)
+                        byte    $3C, $C0      '54 (15552)
+                        byte    $3D, $E0      '55 (15840)
+                        byte    $3F, $00      '56 (16128)
+                        byte    $40, $20      '57 (16416)
+                        byte    $41, $40      '58 (16704)
+                        byte    $42, $60      '59 (16992)
+                        byte    $43, $80      '60 (17280)
+                        byte    $44, $A0      '61 (17568)
+                        byte    $45, $C0      '62 (17856)
+                        byte    $46, $E0      '63 (18144)
+                        byte    $48, $00      '64 (18432)
+                        byte    $49, $20      '65 (18720)
+                        byte    $4A, $40      '66 (19008)
+                        byte    $4B, $60      '67 (19296)
+                        byte    $4C, $80      '68 (19584)
+                        byte    $4D, $A0      '69 (19872)
+                        byte    $4E, $C0      '70 (20160)
+                        byte    $4F, $E0      '71 (20448)
+                        byte    $51, $00      '72 (20736)
+                        byte    $52, $20      '73 (21024)
+                        byte    $53, $40      '74 (21312)
+                        byte    $54, $60      '75 (21600)
+                        byte    $55, $80      '76 (21888)
+                        byte    $56, $A0      '77 (22176)
+                        byte    $57, $C0      '78 (22464)
+                        byte    $58, $E0      '79 (22752)
+                        byte    $5A, $00      '80 (23040)
+                        byte    $5B, $20      '81 (23328)
+                        byte    $5C, $40      '82 (23616)
+                        byte    $5D, $60      '83 (23904)
+                        byte    $5E, $80      '84 (24192)
+                        byte    $5F, $A0      '85 (24480)
+                        byte    $60, $C0      '86 (24768)
+                        byte    $61, $E0      '87 (25056)
+                        byte    $63, $00      '88 (25344)
+                        byte    $64, $20      '89 (25632)
+                        byte    $65, $40      '90 (25920)
+                        byte    $66, $60      '91 (26208)
+                        byte    $67, $80      '92 (26496)
+                        byte    $68, $A0      '93 (26784)
+                        byte    $69, $C0      '94 (27072)
+                        byte    $6A, $E0      '95 (27360)
+                        byte    $6C, $00      '96 (27648)
+                        byte    $6D, $20      '97 (27936)
+                        byte    $6E, $40      '98 (28224)
+                        byte    $6F, $60      '99 (28512)
+                        byte    $70, $80      '100 (28800)
+                        byte    $71, $A0      '101 (29088)
+                        byte    $72, $C0      '102 (29376)
+                        byte    $73, $E0      '103 (29664)
+                        byte    $75, $00      '104 (29952)
+                        byte    $76, $20      '105 (30240)
+                        byte    $77, $40      '106 (30528)
+                        byte    $78, $60      '107 (30816)
+                        byte    $79, $80      '108 (31104)
+                        byte    $7A, $A0      '109 (31392)
+                        byte    $7B, $C0      '110 (31680)
+                        byte    $7C, $E0      '111 (31968)
+                        byte    $7E, $00      '112 (32256)
+                        byte    $7F, $20      '113 (32544)
+                        byte    $80, $40      '114 (32832)
+                        byte    $81, $60      '115 (33120)
+                        byte    $82, $80      '116 (33408)
+                        byte    $83, $A0      '117 (33696)
+                        byte    $84, $C0      '118 (33984)
+                        byte    $85, $E0      '119 (34272)
+                        byte    $87, $00      '120 (34560)
+                        byte    $88, $20      '121 (34848)
+                        byte    $89, $40      '122 (35136)
+                        byte    $8A, $60      '123 (35424)
+                        byte    $8B, $80      '124 (35712)
+                        byte    $8C, $A0      '125 (36000)
+                        byte    $8D, $C0      '126 (36288)
+                        byte    $8E, $E0      '127 (36576)
+                        byte    $90, $00      '128 (36864)
+                        byte    $91, $20      '129 (37152)
+                        byte    $92, $40      '130 (37440)
+                        byte    $93, $60      '131 (37728)
+                        byte    $94, $80      '132 (38016)
+                        byte    $95, $A0      '133 (38304)
+                        byte    $96, $C0      '134 (38592)
+                        byte    $97, $E0      '135 (38880)
+                        byte    $99, $00      '136 (39168)
+                        byte    $9A, $20      '137 (39456)
+                        byte    $9B, $40      '138 (39744)
+                        byte    $9C, $60      '139 (40032)
+                        byte    $9D, $80      '140 (40320)
+                        byte    $9E, $A0      '141 (40608)
+                        byte    $9F, $C0      '142 (40896)
+                        byte    $A0, $E0      '143 (41184)
+                        byte    $A2, $00      '144 (41472)
+                        byte    $A3, $20      '145 (41760)
+                        byte    $A4, $40      '146 (42048)
+                        byte    $A5, $60      '147 (42336)
+                        byte    $A6, $80      '148 (42624)
+                        byte    $A7, $A0      '149 (42912)
+                        byte    $A8, $C0      '150 (43200)
+                        byte    $A9, $E0      '151 (43488)
+                        byte    $AB, $00      '152 (43776)
+                        byte    $AC, $20      '153 (44064)
+                        byte    $AD, $40      '154 (44352)
+                        byte    $AE, $60      '155 (44640)
+                        byte    $AF, $80      '156 (44928)
+                        byte    $B0, $A0      '157 (45216)
+                        byte    $B1, $C0      '158 (45504)
+                        byte    $B2, $E0      '159 (45792)
+                        byte    $B4, $00      '160 (46080)
+                        byte    $B5, $20      '161 (46368)
+                        byte    $B6, $40      '162 (46656)
+                        byte    $B7, $60      '163 (46944)
+                        byte    $B8, $80      '164 (47232)
+                        byte    $B9, $A0      '165 (47520)
+                        byte    $BA, $C0      '166 (47808)
+                        byte    $BB, $E0      '167 (48096)
+                        byte    $BD, $00      '168 (48384)
+                        byte    $BE, $20      '169 (48672)
+                        byte    $BF, $40      '170 (48960)
+                        byte    $C0, $60      '171 (49248)
+                        byte    $C1, $80      '172 (49536)
+                        byte    $C2, $A0      '173 (49824)
+                        byte    $C3, $C0      '174 (50112)
+                        byte    $C4, $E0      '175 (50400)
+                        byte    $C6, $00      '176 (50688)
+                        byte    $C7, $20      '177 (50976)
+                        byte    $C8, $40      '178 (51264)
+                        byte    $C9, $60      '179 (51552)
+                        byte    $CA, $80      '180 (51840)
+                        byte    $CB, $A0      '181 (52128)
+                        byte    $CC, $C0      '182 (52416)
+                        byte    $CD, $E0      '183 (52704)
+                        byte    $CF, $00      '184 (52992)
+                        byte    $D0, $20      '185 (53280)
+                        byte    $D1, $40      '186 (53568)
+                        byte    $D2, $60      '187 (53856)
+                        byte    $D3, $80      '188 (54144)
+                        byte    $D4, $A0      '189 (54432)
+                        byte    $D5, $C0      '190 (54720)
+                        byte    $D6, $E0      '191 (55008)
+                        byte    $D8, $00      '192 (55296)
+
+                                                       
 '------------------------------------------------------------------------------------------------
 ' LUT To map between 7x8 font tiles and 8x8 graphic tiles ((xpos x 7) / 8)
 '------------------------------------------------------------------------------------------------
