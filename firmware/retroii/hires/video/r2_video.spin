@@ -1176,7 +1176,7 @@ mix_mode_flashing
                         sub     flash_counter, #1 wz
               if_z      andn    is_flashing, is_flashing wz 'invert is_flashing
               if_z      mov     hires_val, #32 'space
-              if_z      mov     flash_counter, #5 'reset counter          
+              if_z      mov     flash_counter, #25 'reset counter          
                         'mov     hires_tmp, #0
                         'wrbyte  hires_tmp, draw_reverse_ptr2
                         jmp     #mix_mode_print
@@ -1410,10 +1410,6 @@ hires_draw_column
                         or      hires_tmp, hires_val2
                         wrbyte  hires_tmp, hires_ptr1 
                         
-                        'add     hires_xpos, #7
-                        'rdbyte  hires_tmp, hires_ptr3
-                        'add     hires_tmp, #7
-                        'wrbyte  hires_tmp, hires_ptr3
 hires_pixel_next_col                       
                         add     hires_ptr3, #7 'add x
                         mov     hires_ptr0, hires_ptr3
