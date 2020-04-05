@@ -1066,32 +1066,10 @@ hires_draw_row
                         add     mem_loc, mem_start
                         add     mem_loc, hires_mem_box
                         add     mem_loc, hires_mem_row
-'                        col := 0 '1'moving column a little to the right to center within frame
- '                       mov     hires_col, #0
-'                        repeat 40 '40 columns/bytes per row
-'                        mov     hires_cntr4, #40
-'hires_draw_column
-'                            data := read_byte(mem_loc)
-'                            'the msb is ignored since it's the color grouping bit
-'                            'the other bits are displayed opposite to where they appear
-'                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
-'                            'read Apple II Computer Graphics page 70ish for more details.
-'                            R2.Pixel (data, col, row)     
-                        'mov     hires_val, #255 'test data for now
-                        
-                        'call routine to get data byte from ram. routine will write data to hires_val
-'                        mov     ram_address, mem_loc
-'                        call    #read_byte
-'                        mov     hires_val, ram_read
 
-'                        mov     hires_xpos, hires_col
-                        mov     hires_ypos, hires_row
+                        mov     hires_ypos, hires_row 'pixel sub will iterate 1 row of pixels
                         call    #hires_pixel_sub       'call routine to draw our byte of pixels                                                                    
-'                            col++
-'                        add     hires_col, #1    
-'                            mem_loc++
-'                        add     mem_loc, #1
-'                        djnz    hires_cntr4, #hires_draw_column
+
 '                        row++
                         add     hires_row, #1
 '                        mem_row += $400

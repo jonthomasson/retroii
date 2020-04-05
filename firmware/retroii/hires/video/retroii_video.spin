@@ -99,6 +99,8 @@ VAR
     byte soft_switches_updated 
     long cog_soft_switches
     long cog_ss_stack[20]
+    long cog_regs
+    long cog_regs_stack[20]
     long prog_download_option
     long current_clock 'current frequency in Hz for clock feeding the 6502
     long old_clock 
@@ -215,45 +217,15 @@ PRI init | i, x, y
     outa[WE]~~      'set we high to avoid writing data
     
     cog_soft_switches := cognew(check_soft_switches, @cog_ss_stack) 
-   
+    cog_regs := cognew(check_regs, @cog_regs_stack) 
 
 {{
 Summary: 
-    Runs in its own cog and continually checks for changes to the soft switches
-    or video modes.
-}}
-PRI check_soft_switches | index
-   
+    Runs in its own cog and continually checks for changes to the i2c registers.
+}}   
+PRI check_regs | index
     repeat
-       ' waitcnt(500000 + cnt)
-        index := slave.check_reg(SS_REG) 'check for soft switch changes
-    
-        if index > -1
-            soft_switches := index
-            soft_switches_updated := TRUE
-            
-            if ($08 & soft_switches) == $08
-                ss_hires := TRUE
-            else
-                ss_hires := FALSE
-            
-            if ($04 & soft_switches) == $04
-                ss_page2 := TRUE
-            else
-                ss_page2 := FALSE
-                
-            if ($02 & soft_switches) == $02
-                ss_mix := TRUE
-            else
-                ss_mix := FALSE 
-                
-            if ($01 & soft_switches) == $01
-                ss_text := TRUE
-            else
-                ss_text := FALSE    
-            
-              
-        index := -1
+        waitcnt(500000 + cnt)
         
         index := slave.check_reg(MODE_REG) 'check for new mode
     
@@ -300,7 +272,45 @@ PRI check_soft_switches | index
         
         'send mode to cog
         R2.UpdateRegs ( ss_page2, ss_mix, display_debug, current_clock)
-        'R2.UpdateRetroIIMode (current_mode)
+
+
+{{
+Summary: 
+    Runs in its own cog and continually checks for changes to the soft switches
+    or video modes.
+}}
+PRI check_soft_switches | index
+   
+    repeat
+       ' waitcnt(500000 + cnt)
+        index := slave.check_reg(SS_REG) 'check for soft switch changes
+    
+        if index > -1
+            soft_switches := index
+            soft_switches_updated := TRUE
+            
+            if ($08 & soft_switches) == $08
+                ss_hires := TRUE
+            else
+                ss_hires := FALSE
+            
+            if ($04 & soft_switches) == $04
+                ss_page2 := TRUE
+            else
+                ss_page2 := FALSE
+                
+            if ($02 & soft_switches) == $02
+                ss_mix := TRUE
+            else
+                ss_mix := FALSE 
+                
+            if ($01 & soft_switches) == $01
+                ss_text := TRUE
+            else
+                ss_text := FALSE    
+            
+              
+        
 {{
 Summary: 
     Starts th memory monitor program.
