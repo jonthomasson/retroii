@@ -1067,10 +1067,10 @@ hires_draw_row
                         add     mem_loc, hires_mem_box
                         add     mem_loc, hires_mem_row
 '                        col := 0 '1'moving column a little to the right to center within frame
-                        mov     hires_col, #0
+ '                       mov     hires_col, #0
 '                        repeat 40 '40 columns/bytes per row
-                        mov     hires_cntr4, #40
-hires_draw_column
+'                        mov     hires_cntr4, #40
+'hires_draw_column
 '                            data := read_byte(mem_loc)
 '                            'the msb is ignored since it's the color grouping bit
 '                            'the other bits are displayed opposite to where they appear
@@ -1080,18 +1080,18 @@ hires_draw_column
                         'mov     hires_val, #255 'test data for now
                         
                         'call routine to get data byte from ram. routine will write data to hires_val
-                        mov     ram_address, mem_loc
-                        call    #read_byte
-                        mov     hires_val, ram_read
+'                        mov     ram_address, mem_loc
+'                        call    #read_byte
+'                        mov     hires_val, ram_read
 
-                        mov     hires_xpos, hires_col
+'                        mov     hires_xpos, hires_col
                         mov     hires_ypos, hires_row
                         call    #hires_pixel_sub       'call routine to draw our byte of pixels                                                                    
 '                            col++
-                        add     hires_col, #1    
+'                        add     hires_col, #1    
 '                            mem_loc++
-                        add     mem_loc, #1
-                        djnz    hires_cntr4, #hires_draw_column
+'                        add     mem_loc, #1
+'                        djnz    hires_cntr4, #hires_draw_column
 '                        row++
                         add     hires_row, #1
 '                        mem_row += $400
@@ -1291,19 +1291,19 @@ read_byte_ret           ret  'return to caller
 '---- drawa byte of pixels ------------------------------------------------------------------------------
 '  data &= $7F 'get rid of msb
 '  x := (col * 7) '- 7
-hires_pixel_sub         and     hires_val, #127  'get rid of msb since we don't need color info
-                        mov     hires_val2, hires_val
-                        mov     hires_t1, #0
+hires_pixel_sub         'and     hires_val, #127  'get rid of msb since we don't need color info
+                        'mov     hires_val2, hires_val
+                        'mov     hires_xpos, #0 'x
                                              
-hires_pix0              test    hires_xpos, #255  wz
-              if_nz     sub     hires_xpos, #1
-              if_nz     add     hires_t1, #7
-              if_nz     jmp     #hires_pix0   
+'hires_pix0              test    hires_xpos, #255  wz
+'              if_nz     sub     hires_xpos, #1
+'              if_nz     add     hires_t1, #7
+'              if_nz     jmp     #hires_pix0   
               
                                    
 '  p := (WIDTH * y) + x
                         'mov     hires_ptr0, hires_t1
-                        mov     hires_tmp2, hires_t1
+                        'mov     hires_tmp2, hires_t1
 'hires_pix1              test    hires_ypos, #255  wz
 '              if_nz     sub     hires_ypos, #1
 '              if_nz     add     hires_ptr0, #WIDTH
@@ -1323,12 +1323,38 @@ hires_pix0              test    hires_xpos, #255  wz
                         rdbyte  hires_t2, hires_t1 
                         or      hires_ptr0, hires_t2
                         
-                        add     hires_ptr0, hires_tmp2 'add x
+                        'add     hires_ptr0, #0 'add x
+                        mov     hires_ptr3, hires_ptr0 'copy our pointer so we can modify ptr0
+                        'add     hires_ptr0, hires_xpos 'add x
+                        'mov     hires_col, #0
+'                        repeat 40 '40 columns/bytes per row
+                        mov     hires_cntr4, #40
+hires_draw_column
+                        'mov  hires_ptr0, hires_ptr3
+'                            data := read_byte(mem_loc)
+'                            'the msb is ignored since it's the color grouping bit
+'                            'the other bits are displayed opposite to where they appear
+'                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
+'                            'read Apple II Computer Graphics page 70ish for more details.
+'                            R2.Pixel (data, col, row)     
+                        'mov     hires_val, #255 'test data for now
+                        
+                        'call routine to get data byte from ram. routine will write data to hires_val
+                        mov     ram_address, mem_loc
+                        call    #read_byte
+                        mov     hires_val, ram_read
+
+                        and     hires_val, #127  'get rid of msb since we don't need color info
+                        mov     hires_val2, hires_val
+                        
+                        'mov     hires_xpos, hires_col
+                        'mov     hires_ypos, hires_row
+                        'call    #hires_pixel_sub       'call routine to draw our byte of pixels                                                                    
+
+                        
 '  x := (p & 7)'find x position in byte
                         mov     hires_ypos, hires_ptr0
                         and     hires_ypos, #7
-                        'mov     hires_xpos, #1
-                        'shl     hires_xpos, hires_ypos
                         mov     hires_t1, hires_ypos
                         
 '  p := @pixel_bfr + (p >> 3)
@@ -1370,7 +1396,7 @@ hires_pix0              test    hires_xpos, #255  wz
 '    byte[p + 1] |= data2
                         mov     hires_t2, hires_t1
                         shr     hires_t2, #1 wz
-                if_z    jmp     #hires_pixel_sub_ret
+                if_z    jmp     #hires_pixel_next_col
                 
                         mov     hires_t2, #8
                         sub     hires_t2, hires_t1
@@ -1382,7 +1408,20 @@ hires_pix0              test    hires_xpos, #255  wz
                         shl     hires_tmp2, hires_t1
                         and     hires_tmp, hires_tmp2
                         or      hires_tmp, hires_val2
-                        wrbyte  hires_tmp, hires_ptr1                       
+                        wrbyte  hires_tmp, hires_ptr1 
+                        
+                        'add     hires_xpos, #7
+                        'rdbyte  hires_tmp, hires_ptr3
+                        'add     hires_tmp, #7
+                        'wrbyte  hires_tmp, hires_ptr3
+hires_pixel_next_col                       
+                        add     hires_ptr3, #7 'add x
+                        mov     hires_ptr0, hires_ptr3
+'                            col++
+                        'add     hires_col, #1    
+'                            mem_loc++
+                        add     mem_loc, #1
+                        djnz    hires_cntr4, #hires_draw_column                    
 '  if c byte[p] |= x
 '  else byte[p] &= (!x)
 '                        and     hires_val, #1  wz
@@ -1436,6 +1475,7 @@ hires_ypos              res     1
 hires_ptr0              res     1
 hires_ptr1              res     1
 hires_ptr2              res     1
+hires_ptr3              res     1
 hires_t1                res     1
 hires_t2                res     1
 hires_val               res     1
