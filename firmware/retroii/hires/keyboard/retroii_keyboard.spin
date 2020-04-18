@@ -108,6 +108,7 @@ VAR
     byte ss_hires_override
     byte ss_mix_override
     long clock_freqs[10]
+    long kb_clear
     
 PUB main | soft_switches, i, frq
     init
@@ -163,6 +164,7 @@ PUB main | soft_switches, i, frq
                                
             if current_mode == MODE_RETROII
                 kb_write(key)
+              
             elseif current_mode == MODE_SD_CARD_1
                 if key == $0D 'enter
                     if i > 0 'valid input
@@ -211,6 +213,7 @@ PUB main | soft_switches, i, frq
         elseif key == 192 'send left arrow
             if current_mode == MODE_RETROII
                 kb_write($88)
+                
             elseif current_mode == MODE_SD_CARD_1
                 if current_page > 0
                     current_page--
@@ -219,6 +222,7 @@ PUB main | soft_switches, i, frq
         elseif key == 193 'send right
             if current_mode == MODE_RETROII
                 kb_write($95)
+              
             elseif current_mode == MODE_SD_CARD_1
                 if current_page < last_page
                     current_page++
@@ -291,7 +295,10 @@ PUB main | soft_switches, i, frq
                 ss_text := !ss_text  
                 
         elseif  key == 214 'F7 clear kb 
-            kb_write($00)        
+            kb_write($00)  
+            kb_clear := FALSE   
+        elseif key == 220 'set clear kb mode
+            kb_clear := 255 '!kb_clear   
         elseif  key == 215 'F8 turn off soft switch override
             ss_override := FALSE  
             ss_text_override := FALSE
@@ -881,9 +888,17 @@ PRI kb_write(data_out) | i
     outa[Strobe]~~ 'strobe high should set K7 high   
     'clear strobe
     outa[Strobe]~
-
+    
+    if kb_clear == 255
+        waitcnt(2000000 + cnt)
+        outa[K6..K0] := $00
+        outa[Strobe]~~
+        outa[Strobe]~
+    '    waitcnt(2000000 + cnt)
+    '    kb_write($00)
+        
 PRI init 
-
+    
     dira[K0..K6]~~ 'set keyboard data pins to output
     dira[Strobe]~~ 'set strobe pin to output
     outa[K0..K6] := %0000000 'low
@@ -895,6 +910,7 @@ PRI init
     I2C.start(SCL_pin,SDA_pin,Bitrate)
     ser.Start(rx, tx, 0, 115200)
     kb.startx(26, 27, NUM, RepeatRate) 
+    kb_clear := FALSE
     
     'init clock freq array
     clock_freqs[0]  := 0
