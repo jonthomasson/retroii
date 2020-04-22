@@ -76,8 +76,8 @@
      inkscape:document-units="mm"
      units="in"
      inkscape:zoom="6.7282409"
-     inkscape:cx="803.01534"
-     inkscape:cy="225.96312"
+     inkscape:cx="1465.2172"
+     inkscape:cy="289.7464"
      inkscape:window-x="-11"
      inkscape:window-y="-11"
      inkscape:window-maximized="1"
@@ -46311,4 +46311,10 @@
      cx="77905.477"
      cy="129576.03"
      r="2263.7803" />
+  <circle
+     style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:103.93704224;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path60984"
+     cx="151051.16"
+     cy="126618.94"
+     r="1377.9532" />
 </svg>
