@@ -56,7 +56,7 @@ CON
 
   PSIZE  = WIDTH * HEIGHT       'Total number of pixels
   LSIZE  = PSIZE / 32           'Size of screen buffer in longs
-  LPROW  = COLS / 4             'Longs per screen line
+  LPROW  = 10 'COLS / 4             'Longs per screen line
 
   MAX_X  = WIDTH - 1            'Maximum value of x coordinate
   MAX_Y  = HEIGHT - 1           'Maximum value of y coordinate
@@ -73,10 +73,12 @@ CON
   MODE_TEXT = 1
   MODE_LORES = 3
   
+  LBUFFER_SIZE = 2400           'Size of pixel buffer in longs (320*240/32) NOTE: this size accounts for the color bit.
+  BUFFER_WIDTH = 320
   
 VAR 
   byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix
-  long  pixel_bfr[LSIZE]
+  long  pixel_bfr[LBUFFER_SIZE]
   long  pixel_colors, frame_count, cursor_pos, cursor_mask, hires_busy, draw_command, hires_command, debug_val, display_debug, current_clock
   long  frame_count_hires', ram_lock
   'long cog_hires
@@ -211,7 +213,7 @@ PUB Clear(first_line, line_count)
   longfill(@pixel_bfr + (COLS * first_line), 0, line_count * LPROW)
 
 PUB ClearScreen
-    longfill(@pixel_bfr, 0, LSIZE)
+    longfill(@pixel_bfr, 0, LBUFFER_SIZE)
     
 PUB Pixel(c, x, y) | p
 '------------------------------------------------------------------------------------------------
@@ -538,17 +540,46 @@ vsbp_loop               mov     vscl, #PC_FP
 
 '--- Active Video Lines -------------------------------------------------------------------------
 video_loop1             mov     block_cntr, #BLKS                   'will repeat each video line twice (480/240 height)
-video_loop2             mov     vscl, video_scale                   'video_scale is $000_01_010
+video_loop2             'mov     vscl, video_scale                   'video_scale is $000_01_020
                         mov     pixel_cntr, #LPROW
                         mov     pixel_ptr1, pixel_ptr0
                         
-video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop to display pixel buffer for a single line
-                        cmp     pixel_ptr1, cursor_pos0  wz
-              if_z      or      pixel_values, cursor_mask0
+'video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop to display pixel buffer for a single line
+              '          cmp     pixel_ptr1, cursor_pos0  wz
+              'if_z      or      pixel_values, cursor_mask0
+                        '1 long has 14 color or 28 monochrome pixels
+                        '1 long has 4 color bits
+                        'need to shift out color bits
+                        '10 longs times 28 pixels per long = 280 resolution
+                        'active video pixels should be 288 for our driver
+                        
+                        
+                        
+                        mov     vscl, vscl_7pixel
+video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop to display pixel buffer for a single line                        
+                        'mov     vscl, vscl_280pixel
+                        'waitvid vid_colors, #0
                         add     pixel_ptr1, #4
+                        'shift out color bits
+                        'shr     pixel_values, #1
                         waitvid vid_colors, pixel_values
+                        
+                        shr     pixel_values, #8
+                        waitvid vid_colors, pixel_values
+                        
+                        shr     pixel_values, #8
+                        waitvid vid_colors, pixel_values
+                        
+                        shr     pixel_values, #8
+                        waitvid vid_colors, pixel_values
+                        
                         djnz    pixel_cntr, #video_loop3
-
+                        
+                        'buffer 8 pixels around our 280 to get 288
+                        mov     vscl, #8
+                        waitvid vid_colors, #0
+                        
+                        
                         mov     vscl, #FP
                         waitvid hs_colors, #0
                         mov     vscl, #SP
@@ -557,7 +588,7 @@ video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop t
                         waitvid hs_colors, #0
 
                         djnz    block_cntr, #video_loop2
-                        add     pixel_ptr0, #COLS
+                        add     pixel_ptr0, #40 '#COLS
                         djnz    line_cntr, #video_loop1
 
 '----Vertical Sync Front Porch ------------------------------------------------------------------
@@ -586,6 +617,9 @@ vcfg_reg                long    0
 output_enables          long    0
 frame_cntr_ptr          long    0
 video_scale             long    $000_01_020
+vscl_7pixel             long    $000_01_007
+vscl_8pixel             long    $000_01_008
+vscl_280pixel           long    $000_01_118
 
 vid_colors              res     1
 pixel_ptr0              res     1
@@ -641,16 +675,16 @@ draw_char               rdbyte  draw_reverse, draw_reverse_ptr
 '    'need to determine which 8x8 graphic tile(s) we need to update
 '    x := cursorx * 2
                         mov     draw_x, draw_xpos                       'copy xpos to x
-                        shl     draw_x, #1                              'shift left one time to mult by 2
+                        'shl     draw_x, #1                              'shift left one time to mult by 2
 
 '    graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
-                        mov     char_t1, draw_graphmap_ptr
-                        add     char_t1, draw_x  
-                        rdbyte  char_graphicx, char_t1  
+                        'mov     char_t1, draw_graphmap_ptr
+                        'add     char_t1, draw_x  
+                        'rdbyte  char_graphicx, char_t1  
                  
 '    offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
-                        add     char_t1, #1
-                        rdbyte  char_offset, char_t1
+                        'add     char_t1, #1
+                        'rdbyte  char_offset, char_t1
                         
 '    ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
                         mov     draw_ptr0, #0                           '0 out pointer
@@ -659,137 +693,42 @@ draw_char1              test    draw_ypos, #255  wz                     'mult cu
                          
                         
               if_nz     sub     draw_ypos, #1               
-              if_nz     add     draw_ptr0, #WIDTH
+              if_nz     add     draw_ptr0, #BUFFER_WIDTH
               if_nz     jmp     #draw_char1
 
                         
-                        'new routine using lut to replace multiply
-                        'rdlong would be more efficient here, but 
-                        'there was a problem reading bytes since they weren't
-                        'long aligned...
-                        'mov     char_t1, draw_ymulwidth_ptr
-                        'shl     draw_ypos, #1
-                        'add     char_t1, draw_ypos  
-                        'rdbyte  draw_ptr0, char_t1 
-                        'add     char_t1, #1
-                        'shl     draw_ptr0, #8
-                        'rdbyte  char_t2, char_t1 
-                        'or      draw_ptr0, char_t2
                         
-                        
-                        
-                        add     draw_ptr0, char_graphicx                'add graphicx
+                        add     draw_ptr0, draw_x 'char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
-'    ptr2 := ptr + 1 '@pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
-                        mov     draw_ptr2, draw_ptr0
-                        add     draw_ptr2, #1
                         
 '    repeat idx from 0 to 7 'y
                         mov     draw_cntr, #8
-                        mov     char_offset2, char_offset
-                        add     char_offset2, #1                        
+                                             
 '        tmp := byte[@C64CharMap][idx + c] 'pointer to our char in font rom
 draw_char3              rdbyte  draw_xpos, draw_ptr1
                         add     draw_ptr1, #1        
-                        tjnz    char_offset, #draw_char4    
-                        'if offset is zero fall through to below code
-'        else 'font tile is encapsulated in one graphic tile
-'            byte[ptr] &= $FF << 7 'mask to clear offset bits
-'            byte[ptr] |= (tmp ^ reverse) >> (offset + 1)
+                        
 
                         mov     char_t1, #255
                         shl     char_t1, #7
 
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
-                        'wrbyte  char_ptr0, draw_ptr0  
+                         
                                 
                         xor     draw_xpos, draw_reverse
-                        shr     draw_xpos, char_offset2
-                        'rdbyte  char_ptr0, draw_ptr0
+                       
                         or      char_ptr0, draw_xpos
                         wrbyte  char_ptr0, draw_ptr0                       
                         jmp     #draw_char5
                         
-'       if offset > 0 '7x8 font tile will take up 2 graphic tiles                  
-
-'            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
-'            byte[ptr] |= (tmp ^ reverse) << (7 - offset) 'write left part of char
-draw_char4              mov     char_t1, #8
-                        sub     char_t1, char_offset
-                        mov     char_t2, #255
-                        shl     char_t2, char_t1
-                        rdbyte  char_ptr0, draw_ptr0
-                        andn    char_ptr0, char_t2
-                        'wrbyte  char_ptr0, draw_ptr0
-                        
-                        mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
-                        mov     char_t1, #7
-                        sub     char_t1, char_offset
-                        xor     draw_xpos, draw_reverse
-                        shl     draw_xpos, char_t1
-                        'rdbyte  char_ptr0, draw_ptr0
-                        or      char_ptr0, draw_xpos
-                        wrbyte  char_ptr0, draw_ptr0 
-                         
-'            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
-'            byte[ptr2] |= (tmp ^ reverse) >> (offset + 1)'right part of char
-                        mov     char_t1, #255
-                        shr     char_t1, char_offset2
-                        rdbyte  char_ptr0, draw_ptr2
-                        andn    char_ptr0, char_t1
-                        'wrbyte  char_ptr0, draw_ptr2
-                                 
-                        xor     char_t2, draw_reverse
-                        shr     char_t2, char_offset2
-                        'rdbyte  char_ptr0, draw_ptr2
-                        or      char_ptr0, char_t2
-                        wrbyte  char_ptr0, draw_ptr2   
-'            ptr2 += COLS 
-                        add     draw_ptr2, #COLS
 
 
 '        ptr += COLS 'increment ptr to go to next y coord of graphic tile
-draw_char5              add     draw_ptr0, #COLS     
+draw_char5              add     draw_ptr0, #40 '#COLS     
                         
                         djnz    draw_cntr, #draw_char3
                         jmp     #draw_start                                 
-
-'    c := (c - 32) << 3
-'draw_char               rdbyte  draw_reverse, draw_reverse_ptr
-'                        sub     draw_val, #32
-'                        shl     draw_val, #3
-'                        mov     draw_ptr1, draw_map_ptr
-'                        add     draw_ptr1, draw_val
-'
-'    ptr := @pixel_bfr + (cursorx + (cursory * WIDTH))
-'                        mov     draw_ptr0, #0
-'                        
-'draw_char1              test    draw_ypos, #255  wz
-'
-'              if_nz     sub     draw_ypos, #1
-'              if_nz     add     draw_ptr0, #WIDTH
-'              if_nz     jmp     #draw_char1
-'                        
-'                        add     draw_ptr0, draw_xpos
-'                        add     draw_ptr0, par
-'                        
-'    repeat idx from 0 to 7
-'                        mov     draw_cntr, #8
-'
-'      tmp := byte[@C64CharMap][idx + c]
-'draw_char2              rdbyte  draw_xpos, draw_ptr1
-'                        add     draw_ptr1, #1
-'
-'      byte[ptr] := tmp ^ reverse
-'      ptr += COLS
-'                        xor     draw_xpos, draw_reverse
-'                        wrbyte  draw_xpos, draw_ptr0
-'                        add     draw_ptr0, #COLS     
-'                        
-'                        djnz    draw_cntr, #draw_char2
-'                        jmp     #draw_start
-
 
 
 '---- draw a byte of lores mode ------------------------------------------------
@@ -1269,28 +1208,15 @@ read_byte_ret           ret  'return to caller
 '---- drawa byte of pixels ------------------------------------------------------------------------------
 '  data &= $7F 'get rid of msb
 '  x := (col * 7) '- 7
-hires_pixel_sub         'and     hires_val, #127  'get rid of msb since we don't need color info
-                        'mov     hires_val2, hires_val
-                        'mov     hires_xpos, #0 'x
-                                             
-'hires_pix0              test    hires_xpos, #255  wz
-'              if_nz     sub     hires_xpos, #1
-'              if_nz     add     hires_t1, #7
-'              if_nz     jmp     #hires_pix0   
-              
+hires_pixel_sub         
                                    
 '  p := (WIDTH * y) + x
-                        'mov     hires_ptr0, hires_t1
-                        'mov     hires_tmp2, hires_t1
-'hires_pix1              test    hires_ypos, #255  wz
-'              if_nz     sub     hires_ypos, #1
-'              if_nz     add     hires_ptr0, #WIDTH
-'              if_nz     jmp     #hires_pix1
                         
                         'new routine using lut to replace multiply
                         'rdlong would be more efficient here, but 
                         'there was a problem reading bytes since they weren't
                         'long aligned...
+                        'start at first column of row y
                         
                         mov     hires_t1, hires_ymulwidth_ptr
                         shl     hires_ypos, #1
@@ -1301,70 +1227,63 @@ hires_pixel_sub         'and     hires_val, #127  'get rid of msb since we don't
                         rdbyte  hires_t2, hires_t1 
                         or      hires_ptr0, hires_t2
                         
-                        'add     hires_ptr0, #0 'add x
                         mov     hires_ptr3, hires_ptr0 'copy our pointer so we can modify ptr0
-                        'add     hires_ptr0, hires_xpos 'add x
-                        'mov     hires_col, #0
+                     
 '                        repeat 40 '40 columns/bytes per row
                         mov     hires_cntr4, #40
 hires_draw_column
-                        'mov  hires_ptr0, hires_ptr3
+
 '                            data := read_byte(mem_loc)
 '                            'the msb is ignored since it's the color grouping bit
 '                            'the other bits are displayed opposite to where they appear
 '                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
 '                            'read Apple II Computer Graphics page 70ish for more details.
 '                            R2.Pixel (data, col, row)     
-                        'mov     hires_val, #255 'test data for now
                         
                         'call routine to get data byte from ram. routine will write data to hires_val
                         mov     ram_address, mem_loc
                         call    #read_byte
                         mov     hires_val, ram_read
 
-                        and     hires_val, #127  'get rid of msb since we don't need color info
-                        mov     hires_val2, hires_val
-                        
-                        'mov     hires_xpos, hires_col
-                        'mov     hires_ypos, hires_row
-                        'call    #hires_pixel_sub       'call routine to draw our byte of pixels                                                                    
-
+                        'and     hires_val, #127  'get rid of msb since we don't need color info
+                        'mov     hires_val2, hires_val
                         
 '  x := (p & 7)'find x position in byte
-                        mov     hires_ypos, hires_ptr0
-                        and     hires_ypos, #7
-                        mov     hires_t1, hires_ypos
+                        'mov     hires_ypos, hires_ptr0
+                        'and     hires_ypos, #7
+                        'mov     hires_t1, hires_ypos
                         
 '  p := @pixel_bfr + (p >> 3)
                         shr     hires_ptr0, #3
                         add     hires_ptr0, par
-                        mov     hires_ptr1, hires_ptr0
-                        add     hires_ptr1, #1
+                        wrbyte  hires_val, hires_ptr0 'put val directly into buffer, no manipulation
+                        'mov     hires_ptr1, hires_ptr0
+                        'add     hires_ptr1, #1
 '  data2 := data << (x)
-                        shl     hires_val, hires_t1
-                        mov     hires_t2, hires_val
+                        'shl     hires_val, hires_t1
+                        'mov     hires_t2, hires_val
                        
 '  mask := $FF000080 <- x
 '  byte[p] &= mask
 '  'write data to 1st byte
 '  byte[p] |= data2
-                        rdbyte  hires_tmp, hires_ptr0
+                        'rdbyte  hires_tmp, hires_ptr0
                         'start debug
                         'mov     debug_ptr, hires_tmp
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #hires_start  
                         'end debug
-                        mov     hires_tmp2, hires_t1
-                        mov     pixel_mask2, pixel_mask
-                        rol     pixel_mask2, hires_tmp2
-                        and     hires_tmp, pixel_mask2
+                        'mov     hires_tmp2, hires_t1
+                        'mov     pixel_mask2, pixel_mask
+                        'rol     pixel_mask2, hires_tmp2
+                        'and     hires_tmp, pixel_mask2
                         'start debug
                         'mov     debug_ptr, hires_tmp
                         'wrlong  debug_ptr, debug_val_ptr
                         'jmp     #hires_start  
                         'end debug
-                        or      hires_tmp, hires_t2
-                        wrbyte  hires_tmp, hires_ptr0
+                        'or      hires_tmp, hires_t2
+                        'wrbyte  hires_tmp, hires_ptr0
                         
      
 '  if x > 1
@@ -1372,24 +1291,24 @@ hires_draw_column
 '    mask := $FF << (x - 1)
 '    byte[p + 1] &= mask
 '    byte[p + 1] |= data2
-                        mov     hires_t2, hires_t1
-                        shr     hires_t2, #1 wz
-                if_z    jmp     #hires_pixel_next_col
-                
-                        mov     hires_t2, #8
-                        sub     hires_t2, hires_t1
-                        shr     hires_val2, hires_t2
-                        
-                        rdbyte  hires_tmp, hires_ptr1
-                        sub     hires_t1, #1
-                        mov     hires_tmp2, #255
-                        shl     hires_tmp2, hires_t1
-                        and     hires_tmp, hires_tmp2
-                        or      hires_tmp, hires_val2
-                        wrbyte  hires_tmp, hires_ptr1 
+            '            mov     hires_t2, hires_t1
+            '            shr     hires_t2, #1 wz
+            '    if_z    jmp     #hires_pixel_next_col
+            '    
+            '            mov     hires_t2, #8
+            '            sub     hires_t2, hires_t1
+            '            shr     hires_val2, hires_t2
+            '            
+            '            rdbyte  hires_tmp, hires_ptr1
+            '            sub     hires_t1, #1
+            '            mov     hires_tmp2, #255
+            '            shl     hires_tmp2, hires_t1
+            '            and     hires_tmp, hires_tmp2
+            '            or      hires_tmp, hires_val2
+            '            wrbyte  hires_tmp, hires_ptr1 
                         
 hires_pixel_next_col                       
-                        add     hires_ptr3, #7 'add x
+                        add     hires_ptr3, #8 'add x
                         mov     hires_ptr0, hires_ptr3
 '                            col++
                         'add     hires_col, #1    
@@ -1480,201 +1399,201 @@ DAT
 '------------------------------------------------------------------------------------------------
 'LUT to map multiplication table for char (y * width)
 '------------------------------------------------------------------------------------------------
-'width is 288
+'width is 320
 YMulWidth
                         byte    $00, $00      '0 (0)
-                        byte    $01, $20      '1 (288)
-                        byte    $02, $40      '2 (576)
-                        byte    $03, $60      '3 (864)
-                        byte    $04, $80      '4 (1152)
-                        byte    $05, $A0      '5 (1440)
-                        byte    $06, $C0      '6 (1728)
-                        byte    $07, $E0      '7 (2016)
-                        byte    $09, $00      '8 (2304)
-                        byte    $0A, $20      '9 (2592)
-                        byte    $0B, $40      '10 (2880)
-                        byte    $0C, $60      '11 (3168)
-                        byte    $0D, $80      '12 (3456)
-                        byte    $0E, $A0      '13 (3744)
-                        byte    $0F, $C0      '14 (4032)
-                        byte    $10, $E0      '15 (4320)
-                        byte    $12, $00      '16 (4608)
-                        byte    $13, $20      '17 (4896)
-                        byte    $14, $40      '18 (5184)
-                        byte    $15, $60      '19 (5472)
-                        byte    $16, $80      '20 (5760)
-                        byte    $17, $A0      '21 (6048)
-                        byte    $18, $C0      '22 (6336)
-                        byte    $19, $E0      '23 (6624)
-                        byte    $1B, $00      '24 (6912)
-                        byte    $1C, $20      '25 (7200)
-                        byte    $1D, $40      '26 (7488)
-                        byte    $1E, $60      '27 (7776)
-                        byte    $1F, $80      '28 (8064)
-                        byte    $20, $A0      '29 (8352)
-                        byte    $21, $C0      '30 (8640)
-                        byte    $22, $E0      '31 (8928)
-                        byte    $24, $00      '32 (9216)
-                        byte    $25, $20      '33 (9504)
-                        byte    $26, $40      '34 (9792)
-                        byte    $27, $60      '35 (10080)
-                        byte    $28, $80      '36 (10368)
-                        byte    $29, $A0      '37 (10656)
-                        byte    $2A, $C0      '38 (10944)
-                        byte    $2B, $E0      '39 (11232)
-                        byte    $2D, $00      '40 (11520)
-                        byte    $2E, $20      '41 (11808)
-                        byte    $2F, $40      '42 (12096)
-                        byte    $30, $60      '43 (12384)
-                        byte    $31, $80      '44 (12672)
-                        byte    $32, $A0      '45 (12960)
-                        byte    $33, $C0      '46 (13248)
-                        byte    $34, $E0      '47 (13536)
-                        byte    $36, $00      '48 (13824)
-                        byte    $37, $20      '49 (14112)
-                        byte    $38, $40      '50 (14400)
-                        byte    $39, $60      '51 (14688)
-                        byte    $3A, $80      '52 (14976)
-                        byte    $3B, $A0      '53 (15264)
-                        byte    $3C, $C0      '54 (15552)
-                        byte    $3D, $E0      '55 (15840)
-                        byte    $3F, $00      '56 (16128)
-                        byte    $40, $20      '57 (16416)
-                        byte    $41, $40      '58 (16704)
-                        byte    $42, $60      '59 (16992)
-                        byte    $43, $80      '60 (17280)
-                        byte    $44, $A0      '61 (17568)
-                        byte    $45, $C0      '62 (17856)
-                        byte    $46, $E0      '63 (18144)
-                        byte    $48, $00      '64 (18432)
-                        byte    $49, $20      '65 (18720)
-                        byte    $4A, $40      '66 (19008)
-                        byte    $4B, $60      '67 (19296)
-                        byte    $4C, $80      '68 (19584)
-                        byte    $4D, $A0      '69 (19872)
-                        byte    $4E, $C0      '70 (20160)
-                        byte    $4F, $E0      '71 (20448)
-                        byte    $51, $00      '72 (20736)
-                        byte    $52, $20      '73 (21024)
-                        byte    $53, $40      '74 (21312)
-                        byte    $54, $60      '75 (21600)
-                        byte    $55, $80      '76 (21888)
-                        byte    $56, $A0      '77 (22176)
-                        byte    $57, $C0      '78 (22464)
-                        byte    $58, $E0      '79 (22752)
-                        byte    $5A, $00      '80 (23040)
-                        byte    $5B, $20      '81 (23328)
-                        byte    $5C, $40      '82 (23616)
-                        byte    $5D, $60      '83 (23904)
-                        byte    $5E, $80      '84 (24192)
-                        byte    $5F, $A0      '85 (24480)
-                        byte    $60, $C0      '86 (24768)
-                        byte    $61, $E0      '87 (25056)
-                        byte    $63, $00      '88 (25344)
-                        byte    $64, $20      '89 (25632)
-                        byte    $65, $40      '90 (25920)
-                        byte    $66, $60      '91 (26208)
-                        byte    $67, $80      '92 (26496)
-                        byte    $68, $A0      '93 (26784)
-                        byte    $69, $C0      '94 (27072)
-                        byte    $6A, $E0      '95 (27360)
-                        byte    $6C, $00      '96 (27648)
-                        byte    $6D, $20      '97 (27936)
-                        byte    $6E, $40      '98 (28224)
-                        byte    $6F, $60      '99 (28512)
-                        byte    $70, $80      '100 (28800)
-                        byte    $71, $A0      '101 (29088)
-                        byte    $72, $C0      '102 (29376)
-                        byte    $73, $E0      '103 (29664)
-                        byte    $75, $00      '104 (29952)
-                        byte    $76, $20      '105 (30240)
-                        byte    $77, $40      '106 (30528)
-                        byte    $78, $60      '107 (30816)
-                        byte    $79, $80      '108 (31104)
-                        byte    $7A, $A0      '109 (31392)
-                        byte    $7B, $C0      '110 (31680)
-                        byte    $7C, $E0      '111 (31968)
-                        byte    $7E, $00      '112 (32256)
-                        byte    $7F, $20      '113 (32544)
-                        byte    $80, $40      '114 (32832)
-                        byte    $81, $60      '115 (33120)
-                        byte    $82, $80      '116 (33408)
-                        byte    $83, $A0      '117 (33696)
-                        byte    $84, $C0      '118 (33984)
-                        byte    $85, $E0      '119 (34272)
-                        byte    $87, $00      '120 (34560)
-                        byte    $88, $20      '121 (34848)
-                        byte    $89, $40      '122 (35136)
-                        byte    $8A, $60      '123 (35424)
-                        byte    $8B, $80      '124 (35712)
-                        byte    $8C, $A0      '125 (36000)
-                        byte    $8D, $C0      '126 (36288)
-                        byte    $8E, $E0      '127 (36576)
-                        byte    $90, $00      '128 (36864)
-                        byte    $91, $20      '129 (37152)
-                        byte    $92, $40      '130 (37440)
-                        byte    $93, $60      '131 (37728)
-                        byte    $94, $80      '132 (38016)
-                        byte    $95, $A0      '133 (38304)
-                        byte    $96, $C0      '134 (38592)
-                        byte    $97, $E0      '135 (38880)
-                        byte    $99, $00      '136 (39168)
-                        byte    $9A, $20      '137 (39456)
-                        byte    $9B, $40      '138 (39744)
-                        byte    $9C, $60      '139 (40032)
-                        byte    $9D, $80      '140 (40320)
-                        byte    $9E, $A0      '141 (40608)
-                        byte    $9F, $C0      '142 (40896)
-                        byte    $A0, $E0      '143 (41184)
-                        byte    $A2, $00      '144 (41472)
-                        byte    $A3, $20      '145 (41760)
-                        byte    $A4, $40      '146 (42048)
-                        byte    $A5, $60      '147 (42336)
-                        byte    $A6, $80      '148 (42624)
-                        byte    $A7, $A0      '149 (42912)
-                        byte    $A8, $C0      '150 (43200)
-                        byte    $A9, $E0      '151 (43488)
-                        byte    $AB, $00      '152 (43776)
-                        byte    $AC, $20      '153 (44064)
-                        byte    $AD, $40      '154 (44352)
-                        byte    $AE, $60      '155 (44640)
-                        byte    $AF, $80      '156 (44928)
-                        byte    $B0, $A0      '157 (45216)
-                        byte    $B1, $C0      '158 (45504)
-                        byte    $B2, $E0      '159 (45792)
-                        byte    $B4, $00      '160 (46080)
-                        byte    $B5, $20      '161 (46368)
-                        byte    $B6, $40      '162 (46656)
-                        byte    $B7, $60      '163 (46944)
-                        byte    $B8, $80      '164 (47232)
-                        byte    $B9, $A0      '165 (47520)
-                        byte    $BA, $C0      '166 (47808)
-                        byte    $BB, $E0      '167 (48096)
-                        byte    $BD, $00      '168 (48384)
-                        byte    $BE, $20      '169 (48672)
-                        byte    $BF, $40      '170 (48960)
-                        byte    $C0, $60      '171 (49248)
-                        byte    $C1, $80      '172 (49536)
-                        byte    $C2, $A0      '173 (49824)
-                        byte    $C3, $C0      '174 (50112)
-                        byte    $C4, $E0      '175 (50400)
-                        byte    $C6, $00      '176 (50688)
-                        byte    $C7, $20      '177 (50976)
-                        byte    $C8, $40      '178 (51264)
-                        byte    $C9, $60      '179 (51552)
-                        byte    $CA, $80      '180 (51840)
-                        byte    $CB, $A0      '181 (52128)
-                        byte    $CC, $C0      '182 (52416)
-                        byte    $CD, $E0      '183 (52704)
-                        byte    $CF, $00      '184 (52992)
-                        byte    $D0, $20      '185 (53280)
-                        byte    $D1, $40      '186 (53568)
-                        byte    $D2, $60      '187 (53856)
-                        byte    $D3, $80      '188 (54144)
-                        byte    $D4, $A0      '189 (54432)
-                        byte    $D5, $C0      '190 (54720)
-                        byte    $D6, $E0      '191 (55008)
-                        byte    $D8, $00      '192 (55296)
+                        byte    $01, $40      '1 (320)
+                        byte    $02, $80      '2 (640)
+                        byte    $03, $C0      '3 (960)
+                        byte    $05, $00      '4 (1280)
+                        byte    $06, $40      '5 (1600)
+                        byte    $07, $80      '6 (1920)
+                        byte    $08, $C0      '7 (2240)
+                        byte    $0A, $00      '8 (2560)
+                        byte    $0B, $40      '9 (2880)
+                        byte    $0C, $80      '10 (3200)
+                        byte    $0D, $C0      '11 (3520)
+                        byte    $0F, $00      '12 (3840)
+                        byte    $10, $40      '13 (4160)
+                        byte    $11, $80      '14 (4480)
+                        byte    $12, $C0      '15 (4800)
+                        byte    $14, $00      '16 (5120)
+                        byte    $15, $40      '17 (5440)
+                        byte    $16, $80      '18 (5760)
+                        byte    $17, $C0      '19 (6080)
+                        byte    $19, $00      '20 (6400)
+                        byte    $1A, $40      '21 (6720)
+                        byte    $1B, $80      '22 (7040)
+                        byte    $1C, $C0      '23 (7360)
+                        byte    $1E, $00      '24 (7680)
+                        byte    $1F, $40      '25 (8000)
+                        byte    $20, $80      '26 (8320)
+                        byte    $21, $C0      '27 (8640)
+                        byte    $23, $00      '28 (8960)
+                        byte    $24, $40      '29 (9280)
+                        byte    $25, $80      '30 (9600)
+                        byte    $26, $C0      '31 (9920)
+                        byte    $28, $00      '32 (10240)
+                        byte    $29, $40      '33 (10560)
+                        byte    $2A, $80      '34 (10880)
+                        byte    $2B, $C0      '35 (11200)
+                        byte    $2D, $00      '36 (11520)
+                        byte    $2E, $40      '37 (11840)
+                        byte    $2F, $80      '38 (12160)
+                        byte    $30, $C0      '39 (12480)
+                        byte    $32, $00      '40 (12800)
+                        byte    $33, $40      '41 (13120)
+                        byte    $34, $80      '42 (13440)
+                        byte    $35, $C0      '43 (13760)
+                        byte    $37, $00      '44 (14080)
+                        byte    $38, $40      '45 (14400)
+                        byte    $39, $80      '46 (14720)
+                        byte    $3A, $C0      '47 (15040)
+                        byte    $3C, $00      '48 (15360)
+                        byte    $3D, $40      '49 (15680)
+                        byte    $3E, $80      '50 (16000)
+                        byte    $3F, $C0      '51 (16320)
+                        byte    $41, $00      '52 (16640)
+                        byte    $42, $40      '53 (16960)
+                        byte    $43, $80      '54 (17280)
+                        byte    $44, $C0      '55 (17600)
+                        byte    $46, $00      '56 (17920)
+                        byte    $47, $40      '57 (18240)
+                        byte    $48, $80      '58 (18560)
+                        byte    $49, $C0      '59 (18880)
+                        byte    $4B, $00      '60 (19200)
+                        byte    $4C, $40      '61 (19520)
+                        byte    $4D, $80      '62 (19840)
+                        byte    $4E, $C0      '63 (20160)
+                        byte    $50, $00      '64 (20480)
+                        byte    $51, $40      '65 (20800)
+                        byte    $52, $80      '66 (21120)
+                        byte    $53, $C0      '67 (21440)
+                        byte    $55, $00      '68 (21760)
+                        byte    $56, $40      '69 (22080)
+                        byte    $57, $80      '70 (22400)
+                        byte    $58, $C0      '71 (22720)
+                        byte    $5A, $00      '72 (23040)
+                        byte    $5B, $40      '73 (23360)
+                        byte    $5C, $80      '74 (23680)
+                        byte    $5D, $C0      '75 (24000)
+                        byte    $5F, $00      '76 (24320)
+                        byte    $60, $40      '77 (24640)
+                        byte    $61, $80      '78 (24960)
+                        byte    $62, $C0      '79 (25280)
+                        byte    $64, $00      '80 (25600)
+                        byte    $65, $40      '81 (25920)
+                        byte    $66, $80      '82 (26240)
+                        byte    $67, $C0      '83 (26560)
+                        byte    $69, $00      '84 (26880)
+                        byte    $6A, $40      '85 (27200)
+                        byte    $6B, $80      '86 (27520)
+                        byte    $6C, $C0      '87 (27840)
+                        byte    $6E, $00      '88 (28160)
+                        byte    $6F, $40      '89 (28480)
+                        byte    $70, $80      '90 (28800)
+                        byte    $71, $C0      '91 (29120)
+                        byte    $73, $00      '92 (29440)
+                        byte    $74, $40      '93 (29760)
+                        byte    $75, $80      '94 (30080)
+                        byte    $76, $C0      '95 (30400)
+                        byte    $78, $00      '96 (30720)
+                        byte    $79, $40      '97 (31040)
+                        byte    $7A, $80      '98 (31360)
+                        byte    $7B, $C0      '99 (31680)
+                        byte    $7D, $00      '100 (32000)
+                        byte    $7E, $40      '101 (32320)
+                        byte    $7F, $80      '102 (32640)
+                        byte    $80, $C0      '103 (32960)
+                        byte    $82, $00      '104 (33280)
+                        byte    $83, $40      '105 (33600)
+                        byte    $84, $80      '106 (33920)
+                        byte    $85, $C0      '107 (34240)
+                        byte    $87, $00      '108 (34560)
+                        byte    $88, $40      '109 (34880)
+                        byte    $89, $80      '110 (35200)
+                        byte    $8A, $C0      '111 (35520)
+                        byte    $8C, $00      '112 (35840)
+                        byte    $8D, $40      '113 (36160)
+                        byte    $8E, $80      '114 (36480)
+                        byte    $8F, $C0      '115 (36800)
+                        byte    $91, $00      '116 (37120)
+                        byte    $92, $40      '117 (37440)
+                        byte    $93, $80      '118 (37760)
+                        byte    $94, $C0      '119 (38080)
+                        byte    $96, $00      '120 (38400)
+                        byte    $97, $40      '121 (38720)
+                        byte    $98, $80      '122 (39040)
+                        byte    $99, $C0      '123 (39360)
+                        byte    $9B, $00      '124 (39680)
+                        byte    $9C, $40      '125 (40000)
+                        byte    $9D, $80      '126 (40320)
+                        byte    $9E, $C0      '127 (40640)
+                        byte    $A0, $00      '128 (40960)
+                        byte    $A1, $40      '129 (41280)
+                        byte    $A2, $80      '130 (41600)
+                        byte    $A3, $C0      '131 (41920)
+                        byte    $A5, $00      '132 (42240)
+                        byte    $A6, $40      '133 (42560)
+                        byte    $A7, $80      '134 (42880)
+                        byte    $A8, $C0      '135 (43200)
+                        byte    $AA, $00      '136 (43520)
+                        byte    $AB, $40      '137 (43840)
+                        byte    $AC, $80      '138 (44160)
+                        byte    $AD, $C0      '139 (44480)
+                        byte    $AF, $00      '140 (44800)
+                        byte    $B0, $40      '141 (45120)
+                        byte    $B1, $80      '142 (45440)
+                        byte    $B2, $C0      '143 (45760)
+                        byte    $B4, $00      '144 (46080)
+                        byte    $B5, $40      '145 (46400)
+                        byte    $B6, $80      '146 (46720)
+                        byte    $B7, $C0      '147 (47040)
+                        byte    $B9, $00      '148 (47360)
+                        byte    $BA, $40      '149 (47680)
+                        byte    $BB, $80      '150 (48000)
+                        byte    $BC, $C0      '151 (48320)
+                        byte    $BE, $00      '152 (48640)
+                        byte    $BF, $40      '153 (48960)
+                        byte    $C0, $80      '154 (49280)
+                        byte    $C1, $C0      '155 (49600)
+                        byte    $C3, $00      '156 (49920)
+                        byte    $C4, $40      '157 (50240)
+                        byte    $C5, $80      '158 (50560)
+                        byte    $C6, $C0      '159 (50880)
+                        byte    $C8, $00      '160 (51200)
+                        byte    $C9, $40      '161 (51520)
+                        byte    $CA, $80      '162 (51840)
+                        byte    $CB, $C0      '163 (52160)
+                        byte    $CD, $00      '164 (52480)
+                        byte    $CE, $40      '165 (52800)
+                        byte    $CF, $80      '166 (53120)
+                        byte    $D0, $C0      '167 (53440)
+                        byte    $D2, $00      '168 (53760)
+                        byte    $D3, $40      '169 (54080)
+                        byte    $D4, $80      '170 (54400)
+                        byte    $D5, $C0      '171 (54720)
+                        byte    $D7, $00      '172 (55040)
+                        byte    $D8, $40      '173 (55360)
+                        byte    $D9, $80      '174 (55680)
+                        byte    $DA, $C0      '175 (56000)
+                        byte    $DC, $00      '176 (56320)
+                        byte    $DD, $40      '177 (56640)
+                        byte    $DE, $80      '178 (56960)
+                        byte    $DF, $C0      '179 (57280)
+                        byte    $E1, $00      '180 (57600)
+                        byte    $E2, $40      '181 (57920)
+                        byte    $E3, $80      '182 (58240)
+                        byte    $E4, $C0      '183 (58560)
+                        byte    $E6, $00      '184 (58880)
+                        byte    $E7, $40      '185 (59200)
+                        byte    $E8, $80      '186 (59520)
+                        byte    $E9, $C0      '187 (59840)
+                        byte    $EB, $00      '188 (60160)
+                        byte    $EC, $40      '189 (60480)
+                        byte    $ED, $80      '190 (60800)
+                        byte    $EE, $C0      '191 (61120)
+                        byte    $F0, $00      '192 (61440)
 
                                                        
 '------------------------------------------------------------------------------------------------
