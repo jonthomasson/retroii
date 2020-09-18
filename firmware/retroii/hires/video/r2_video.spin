@@ -45,6 +45,7 @@ CON
   #$10, RED, #$0C, LT_BLUE
   #$18, YELLOW, #$14, LT_RED
   #$00, BLACK, #$1C, WHITE 
+  #$FF, FULL 'full 6 color pallet mode
 
   PC_FP  = WIDTH + FP
   BLKS   = 480 / HEIGHT         'Number of times to repeat each video line
@@ -77,12 +78,11 @@ CON
   BUFFER_WIDTH = 320
   
 VAR 
-  byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix
+  byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix, update_vcfg, screen_mode, old_screen_mode
   long  pixel_bfr[LBUFFER_SIZE]
   long  pixel_colors, frame_count, cursor_pos, cursor_mask, hires_busy, draw_command, hires_command, debug_val, display_debug, current_clock
-  long  frame_count_hires', ram_lock
-  'long cog_hires
-  'long cog_hires_stack[20]
+  long  frame_count_hires', ram_lock                        
+  'long  group1_colors, group2_colors 'color paletts. 
 
 PUB Char(c) | idx, ptr, tmp
 '------------------------------------------------------------------------------------------------
@@ -306,25 +306,42 @@ PUB Color(color_num, new_color)
 '' color_num - The color number to change for the whole screen, 0 or 1.
 '' new_color - A color byte (%RR_GG_BB_xx) describing the pixel's new color.
 '------------------------------------------------------------------------------------------------
-  color_num &= 1
-  pixel_colors.byte[color_num] := new_color
+  if(new_color) == $FF 'if full color mode
+    'need to set vcfg for 4 color mode
+    screen_mode := $FF 'rgb color monitor
+    vcfg_reg := $30_00_04_1F 'set for 4 color mode vga    
+    update_vcfg := $FF 'tell vga driver to update vcfg                   
+  else  'monochrome
+    screen_mode := $00 'monochrome monitor
+    'set vcfg to 2 color mode
+    if old_screen_mode <> screen_mode 'going from color to monochrome, update vcfg
+        vcfg_reg := $20_00_04_1F 'set for 2 color mode vga                                   
+        update_vcfg := $FF 'tell vga driver to update vcfg    
+    color_num &= 1
+    pixel_colors.byte[color_num] := new_color
+  
+  old_screen_mode := screen_mode
+                                      
 
 PUB Start(pin_group) | hres, vres
 '------------------------------------------------------------------------------------------------
-'' Starts up the C64 driver running on a cog.
+'' Starts up the RetroII driver running on a cog.
 '' Returns true on success and false on failure.
 ''
 '' pin_group - Pin group to use to drive the video circuit. Between 0 and 3.
 '------------------------------------------------------------------------------------------------
   Stop
 
-  colors_ptr := @pixel_colors 
-
   pin_group &= 3
   output_enables := ($FF << (pin_group << 3))
-  vcfg_reg := $20_00_04_1F '| (pin_group << 9)
-   
+  vcfg_reg := $20_00_04_1F 'set for 2 color mode vga   '$20_00_04_1F '| (pin_group << 9)
+  update_vcfg := $00
+  screen_mode := $00 'monochrome
+  update_vcfg_ptr := @update_vcfg
+  screen_mode_ptr := @screen_mode
+     
   colors_ptr := @pixel_colors
+  
   frame_cntr_ptr := @frame_count
   frame_count_hires := 0
   frame_cnt_hres_ptr := @frame_count_hires 
@@ -336,7 +353,6 @@ PUB Start(pin_group) | hres, vres
   cursor_mask := 0
   cursor_mask_ptr := @cursor_mask
   reverse := 0
-  'ram_lock := 0
   draw_command := 0
   hires_command := 0
   hires_busy := 0
@@ -355,10 +371,9 @@ PUB Start(pin_group) | hres, vres
   draw_map_ptr := @C64CharMap
   draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
-  'draw_reverse_ptr2 := @reverse
+  
   draw_ymulwidth_ptr := @YMulWidth
   hires_ymulwidth_ptr := @YMulWidth
-  'hires_ram_lock_ptr := @ram_lock
   
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
   if cog2 == 0
@@ -376,7 +391,7 @@ PUB DebugOutput
 
 PUB Stop
 '------------------------------------------------------------------------------------------------
-'' Shuts down the C64 driver running on a cog.
+'' Shuts down the RetroII driver running on a cog.
 '------------------------------------------------------------------------------------------------
   if cog1 > 0
     cogstop(cog1 - 1)
@@ -523,9 +538,9 @@ vsbp_loop               mov     vscl, #PC_FP
                         mov     pixel_ptr0, par
                         
                         mov     line_cntr, #HEIGHT                  'active video lines = resolution height
-                        rdlong  vid_colors, colors_ptr
-                        or      vid_colors, blank_colors
-
+                        rdlong  vid_mono_color, colors_ptr
+                        or      vid_mono_color, blank_colors
+                       
                         mov     cursor_mask0, frame_cntr            'mask off cursor, if cursor is in visible area?
                         and     cursor_mask0, #$20  wz
               if_nz     mov     cursor_mask0, #0
@@ -541,8 +556,8 @@ vsbp_loop               mov     vscl, #PC_FP
 '--- Active Video Lines -------------------------------------------------------------------------
 video_loop1             mov     block_cntr, #BLKS                   'will repeat each video line twice (480/240 height)
 video_loop2             'mov     vscl, video_scale                   'video_scale is $000_01_020
-                        mov     pixel_cntr, #LPROW
-                        mov     pixel_ptr1, pixel_ptr0
+                        'mov     pixel_cntr, #LPROW
+                        'mov     pixel_ptr1, pixel_ptr0
                         
 'video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop to display pixel buffer for a single line
               '          cmp     pixel_ptr1, cursor_pos0  wz
@@ -553,31 +568,57 @@ video_loop2             'mov     vscl, video_scale                   'video_scal
                         '10 longs times 28 pixels per long = 280 resolution
                         'active video pixels should be 288 for our driver
                         
+                        mov     pixel_cntr,#20                  '40 columns/2 bytes per word
                         
+                        mov     pixel_ptr1, pixel_ptr0
                         
-                        mov     vscl, vscl_7pixel
-video_loop3             rdlong  pixel_values, pixel_ptr1            'main loop to display pixel buffer for a single line                        
-                        'mov     vscl, vscl_280pixel
-                        'waitvid vid_colors, #0
-                        add     pixel_ptr1, #4
-                        'shift out color bits
-                        'shr     pixel_values, #1
-                        waitvid vid_colors, pixel_values
+                        rdbyte  tmp1, screen_mode_ptr  wz       'check screen mode
+        if_z            jmp     #video_loop_monochrome          'if zero then monochrome
+        if_nz           jmp     #video_loop_color               'else color
+              
+video_loop_color
+                        
+                        rdword  pixel_values,pixel_ptr1
+                        add     pixel_ptr1,#2
+                        
+                        'odd byte
+                        'test color write to z flag
+                        test    pixel_values, bit8 wz           'if zero then group 1 else group 2
+        if_z            mov     vid_colors, group1_vid_colors
+        if_nz           mov     vid_colors, group2_vid_colors
+                        mov     vscl,vscl_3pixel
+                        waitvid vid_colors,pixel_values         'display 3 pixels of odd byte
+                        
+                        'even byte
+                        test    pixel_values, bit7 wc           'move bit 7 from odd byte up so we can display it with even byte
+                        muxc    pixel_values, bit8
+                        test    pixel_values, bit15 wz          'if zero then group 1 else group 2
+        if_z            mov     vid_colors, group1_vid_colors
+        if_nz           mov     vid_colors, group2_vid_colors
+                        shr     pixel_values,#7                 'shift out first 3.5 pixels
+                       
+                        mov     vscl,vscl_4pixel
+                        waitvid vid_colors,pixel_values         'display 4 pixels of even byte
+                        djnz    pixel_cntr,#video_loop_color
+                        jmp     #video_loop3 
+
+video_loop_monochrome   mov     vscl, vscl_7pixel
+
+video_loop_monochrome2  rdword  pixel_values,pixel_ptr1
+                        add     pixel_ptr1,#2
+                        
+                        waitvid vid_mono_color, pixel_values
                         
                         shr     pixel_values, #8
-                        waitvid vid_colors, pixel_values
+                        waitvid vid_mono_color, pixel_values
+                       
+                        djnz    pixel_cntr, #video_loop_monochrome2
                         
-                        shr     pixel_values, #8
-                        waitvid vid_colors, pixel_values
                         
-                        shr     pixel_values, #8
-                        waitvid vid_colors, pixel_values
-                        
-                        djnz    pixel_cntr, #video_loop3
-                        
+video_loop3                       
                         'buffer 8 pixels around our 280 to get 288
-                        mov     vscl, #8
-                        waitvid vid_colors, #0
+                        mov     vscl, vscl_8pixel
+                        waitvid vid_mono_color, #0
                         
                         
                         mov     vscl, #FP
@@ -604,28 +645,59 @@ vsfp_loop               mov     vscl, #PC_FP
                         waitvid hs_colors, #0
                         djnz    line_cntr, #vsfp_loop
 
+                        'check to see if we need to load a new vcfg for 2 or 4 color video
+                        rdbyte  tmp1, update_vcfg_ptr  wz       
+        if_z            jmp     #vsync_loop                         'no updates, continue
+                        rdbyte  tmp1, screen_mode_ptr  wz
+        if_z            mov     vcfg, vcfg_2color                   'else update vcfg
+        if_nz           mov     vcfg, vcfg_4color                            
+                                             
+                        mov     tmp1, #0
+                        wrbyte  tmp1, update_vcfg_ptr               'reset update pointer
                         jmp     #vsync_loop
 
+group1_vid_colors       long    $1F_0B_17_03 'white/green/magenta/black
+group2_vid_colors       long    $1F_13_0F_03 'white/red(orange)/blue/black
 hs_colors               long    $01_03_01_03
 vs_colors               long    $00_02_00_02
 blank_colors            long    $03_03_03_03
+vcfg_4color             long    $30_00_04_1F
+vcfg_2color             long    $20_00_04_1F
 colors_ptr              long    0
+screen_mode_ptr         long    0
+update_vcfg_ptr         long    0
 cursor_pos_ptr          long    0
 cursor_mask_ptr         long    0
 freq_reg                long    FREQ_VALUE
 vcfg_reg                long    0
 output_enables          long    0
 frame_cntr_ptr          long    0
-video_scale             long    $000_01_020
+video_scale             long    $000_01_010
+vscl_4pixel             long    $000_02_008
+vscl_3pixel             long    $000_02_006
+vscl_6pixel             long    $000_01_006
 vscl_7pixel             long    $000_01_007
 vscl_8pixel             long    $000_01_008
+vscl_14pixel            long    $000_01_00E
 vscl_280pixel           long    $000_01_118
+bit32                   long    $80_00_00_00
+bit25                   long    $01_00_00_00
+bit24                   long    $00_80_00_00
+bit15                   long    $00_00_80_00
+bit14                   long    $00_00_40_00
+bit9                    long    $00_00_01_00
+bit8                    long    $00_00_00_80
+bit7                    long    $00_00_00_40
+tmp1                    long    0
 
 vid_colors              res     1
+vid_mono_color          res     1
 pixel_ptr0              res     1
 pixel_ptr1              res     1
 pixel_cntr              res     1
+pixel_cntr2             res     1
 pixel_values            res     1
+current_pixels          res     1
 line_cntr               res     1
 block_cntr              res     1
 frame_cntr              res     1
@@ -1646,7 +1718,7 @@ FontToGraphicMap
                                                 
                                                                                                                                                     
 '------------------------------------------------------------------------------------------------
-' C64 Character Map
+' RetroII Character Map
 '------------------------------------------------------------------------------------------------
 C64CharMap
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 32 Space 

@@ -105,7 +105,7 @@ VAR
     long current_clock 'current frequency in Hz for clock feeding the 6502
     long old_clock 
     long clock_freqs[10]
-    byte colors[6]
+    byte colors[7]
     long current_color
     byte display_debug
     byte old_display_debug
@@ -178,6 +178,7 @@ PRI init | i, x, y
     colors[4] := R2#LT_RED
     colors[5] := R2#YELLOW
     colors[6] := R2#WHITE
+    colors[7] := R2#FULL
     current_color := 0 'GREEN
     
     soft_switches_updated := FALSE
@@ -260,13 +261,13 @@ PRI check_regs | index
             if index == CMD_CHANGE_COLOR
                 
                 'toggle COLOR
-                if current_color > 5
+                if current_color > 6
                     current_color := 0
                 else
                     current_color++
-                 
-                if current_color == 6 and display_debug == FALSE   'weird bug where color is white and display_debug is false, it just displays black
-                    R2.Color(1, R2#WHITE)
+                
+                if current_color == 7 and display_debug == FALSE   'weird bug where color is full and display_debug is false, it just displays black
+                    R2.Color(1, R2#FULL)
                 else
                     R2.Color(1, colors[current_color])
         
