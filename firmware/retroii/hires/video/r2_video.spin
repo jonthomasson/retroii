@@ -98,7 +98,7 @@ PUB Char(c) | idx, ptr, tmp
     draw_command := c | (cursorx << 8) | (cursory << 17)
     cursorx += 1
  
-  UpdateCursor
+  'UpdateCursor
 
 PUB RChar(c)
 '------------------------------------------------------------------------------------------------
@@ -121,39 +121,6 @@ PUB LowRes(c, x, y)
   repeat while draw_command <> 0
   draw_command := c | (x << 8) | (y << 17) | CMD_LORES
 
-PUB LowRes2(data, x, y)|bottom, top,idx, ptr, ptr2, graphicx, offset, tmp
-    'bottom block = left nibble
-    bottom := data >> 4
-    bottom |= (data & $F0) 'duplicate nibble on both s
-    bottom &= $0FE
-    'top block = right nibble
-    top := data << 4
-    top |= (data & $0F) 'duplicate nibble on both sides
-    top &= $0FE
-    'need to determine which 8x8 graphic tile(s) we need to update
-    x := x << 1 'x * 2
-    graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
-    offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
-    
-    ptr := @pixel_bfr + (graphicx + (Y * WIDTH))
-    ptr2 := ptr + 1 '@pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
-    repeat idx from 0 to 7 'y
-        if idx < 4
-            tmp := top
-        else
-            tmp := bottom
-            
-        if offset > 0 '7x8 tile will take up 2 graphic tiles
-            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
-            byte[ptr] |= (tmp) << (7 - offset) 'write left part of char
-            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
-            byte[ptr2] |= (tmp) >> (offset + 1)'right part of char
-            ptr2 += COLS                                   
-        else 'font tile is encapsulated in one graphic tile
-            byte[ptr] &= $FF << 7 'mask to clear offset bits
-            byte[ptr] |= (tmp) >> (offset + 1)
-        
-        ptr += COLS 'increment ptr to go to next y coord of graphic tile
 
 PUB Str(s) | b
 '------------------------------------------------------------------------------------------------
@@ -176,7 +143,7 @@ PUB Pos(X, Y)
   cursory := Y
   'cursorx := (X <# MAX_C) #> 0 
   'cursory := (Y <# MAX_R) #> 0 
-  UpdateCursor
+  'UpdateCursor
 
 PUB GetX
 '------------------------------------------------------------------------------------------------
@@ -198,7 +165,7 @@ PUB Cursor(state)
 '------------------------------------------------------------------------------------------------
   cursor_state := state
   cursor_mask := 0
-  UpdateCursor
+  'UpdateCursor
 
 PUB Clear(first_line, line_count)
 '------------------------------------------------------------------------------------------------
@@ -369,7 +336,7 @@ PUB Start(pin_group) | hres, vres
   draw_cmnd_ptr2 := @draw_command
   hires_cmnd_ptr := @hires_command
   draw_map_ptr := @AppleIICharMap
-  draw_graphmap_ptr := @FontToGraphicMap
+  'draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
   
   draw_ymulwidth_ptr := @YMulWidth
@@ -420,24 +387,24 @@ PUB UpdateRetroIIMode(mode)
     mode_retroii_old := mode_retroii
             
         
-PRI UpdateCursor | cpos, cx, offset, x
+'PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
 '------------------------------------------------------------------------------------------------
   
-  if cursor_state
-    x := cursorx * 2
-    cx := byte[@FontToGraphicMap][x]
-    offset := byte[@FontToGraphicMap][x + 1]
+  'if cursor_state
+  '  x := cursorx * 2
+  '  cx := byte[@FontToGraphicMap][x]
+  '  offset := byte[@FontToGraphicMap][x + 1]
     
-    cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS) 'need to get rid of cols
-    cpos := cpos + (cx & $FFFC)
-    if offset > 0
-        cursor_mask := $FE << ((cx & 3) << 3) << (6 - offset)
-    else
-        cursor_mask := $FE << ((cx & 3) << 3) '>> (offset)
+  '  cpos := @pixel_bfr + (cursory * WIDTH) + constant(7 * COLS) 'need to get rid of cols
+  '  cpos := cpos + (cx & $FFFC)
+  '  if offset > 0
+  '      cursor_mask := $FE << ((cx & 3) << 3) << (6 - offset)
+  '  else
+  '      cursor_mask := $FE << ((cx & 3) << 3) '>> (offset)
     'ptr := @pixel_bfr + (graphicx + (cursory * WIDTH))
-    cursor_pos := cpos
+  '  cursor_pos := cpos
 
 DAT
 '------------------------------------------------------------------------------------------------
@@ -953,7 +920,7 @@ draw_lores5             add     draw_ptr0, #40  '#COLS
 
 draw_cmnd_ptr           long    0
 draw_map_ptr            long    0
-draw_graphmap_ptr       long    0
+'draw_graphmap_ptr       long    0
 draw_ymulwidth_ptr      long    0
 draw_reverse_ptr        long    0
 draw_lastx              long    0
@@ -1666,55 +1633,7 @@ YMulWidth
                         byte    $F0, $00      '192 (61440)
 
                                                                                                                                                                                          
-'------------------------------------------------------------------------------------------------
-' LUT To map between 7x8 font tiles and 8x8 graphic tiles ((xpos x 7) / 8)
-'------------------------------------------------------------------------------------------------
-'                      GRAPH COL, OFFSET
-FontToGraphicMap
-                       byte     $00, $00   'col 0
-                       byte     $00, $01   'col 1
-                       byte     $01, $02   'col 2
-                       byte     $02, $03   'col 3
-                       byte     $03, $04   'col 4
-                       byte     $04, $05   'col 5
-                       byte     $05, $06   'col 6
-                       byte     $06, $07   'col 7
-                       byte     $07, $00   'col 8
-                       byte     $07, $01   'col 9
-                       byte     $08, $02   'col 10
-                       byte     $09, $03   'col 11
-                       byte     $0A, $04   'col 12
-                       byte     $0B, $05   'col 13
-                       byte     $0C, $06   'col 14
-                       byte     $0D, $07   'col 15
-                       byte     $0E, $00   'col 16
-                       byte     $0E, $01   'col 17
-                       byte     $0F, $02   'col 18
-                       byte     $10, $03   'col 19
-                       byte     $11, $04   'col 20
-                       byte     $12, $05   'col 21
-                       byte     $13, $06   'col 22
-                       byte     $14, $07   'col 23
-                       byte     $15, $00   'col 24
-                       byte     $15, $01   'col 25
-                       byte     $16, $02   'col 26
-                       byte     $17, $03   'col 27
-                       byte     $18, $04   'col 28
-                       byte     $19, $05   'col 29
-                       byte     $1A, $06   'col 30
-                       byte     $1B, $07   'col 31
-                       byte     $1C, $00   'col 32
-                       byte     $1C, $01   'col 33
-                       byte     $1D, $02   'col 34
-                       byte     $1E, $03   'col 35
-                       byte     $1F, $04   'col 36
-                       byte     $20, $05   'col 37
-                       byte     $21, $06   'col 38
-                       byte     $22, $07   'col 39
-                       byte     $23, $00   'col 40                        
-                       byte     $23, $01   'col 41                         
-                                                
-                                                                                                                                                    
+                                                                                                                                        
 '------------------------------------------------------------------------------------------------
 ' RetroII Character Map
 '------------------------------------------------------------------------------------------------
