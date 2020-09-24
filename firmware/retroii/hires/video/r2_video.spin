@@ -368,7 +368,7 @@ PUB Start(pin_group) | hres, vres
   draw_cmnd_ptr := @draw_command
   draw_cmnd_ptr2 := @draw_command
   hires_cmnd_ptr := @hires_command
-  draw_map_ptr := @C64CharMap
+  draw_map_ptr := @AppleIICharMap
   draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
   
@@ -541,11 +541,11 @@ vsbp_loop               mov     vscl, #PC_FP
                         rdlong  vid_mono_color, colors_ptr
                         or      vid_mono_color, blank_colors
                        
-                        mov     cursor_mask0, frame_cntr            'mask off cursor, if cursor is in visible area?
-                        and     cursor_mask0, #$20  wz
-              if_nz     mov     cursor_mask0, #0
-              if_z      rdlong  cursor_mask0, cursor_mask_ptr
-                        rdlong  cursor_pos0, cursor_pos_ptr
+                        'mov     cursor_mask0, frame_cntr            'mask off cursor, if cursor is in visible area?
+                        'and     cursor_mask0, #$20  wz
+              'if_nz     mov     cursor_mask0, #0
+              'if_z      rdlong  cursor_mask0, cursor_mask_ptr
+                        'rdlong  cursor_pos0, cursor_pos_ptr
 
                         waitvid hs_colors, #0
                         mov     vscl, #SP
@@ -572,13 +572,12 @@ video_loop2             'mov     vscl, video_scale                   'video_scal
                         
                         mov     pixel_ptr1, pixel_ptr0
                         
+        
                         rdbyte  tmp1, screen_mode_ptr  wz       'check screen mode
         if_z            jmp     #video_loop_monochrome          'if zero then monochrome
         if_nz           jmp     #video_loop_color               'else color
               
-video_loop_color
-                        
-                        rdword  pixel_values,pixel_ptr1
+video_loop_color        rdword  pixel_values,pixel_ptr1
                         add     pixel_ptr1,#2
                         
                         'odd byte
@@ -596,7 +595,6 @@ video_loop_color
         if_z            mov     vid_colors, group1_vid_colors
         if_nz           mov     vid_colors, group2_vid_colors
                         shr     pixel_values,#7                 'shift out first 3.5 pixels
-                       
                         mov     vscl,vscl_4pixel
                         waitvid vid_colors,pixel_values         'display 4 pixels of even byte
                         djnz    pixel_cntr,#video_loop_color
@@ -735,7 +733,7 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
 
                         cmp     draw_cmnd, #4  wz
               if_z      jmp     #draw_lores
-
+            
 '---- Draw a character --------------------------------------------------------------------------
 '    c := (c - 32) << 3
 draw_char               rdbyte  draw_reverse, draw_reverse_ptr
@@ -830,16 +828,16 @@ draw_lores
     'need to determine which 8x8 graphic tile(s) we need to update
     'x := x << 1 'x * 2
                         mov     draw_x, draw_xpos                       'copy xpos to x
-                        shl     draw_x, #1                              'shift left one time to mult by 2
+                        'shl     draw_x, #1                              'shift left one time to mult by 2
 
     'graphicx := byte[@FontToGraphicMap][x] 'graphic tile column
-                        mov     char_t1, draw_graphmap_ptr
-                        add     char_t1, draw_x  
-                        rdbyte  char_graphicx, char_t1  
+                        'mov     char_t1, draw_graphmap_ptr
+                        'add     char_t1, draw_x  
+                        'rdbyte  char_graphicx, char_t1  
                  
     'offset := byte[@FontToGraphicMap][x + 1] 'offset for our font tile
-                        add     char_t1, #1
-                        rdbyte  char_offset, char_t1
+                        'add     char_t1, #1
+                        'rdbyte  char_offset, char_t1
                         
     'ptr := @pixel_bfr + (graphicx + (Y * WIDTH))
                         mov     draw_ptr0, #0                           '0 out pointer
@@ -848,7 +846,7 @@ draw_lores1             test    draw_ypos, #255  wz                     'mult cu
                          
                         
               if_nz     sub     draw_ypos, #1               
-              if_nz     add     draw_ptr0, #WIDTH
+              if_nz     add     draw_ptr0, #BUFFER_WIDTH
               if_nz     jmp     #draw_lores1
 
                         
@@ -871,16 +869,16 @@ draw_lores1             test    draw_ypos, #255  wz                     'mult cu
                         'jmp     #draw_start  
                         'end debug
                         
-                        add     draw_ptr0, char_graphicx                'add graphicx
+                        add     draw_ptr0, draw_x 'char_graphicx                'add graphicx
                         add     draw_ptr0, par                          'add @pixel_bfr
     'ptr2 := ptr + 1 '@pixel_bfr + ((graphicx + 1) + (cursory * WIDTH))
-                        mov     draw_ptr2, draw_ptr0
-                        add     draw_ptr2, #1
+                        'mov     draw_ptr2, draw_ptr0
+                        'add     draw_ptr2, #1
                         
 '    repeat idx from 0 to 7 'y
                         mov     draw_cntr, #8
-                        mov     char_offset2, char_offset
-                        add     char_offset2, #1                        
+                        'mov     char_offset2, char_offset
+                        'add     char_offset2, #1                        
     '    if idx < 4
     '        tmp := top
     '    else
@@ -890,7 +888,7 @@ draw_lores3
               if_nc     mov     draw_xpos, lores_top
               if_c      mov     draw_xpos, lores_bottom
               
-                        tjnz    char_offset, #draw_lores4    
+                        'tjnz    char_offset, #draw_lores4    
                         'if offset is zero fall through to below code
 '        else 'font tile is encapsulated in one graphic tile
 '            byte[ptr] &= $FF << 7 'mask to clear offset bits
@@ -902,7 +900,7 @@ draw_lores3
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
                         
-                        shr     draw_xpos, char_offset2
+                        'shr     draw_xpos, char_offset2
                         
                         or      char_ptr0, draw_xpos
                         wrbyte  char_ptr0, draw_ptr0                       
@@ -912,40 +910,40 @@ draw_lores3
 
 '            byte[ptr] &= !($FF << (8 - offset)) 'mask to clear offset bits
 '            byte[ptr] |= (tmp) << (7 - offset) 'write left part of char
-draw_lores4             mov     char_t1, #8
-                        sub     char_t1, char_offset
-                        mov     char_t2, #255
-                        shl     char_t2, char_t1
-                        rdbyte  char_ptr0, draw_ptr0
-                        andn    char_ptr0, char_t2
+'draw_lores4             mov     char_t1, #8
+                        'sub     char_t1, char_offset
+                        'mov     char_t2, #255
+                        'shl     char_t2, char_t1
+                        'rdbyte  char_ptr0, draw_ptr0
+                        'andn    char_ptr0, char_t2
                         
-                        mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
-                        mov     char_t1, #7
-                        sub     char_t1, char_offset
+                        'mov     char_t2, draw_xpos 'make copy of draw_xpos so we can use it later
+                        'mov     char_t1, #7
+                        'sub     char_t1, char_offset
                         
-                        shl     draw_xpos, char_t1
+                        'shl     draw_xpos, char_t1
                         
-                        or      char_ptr0, draw_xpos
-                        wrbyte  char_ptr0, draw_ptr0 
+                        'or      char_ptr0, draw_xpos
+                        'wrbyte  char_ptr0, draw_ptr0 
                          
 '            byte[ptr2] &= !($FF >> (offset + 1)) 'mask
 '            byte[ptr2] |= (tmp) >> (offset + 1)'right part of char
-                        mov     char_t1, #255
-                        shr     char_t1, char_offset2
-                        rdbyte  char_ptr0, draw_ptr2
-                        andn    char_ptr0, char_t1
+                        'mov     char_t1, #255
+                        'shr     char_t1, char_offset2
+                        'rdbyte  char_ptr0, draw_ptr2
+                        'andn    char_ptr0, char_t1
                                 
-                        xor     char_t2, draw_reverse
-                        shr     char_t2, char_offset2
+                        'xor     char_t2, draw_reverse
+                        'shr     char_t2, char_offset2
                         
-                        or      char_ptr0, char_t2
-                        wrbyte  char_ptr0, draw_ptr2   
+                        'or      char_ptr0, char_t2
+                        'wrbyte  char_ptr0, draw_ptr2   
 '            ptr2 += COLS 
-                        add     draw_ptr2, #COLS
+                        'add     draw_ptr2, #COLS
 
 
 '        ptr += COLS 'increment ptr to go to next y coord of graphic tile
-draw_lores5             add     draw_ptr0, #COLS     
+draw_lores5             add     draw_ptr0, #40  '#COLS     
                         
                         djnz    draw_cntr, #draw_lores3
                         jmp     #draw_start          
@@ -1667,7 +1665,7 @@ YMulWidth
                         byte    $EE, $C0      '191 (61120)
                         byte    $F0, $00      '192 (61440)
 
-                                                       
+                                                                                                                                                                                         
 '------------------------------------------------------------------------------------------------
 ' LUT To map between 7x8 font tiles and 8x8 graphic tiles ((xpos x 7) / 8)
 '------------------------------------------------------------------------------------------------
@@ -1720,7 +1718,7 @@ FontToGraphicMap
 '------------------------------------------------------------------------------------------------
 ' RetroII Character Map
 '------------------------------------------------------------------------------------------------
-C64CharMap
+AppleIICharMap
 			byte	$00, $00, $00, $00, $00, $00, $00, $00 ' 32 Space 
 			byte	$00, $10, $10, $10, $10, $10, $00, $10 ' 33 ! 
 			byte	$00, $28, $28, $28, $00, $00, $00, $00 ' 34 " 
