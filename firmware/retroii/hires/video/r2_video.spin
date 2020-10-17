@@ -346,6 +346,8 @@ PUB Start(pin_group) | hres, vres
   hires_oddc_lut_ptr := @ColorOddC
   hires_even_lut_ptr := @ColorEven
   hires_evenc_lut_ptr := @ColorEvenC
+  hires_blank_lut_ptr := @ColorBlankTest
+  hires_default_lut_ptr := @ColorDefaultTest
   
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
   if cog2 == 0
@@ -1286,8 +1288,9 @@ hires_draw_column
 '                            R2.Pixel (data, col, row)     
                         
                         'test carry bit (bit 7), set c flag
-                        test    hires_val, #64 wc  'this will help determine which lut value to access based off previous byte
-                        
+                        'and     hires_val, hires_bit7 wc, nr  'this will help determine which lut value to access based off previous byte
+                        'mov     hires_val2, hires_val
+                        'test    hires_val, #64 wc           'save 7th bit to check next byte
                         'call routine to get data byte from ram. routine will write data to hires_val
                         mov     ram_address, mem_loc
                         call    #read_byte
@@ -1308,12 +1311,13 @@ hires_draw_column
         if_z            jmp     #hires_pixel_save               'if monochrome skip
 
                         xor     hires_parity, #255 wz      'toggle odd/even parity check
+                        
         if_c_and_z      mov     hires_lut_ptr, hires_oddc_lut_ptr         'odd byte with bit carried from even
-        if_c_and_nz     mov     hires_lut_ptr, hires_evenc_lut_ptr        'even byte with bit carried from odd              
+        if_c_and_nz     mov     hires_lut_ptr, hires_even_lut_ptr        'even byte with bit carried from odd              
         if_nc_and_z     mov     hires_lut_ptr, hires_odd_lut_ptr          'odd byte
         if_nc_and_nz    mov     hires_lut_ptr, hires_even_lut_ptr         'even byte                   
                         
-        
+                        test    hires_val, #64 wc           'save 7th bit to check next byte
                         add     hires_lut_ptr, hires_val  'find correct value
                         rdbyte  hires_val, hires_lut_ptr  'save modified byte
 hires_pixel_save
@@ -1395,6 +1399,8 @@ hires_odd_lut_ptr       long    0
 hires_even_lut_ptr      long    0
 hires_oddc_lut_ptr      long    0
 hires_evenc_lut_ptr     long    0
+hires_blank_lut_ptr     long    0
+hires_default_lut_ptr   long    0
 hires_lut_ptr           long    0
 hires_parity            long    0
 hires_screen_mode_ptr   long    0
@@ -1468,779 +1474,1295 @@ hires_row               res     1
 DAT
 
 ColorOdd
-                        byte    $00
-                        byte    $01
-                        byte    $02
-                        byte    $03
-                        byte    $04
-                        byte    $05
-                        byte    $06
-                        byte    $07
-                        byte    $08
-                        byte    $09
-                        byte    $0A
-                        byte    $0B
-                        byte    $0C
-                        byte    $0D
-                        byte    $0E
-                        byte    $0F
-                        byte    $10
-                        byte    $11
-                        byte    $12
-                        byte    $13
-                        byte    $14
-                        byte    $15
-                        byte    $16
-                        byte    $17
-                        byte    $18
-                        byte    $19
-                        byte    $1A
-                        byte    $1B
-                        byte    $1C
-                        byte    $1D
-                        byte    $1E
-                        byte    $1F
-                        byte    $20
-                        byte    $21
-                        byte    $22
-                        byte    $23
-                        byte    $24
-                        byte    $25
-                        byte    $26
-                        byte    $27
-                        byte    $28
-                        byte    $29
-                        byte    $2A
-                        byte    $2B
-                        byte    $2C
-                        byte    $2D
-                        byte    $2E
-                        byte    $2F
-                        byte    $30
-                        byte    $31
-                        byte    $32
-                        byte    $33
-                        byte    $34
-                        byte    $35
-                        byte    $36
-                        byte    $37
-                        byte    $38
-                        byte    $39
-                        byte    $3A
-                        byte    $3B
-                        byte    $3C
-                        byte    $3D
-                        byte    $3E
-                        byte    $3F
-                        byte    $40
-                        byte    $41
-                        byte    $42
-                        byte    $43
-                        byte    $44
-                        byte    $45
-                        byte    $46
-                        byte    $47
-                        byte    $48
-                        byte    $49
-                        byte    $4A
-                        byte    $4B
-                        byte    $4C
-                        byte    $4D
-                        byte    $4E
-                        byte    $4F
-                        byte    $50
-                        byte    $51
-                        byte    $52
-                        byte    $53
-                        byte    $54
-                        byte    $55
-                        byte    $56
-                        byte    $57
-                        byte    $58
-                        byte    $59
-                        byte    $5A
-                        byte    $5B
-                        byte    $5C
-                        byte    $5D
-                        byte    $5E
-                        byte    $5F
-                        byte    $60
-                        byte    $61
-                        byte    $62
-                        byte    $63
-                        byte    $64
-                        byte    $65
-                        byte    $66
-                        byte    $67
-                        byte    $68
-                        byte    $69
-                        byte    $6A
-                        byte    $6B
-                        byte    $6C
-                        byte    $6D
-                        byte    $6E
-                        byte    $6F
-                        byte    $70
-                        byte    $71
-                        byte    $72
-                        byte    $73
-                        byte    $74
-                        byte    $75
-                        byte    $76
-                        byte    $77
-                        byte    $78
-                        byte    $79
-                        byte    $7A
-                        byte    $7B
-                        byte    $7C
-                        byte    $7D
-                        byte    $7E
-                        byte    $7F
-                        byte    $80
-                        byte    $81
-                        byte    $82
-                        byte    $83
-                        byte    $84
-                        byte    $85
-                        byte    $86
-                        byte    $87
-                        byte    $88
-                        byte    $89
-                        byte    $8A
-                        byte    $8B
-                        byte    $8C
-                        byte    $8D
-                        byte    $8E
-                        byte    $8F
-                        byte    $90
-                        byte    $91
-                        byte    $92
-                        byte    $93
-                        byte    $94
-                        byte    $95
-                        byte    $96
-                        byte    $97
-                        byte    $98
-                        byte    $99
-                        byte    $9A
-                        byte    $9B
-                        byte    $9C
-                        byte    $9D
-                        byte    $9E
-                        byte    $9F
-                        byte    $A0
-                        byte    $A1
-                        byte    $A2
-                        byte    $A3
-                        byte    $A4
-                        byte    $A5
-                        byte    $A6
-                        byte    $A7
-                        byte    $A8
-                        byte    $A9
-                        byte    $AA
-                        byte    $AB
-                        byte    $AC
-                        byte    $AD
-                        byte    $AE
-                        byte    $AF
-                        byte    $B0
-                        byte    $B1
-                        byte    $B2
-                        byte    $B3
-                        byte    $B4
-                        byte    $B5
-                        byte    $B6
-                        byte    $B7
-                        byte    $B8
-                        byte    $B9
-                        byte    $BA
-                        byte    $BB
-                        byte    $BC
-                        byte    $BD
-                        byte    $BE
-                        byte    $BF
-                        byte    $C0
-                        byte    $C1
-                        byte    $C2
-                        byte    $C3
-                        byte    $C4
-                        byte    $C5
-                        byte    $C6
-                        byte    $C7
-                        byte    $C8
-                        byte    $C9
-                        byte    $CA
-                        byte    $CB
-                        byte    $CC
-                        byte    $CD
-                        byte    $CE
-                        byte    $CF
-                        byte    $D0
-                        byte    $D1
-                        byte    $D2
-                        byte    $D3
-                        byte    $D4
-                        byte    $D5
-                        byte    $D6
-                        byte    $D7
-                        byte    $D8
-                        byte    $D9
-                        byte    $DA
-                        byte    $DB
-                        byte    $DC
-                        byte    $DD
-                        byte    $DE
-                        byte    $DF
-                        byte    $E0
-                        byte    $E1
-                        byte    $E2
-                        byte    $E3
-                        byte    $E4
-                        byte    $E5
-                        byte    $E6
-                        byte    $E7
-                        byte    $E8
-                        byte    $E9
-                        byte    $EA
-                        byte    $EB
-                        byte    $EC
-                        byte    $ED
-                        byte    $EE
-                        byte    $EF
-                        byte    $F0
-                        byte    $F1
-                        byte    $F2
-                        byte    $F3
-                        byte    $F4
-                        byte    $F5
-                        byte    $F6
-                        byte    $F7
-                        byte    $F8
-                        byte    $F9
-                        byte    $FA
-                        byte    $FB
-                        byte    $FC
-                        byte    $FD
-                        byte    $FE
-                        byte    $FF
+                        byte    $00      '0 (00000000)
+                        byte    $01      '1 (00000001)
+                        byte    $02      '2 (00000010)
+                        byte    $03      '3 (00000011) modified from 03 (00000011)
+                        byte    $04      '4 (00000100)
+                        byte    $05      '5 (00000101)
+                        byte    $0C      '12 (00001100) modified from 06 (00000110)
+                        byte    $03      '3 (00000011) modified from 07 (00000111)
+                        byte    $08      '8 (00001000)
+                        byte    $09      '9 (00001001)
+                        byte    $0A      '10 (00001010)
+                        byte    $0B      '11 (00001011)
+                        byte    $0C      '12 (00001100)
+                        byte    $0D      '13 (00001101)
+                        byte    $0C      '12 (00001100) modified from 0E (00001110)
+                        byte    $0F      '15 (00001111)
+                        byte    $10      '16 (00010000)
+                        byte    $11      '17 (00010001)
+                        byte    $12      '18 (00010010)
+                        byte    $13      '19 (00010011)
+                        byte    $14      '20 (00010100)
+                        byte    $15      '21 (00010101)
+                        byte    $1C      '28 (00011100) modified from 16 (00010110)
+                        byte    $17      '23 (00010111)
+                        byte    $30      '48 (00110000) modified from 18 (00011000)
+                        byte    $31      '49 (00110001) modified from 19 (00011001)
+                        byte    $32      '50 (00110010) modified from 1A (00011010)
+                        byte    $3B      '59 (00111011) modified from 1B (00011011)
+                        byte    $0C      '12 (00001100) modified from 1C (00011100)
+                        byte    $0D      '13 (00001101) modified from 1D (00011101)
+                        byte    $3C      '60 (00111100) modified from 1E (00011110)
+                        byte    $0F      '15 (00001111) modified from 1F (00011111)
+                        byte    $20      '32 (00100000)
+                        byte    $21      '33 (00100001)
+                        byte    $22      '34 (00100010)
+                        byte    $23      '35 (00100011)
+                        byte    $24      '36 (00100100)
+                        byte    $25      '37 (00100101)
+                        byte    $2C      '44 (00101100) modified from 26 (00100110)
+                        byte    $23      '35 (00100011) modified from 27 (00100111)
+                        byte    $28      '40 (00101000)
+                        byte    $29      '41 (00101001)
+                        byte    $2A      '42 (00101010)
+                        byte    $2B      '43 (00101011)
+                        byte    $2C      '44 (00101100)
+                        byte    $2D      '45 (00101101)
+                        byte    $2C      '44 (00101100) modified from 2E (00101110)
+                        byte    $2F      '47 (00101111)
+                        byte    $30      '48 (00110000)
+                        byte    $31      '49 (00110001)
+                        byte    $32      '50 (00110010)
+                        byte    $33      '51 (00110011)
+                        byte    $34      '52 (00110100)
+                        byte    $35      '53 (00110101)
+                        byte    $37      '55 (00110111) modified from 36 (00110110)
+                        byte    $37      '55 (00110111)
+                        byte    $30      '48 (00110000) modified from 38 (00111000)
+                        byte    $31      '49 (00110001) modified from 39 (00111001)
+                        byte    $38      '56 (00111000) modified from 3A (00111010)
+                        byte    $3B      '59 (00111011)
+                        byte    $3C      '60 (00111100)
+                        byte    $3D      '61 (00111101)
+                        byte    $3E      '60 (00111100) modified from 3E (00111110) modded back to 3E (mario pipe)
+                        byte    $3F      '63 (00111111)
+                        byte    $40      '64 (01000000)
+                        byte    $41      '65 (01000001)
+                        byte    $42      '66 (01000010)
+                        byte    $43      '67 (01000011)
+                        byte    $44      '68 (01000100)
+                        byte    $45      '69 (01000101)
+                        byte    $4C      '76 (01001100) modified from 46 (01000110)
+                        byte    $43      '67 (01000011) modified from 47 (01000111)
+                        byte    $48      '72 (01001000)
+                        byte    $49      '73 (01001001)
+                        byte    $4A      '74 (01001010)
+                        byte    $4B      '75 (01001011)
+                        byte    $4C      '76 (01001100)
+                        byte    $4D      '77 (01001101)
+                        byte    $4C      '76 (01001100) modified from 4E (01001110)
+                        byte    $4F      '79 (01001111)
+                        byte    $50      '80 (01010000)
+                        byte    $51      '81 (01010001)
+                        byte    $52      '82 (01010010)
+                        byte    $53      '83 (01010011)
+                        byte    $54      '84 (01010100)
+                        byte    $55      '85 (01010101)
+                        byte    $5C      '92 (01011100) modified from 56 (01010110)
+                        byte    $57      '87 (01010111)
+                        byte    $70      '112 (01110000) modified from 58 (01011000)
+                        byte    $71      '113 (01110001) modified from 59 (01011001)
+                        byte    $74      '116 (01110100) modified from 5A (01011010)
+                        byte    $7B      '123 (01111011) modified from 5B (01011011)
+                        byte    $5C      '92 (01011100)
+                        byte    $5D      '93 (01011101)
+                        byte    $7C      '124 (01111100) modified from 5E (01011110)
+                        byte    $7F      '127 (01111111) modified from 5F (01011111)
+                        byte    $70      '112 (01110000) modified from 60 (01100000)
+                        byte    $71      '113 (01110001) modified from 61 (01100001)
+                        byte    $72      '114 (01110010) modified from 62 (01100010)
+                        byte    $73      '115 (01110011) modified from 63 (01100011)
+                        byte    $74      '116 (01110100) modified from 64 (01100100)
+                        byte    $75      '117 (01110101) modified from 65 (01100101)
+                        byte    $73      '115 (01110011) modified from 66 (01100110)
+                        byte    $73      '115 (01110011) modified from 67 (01100111)
+                        byte    $78      '120 (01111000) modified from 68 (01101000)
+                        byte    $79      '121 (01111001) modified from 69 (01101001)
+                        byte    $7A      '122 (01111010) modified from 6A (01101010)
+                        byte    $7B      '123 (01111011) modified from 6B (01101011)
+                        byte    $7C      '124 (01111100) modified from 6C (01101100)
+                        byte    $7D      '125 (01111101) modified from 6D (01101101)
+                        byte    $77      '119 (01110111) modified from 6E (01101110)
+                        byte    $77      '119 (01110111) modified from 6F (01101111)
+                        byte    $70      '112 (01110000)
+                        byte    $71      '113 (01110001)
+                        byte    $72      '114 (01110010)
+                        byte    $73      '115 (01110011)
+                        byte    $74      '116 (01110100)
+                        byte    $75      '117 (01110101)
+                        byte    $77      '119 (01110111) modified from 76 (01110110)
+                        byte    $77      '119 (01110111)
+                        byte    $7C      '124 (01111100) modified from 78 (01111000)
+                        byte    $71      '113 (01110001) modified from 79 (01111001)
+                        byte    $7E      '126 (01111110) modified from 7A (01111010)
+                        byte    $7B      '123 (01111011)
+                        byte    $7C      '124 (01111100)
+                        byte    $7D      '125 (01111101)
+                        byte    $7E      '126 (01111110) modified from 7E (01111110)
+                        byte    $7F      '127 (01111111)
+                        byte    $80      '128 (10000000)
+                        byte    $81      '129 (10000001)
+                        byte    $82      '130 (10000010)
+                        byte    $83      '131 (10000011) modified from 83 (10000011)
+                        byte    $84      '132 (10000100)
+                        byte    $85      '133 (10000101)
+                        byte    $8C      '140 (10001100) modified from 86 (10000110)
+                        byte    $83      '131 (10000011) modified from 87 (10000111)
+                        byte    $88      '136 (10001000)
+                        byte    $89      '137 (10001001)
+                        byte    $8A      '138 (10001010)
+                        byte    $8B      '139 (10001011)
+                        byte    $8C      '140 (10001100)
+                        byte    $8D      '141 (10001101)
+                        byte    $8C      '140 (10001100) modified from 8E (10001110)
+                        byte    $8F      '143 (10001111)
+                        byte    $90      '144 (10010000)
+                        byte    $91      '145 (10010001)
+                        byte    $92      '146 (10010010)
+                        byte    $93      '147 (10010011)
+                        byte    $94      '148 (10010100)
+                        byte    $95      '149 (10010101)
+                        byte    $9C      '156 (10011100) modified from 96 (10010110)
+                        byte    $97      '151 (10010111)
+                        byte    $B0      '176 (10110000) modified from 98 (10011000)
+                        byte    $B1      '177 (10110001) modified from 99 (10011001)
+                        byte    $B2      '178 (10110010) modified from 9A (10011010)
+                        byte    $BB      '187 (10111011) modified from 9B (10011011)
+                        byte    $8C      '140 (10001100) modified from 9C (10011100)
+                        byte    $8D      '141 (10001101) modified from 9D (10011101)
+                        byte    $BC      '188 (10111100) modified from 9E (10011110)
+                        byte    $8F      '143 (10001111) modified from 9F (10011111)
+                        byte    $A0      '160 (10100000)
+                        byte    $A1      '161 (10100001)
+                        byte    $A2      '162 (10100010)
+                        byte    $A3      '163 (10100011)
+                        byte    $A4      '164 (10100100)
+                        byte    $A5      '165 (10100101)
+                        byte    $AC      '172 (10101100) modified from A6 (10100110)
+                        byte    $A3      '163 (10100011) modified from A7 (10100111)
+                        byte    $A8      '168 (10101000)
+                        byte    $A9      '169 (10101001)
+                        byte    $AA      '170 (10101010)
+                        byte    $AB      '171 (10101011)
+                        byte    $AC      '172 (10101100)
+                        byte    $AD      '173 (10101101)
+                        byte    $AC      '172 (10101100) modified from AE (10101110)
+                        byte    $AF      '175 (10101111)
+                        byte    $B0      '176 (10110000)
+                        byte    $B1      '177 (10110001)
+                        byte    $B2      '178 (10110010)
+                        byte    $B3      '179 (10110011)
+                        byte    $B4      '180 (10110100)
+                        byte    $B5      '181 (10110101)
+                        byte    $B7      '183 (10110111) modified from B6 (10110110)
+                        byte    $B7      '183 (10110111)
+                        byte    $B0      '176 (10110000) modified from B8 (10111000)
+                        byte    $B1      '177 (10110001) modified from B9 (10111001)
+                        byte    $B8      '184 (10111000) modified from BA (10111010)
+                        byte    $BB      '187 (10111011)
+                        byte    $BC      '188 (10111100)
+                        byte    $BD      '189 (10111101)
+                        byte    $BC      '188 (10111100) modified from BE (10111110)
+                        byte    $BF      '191 (10111111)
+                        byte    $C0      '192 (11000000)
+                        byte    $C1      '193 (11000001)
+                        byte    $C2      '194 (11000010)
+                        byte    $C3      '195 (11000011)
+                        byte    $C4      '196 (11000100)
+                        byte    $C5      '197 (11000101)
+                        byte    $CC      '204 (11001100) modified from C6 (11000110)
+                        byte    $C3      '195 (11000011) modified from C7 (11000111)
+                        byte    $C8      '200 (11001000)
+                        byte    $C9      '201 (11001001)
+                        byte    $CA      '202 (11001010)
+                        byte    $CB      '203 (11001011)
+                        byte    $CC      '204 (11001100)
+                        byte    $CD      '205 (11001101)
+                        byte    $CC      '204 (11001100) modified from CE (11001110)
+                        byte    $CF      '207 (11001111)
+                        byte    $D0      '208 (11010000)
+                        byte    $D1      '209 (11010001)
+                        byte    $D2      '210 (11010010)
+                        byte    $D3      '211 (11010011)
+                        byte    $D4      '212 (11010100)
+                        byte    $D5      '213 (11010101)
+                        byte    $DC      '220 (11011100) modified from D6 (11010110)
+                        byte    $D7      '215 (11010111)
+                        byte    $F0      '240 (11110000) modified from D8 (11011000)
+                        byte    $F1      '241 (11110001) modified from D9 (11011001)
+                        byte    $F4      '244 (11110100) modified from DA (11011010)
+                        byte    $FB      '251 (11111011) modified from DB (11011011)
+                        byte    $DC      '220 (11011100)
+                        byte    $DD      '221 (11011101)
+                        byte    $FC      '252 (11111100) modified from DE (11011110)
+                        byte    $FF      '255 (11111111) modified from DF (11011111)
+                        byte    $F0      '240 (11110000) modified from E0 (11100000)
+                        byte    $F1      '241 (11110001) modified from E1 (11100001)
+                        byte    $F2      '242 (11110010) modified from E2 (11100010)
+                        byte    $F3      '243 (11110011) modified from E3 (11100011)
+                        byte    $F4      '244 (11110100) modified from E4 (11100100)
+                        byte    $F5      '245 (11110101) modified from E5 (11100101)
+                        byte    $F3      '243 (11110011) modified from E6 (11100110)
+                        byte    $F3      '243 (11110011) modified from E7 (11100111)
+                        byte    $F8      '248 (11111000) modified from E8 (11101000)
+                        byte    $F9      '249 (11111001) modified from E9 (11101001)
+                        byte    $FA      '250 (11111010) modified from EA (11101010)
+                        byte    $FB      '251 (11111011) modified from EB (11101011)
+                        byte    $FC      '252 (11111100) modified from EC (11101100)
+                        byte    $FD      '253 (11111101) modified from ED (11101101)
+                        byte    $F7      '247 (11110111) modified from EE (11101110)
+                        byte    $F7      '247 (11110111) modified from EF (11101111)
+                        byte    $F0      '240 (11110000)
+                        byte    $F1      '241 (11110001)
+                        byte    $F2      '242 (11110010)
+                        byte    $F3      '243 (11110011)
+                        byte    $F4      '244 (11110100)
+                        byte    $F5      '245 (11110101)
+                        byte    $F7      '247 (11110111) modified from F6 (11110110)
+                        byte    $F7      '247 (11110111)
+                        byte    $FC      '252 (11111100) modified from F8 (11111000)
+                        byte    $F1      '241 (11110001) modified from F9 (11111001)
+                        byte    $FE      '254 (11111110) modified from FA (11111010)
+                        byte    $FB      '251 (11111011)
+                        byte    $FC      '252 (11111100)
+                        byte    $FD      '253 (11111101)
+                        byte    $FE      '254 (11111110) modified from FE (11111110)
+                        byte    $FF      '255 (11111111)
                         
 ColorOddC
-                        byte    $00
-                        byte    $01
-                        byte    $02
-                        byte    $03
-                        byte    $04
-                        byte    $05
-                        byte    $06
-                        byte    $07
-                        byte    $08
-                        byte    $09
-                        byte    $0A
-                        byte    $0B
-                        byte    $0C
-                        byte    $0D
-                        byte    $0E
-                        byte    $0F
-                        byte    $10
-                        byte    $11
-                        byte    $12
-                        byte    $13
-                        byte    $14
-                        byte    $15
-                        byte    $16
-                        byte    $17
-                        byte    $18
-                        byte    $19
-                        byte    $1A
-                        byte    $1B
-                        byte    $1C
-                        byte    $1D
-                        byte    $1E
-                        byte    $1F
-                        byte    $20
-                        byte    $21
-                        byte    $22
-                        byte    $23
-                        byte    $24
-                        byte    $25
-                        byte    $26
-                        byte    $27
-                        byte    $28
-                        byte    $29
-                        byte    $2A
-                        byte    $2B
-                        byte    $2C
-                        byte    $2D
-                        byte    $2E
-                        byte    $2F
-                        byte    $30
-                        byte    $31
-                        byte    $32
-                        byte    $33
-                        byte    $34
-                        byte    $35
-                        byte    $36
-                        byte    $37
-                        byte    $38
-                        byte    $39
-                        byte    $3A
-                        byte    $3B
-                        byte    $3C
-                        byte    $3D
-                        byte    $3E
-                        byte    $3F
-                        byte    $40
-                        byte    $41
-                        byte    $42
-                        byte    $43
-                        byte    $44
-                        byte    $45
-                        byte    $46
-                        byte    $47
-                        byte    $48
-                        byte    $49
-                        byte    $4A
-                        byte    $4B
-                        byte    $4C
-                        byte    $4D
-                        byte    $4E
-                        byte    $4F
-                        byte    $50
-                        byte    $51
-                        byte    $52
-                        byte    $53
-                        byte    $54
-                        byte    $55
-                        byte    $56
-                        byte    $57
-                        byte    $58
-                        byte    $59
-                        byte    $5A
-                        byte    $5B
-                        byte    $5C
-                        byte    $5D
-                        byte    $5E
-                        byte    $5F
-                        byte    $60
-                        byte    $61
-                        byte    $62
-                        byte    $63
-                        byte    $64
-                        byte    $65
-                        byte    $66
-                        byte    $67
-                        byte    $68
-                        byte    $69
-                        byte    $6A
-                        byte    $6B
-                        byte    $6C
-                        byte    $6D
-                        byte    $6E
-                        byte    $6F
-                        byte    $70
-                        byte    $71
-                        byte    $72
-                        byte    $73
-                        byte    $74
-                        byte    $75
-                        byte    $76
-                        byte    $77
-                        byte    $78
-                        byte    $79
-                        byte    $7A
-                        byte    $7B
-                        byte    $7C
-                        byte    $7D
-                        byte    $7E
-                        byte    $7F
-                        byte    $80
-                        byte    $81
-                        byte    $82
-                        byte    $83
-                        byte    $84
-                        byte    $85
-                        byte    $86
-                        byte    $87
-                        byte    $88
-                        byte    $89
-                        byte    $8A
-                        byte    $8B
-                        byte    $8C
-                        byte    $8D
-                        byte    $8E
-                        byte    $8F
-                        byte    $90
-                        byte    $91
-                        byte    $92
-                        byte    $93
-                        byte    $94
-                        byte    $95
-                        byte    $96
-                        byte    $97
-                        byte    $98
-                        byte    $99
-                        byte    $9A
-                        byte    $9B
-                        byte    $9C
-                        byte    $9D
-                        byte    $9E
-                        byte    $9F
-                        byte    $A0
-                        byte    $A1
-                        byte    $A2
-                        byte    $A3
-                        byte    $A4
-                        byte    $A5
-                        byte    $A6
-                        byte    $A7
-                        byte    $A8
-                        byte    $A9
-                        byte    $AA
-                        byte    $AB
-                        byte    $AC
-                        byte    $AD
-                        byte    $AE
-                        byte    $AF
-                        byte    $B0
-                        byte    $B1
-                        byte    $B2
-                        byte    $B3
-                        byte    $B4
-                        byte    $B5
-                        byte    $B6
-                        byte    $B7
-                        byte    $B8
-                        byte    $B9
-                        byte    $BA
-                        byte    $BB
-                        byte    $BC
-                        byte    $BD
-                        byte    $BE
-                        byte    $BF
-                        byte    $C0
-                        byte    $C1
-                        byte    $C2
-                        byte    $C3
-                        byte    $C4
-                        byte    $C5
-                        byte    $C6
-                        byte    $C7
-                        byte    $C8
-                        byte    $C9
-                        byte    $CA
-                        byte    $CB
-                        byte    $CC
-                        byte    $CD
-                        byte    $CE
-                        byte    $CF
-                        byte    $D0
-                        byte    $D1
-                        byte    $D2
-                        byte    $D3
-                        byte    $D4
-                        byte    $D5
-                        byte    $D6
-                        byte    $D7
-                        byte    $D8
-                        byte    $D9
-                        byte    $DA
-                        byte    $DB
-                        byte    $DC
-                        byte    $DD
-                        byte    $DE
-                        byte    $DF
-                        byte    $E0
-                        byte    $E1
-                        byte    $E2
-                        byte    $E3
-                        byte    $E4
-                        byte    $E5
-                        byte    $E6
-                        byte    $E7
-                        byte    $E8
-                        byte    $E9
-                        byte    $EA
-                        byte    $EB
-                        byte    $EC
-                        byte    $ED
-                        byte    $EE
-                        byte    $EF
-                        byte    $F0
-                        byte    $F1
-                        byte    $F2
-                        byte    $F3
-                        byte    $F4
-                        byte    $F5
-                        byte    $F6
-                        byte    $F7
-                        byte    $F8
-                        byte    $F9
-                        byte    $FA
-                        byte    $FB
-                        byte    $FC
-                        byte    $FD
-                        byte    $FE
-                        byte    $FF
+                        byte    $00      '0 (00000000)
+                        byte    $03      '3 (00000011) modified from 01 (00000001)
+                        byte    $02      '2 (00000010)
+                        byte    $03      '3 (00000011) modified from 03 (00000011)
+                        byte    $04      '4 (00000100)
+                        byte    $07      '7 (00000111) modified from 05 (00000101)
+                        byte    $0E      '14 (00001110) modified from 06 (00000110)
+                        byte    $0F      '15 (00001111) modified from 07 (00000111)
+                        byte    $08      '8 (00001000)
+                        byte    $0B      '11 (00001011) modified from 09 (00001001)
+                        byte    $0A      '10 (00001010)
+                        byte    $0B      '11 (00001011)
+                        byte    $0C      '12 (00001100)
+                        byte    $0F      '15 (00001111) modified from 0D (00001101)
+                        byte    $0E      '14 (00001110)
+                        byte    $0F      '15 (00001111)
+                        byte    $10      '16 (00010000)
+                        byte    $11      '17 (00010001)
+                        byte    $12      '18 (00010010)
+                        byte    $13      '19 (00010011)
+                        byte    $14      '20 (00010100)
+                        byte    $17      '23 (00010111) modified from 15 (00010101)
+                        byte    $1E      '30 (00011110) modified from 16 (00010110)
+                        byte    $1F      '31 (00011111) modified from 17 (00010111)
+                        byte    $30      '48 (00110000) modified from 18 (00011000)
+                        byte    $33      '51 (00110011) modified from 19 (00011001)
+                        byte    $3A      '58 (00111010) modified from 1A (00011010)
+                        byte    $3B      '59 (00111011) modified from 1B (00011011)
+                        byte    $0C      '12 (00001100) modified from 1C (00011100)
+                        byte    $37      '55 (00110111) modified from 1D (00011101)
+                        byte    $3E      '62 (00111110) modified from 1E (00011110)
+                        byte    $3F      '63 (00111111) modified from 1F (00011111)
+                        byte    $20      '32 (00100000)
+                        byte    $23      '35 (00100011) modified from 21 (00100001)
+                        byte    $22      '34 (00100010)
+                        byte    $23      '35 (00100011)
+                        byte    $24      '36 (00100100)
+                        byte    $27      '39 (00100111) modified from 25 (00100101)
+                        byte    $2E      '46 (00101110) modified from 26 (00100110)
+                        byte    $23      '35 (00100011) modified from 27 (00100111)
+                        byte    $28      '40 (00101000)
+                        byte    $23      '35 (00100011) modified from 29 (00101001)
+                        byte    $2A      '42 (00101010)
+                        byte    $2B      '43 (00101011)
+                        byte    $2C      '44 (00101100)
+                        byte    $2F      '47 (00101111) modified from 2D (00101101)
+                        byte    $2E      '46 (00101110)
+                        byte    $2F      '47 (00101111)
+                        byte    $30      '48 (00110000)
+                        byte    $33      '51 (00110011) modified from 31 (00110001)
+                        byte    $32      '50 (00110010)
+                        byte    $33      '51 (00110011)
+                        byte    $34      '52 (00110100)
+                        byte    $37      '55 (00110111) modified from 35 (00110101)
+                        byte    $3E      '62 (00111110) modified from 36 (00110110)
+                        byte    $37      '55 (00110111)
+                        byte    $30      '48 (00110000) modified from 38 (00111000)
+                        byte    $33      '51 (00110011) modified from 39 (00111001)
+                        byte    $3A      '58 (00111010)
+                        byte    $3B      '59 (00111011)
+                        byte    $3C      '60 (00111100)
+                        byte    $3F      '63 (00111111) modified from 3D (00111101)
+                        byte    $3E      '62 (00111110)
+                        byte    $3F      '63 (00111111)
+                        byte    $40      '64 (01000000)
+                        byte    $41      '65 (01000001)
+                        byte    $42      '66 (01000010)
+                        byte    $43      '67 (01000011)
+                        byte    $44      '68 (01000100)
+                        byte    $47      '71 (01000111) modified from 45 (01000101)
+                        byte    $4E      '78 (01001110) modified from 46 (01000110)
+                        byte    $43      '67 (01000011) modified from 47 (01000111)
+                        byte    $48      '72 (01001000)
+                        byte    $4B      '75 (01001011) modified from 49 (01001001)
+                        byte    $4A      '74 (01001010)
+                        byte    $4B      '75 (01001011)
+                        byte    $4C      '76 (01001100)
+                        byte    $4F      '79 (01001111) modified from 4D (01001101)
+                        byte    $4E      '78 (01001110)
+                        byte    $4F      '79 (01001111)
+                        byte    $50      '80 (01010000)
+                        byte    $53      '83 (01010011) modified from 51 (01010001)
+                        byte    $52      '82 (01010010)
+                        byte    $53      '83 (01010011)
+                        byte    $54      '84 (01010100)
+                        byte    $57      '87 (01010111) modified from 55 (01010101)
+                        byte    $5E      '94 (01011110) modified from 56 (01010110)
+                        byte    $57      '87 (01010111)
+                        byte    $5C      '92 (01011100) modified from 58 (01011000)
+                        byte    $73      '115 (01110011) modified from 59 (01011001)
+                        byte    $7A      '122 (01111010) modified from 5A (01011010)
+                        byte    $7B      '123 (01111011) modified from 5B (01011011)
+                        byte    $5C      '92 (01011100)
+                        byte    $77      '119 (01110111) modified from 5D (01011101)
+                        byte    $5E      '94 (01011110)
+                        byte    $5F      '95 (01011111)
+                        byte    $70      '112 (01110000) modified from 60 (01100000)
+                        byte    $73      '115 (01110011) modified from 61 (01100001)
+                        byte    $72      '114 (01110010) modified from 62 (01100010)
+                        byte    $73      '115 (01110011) modified from 63 (01100011)
+                        byte    $74      '116 (01110100) modified from 64 (01100100)
+                        byte    $77      '119 (01110111) modified from 65 (01100101)
+                        byte    $7E      '126 (01111110) modified from 66 (01100110)
+                        byte    $73      '115 (01110011) modified from 67 (01100111)
+                        byte    $78      '120 (01111000) modified from 68 (01101000)
+                        byte    $7B      '123 (01111011) modified from 69 (01101001)
+                        byte    $7A      '122 (01111010) modified from 6A (01101010)
+                        byte    $7B      '123 (01111011) modified from 6B (01101011)
+                        byte    $7C      '124 (01111100) modified from 6C (01101100)
+                        byte    $7F      '127 (01111111) modified from 6D (01101101)
+                        byte    $7E      '126 (01111110) modified from 6E (01101110)
+                        byte    $7F      '127 (01111111) modified from 6F (01101111)
+                        byte    $70      '112 (01110000)
+                        byte    $73      '115 (01110011) modified from 71 (01110001)
+                        byte    $72      '114 (01110010)
+                        byte    $73      '115 (01110011)
+                        byte    $74      '116 (01110100)
+                        byte    $77      '119 (01110111) modified from 75 (01110101)
+                        byte    $7E      '126 (01111110) modified from 76 (01110110)
+                        byte    $77      '119 (01110111)
+                        byte    $7C      '124 (01111100) modified from 78 (01111000)
+                        byte    $73      '115 (01110011) modified from 79 (01111001)
+                        byte    $7A      '122 (01111010)
+                        byte    $7B      '123 (01111011)
+                        byte    $7C      '124 (01111100)
+                        byte    $7F      '127 (01111111) modified from 7D (01111101)
+                        byte    $7E      '126 (01111110)
+                        byte    $7F      '127 (01111111)
+                        byte    $80      '128 (10000000)
+                        byte    $83      '131 (10000011) modified from 81 (10000001)
+                        byte    $82      '130 (10000010)
+                        byte    $83      '131 (10000011) modified from 83 (10000011)
+                        byte    $84      '132 (10000100)
+                        byte    $87      '135 (10000111) modified from 85 (10000101)
+                        byte    $8E      '142 (10001110) modified from 86 (10000110)
+                        byte    $8F      '143 (10001111) modified from 87 (10000111)
+                        byte    $88      '136 (10001000)
+                        byte    $8B      '139 (10001011) modified from 89 (10001001)
+                        byte    $8A      '138 (10001010)
+                        byte    $8B      '139 (10001011)
+                        byte    $8C      '140 (10001100)
+                        byte    $8F      '143 (10001111) modified from 8D (10001101)
+                        byte    $8E      '142 (10001110)
+                        byte    $8F      '143 (10001111)
+                        byte    $90      '144 (10010000)
+                        byte    $91      '145 (10010001)
+                        byte    $92      '146 (10010010)
+                        byte    $93      '147 (10010011)
+                        byte    $94      '148 (10010100)
+                        byte    $97      '151 (10010111) modified from 95 (10010101)
+                        byte    $9E      '158 (10011110) modified from 96 (10010110)
+                        byte    $9F      '159 (10011111) modified from 97 (10010111)
+                        byte    $B0      '176 (10110000) modified from 98 (10011000)
+                        byte    $B3      '179 (10110011) modified from 99 (10011001)
+                        byte    $BA      '186 (10111010) modified from 9A (10011010)
+                        byte    $BB      '187 (10111011) modified from 9B (10011011)
+                        byte    $8C      '140 (10001100) modified from 9C (10011100)
+                        byte    $B7      '183 (10110111) modified from 9D (10011101)
+                        byte    $BE      '190 (10111110) modified from 9E (10011110)
+                        byte    $BF      '191 (10111111) modified from 9F (10011111)
+                        byte    $A0      '160 (10100000)
+                        byte    $A3      '163 (10100011) modified from A1 (10100001)
+                        byte    $A2      '162 (10100010)
+                        byte    $A3      '163 (10100011)
+                        byte    $A4      '164 (10100100)
+                        byte    $A7      '167 (10100111) modified from A5 (10100101)
+                        byte    $AE      '174 (10101110) modified from A6 (10100110)
+                        byte    $A3      '163 (10100011) modified from A7 (10100111)
+                        byte    $A8      '168 (10101000)
+                        byte    $A3      '163 (10100011) modified from A9 (10101001)
+                        byte    $AA      '170 (10101010)
+                        byte    $AB      '171 (10101011)
+                        byte    $AC      '172 (10101100)
+                        byte    $AF      '175 (10101111) modified from AD (10101101)
+                        byte    $AE      '174 (10101110)
+                        byte    $AF      '175 (10101111)
+                        byte    $B0      '176 (10110000)
+                        byte    $B3      '179 (10110011) modified from B1 (10110001)
+                        byte    $B2      '178 (10110010)
+                        byte    $B3      '179 (10110011)
+                        byte    $B4      '180 (10110100)
+                        byte    $B7      '183 (10110111) modified from B5 (10110101)
+                        byte    $BE      '190 (10111110) modified from B6 (10110110)
+                        byte    $B7      '183 (10110111)
+                        byte    $B0      '176 (10110000) modified from B8 (10111000)
+                        byte    $B3      '179 (10110011) modified from B9 (10111001)
+                        byte    $BA      '186 (10111010)
+                        byte    $BB      '187 (10111011)
+                        byte    $BC      '188 (10111100)
+                        byte    $BF      '191 (10111111) modified from BD (10111101)
+                        byte    $BE      '190 (10111110)
+                        byte    $BF      '191 (10111111)
+                        byte    $C0      '192 (11000000)
+                        byte    $C1      '193 (11000001)
+                        byte    $C2      '194 (11000010)
+                        byte    $C3      '195 (11000011)
+                        byte    $C4      '196 (11000100)
+                        byte    $C7      '199 (11000111) modified from C5 (11000101)
+                        byte    $CE      '206 (11001110) modified from C6 (11000110)
+                        byte    $C3      '195 (11000011) modified from C7 (11000111)
+                        byte    $C8      '200 (11001000)
+                        byte    $CB      '203 (11001011) modified from C9 (11001001)
+                        byte    $CA      '202 (11001010)
+                        byte    $CB      '203 (11001011)
+                        byte    $CC      '204 (11001100)
+                        byte    $CF      '207 (11001111) modified from CD (11001101)
+                        byte    $CE      '206 (11001110)
+                        byte    $CF      '207 (11001111)
+                        byte    $D0      '208 (11010000)
+                        byte    $D3      '211 (11010011) modified from D1 (11010001)
+                        byte    $D2      '210 (11010010)
+                        byte    $D3      '211 (11010011)
+                        byte    $D4      '212 (11010100)
+                        byte    $D7      '215 (11010111) modified from D5 (11010101)
+                        byte    $DE      '222 (11011110) modified from D6 (11010110)
+                        byte    $D7      '215 (11010111)
+                        byte    $DC      '220 (11011100) modified from D8 (11011000)
+                        byte    $F3      '243 (11110011) modified from D9 (11011001)
+                        byte    $FA      '250 (11111010) modified from DA (11011010)
+                        byte    $FB      '251 (11111011) modified from DB (11011011)
+                        byte    $DC      '220 (11011100)
+                        byte    $F7      '247 (11110111) modified from DD (11011101)
+                        byte    $DE      '222 (11011110)
+                        byte    $DF      '223 (11011111)
+                        byte    $F0      '240 (11110000) modified from E0 (11100000)
+                        byte    $F3      '243 (11110011) modified from E1 (11100001)
+                        byte    $F2      '242 (11110010) modified from E2 (11100010)
+                        byte    $F3      '243 (11110011) modified from E3 (11100011)
+                        byte    $F4      '244 (11110100) modified from E4 (11100100)
+                        byte    $F7      '247 (11110111) modified from E5 (11100101)
+                        byte    $FE      '254 (11111110) modified from E6 (11100110)
+                        byte    $F3      '243 (11110011) modified from E7 (11100111)
+                        byte    $F8      '248 (11111000) modified from E8 (11101000)
+                        byte    $FB      '251 (11111011) modified from E9 (11101001)
+                        byte    $EA      '250 (11111010) modified from EA (11101010) modded back to EA mario bricks
+                        byte    $FB      '251 (11111011) modified from EB (11101011)
+                        byte    $FC      '252 (11111100) modified from EC (11101100)
+                        byte    $FF      '255 (11111111) modified from ED (11101101)
+                        byte    $FE      '254 (11111110) modified from EE (11101110)
+                        byte    $FF      '255 (11111111) modified from EF (11101111)
+                        byte    $F0      '240 (11110000)
+                        byte    $F3      '243 (11110011) modified from F1 (11110001)
+                        byte    $F2      '242 (11110010)
+                        byte    $F3      '243 (11110011)
+                        byte    $F4      '244 (11110100)
+                        byte    $F7      '247 (11110111) modified from F5 (11110101)
+                        byte    $FE      '254 (11111110) modified from F6 (11110110)
+                        byte    $F7      '247 (11110111)
+                        byte    $FC      '252 (11111100) modified from F8 (11111000)
+                        byte    $F3      '243 (11110011) modified from F9 (11111001)
+                        byte    $FA      '250 (11111010)
+                        byte    $FB      '251 (11111011)
+                        byte    $FC      '252 (11111100)
+                        byte    $FF      '255 (11111111) modified from FD (11111101)
+                        byte    $FE      '254 (11111110)
+                        byte    $FF      '255 (11111111)
+                                         
 ColorEven
-                        byte    $00
-                        byte    $01
-                        byte    $02
-                        byte    $03
-                        byte    $04
-                        byte    $05
-                        byte    $06
-                        byte    $07
-                        byte    $08
-                        byte    $09
-                        byte    $0A
-                        byte    $0B
-                        byte    $0C
-                        byte    $0D
-                        byte    $0E
-                        byte    $0F
-                        byte    $10
-                        byte    $11
-                        byte    $12
-                        byte    $13
-                        byte    $14
-                        byte    $15
-                        byte    $16
-                        byte    $17
-                        byte    $18
-                        byte    $19
-                        byte    $1A
-                        byte    $1B
-                        byte    $1C
-                        byte    $1D
-                        byte    $1E
-                        byte    $1F
-                        byte    $20
-                        byte    $21
-                        byte    $22
-                        byte    $23
-                        byte    $24
-                        byte    $25
-                        byte    $26
-                        byte    $27
-                        byte    $28
-                        byte    $29
-                        byte    $2A
-                        byte    $2B
-                        byte    $2C
-                        byte    $2D
-                        byte    $2E
-                        byte    $2F
-                        byte    $30
-                        byte    $31
-                        byte    $32
-                        byte    $33
-                        byte    $34
-                        byte    $35
-                        byte    $36
-                        byte    $37
-                        byte    $38
-                        byte    $39
-                        byte    $3A
-                        byte    $3B
-                        byte    $3C
-                        byte    $3D
-                        byte    $3E
-                        byte    $3F
-                        byte    $40
-                        byte    $41
-                        byte    $42
-                        byte    $43
-                        byte    $44
-                        byte    $45
-                        byte    $46
-                        byte    $47
-                        byte    $48
-                        byte    $49
-                        byte    $4A
-                        byte    $4B
-                        byte    $4C
-                        byte    $4D
-                        byte    $4E
-                        byte    $4F
-                        byte    $50
-                        byte    $51
-                        byte    $52
-                        byte    $53
-                        byte    $54
-                        byte    $55
-                        byte    $56
-                        byte    $57
-                        byte    $58
-                        byte    $59
-                        byte    $5A
-                        byte    $5B
-                        byte    $5C
-                        byte    $5D
-                        byte    $5E
-                        byte    $5F
-                        byte    $60
-                        byte    $61
-                        byte    $62
-                        byte    $63
-                        byte    $64
-                        byte    $65
-                        byte    $66
-                        byte    $67
-                        byte    $68
-                        byte    $69
-                        byte    $6A
-                        byte    $6B
-                        byte    $6C
-                        byte    $6D
-                        byte    $6E
-                        byte    $6F
-                        byte    $70
-                        byte    $71
-                        byte    $72
-                        byte    $73
-                        byte    $74
-                        byte    $75
-                        byte    $76
-                        byte    $77
-                        byte    $78
-                        byte    $79
-                        byte    $7A
-                        byte    $7B
-                        byte    $7C
-                        byte    $7D
-                        byte    $7E
-                        byte    $7F
-                        byte    $80
-                        byte    $81
-                        byte    $82
-                        byte    $83
-                        byte    $84
-                        byte    $85
-                        byte    $86
-                        byte    $87
-                        byte    $88
-                        byte    $89
-                        byte    $8A
-                        byte    $8B
-                        byte    $8C
-                        byte    $8D
-                        byte    $8E
-                        byte    $8F
-                        byte    $90
-                        byte    $91
-                        byte    $92
-                        byte    $93
-                        byte    $94
-                        byte    $95
-                        byte    $96
-                        byte    $97
-                        byte    $98
-                        byte    $99
-                        byte    $9A
-                        byte    $9B
-                        byte    $9C
-                        byte    $9D
-                        byte    $9E
-                        byte    $9F
-                        byte    $A0
-                        byte    $A1
-                        byte    $A2
-                        byte    $A3
-                        byte    $A4
-                        byte    $A5
-                        byte    $A6
-                        byte    $A7
-                        byte    $A8
-                        byte    $A9
-                        byte    $AA
-                        byte    $AB
-                        byte    $AC
-                        byte    $AD
-                        byte    $AE
-                        byte    $AF
-                        byte    $B0
-                        byte    $B1
-                        byte    $B2
-                        byte    $B3
-                        byte    $B4
-                        byte    $B5
-                        byte    $B6
-                        byte    $B7
-                        byte    $B8
-                        byte    $B9
-                        byte    $BA
-                        byte    $BB
-                        byte    $BC
-                        byte    $BD
-                        byte    $BE
-                        byte    $BF
-                        byte    $C0
-                        byte    $C1
-                        byte    $C2
-                        byte    $C3
-                        byte    $C4
-                        byte    $C5
-                        byte    $C6
-                        byte    $C7
-                        byte    $C8
-                        byte    $C9
-                        byte    $CA
-                        byte    $CB
-                        byte    $CC
-                        byte    $CD
-                        byte    $CE
-                        byte    $CF
-                        byte    $D0
-                        byte    $D1
-                        byte    $D2
-                        byte    $D3
-                        byte    $D4
-                        byte    $D5
-                        byte    $D6
-                        byte    $D7
-                        byte    $D8
-                        byte    $D9
-                        byte    $DA
-                        byte    $DB
-                        byte    $DC
-                        byte    $DD
-                        byte    $DE
-                        byte    $DF
-                        byte    $E0
-                        byte    $E1
-                        byte    $E2
-                        byte    $E3
-                        byte    $E4
-                        byte    $E5
-                        byte    $E6
-                        byte    $E7
-                        byte    $E8
-                        byte    $E9
-                        byte    $EA
-                        byte    $EB
-                        byte    $EC
-                        byte    $ED
-                        byte    $EE
-                        byte    $EF
-                        byte    $F0
-                        byte    $F1
-                        byte    $F2
-                        byte    $F3
-                        byte    $F4
-                        byte    $F5
-                        byte    $F6
-                        byte    $F7
-                        byte    $F8
-                        byte    $F9
-                        byte    $FA
-                        byte    $FB
-                        byte    $FC
-                        byte    $FD
-                        byte    $FE
-                        byte    $FF
-                        
+                        byte    $00      '0 (00000000)
+                        byte    $01      '1 (00000001)
+                        byte    $02      '2 (00000010)
+                        byte    $07      '7 (00000111) modified from 03 (00000011)
+                        byte    $04      '4 (00000100)
+                        byte    $05      '5 (00000101)
+                        byte    $06      '6 (00000110)
+                        byte    $07      '7 (00000111)
+                        byte    $08      '8 (00001000)
+                        byte    $09      '9 (00001001)
+                        byte    $0A      '10 (00001010)
+                        byte    $0F      '15 (00001111) modified from 0B (00001011)
+                        byte    $18      '24 (00011000) modified from 0C (00001100)
+                        byte    $1D      '29 (00011101) modified from 0D (00001101)
+                        byte    $06      '6 (00000110) modified from 0E (00001110)
+                        byte    $1F      '31 (00011111) modified from 0F (00001111)
+                        byte    $10      '16 (00010000)
+                        byte    $11      '17 (00010001)
+                        byte    $12      '18 (00010010)
+                        byte    $47      '71 (01000111) modified from 13 (00010011)
+                        byte    $14      '20 (00010100)
+                        byte    $15      '21 (00010101)
+                        byte    $16      '22 (00010110)
+                        byte    $17      '23 (00010111)
+                        byte    $18      '24 (00011000)
+                        byte    $19      '25 (00011001)
+                        byte    $1A      '26 (00011010)
+                        byte    $1F      '31 (00011111) modified from 1B (00011011)
+                        byte    $18      '24 (00011000) modified from 1C (00011100)
+                        byte    $1D      '29 (00011101)
+                        byte    $1E      '30 (00011110)
+                        byte    $1F      '31 (00011111)
+                        byte    $20      '32 (00100000)
+                        byte    $21      '33 (00100001)
+                        byte    $22      '34 (00100010)
+                        byte    $27      '39 (00100111) modified from 23 (00100011)
+                        byte    $24      '36 (00100100)
+                        byte    $25      '37 (00100101)
+                        byte    $26      '38 (00100110)
+                        byte    $27      '39 (00100111)
+                        byte    $28      '40 (00101000)
+                        byte    $29      '41 (00101001)
+                        byte    $2A      '42 (00101010)
+                        byte    $2F      '47 (00101111) modified from 2B (00101011)
+                        byte    $38      '56 (00111000) modified from 2C (00101100)
+                        byte    $3D      '61 (00111101) modified from 2D (00101101)
+                        byte    $2E      '46 (00101110)
+                        byte    $3F      '63 (00111111) modified from 2F (00101111)
+                        byte    $60      '96 (01100000) modified from 30 (00110000)
+                        byte    $61      '97 (01100001) modified from 31 (00110001)
+                        byte    $62      '98 (01100010) modified from 32 (00110010)
+                        byte    $67      '103 (01100111) modified from 33 (00110011)
+                        byte    $74      '116 (01110100) modified from 34 (00110100)
+                        byte    $75      '117 (01110101) modified from 35 (00110101)
+                        byte    $76      '118 (01110110) modified from 36 (00110110)
+                        byte    $77      '119 (01110111) modified from 37 (00110111)
+                        byte    $18      '24 (00011000) modified from 38 (00111000)
+                        byte    $19      '25 (00011001) modified from 39 (00111001)
+                        byte    $1A      '26 (00011010) modified from 3A (00111010)
+                        byte    $6F      '111 (01101111) modified from 3B (00111011)
+                        byte    $78      '120 (01111000) modified from 3C (00111100)
+                        byte    $7D      '125 (01111101) modified from 3D (00111101)
+                        byte    $1E      '30 (00011110) modified from 3E (00111110)
+                        byte    $1F      '31 (00011111) modified from 3F (00111111)
+                        byte    $40      '64 (01000000)
+                        byte    $41      '65 (01000001)
+                        byte    $42      '66 (01000010)
+                        byte    $47      '71 (01000111) modified from 43 (01000011)
+                        byte    $44      '68 (01000100)
+                        byte    $45      '69 (01000101)
+                        byte    $46      '70 (01000110)
+                        byte    $47      '71 (01000111)
+                        byte    $48      '72 (01001000)
+                        byte    $49      '73 (01001001)
+                        byte    $4A      '74 (01001010)
+                        byte    $4F      '79 (01001111) modified from 4B (01001011)
+                        byte    $58      '88 (01011000) modified from 4C (01001100)
+                        byte    $5D      '93 (01011101) modified from 4D (01001101)
+                        byte    $46      '70 (01000110) modified from 4E (01001110)
+                        byte    $47      '71 (01000111) modified from 4F (01001111)
+                        byte    $50      '80 (01010000)
+                        byte    $51      '81 (01010001)
+                        byte    $52      '82 (01010010)
+                        byte    $57      '87 (01010111) modified from 53 (01010011)
+                        byte    $54      '84 (01010100)
+                        byte    $55      '85 (01010101)
+                        byte    $56      '86 (01010110)
+                        byte    $57      '87 (01010111)
+                        byte    $58      '88 (01011000)
+                        byte    $59      '89 (01011001)
+                        byte    $5A      '90 (01011010)
+                        byte    $5F      '95 (01011111) modified from 5B (01011011)
+                        byte    $58      '88 (01011000) modified from 5C (01011100)
+                        byte    $5D      '93 (01011101)
+                        byte    $5E      '94 (01011110)
+                        byte    $5F      '95 (01011111)
+                        byte    $60      '96 (01100000)
+                        byte    $61      '97 (01100001)
+                        byte    $62      '98 (01100010)
+                        byte    $67      '103 (01100111) modified from 63 (01100011)
+                        byte    $64      '100 (01100100)
+                        byte    $65      '101 (01100101)
+                        byte    $66      '102 (01100110)
+                        byte    $67      '103 (01100111)
+                        byte    $68      '104 (01101000)
+                        byte    $69      '105 (01101001)
+                        byte    $6A      '106 (01101010)
+                        byte    $6F      '111 (01101111) modified from 6B (01101011)
+                        byte    $78      '120 (01111000) modified from 6C (01101100)
+                        byte    $7D      '125 (01111101) modified from 6D (01101101)
+                        byte    $6E      '110 (01101110)
+                        byte    $6F      '111 (01101111)
+                        byte    $60      '96 (01100000) modified from 70 (01110000)
+                        byte    $61      '97 (01100001) modified from 71 (01110001)
+                        byte    $62      '98 (01100010) modified from 72 (01110010)
+                        byte    $67      '103 (01100111) modified from 73 (01110011)
+                        byte    $74      '116 (01110100)
+                        byte    $75      '117 (01110101)
+                        byte    $76      '118 (01110110)
+                        byte    $77      '119 (01110111)
+                        byte    $78      '120 (01111000)
+                        byte    $79      '121 (01111001)
+                        byte    $7A      '122 (01111010)
+                        byte    $7F      '127 (01111111) modified from 7B (01111011)
+                        byte    $78      '120 (01111000) modified from 7C (01111100)
+                        byte    $7D      '125 (01111101)
+                        byte    $7E      '126 (01111110)
+                        byte    $7F      '127 (01111111)
+                        byte    $80      '128 (10000000)
+                        byte    $81      '129 (10000001)
+                        byte    $82      '130 (10000010)
+                        byte    $87      '135 (10000111) modified from 83 (10000011)
+                        byte    $84      '132 (10000100)
+                        byte    $85      '133 (10000101)
+                        byte    $86      '134 (10000110)
+                        byte    $87      '135 (10000111)
+                        byte    $88      '136 (10001000)
+                        byte    $89      '137 (10001001)
+                        byte    $8A      '138 (10001010)
+                        byte    $8F      '143 (10001111) modified from 8B (10001011)
+                        byte    $98      '152 (10011000) modified from 8C (10001100)
+                        byte    $9D      '157 (10011101) modified from 8D (10001101)
+                        byte    $86      '134 (10000110) modified from 8E (10001110)
+                        byte    $9F      '159 (10011111) modified from 8F (10001111)
+                        byte    $90      '144 (10010000)
+                        byte    $91      '145 (10010001)
+                        byte    $92      '146 (10010010)
+                        byte    $C7      '199 (11000111) modified from 93 (10010011)
+                        byte    $94      '148 (10010100)
+                        byte    $95      '149 (10010101)
+                        byte    $96      '150 (10010110)
+                        byte    $97      '151 (10010111)
+                        byte    $98      '152 (10011000)
+                        byte    $99      '153 (10011001)
+                        byte    $9A      '154 (10011010)
+                        byte    $9F      '159 (10011111) modified from 9B (10011011)
+                        byte    $98      '152 (10011000) modified from 9C (10011100)
+                        byte    $9D      '157 (10011101)
+                        byte    $9E      '158 (10011110)
+                        byte    $9F      '159 (10011111)
+                        byte    $A0      '160 (10100000)
+                        byte    $A1      '161 (10100001)
+                        byte    $A2      '162 (10100010)
+                        byte    $A7      '167 (10100111) modified from A3 (10100011)
+                        byte    $A4      '164 (10100100)
+                        byte    $A5      '165 (10100101)
+                        byte    $A6      '166 (10100110)
+                        byte    $A7      '167 (10100111)
+                        byte    $A8      '168 (10101000)
+                        byte    $A9      '169 (10101001)
+                        byte    $AA      '170 (10101010)
+                        byte    $AF      '175 (10101111) modified from AB (10101011)
+                        byte    $B8      '184 (10111000) modified from AC (10101100)
+                        byte    $BD      '189 (10111101) modified from AD (10101101)
+                        byte    $AE      '174 (10101110)
+                        byte    $BF      '191 (10111111) modified from AF (10101111)
+                        byte    $E0      '224 (11100000) modified from B0 (10110000)
+                        byte    $E1      '225 (11100001) modified from B1 (10110001)
+                        byte    $E2      '226 (11100010) modified from B2 (10110010)
+                        byte    $E7      '231 (11100111) modified from B3 (10110011)
+                        byte    $F4      '244 (11110100) modified from B4 (10110100)
+                        byte    $F5      '245 (11110101) modified from B5 (10110101)
+                        byte    $F6      '246 (11110110) modified from B6 (10110110)
+                        byte    $F7      '247 (11110111) modified from B7 (10110111)
+                        byte    $98      '152 (10011000) modified from B8 (10111000)
+                        byte    $99      '153 (10011001) modified from B9 (10111001)
+                        byte    $9A      '154 (10011010) modified from BA (10111010)
+                        byte    $EF      '239 (11101111) modified from BB (10111011)
+                        byte    $F8      '248 (11111000) modified from BC (10111100)
+                        byte    $FD      '253 (11111101) modified from BD (10111101)
+                        byte    $9E      '158 (10011110) modified from BE (10111110)
+                        byte    $9F      '159 (10011111) modified from BF (10111111)
+                        byte    $C0      '192 (11000000)
+                        byte    $C1      '193 (11000001)
+                        byte    $C2      '194 (11000010)
+                        byte    $C7      '199 (11000111) modified from C3 (11000011)
+                        byte    $C4      '196 (11000100)
+                        byte    $C5      '197 (11000101)
+                        byte    $C6      '198 (11000110)
+                        byte    $C7      '199 (11000111)
+                        byte    $C8      '200 (11001000)
+                        byte    $C9      '201 (11001001)
+                        byte    $CA      '202 (11001010)
+                        byte    $CF      '207 (11001111) modified from CB (11001011)
+                        byte    $D8      '216 (11011000) modified from CC (11001100)
+                        byte    $DD      '221 (11011101) modified from CD (11001101)
+                        byte    $C6      '198 (11000110) modified from CE (11001110)
+                        byte    $C7      '199 (11000111) modified from CF (11001111)
+                        byte    $D0      '208 (11010000)
+                        byte    $D1      '209 (11010001)
+                        byte    $D2      '210 (11010010)
+                        byte    $D7      '215 (11010111) modified from D3 (11010011)
+                        byte    $D4      '212 (11010100)
+                        byte    $D5      '213 (11010101)
+                        byte    $D6      '214 (11010110)
+                        byte    $D7      '215 (11010111)
+                        byte    $D8      '216 (11011000)
+                        byte    $D9      '217 (11011001)
+                        byte    $DA      '218 (11011010)
+                        byte    $DF      '223 (11011111) modified from DB (11011011)
+                        byte    $D8      '216 (11011000) modified from DC (11011100)
+                        byte    $DD      '221 (11011101)
+                        byte    $DE      '222 (11011110)
+                        byte    $DF      '223 (11011111)
+                        byte    $E0      '224 (11100000)
+                        byte    $E1      '225 (11100001)
+                        byte    $E2      '226 (11100010)
+                        byte    $E7      '231 (11100111) modified from E3 (11100011)
+                        byte    $E4      '228 (11100100)
+                        byte    $E5      '229 (11100101)
+                        byte    $E6      '230 (11100110)
+                        byte    $E7      '231 (11100111)
+                        byte    $E8      '232 (11101000)
+                        byte    $E9      '233 (11101001)
+                        byte    $EA      '234 (11101010)
+                        byte    $EF      '239 (11101111) modified from EB (11101011)
+                        byte    $F8      '248 (11111000) modified from EC (11101100)
+                        byte    $FD      '253 (11111101) modified from ED (11101101)
+                        byte    $EE      '238 (11101110)
+                        byte    $EF      '239 (11101111)
+                        byte    $E0      '224 (11100000) modified from F0 (11110000)
+                        byte    $E1      '225 (11100001) modified from F1 (11110001)
+                        byte    $E2      '226 (11100010) modified from F2 (11110010)
+                        byte    $E7      '231 (11100111) modified from F3 (11110011)
+                        byte    $F4      '244 (11110100)
+                        byte    $F5      '245 (11110101)
+                        byte    $F6      '246 (11110110)
+                        byte    $F7      '247 (11110111)
+                        byte    $F8      '248 (11111000)
+                        byte    $F9      '249 (11111001)
+                        byte    $FA      '250 (11111010)
+                        byte    $FF      '255 (11111111) modified from FB (11111011)
+                        byte    $F8      '248 (11111000) modified from FC (11111100)
+                        byte    $FD      '253 (11111101)
+                        byte    $FE      '254 (11111110)
+                        byte    $FF      '255 (11111111)
+                                         
 ColorEvenC
+                        byte    $00      '0 (00000000)
+                        byte    $01      '1 (00000001)
+                        byte    $02      '2 (00000010)
+                        byte    $07      '7 (00000111) modified from 03 (00000011)
+                        byte    $04      '4 (00000100)
+                        byte    $05      '5 (00000101)
+                        byte    $06      '6 (00000110)
+                        byte    $07      '7 (00000111)
+                        byte    $08      '8 (00001000)
+                        byte    $09      '9 (00001001)
+                        byte    $0A      '10 (00001010)
+                        byte    $0F      '15 (00001111) modified from 0B (00001011)
+                        byte    $18      '24 (00011000) modified from 0C (00001100)
+                        byte    $19      '25 (00011001) modified from 0D (00001101)
+                        byte    $1E      '30 (00011110) modified from 0E (00001110)
+                        byte    $1F      '31 (00011111) modified from 0F (00001111)
+                        byte    $10      '16 (00010000)
+                        byte    $11      '17 (00010001)
+                        byte    $12      '18 (00010010)
+                        byte    $17      '23 (00010111) modified from 13 (00010011)
+                        byte    $14      '20 (00010100)
+                        byte    $15      '21 (00010101)
+                        byte    $16      '22 (00010110)
+                        byte    $17      '23 (00010111)
+                        byte    $18      '24 (00011000)
+                        byte    $19      '25 (00011001)
+                        byte    $1A      '26 (00011010)
+                        byte    $1B      '27 (00011011)
+                        byte    $1E      '30 (00011110) modified from 1C (00011100)
+                        byte    $1D      '29 (00011101)
+                        byte    $1E      '30 (00011110)
+                        byte    $1F      '31 (00011111)
+                        byte    $20      '32 (00100000)
+                        byte    $21      '33 (00100001)
+                        byte    $22      '34 (00100010)
+                        byte    $27      '39 (00100111) modified from 23 (00100011)
+                        byte    $24      '36 (00100100)
+                        byte    $25      '37 (00100101)
+                        byte    $26      '38 (00100110)
+                        byte    $27      '39 (00100111)
+                        byte    $28      '40 (00101000)
+                        byte    $29      '41 (00101001)
+                        byte    $2A      '42 (00101010)
+                        byte    $2F      '47 (00101111) modified from 2B (00101011)
+                        byte    $38      '56 (00111000) modified from 2C (00101100)
+                        byte    $39      '57 (00111001) modified from 2D (00101101)
+                        byte    $3E      '62 (00111110) modified from 2E (00101110)
+                        byte    $3F      '63 (00111111) modified from 2F (00101111)
+                        byte    $60      '96 (01100000) modified from 30 (00110000)
+                        byte    $61      '97 (01100001) modified from 31 (00110001)
+                        byte    $62      '98 (01100010) modified from 32 (00110010)
+                        byte    $67      '103 (01100111) modified from 33 (00110011)
+                        byte    $64      '100 (01100100) modified from 34 (00110100)
+                        byte    $65      '101 (01100101) modified from 35 (00110101)
+                        byte    $66      '102 (01100110) modified from 36 (00110110)
+                        byte    $67      '103 (01100111) modified from 37 (00110111)
+                        byte    $70      '112 (01110000) modified from 38 (00111000)
+                        byte    $71      '113 (01110001) modified from 39 (00111001)
+                        byte    $3A      '114 (00111010) modified from 3A (00111010) modded
+                        byte    $77      '119 (01110111) modified from 3B (00111011)
+                        byte    $78      '120 (01111000) modified from 3C (00111100)
+                        byte    $79      '121 (01111001) modified from 3D (00111101)
+                        byte    $3E      '62 (00111110)
+                        byte    $7F      '127 (01111111) modified from 3F (00111111)
+                        byte    $40      '64 (01000000)
+                        byte    $41      '65 (01000001)
+                        byte    $42      '66 (01000010)
+                        byte    $47      '71 (01000111) modified from 43 (01000011)
+                        byte    $44      '68 (01000100)
+                        byte    $45      '69 (01000101)
+                        byte    $46      '70 (01000110)
+                        byte    $47      '71 (01000111)
+                        byte    $48      '72 (01001000)
+                        byte    $49      '73 (01001001)
+                        byte    $4A      '74 (01001010)
+                        byte    $4F      '79 (01001111) modified from 4B (01001011)
+                        byte    $58      '88 (01011000) modified from 4C (01001100)
+                        byte    $59      '89 (01011001) modified from 4D (01001101)
+                        byte    $5E      '94 (01011110) modified from 4E (01001110)
+                        byte    $5F      '95 (01011111) modified from 4F (01001111)
+                        byte    $50      '80 (01010000)
+                        byte    $51      '81 (01010001)
+                        byte    $52      '82 (01010010)
+                        byte    $57      '87 (01010111) modified from 53 (01010011)
+                        byte    $54      '84 (01010100)
+                        byte    $55      '85 (01010101)
+                        byte    $56      '86 (01010110)
+                        byte    $57      '87 (01010111)
+                        byte    $58      '88 (01011000)
+                        byte    $59      '89 (01011001)
+                        byte    $5A      '90 (01011010)
+                        byte    $5B      '91 (01011011)
+                        byte    $5E      '94 (01011110) modified from 5C (01011100)
+                        byte    $5D      '93 (01011101)
+                        byte    $5E      '94 (01011110)
+                        byte    $5F      '95 (01011111)
+                        byte    $60      '96 (01100000)
+                        byte    $61      '97 (01100001)
+                        byte    $62      '98 (01100010)
+                        byte    $67      '103 (01100111) modified from 63 (01100011)
+                        byte    $64      '100 (01100100)
+                        byte    $65      '101 (01100101)
+                        byte    $66      '102 (01100110)
+                        byte    $67      '103 (01100111)
+                        byte    $68      '104 (01101000)
+                        byte    $69      '105 (01101001)
+                        byte    $6A      '106 (01101010)
+                        byte    $6F      '111 (01101111) modified from 6B (01101011)
+                        byte    $78      '120 (01111000) modified from 6C (01101100)
+                        byte    $79      '121 (01111001) modified from 6D (01101101)
+                        byte    $7E      '126 (01111110) modified from 6E (01101110)
+                        byte    $6F      '111 (01101111) modified from 6F (01101111)
+                        byte    $78      '120 (01111000) modified from 70 (01110000)
+                        byte    $79      '121 (01111001) modified from 71 (01110001)
+                        byte    $7A      '122 (01111010) modified from 72 (01110010)
+                        byte    $7B      '123 (01111011) modified from 73 (01110011)
+                        byte    $7C      '124 (01111100) modified from 74 (01110100)
+                        byte    $75      '117 (01110101)
+                        byte    $76      '118 (01110110)
+                        byte    $77      '119 (01110111)
+                        byte    $78      '120 (01111000)
+                        byte    $79      '121 (01111001)
+                        byte    $7A      '122 (01111010)
+                        byte    $7B      '123 (01111011)
+                        byte    $7C      '124 (01111100)
+                        byte    $7D      '125 (01111101)
+                        byte    $7E      '126 (01111110)
+                        byte    $7F      '127 (01111111)
+                        byte    $80      '128 (10000000)
+                        byte    $81      '129 (10000001)
+                        byte    $82      '130 (10000010)
+                        byte    $87      '135 (10000111) modified from 83 (10000011)
+                        byte    $84      '132 (10000100)
+                        byte    $85      '133 (10000101)
+                        byte    $86      '134 (10000110)
+                        byte    $87      '135 (10000111)
+                        byte    $88      '136 (10001000)
+                        byte    $89      '137 (10001001)
+                        byte    $8A      '138 (10001010)
+                        byte    $8F      '143 (10001111) modified from 8B (10001011)
+                        byte    $98      '152 (10011000) modified from 8C (10001100)
+                        byte    $99      '153 (10011001) modified from 8D (10001101)
+                        byte    $9E      '158 (10011110) modified from 8E (10001110)
+                        byte    $9F      '159 (10011111) modified from 8F (10001111)
+                        byte    $90      '144 (10010000)
+                        byte    $91      '145 (10010001)
+                        byte    $92      '146 (10010010)
+                        byte    $97      '151 (10010111) modified from 93 (10010011)
+                        byte    $94      '148 (10010100)
+                        byte    $95      '149 (10010101)
+                        byte    $96      '150 (10010110)
+                        byte    $97      '151 (10010111)
+                        byte    $98      '152 (10011000)
+                        byte    $99      '153 (10011001)
+                        byte    $9A      '154 (10011010)
+                        byte    $9B      '155 (10011011)
+                        byte    $9E      '158 (10011110) modified from 9C (10011100)
+                        byte    $9D      '157 (10011101)
+                        byte    $9E      '158 (10011110)
+                        byte    $9F      '159 (10011111)
+                        byte    $A0      '160 (10100000)
+                        byte    $A1      '161 (10100001)
+                        byte    $A2      '162 (10100010)
+                        byte    $A7      '167 (10100111) modified from A3 (10100011)
+                        byte    $A4      '164 (10100100)
+                        byte    $A5      '165 (10100101)
+                        byte    $A6      '166 (10100110)
+                        byte    $A7      '167 (10100111)
+                        byte    $A8      '168 (10101000)
+                        byte    $A9      '169 (10101001)
+                        byte    $AA      '170 (10101010)
+                        byte    $AF      '175 (10101111) modified from AB (10101011)
+                        byte    $B8      '184 (10111000) modified from AC (10101100)
+                        byte    $B9      '185 (10111001) modified from AD (10101101)
+                        byte    $BE      '190 (10111110) modified from AE (10101110)
+                        byte    $BF      '191 (10111111) modified from AF (10101111)
+                        byte    $E0      '224 (11100000) modified from B0 (10110000)
+                        byte    $E1      '225 (11100001) modified from B1 (10110001)
+                        byte    $E2      '226 (11100010) modified from B2 (10110010)
+                        byte    $E7      '231 (11100111) modified from B3 (10110011)
+                        byte    $E4      '228 (11100100) modified from B4 (10110100)
+                        byte    $E5      '229 (11100101) modified from B5 (10110101)
+                        byte    $E6      '230 (11100110) modified from B6 (10110110)
+                        byte    $E7      '231 (11100111) modified from B7 (10110111)
+                        byte    $F0      '240 (11110000) modified from B8 (10111000)
+                        byte    $F1      '241 (11110001) modified from B9 (10111001)
+                        byte    $F2      '242 (11110010) modified from BA (10111010)
+                        byte    $F7      '247 (11110111) modified from BB (10111011)
+                        byte    $F8      '248 (11111000) modified from BC (10111100)
+                        byte    $F9      '249 (11111001) modified from BD (10111101)
+                        byte    $BE      '190 (10111110)
+                        byte    $FF      '255 (11111111) modified from BF (10111111)
+                        byte    $C0      '192 (11000000)
+                        byte    $C1      '193 (11000001)
+                        byte    $C2      '194 (11000010)
+                        byte    $C7      '199 (11000111) modified from C3 (11000011)
+                        byte    $C4      '196 (11000100)
+                        byte    $C5      '197 (11000101)
+                        byte    $C6      '198 (11000110)
+                        byte    $C7      '199 (11000111)
+                        byte    $C8      '200 (11001000)
+                        byte    $C9      '201 (11001001)
+                        byte    $CA      '202 (11001010)
+                        byte    $CF      '207 (11001111) modified from CB (11001011)
+                        byte    $D8      '216 (11011000) modified from CC (11001100)
+                        byte    $D9      '217 (11011001) modified from CD (11001101)
+                        byte    $DE      '222 (11011110) modified from CE (11001110)
+                        byte    $DF      '223 (11011111) modified from CF (11001111)
+                        byte    $D0      '208 (11010000)
+                        byte    $D1      '209 (11010001)
+                        byte    $D2      '210 (11010010)
+                        byte    $D7      '215 (11010111) modified from D3 (11010011)
+                        byte    $D4      '212 (11010100)
+                        byte    $D5      '213 (11010101)
+                        byte    $D6      '214 (11010110)
+                        byte    $D7      '215 (11010111)
+                        byte    $D8      '216 (11011000)
+                        byte    $D9      '217 (11011001)
+                        byte    $DA      '218 (11011010)
+                        byte    $DB      '219 (11011011)
+                        byte    $DE      '222 (11011110) modified from DC (11011100)
+                        byte    $DD      '221 (11011101)
+                        byte    $DE      '222 (11011110)
+                        byte    $DF      '223 (11011111)
+                        byte    $E0      '224 (11100000)
+                        byte    $E1      '225 (11100001)
+                        byte    $E2      '226 (11100010)
+                        byte    $E7      '231 (11100111) modified from E3 (11100011)
+                        byte    $E4      '228 (11100100)
+                        byte    $E5      '229 (11100101)
+                        byte    $E6      '230 (11100110)
+                        byte    $E7      '231 (11100111)
+                        byte    $E8      '232 (11101000)
+                        byte    $E9      '233 (11101001)
+                        byte    $EA      '234 (11101010)
+                        byte    $EF      '239 (11101111) modified from EB (11101011)
+                        byte    $F8      '248 (11111000) modified from EC (11101100)
+                        byte    $F9      '249 (11111001) modified from ED (11101101)
+                        byte    $FE      '254 (11111110) modified from EE (11101110)
+                        byte    $EF      '239 (11101111) modified from EF (11101111)
+                        byte    $F8      '248 (11111000) modified from F0 (11110000)
+                        byte    $F9      '249 (11111001) modified from F1 (11110001)
+                        byte    $FA      '250 (11111010) modified from F2 (11110010)
+                        byte    $FB      '251 (11111011) modified from F3 (11110011)
+                        byte    $FC      '252 (11111100) modified from F4 (11110100)
+                        byte    $F5      '245 (11110101)
+                        byte    $F6      '246 (11110110)
+                        byte    $F7      '247 (11110111)
+                        byte    $F8      '248 (11111000)
+                        byte    $F9      '249 (11111001)
+                        byte    $FA      '250 (11111010)
+                        byte    $FB      '251 (11111011)
+                        byte    $FC      '252 (11111100)
+                        byte    $FD      '253 (11111101)
+                        byte    $FE      '254 (11111110)
+                        byte    $FF      '255 (11111111)
+ColorBlankTest
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+                        byte    $00
+ 
+ColorDefaultTest
                         byte    $00
                         byte    $01
                         byte    $02
@@ -2497,7 +3019,7 @@ ColorEvenC
                         byte    $FD
                         byte    $FE
                         byte    $FF
-                        
+                                                                       
 '------------------------------------------------------------------------------------------------
 'LUT to map multiplication table for char (y * width)
 '------------------------------------------------------------------------------------------------

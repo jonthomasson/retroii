@@ -1,0 +1,13 @@
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\bin\Debug\netcoreapp3.1\LookupGenerator.exe
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\bin\Debug\netcoreapp3.1\LookupGenerator.deps.json
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\bin\Debug\netcoreapp3.1\LookupGenerator.runtimeconfig.json
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\bin\Debug\netcoreapp3.1\LookupGenerator.runtimeconfig.dev.json
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\bin\Debug\netcoreapp3.1\LookupGenerator.dll
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\bin\Debug\netcoreapp3.1\LookupGenerator.pdb
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.csprojAssemblyReference.cache
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.AssemblyInfoInputs.cache
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.AssemblyInfo.cs
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.csproj.CoreCompileInputs.cache
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.dll
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.pdb
+C:\Users\Jons Macbook\source\repos\LookupGenerator\LookupGenerator\obj\Debug\netcoreapp3.1\LookupGenerator.genruntimeconfig.cache
