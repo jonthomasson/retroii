@@ -307,6 +307,7 @@ PUB Start(pin_group) | hres, vres
   update_vcfg_ptr := @update_vcfg
   screen_mode_ptr := @screen_mode
   hires_screen_mode_ptr := @screen_mode
+  draw_screen_mode_ptr := @screen_mode
      
   colors_ptr := @pixel_colors
   
@@ -686,6 +687,8 @@ cursor_mask0            res     1
 draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
               if_z      jmp     #draw_start
 
+                        rdbyte  draw_screen_mode, draw_screen_mode_ptr 'color vs monochrome screen
+                        
                         mov     draw_cntr, #0
                         wrlong  draw_cntr, draw_cmnd_ptr 'reset draw_command to 0 accept new command
 
@@ -758,7 +761,12 @@ draw_char3              rdbyte  draw_xpos, draw_ptr1
 
                         rdbyte  char_ptr0, draw_ptr0
                         and     char_ptr0, char_t1
-                         
+                        
+                        'if in color mode, shift byte over and or it with itself to display white text
+                        cmp     draw_screen_mode, #0  wz       'check screen mode
+              if_nz     mov     char_t2, draw_xpos
+              if_nz     shr     char_t2, #1
+              if_nz     or      draw_xpos, char_t2 
                                 
                         xor     draw_xpos, draw_reverse
                        
@@ -932,6 +940,8 @@ draw_ymulwidth_ptr      long    0
 draw_reverse_ptr        long    0
 draw_lastx              long    0
 draw_lasty              long    0
+draw_screen_mode_ptr    long    0
+draw_screen_mode        long    0
 
 draw_cmnd               res     1
 draw_val                res     1
