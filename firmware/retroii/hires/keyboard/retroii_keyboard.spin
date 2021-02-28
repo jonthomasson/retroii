@@ -34,6 +34,7 @@ CON
 
     {CLOCKS}
     Prop_Phi2 = 12 'Clock generator output Phi0/Phi2 pin P12 - physical pin 17
+    Prop_Phi1 = 15 'Phi1 to pin P15 - physical pin 20 (originally RDY) - cut trace and wire to H2 pin 5
     Q3_pin = 13 '2MHz clock signal for peripheral cards slots - used by floppy uController
 
     MAX_CLOCK = 8 'the maximum frequency in MHz that we'll overclock
