@@ -31,30 +31,38 @@ CON
     CMD_DEBUG = $F1 'command tells video processor to toggle the debug screen
     COLOR_REG = 21
     CMD_CHANGE_COLOR = $B3
-    {CLOCK}
-    Btn_Phi2 = 11
-    Prop_Phi2 = 12
+
+    {CLOCKS}
+    Prop_Phi2 = 12 'Clock generator output Phi0/Phi2 pin P12 - physical pin 17
+    Prop_Phi1 = 15 'Phi1 to pin P15 - physical pin 20 (originally RDY) - cut trace and wire to H2 pin 5
+    Q3_pin = 13 '2MHz clock signal for peripheral cards slots - used by floppy uController
+
     MAX_CLOCK = 8 'the maximum frequency in MHz that we'll overclock
     CLOCK_REG = 23 'i2c register to hold clock value
+
     {SOFT SWITCHES}
     SS_LOW = 4
     SS_HIGH = 7
     SS_REG = 30
+
     {RESET}
     RESET_pin = 24
     RESET_PERIOD  = 20_000_000 '1/2 second
+
     {KEYBOARD RETRO][}
     Strobe = 25
     K0 = 17
     K6 = 23
     KEY_REG = 31
+
     {MODES}
     MODE_MONITOR = 1
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
     MODE_SD_CARD_1 = 4 'disk selection
     MODE_SD_CARD_2 = 5 'program selection
-    MODE_SD_CARD_3 = 6 'program download            
+    MODE_SD_CARD_3 = 6 'program download 
+
     {SD CARD}
     SD_PINS  = 0
     RESULTS_PER_PAGE = 56
@@ -62,9 +70,17 @@ CON
     MAX_FILES = 300 'limiting to 300 for now due to memory limits
     FILE_BUF_SIZE = 256 'size of file buffer. can optimize this later on.
     LINE_BUF_SIZE = 10
+
     {FILE OPTIONS FOR MODE_SD_CARD_3}
     FILE_LOAD = 1
     FILE_RUN = 2  
+
+    {BUTTONS - physical buttons pin assignements}
+    Btn_Load = 8
+    Btn_Save = 9
+    'Btn_Misc1 = 10
+    'Btn_Misc2 = 11
+
 OBJ 
     sd: "fsrw" 
     kb:   "keyboard"  
@@ -374,6 +390,29 @@ PRI fraction(a, b, shift) : f
       f++           
     a <<= 1
 
+PUB set_clock_simple
+{{Set clock output to 1,0205MHz with differential output and Q3 at double that = 2,041MHz approx}}
+
+  DIRA[Prop_Phi0]~~  'output
+  OUTA[Prop_Phi0]~   'low
+
+  DIRA[Prop_Phi1]~~
+  OUTA[Prop_Phi1]~
+
+  DIRA[Q3_pin]~~
+  OUTA[Q3_pin]~   'low
+
+  'PHSA := 0
+  PHSB := CLKFREQ * 109_575_200
+  PHSA := 0
+
+  '         Mode             Divider        Pin B      Pin A
+  CTRB := (%00101 << 26) + (%000 << 23) + (Prop_Phi1 << 9) + Prop_Phi0
+  FRQB := 54_787_600 'for 1.020.500 Hz
+
+  '         Mode             Divider        Pin B      Pin A
+  CTRA := (%00100 << 26) + (%000 << 23) + (0 << 9) + Q3_Pin
+  FRQA := 109_575_200
 
 PRI reset
     'toggle reset line
@@ -927,7 +966,12 @@ PRI init
     
     dira[Prop_Phi2]~~  'output
     outa[Prop_Phi2]~   'low 
-    set_clock("A",Prop_Phi2,clock_freqs[7])
+    dira[Prop_Phi1]~~  'output
+    outa[Prop_Phi1]~   'low
+    'set_clock("A",Prop_Phi2,clock_freqs[7])
+    'set_clock("B",Q3_pin,clock_freqs[7]*2) 'set Q2 at 2x original clock
+    set_clock_simple
+
     current_clock := 7 'default to 1MHz
     I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
     
