@@ -67,13 +67,20 @@ CON
   CMD_CHAR  = $00_00_00_00
   CMD_PIXEL = $04_00_00_00
   CMD_LORES = $10_00_00_00
-  CMD_LINE  = $20_00_00_00
+  CMD_HIRES  = $20_00_00_00
+  
+  MODE_HIRES = 2
+  MODE_TEXT = 1
+  MODE_LORES = 3
+  
+  LBUFFER_SIZE = 2400           'Size of pixel buffer in longs (320*240/32) NOTE: this size accounts for the color bit.
   
 VAR 
-
-  long  pixel_bfr[LSIZE]
-  long  pixel_colors, frame_count, cursor_pos, cursor_mask, draw_command, debug_val
-  byte  cursorx, cursory, cog1, cog2, reverse, cursor_state
+  byte  cursorx, cursory, cog1, cog2, cog3, reverse, cursor_state, mode_retroii, mode_retroii_old, ss_page2, ss_mix
+  long  pixel_bfr[LBUFFER_SIZE]
+  long  pixel_colors, frame_count, cursor_pos, cursor_mask, hires_busy, draw_command, hires_command, debug_val, display_debug, current_clock
+  long  frame_count_hires', ram_lock
+  
 
 PUB Char(c) | idx, ptr, tmp
 '------------------------------------------------------------------------------------------------
@@ -82,13 +89,13 @@ PUB Char(c) | idx, ptr, tmp
 '' c - Character to print.
 '------------------------------------------------------------------------------------------------
   c &= 255
-
+  
   'If a printable character
   if c > 31
     repeat while draw_command <> 0
     draw_command := c | (cursorx << 8) | (cursory << 17)
     cursorx += 1
-
+ 
   UpdateCursor
 
 PUB RChar(c)
@@ -204,7 +211,7 @@ PUB Clear(first_line, line_count)
   longfill(@pixel_bfr + (COLS * first_line), 0, line_count * LPROW)
 
 PUB ClearScreen
-    longfill(@pixel_bfr, 0, LSIZE)
+    longfill(@pixel_bfr, 0, LBUFFER_SIZE)
     
 PUB Pixel(c, x, y) | p
 '------------------------------------------------------------------------------------------------
@@ -226,11 +233,11 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
 '' y - The Y pixel coordinate.
 '------------------------------------------------------------------------------------------------
   
-  data &= $7F 'get rid of msb
-  x := (col * 7) '- 7
+  'data &= $7F 'get rid of msb
+  'x := (col * 7) '- 7
+  x := (col << 3) 'mult by 8
   p := (WIDTH * row) + x 'get byte location of our column of data
   
-  'x := |<(p & 7) 'finds x coord in byte
   x := (p & 7) 'find x position in byte
   
   p := @pixel_bfr + (p >> 3) ' find our byte inside the pixel buffer
@@ -247,9 +254,11 @@ PUB PixelByte(data, col, row) | p, mask, data2, x
     byte[p + 1] |= data2
 
 PUB HiRes
-  repeat while draw_command <> 0
-  draw_command := CMD_LINE
+    repeat while hires_command <> 0
+    hires_command := CMD_HIRES
    
+   
+      
 PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
 '------------------------------------------------------------------------------------------------
 '' Draw a line on the screen.
@@ -261,7 +270,7 @@ PUB Line(c, x1, y1, x2, y2)' | dx, dy, df, a, b, d1, d2
   'repeat while draw_command <> 0
   'draw_command := c | (x1 << 8) | (y1 << 17) | CMD_START
   'repeat while draw_command <> 0
-  'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_LINE
+  'draw_command := c | (x2 << 8) | (y2 << 17) | CMD_HIRES
 
   
 PUB LineTo(c, x, y)
@@ -272,7 +281,7 @@ PUB LineTo(c, x, y)
 '' x, y - XY coordinates of end of line.
 '------------------------------------------------------------------------------------------------
   repeat while draw_command <> 0
-  draw_command := c | (x << 8) | (y << 17) | CMD_LINE
+  draw_command := c | (x << 8) | (y << 17) | CMD_HIRES
 
 PUB FrameCount
 '------------------------------------------------------------------------------------------------
@@ -281,6 +290,12 @@ PUB FrameCount
 '' Frame counter is an 32 bit integer.
 '------------------------------------------------------------------------------------------------
   return frame_count
+
+PUB FrameCountHires
+    return frame_count_hires
+    
+PUB ClearFrameCountHires
+    frame_count_hires := 0
 
 PUB Color(color_num, new_color)
 '------------------------------------------------------------------------------------------------
@@ -309,7 +324,8 @@ PUB Start(pin_group) | hres, vres
    
   colors_ptr := @pixel_colors
   frame_cntr_ptr := @frame_count
-   
+  frame_count_hires := 0
+  frame_cnt_hres_ptr := @frame_count_hires 
   cursorx := 0
   cursory := 0
   cursor_state := FALSE
@@ -318,22 +334,37 @@ PUB Start(pin_group) | hres, vres
   cursor_mask := 0
   cursor_mask_ptr := @cursor_mask
   reverse := 0
+  'ram_lock := 0
   draw_command := 0
+  hires_command := 0
+  hires_busy := 0
+  hires_busy_ptr := @hires_busy
   debug_val_ptr := @debug_val
-   
+  mode_retroii_ptr := @mode_retroii 
+  ss_page2_ptr := @ss_page2
+  ss_mix_ptr := @ss_mix
   cog1 := cognew(@asm_start, @pixel_bfr) + 1
   if cog1 == 0
     return FALSE
 
   draw_cmnd_ptr := @draw_command
+  draw_cmnd_ptr2 := @draw_command
+  hires_cmnd_ptr := @hires_command
   draw_map_ptr := @C64CharMap
   draw_graphmap_ptr := @FontToGraphicMap
   draw_reverse_ptr := @reverse
+  'draw_reverse_ptr2 := @reverse
   draw_ymulwidth_ptr := @YMulWidth
+  hires_ymulwidth_ptr := @YMulWidth
+  'hires_ram_lock_ptr := @ram_lock
   
   cog2 := cognew(@draw_start, @pixel_bfr) + 1
   if cog2 == 0
     cogstop(cog1 - 1)
+    return FALSE  
+    
+  cog3 := cognew(@hires_cmd_start, @pixel_bfr) + 1
+  if cog3 == 0
     return FALSE  
 
   return TRUE  
@@ -350,7 +381,28 @@ PUB Stop
 
   if cog2 > 0
     cogstop(cog2 - 1)
+'------------------------------------------------------------------------------------------------
+''Set registers for current mode, soft switches, debug display, and clock speed
+'------------------------------------------------------------------------------------------------
+PUB UpdateRegs(page2, mix, debug, clock)
+    'mode_retroii := mode
+    ss_page2 := page2
+    ss_mix := mix 
+    display_debug := debug
+    current_clock := clock
 
+PUB UpdateRetroIIMode(mode)
+    
+    mode_retroii := mode
+    'check with old mode to see if we're going from hires to something else
+    if mode_retroii_old <> mode_retroii 'new mode
+    'while loop that waits for hires to stop?
+        if mode_retroii_old == MODE_HIRES
+            repeat while hires_busy == 1    'if switching from hires, need to wait till hires is done running
+    
+    mode_retroii_old := mode_retroii
+            
+        
 PRI UpdateCursor | cpos, cx, offset, x
 '------------------------------------------------------------------------------------------------
 '' Update the cursor position.
@@ -557,7 +609,7 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
               if_z      jmp     #draw_start
 
                         mov     draw_cntr, #0
-                        wrlong  draw_cntr, draw_cmnd_ptr
+                        wrlong  draw_cntr, draw_cmnd_ptr 'reset draw_command to 0 accept new command
 
                         mov     draw_val, draw_cmnd
                         and     draw_val, #255
@@ -569,11 +621,11 @@ draw_start              rdlong  draw_cmnd, draw_cmnd_ptr  wz
                         and     draw_ypos, #511
                         shr     draw_cmnd, #9
 
-                        cmp     draw_cmnd, #8  wz
-              if_z      jmp     #draw_hires
+                        'cmp     draw_cmnd, #8  wz
+              'if_z      jmp     #draw_hires
 
-                        cmp     draw_cmnd, #1  wz
-              if_z      jmp     #draw_pixel
+                        'cmp     draw_cmnd, #1  wz
+              'if_z      jmp     #draw_pixel
 
                         cmp     draw_cmnd, #4  wz
               if_z      jmp     #draw_lores
@@ -739,110 +791,6 @@ draw_char5              add     draw_ptr0, #COLS
 '                        jmp     #draw_start
 
 
-'---- Draw a byte of pixels ------------------------------------------------------------------------------
-'  data &= $7F 'get rid of msb
-'  x := (col * 7) '- 7
-draw_pixel_sub          and     draw_val, #127  'get rid of msb since we don't need color info
-                        mov     draw_val2, draw_val
-                        mov     char_t1, #0
-                                             
-draw_pix0               test    draw_xpos, #255  wz
-              if_nz     sub     draw_xpos, #1
-              if_nz     add     char_t1, #7
-              if_nz     jmp     #draw_pix0   
-              
-                                   
-'  p := (WIDTH * y) + x
-                        mov     draw_ptr0, char_t1
-
-draw_pix1               test    draw_ypos, #255  wz
-              if_nz     sub     draw_ypos, #1
-              if_nz     add     draw_ptr0, #WIDTH
-              if_nz     jmp     #draw_pix1
-                        'new routine using lut to replace multiply
-                        'rdlong would be more efficient here, but 
-                        'there was a problem reading bytes since they weren't
-                        'long aligned...
-                        
-                        'mov     char_t1, draw_ymulwidth_ptr
-                        'shl     draw_ypos, #1
-                        'add     char_t1, draw_ypos  
-                        'rdbyte  draw_ptr0, char_t1 
-                        'add     char_t1, #1
-                        'shl     draw_ptr0, #8
-                        'rdbyte  char_t2, char_t1 
-                        'or      draw_ptr0, char_t2
-                        
-'  x := (p & 7)'find x position in byte
-                        mov     draw_ypos, draw_ptr0
-                        and     draw_ypos, #7
-                        'mov     draw_xpos, #1
-                        'shl     draw_xpos, draw_ypos
-                        mov     char_t1, draw_ypos
-                        
-'  p := @pixel_bfr + (p >> 3)
-                        shr     draw_ptr0, #3
-                        add     draw_ptr0, par
-                        mov     draw_ptr1, draw_ptr0
-                        add     draw_ptr1, #1
-'  data2 := data << (x)
-                        shl     draw_val, char_t1
-                        mov     char_t2, draw_val
-                       
-'  mask := $FF000080 <- x
-'  byte[p] &= mask
-'  'write data to 1st byte
-'  byte[p] |= data2
-                        rdbyte  draw_tmp, draw_ptr0
-                        'start debug
-                        'mov     debug_ptr, draw_tmp
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug
-                        mov     draw_tmp2, char_t1
-                        mov     pixel_mask2, pixel_mask
-                        rol     pixel_mask2, draw_tmp2
-                        and     draw_tmp, pixel_mask2
-                        'start debug
-                        'mov     debug_ptr, draw_tmp
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug
-                        or      draw_tmp, char_t2
-                        wrbyte  draw_tmp, draw_ptr0
-                        
-     
-'  if x > 1
-'    data2 := data >> (8 - x) 'data for right most byte
-'    mask := $FF << (x - 1)
-'    byte[p + 1] &= mask
-'    byte[p + 1] |= data2
-                        mov     char_t2, char_t1
-                        shr     char_t2, #1 wz
-                if_z    jmp     #draw_pixel_sub_ret
-                
-                        mov     char_t2, #8
-                        sub     char_t2, char_t1
-                        shr     draw_val2, char_t2
-                        
-                        rdbyte  draw_tmp, draw_ptr1
-                        sub     char_t1, #1
-                        mov     draw_tmp2, #255
-                        shl     draw_tmp2, char_t1
-                        and     draw_tmp, draw_tmp2
-                        or      draw_tmp, draw_val2
-                        wrbyte  draw_tmp, draw_ptr1                       
-'  if c byte[p] |= x
-'  else byte[p] &= (!x)
-'                        and     draw_val, #1  wz
-'                        rdbyte  draw_tmp, draw_ptr0
-'              if_nz     or      draw_tmp, draw_xpos
-'              if_z      andn    draw_tmp, draw_xpos
-'                        wrbyte  draw_tmp, draw_ptr0
-draw_pixel_sub_ret      ret
-
-draw_pixel              call    #draw_pixel_sub
-                        jmp     #draw_start
 
 '---- draw a byte of lores mode ------------------------------------------------
 draw_lores       
@@ -992,236 +940,6 @@ draw_lores5             add     draw_ptr0, #COLS
                         jmp     #draw_start          
 
 
-'---- Draw HiRes screen--------------------------------------------------------------------------
-draw_hires 
-                        mov     current_mode, #2 'in retroii mode
-                        'mov     ram_address, ram_address_test
-                        'call    #read_byte 
-                        
-                        'start debug
-                        'mov     debug_ptr, #2
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug                        
-
-'            mem_loc := HIRES_PAGE1    'set starting address  
-'            mem_start := $00         
-'            mem_page_start := HIRES_PAGE1
-'            row := 0                          
-hires_start                        
-                        mov     mem_loc, hires_page1
-                        mov     mem_start, #0
-                        mov     mem_page_start, hires_page1
-                        mov     draw_row, #0
-'            repeat mem_section from 1 to 3 '3 sections
-                        mov     draw_cntr, #3  
-hires_section  
-'                mem_box := 0     
-                        mov     draw_mem_box, #0
-'                repeat 8 '8 box rows per section                             
-                        mov     draw_cntr2, #8  
-hires_boxrow                     
-'                    mem_row := 0
-                        mov     draw_mem_row, #0   
-'                    repeat 8 '8 rows within box row
-                        mov     draw_cntr3, #8   
-hires_row
-'                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
-                        mov     mem_loc, #0
-                        add     mem_loc, mem_page_start
-                        add     mem_loc, mem_start
-                        add     mem_loc, draw_mem_box
-                        add     mem_loc, draw_mem_row
-'                        col := 0 '1'moving column a little to the right to center within frame
-                        mov     draw_col, #0
-'                        repeat 40 '40 columns/bytes per row
-                        mov     draw_cntr4, #40
-hires_col
-'                            data := read_byte(mem_loc)
-'                            'the msb is ignored since it's the color grouping bit
-'                            'the other bits are displayed opposite to where they appear
-'                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
-'                            'read Apple II Computer Graphics page 70ish for more details.
-'                            R2.Pixel (data, col, row)     
-                        'mov     draw_val, #255 'test data for now
-                        
-                        'call routine to get data byte from ram. routine will write data to draw_val
-                        mov     ram_address, mem_loc
-                        call    #read_byte
-                        mov     draw_val, ram_read
-                        
-                        mov     draw_xpos, draw_col
-                        mov     draw_ypos, draw_row
-                        call    #draw_pixel_sub                                                                           
-'                            col++
-                        add     draw_col, #1    
-'                            mem_loc++
-                        add     mem_loc, #1
-                        djnz    draw_cntr4, #hires_col
-'                        row++
-                        add     draw_row, #1
-'                        mem_row += $400
-                        add     draw_mem_row, mem_row_inc
-                        djnz    draw_cntr3, #hires_row
-'                    mem_box += $80
-                        add     draw_mem_box, #128
-                        djnz    draw_cntr2, #hires_boxrow
-'                mem_start += $28  
-                        add     mem_start,#40   
-                        djnz    draw_cntr, #hires_section wz
-                       
-                        mov     draw_cntr, #0
-                        mov     draw_cntr2, #0
-                        mov     draw_cntr3, #0
-                        mov     draw_cntr4, #0
-                        
-                        cmp     current_mode, #2  wz 'repeat loop while in retroii hires mode
-              if_z      jmp     #hires_start
-                        
-'---- Draw a line -------------------------------------------------------------------------------
-'draw_line
-'  dy := y2 - y1
- '                       mov     draw_dy, draw_ypos
- '                       sub     draw_dy, draw_lasty
-'
-'  dx := x2 - x1
-'                        mov     draw_dx, draw_xpos
-'                        sub     draw_dx, draw_lastx  wc
-'
-'  if dx >= 0
-'              if_nc     mov     draw_x1, draw_lastx
-'              if_nc     mov     draw_x2, draw_xpos
-'              if_nc     mov     draw_y1, draw_lasty
-'              if_nc     mov     draw_y2, draw_ypos
-'
-'  else dx < 0
-'              if_c      mov     draw_x1, draw_xpos
-'              if_c      mov     draw_x2, draw_lastx
-'              if_c      mov     draw_y1, draw_ypos
-'              if_c      mov     draw_y2, draw_lasty
-'              if_c      neg     draw_dx, draw_dx
-'              if_c      neg     draw_dy, draw_dy
-'
-'  lastx := xpos
-'  lasty := ypos
-'                        mov     draw_lastx, draw_xpos
-'                        mov     draw_lasty, draw_ypos
-'
-'  d1 := 1
-'  if dy < 0
-'    d1 := -1
-'    dy := -dy
-'                        mov     draw_d1, #1
-'                        neg     draw_dy, draw_dy  wc, nr
-'              if_c      neg     draw_d1, draw_d1
-'              if_c      neg     draw_dy, draw_dy
-
-'  a := b := 0
-
-'  if dx > dy df := 1
-'  else       df := -1
-'                        cmp     draw_dy, draw_dx  wc
-'              if_c      mov     draw_df, #1
-'              if_nc     neg     draw_df, #1
-
-'  repeat
-'draw_line1
-'    Pixel(c, x1, y1)
-'                        mov     draw_xpos, draw_x1
-'                        mov     draw_ypos, draw_y1
-'                        call    #draw_pixel_sub
-
-'    if df < 0
-'      y1 += d1
-'      df += dx
-'                        neg     draw_df, draw_df  wc, nr
-'              if_c      add     draw_y1, draw_d1
-'              if_c      add     draw_df, draw_dx
-
-'    else df >= 0
-'      x1 += 1
-'      df -= dy
-'              if_nc     add     draw_x1, #1
-'              if_nc     sub     draw_df, draw_dy
-
-'  until (x1 >= x2) and (y1 == y2)
-'                        cmp     draw_x2, draw_x1  wz
-'        if_nz_and_nc    jmp     #draw_line1
-'                        cmp     draw_y1, draw_y2  wz
-'        if_nz           jmp     #draw_line1
-
-'draw_line2
-'  Pixel(c, x1 + a, y1 + b)
-'                        mov     draw_xpos, draw_x1
-'                        mov     draw_ypos, draw_y1
-'                        call    #draw_pixel_sub
-'                        jmp     #draw_start
-
-'reads a byte from RAM------------------------------------------------------------------
-'ram_address should have the address you want to read from
-'will place byte read into var ram_read
-read_byte
-'   'to read:   
-'    lsb := address 
-                        mov     ram_lsb, ram_address
-                        mov     ram_a15, ram_address
-'    msb := address >> 8
-                        shl     ram_address, #13
-                        mov     ram_msb, ram_address
-                        
-                        
-'    'set we pin high
-'    outa[WE]~~
-                        or      outa, ram_we_mask 
-'    'set data pins as input
-'    dira[D0..D7]~
-                        'andn    dira,#255
-                        'updating dira to ram_dira_mask below        
-'    'set address pins
-'    outa[A7..A0] := lsb
-                        shl     ram_lsb, #8 
-                        and     ram_lsb, ram_lsb_mask  
-                        andn    outa, ram_lsb_mask   'clear first
-                        or      outa, ram_lsb 
-                       
-'    outa[A14..A8] := msb
-                        and     ram_msb, ram_msb_mask     
-                        andn    outa, ram_msb_mask   'clear first
-                        or      outa, ram_msb 
-
-'    outa[A15] := msb >> 7
-                        shl     ram_a15, #17
-                        and     ram_a15, ram_a15_mask
-                        andn    outa, ram_a15_mask   'clear first
-                        or      outa, ram_a15 
-                        'start debug
-                        'mov     debug_ptr, outa
-                        'wrlong  debug_ptr, debug_val_ptr
-                        'jmp     #draw_start  
-                        'end debug                       
-                        andn    dira, ram_dira_mask
-                        or      dira, ram_dira_mask 'set proper input/outputs
-'    'wait specified time
-'    'can adjust the amount of nops here to optimize performance a bit
-                        'nop
-                        'nop
-                        'nop
-                        
-'    'read data pins
-'    data_in := ina[D7..D0]
-                        mov     draw_tmp, ina                      
-                        and     draw_tmp, #255        
-                        mov     ram_read, draw_tmp     
-'    outa[A0..A7] := %00000000 'low
-                        andn    outa, ram_lsb_mask
-'    outa[A8..A14] := %0000000 'low
-                        andn    outa, ram_msb_mask
-'    outa[A15]~ 'low                          
-                        andn    outa, ram_a15_mask
- 
-'    return data_in                       
-                        'mov     ram_read, #127
-read_byte_ret           ret  'return to caller
 
 
 draw_cmnd_ptr           long    0
@@ -1231,32 +949,7 @@ draw_ymulwidth_ptr      long    0
 draw_reverse_ptr        long    0
 draw_lastx              long    0
 draw_lasty              long    0
-debug_ptr               long    0
-debug_val_ptr           long    0
-pixel_mask              long    $FF_00_00_80
-pixel_mask2             long    0
-ram_we_mask             long    $40_00_00_00
-ram_lsb_mask            long    $00_00_FF_00
-ram_msb_mask            long    $0F_E0_00_00
-ram_a15_mask            long    $80_00_00_00
-ram_dira_mask           long    $8F_E0_FF_00
-ram_address_test        long    $DD_DD
-hires_page1             long    $20_00
-mem_row_inc             long    $400
 
-current_mode            res     1
-mem_loc                 res     1
-mem_start               res     1
-mem_page_start          res     1
-ram_read                res     1
-ram_address             res     1
-ram_lsb                 res     1
-ram_msb                 res     1
-ram_a15                 res     1
-draw_mem_box            res     1
-draw_mem_row            res     1
-draw_col                res     1
-draw_row                res     1
 draw_cmnd               res     1
 draw_val                res     1
 draw_val2               res     1
@@ -1291,14 +984,487 @@ char_t2                 res     1
 char_ptr0               res     1
 lores_bottom            res     1
 lores_top               res     1
-                        fit
 
+                        fit
+'------------------------------------------------------------------------------------------------
+' Routines to hires hires mode
+'------------------------------------------------------------------------------------------------
+                        org     0
+'---- Wait for a command to start hires -----------------------------------------------------------
+hires_cmd_start         rdlong  hires_cmnd, hires_cmnd_ptr  wz
+              if_z      jmp     #hires_cmd_start
+
+                        mov     hires_cntr, #0
+                        wrlong  hires_cntr, hires_cmnd_ptr 'reset hires_command to 0 accept new command
+                       
+                        
+                        wrlong  hires_is_busy, hires_busy_ptr 'hires is busy
+			'jmp #hires
+'---- draw HiRes screen--------------------------------------------------------------------------
+hires_hires             'setup input/output for ram once
+                        andn    dira, ram_dira_mask
+                        or      dira, ram_dira_mask 'set proper input/outputs
+                        or      outa, ram_we_mask                             
+                        'mov     mode_retroii_ptr, #2 'in retroii mode
+                        'mov     ram_address, ram_address_test
+                        'call    #read_byte 
+                        
+                        'start debug
+                        'mov     debug_ptr, ram_read
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #hires_start  
+                        'end debug                        
+
+'            mem_loc := HIRES_PAGE1    'set starting address  
+'            mem_start := $00         
+'            mem_page_start := HIRES_PAGE1
+'            row := 0                          
+hires_start             
+                        mov     mem_start, #0
+                        mov     mem_page_start, hires_page1
+                        mov     hires_row, hires_row_start
+                        
+'            if ss_page2 == $FF
+'                mem_page_start := HIRES_PAGE2
+                        rdbyte  hires_tmp, ss_page2_ptr wz
+                        'xor     hires_tmp, #255 wz
+                if_nz   mov     mem_page_start, hires_page2   
+     
+'            repeat mem_section from 1 to 3 '3 sections
+                        mov     hires_cntr, #3  
+hires_section  
+'                mem_box := 0     
+                        mov     hires_mem_box, #0
+'                repeat 8 '8 box rows per section                             
+                        mov     hires_cntr2, #8  
+hires_boxrow          
+            '        'mix mode
+            '        if ss_mix == $FF
+                        rdbyte  hires_tmp, ss_mix_ptr wz
+                        'xor     hires_tmp, #255 wz
+                if_z    jmp     #hires_start_row 'not in mixed mode, else fall through to below code                  
+            '            'when we're at row 5 and section 3, exec mix mode
+            '            'check mem_box and mem_start
+            '            if mem_section == 3 and mem_box == $200
+                        cmp     hires_cntr, #1  wz 'comparing 1 because we're counting down here, not up
+                if_nz   jmp     #hires_start_row
+                        cmp     hires_mem_box, mem_box_mix wz
+                if_z    jmp     #mix_mode_start
+            '                display_retroii_mixed(cursor_toggle)
+            '                'jump out of loops
+            '                mem_section := 3
+            '                quit           
+hires_start_row
+'                    mem_row := 0
+                        mov     hires_mem_row, #0   
+'                    repeat 8 '8 rows within box row
+                        mov     hires_cntr3, #8   
+hires_draw_row
+'                        mem_loc := mem_page_start + mem_start + mem_box + mem_row
+                        mov     mem_loc, #0
+                        add     mem_loc, mem_page_start
+                        add     mem_loc, mem_start
+                        add     mem_loc, hires_mem_box
+                        add     mem_loc, hires_mem_row
+'                        col := 0 '1'moving column a little to the right to center within frame
+                        mov     hires_col, #0
+'                        repeat 40 '40 columns/bytes per row
+                        mov     hires_cntr4, #40
+hires_draw_column
+'                            data := read_byte(mem_loc)
+'                            'the msb is ignored since it's the color grouping bit
+'                            'the other bits are displayed opposite to where they appear
+'                            'ie the lsb bit appears on the left and each subsequent bit moves to the right.
+'                            'read Apple II Computer Graphics page 70ish for more details.
+'                            R2.Pixel (data, col, row)     
+                        'mov     hires_val, #255 'test data for now
+                        
+                        'call routine to get data byte from ram. routine will write data to hires_val
+                        mov     ram_address, mem_loc
+                        call    #read_byte
+                        mov     hires_val, ram_read
+
+                        mov     hires_xpos, hires_col
+                        mov     hires_ypos, hires_row
+                        call    #hires_pixel_sub       'call routine to draw our byte of pixels                                                                    
+'                            col++
+                        add     hires_col, #1    
+'                            mem_loc++
+                        add     mem_loc, #1
+                        djnz    hires_cntr4, #hires_draw_column
+'                        row++
+                        add     hires_row, #1
+'                        mem_row += $400
+                        add     hires_mem_row, mem_row_inc
+                        djnz    hires_cntr3, #hires_draw_row
+'                    mem_box += $80
+                        add     hires_mem_box, #128
+                        djnz    hires_cntr2, #hires_boxrow
+'                mem_start += $28  
+                        add     mem_start,#40   
+                        djnz    hires_cntr, #hires_section wz
+                       
+                        'get updated value for mode_retroii
+hires_check_mode        rdbyte  hires_tmp, mode_retroii_ptr
+                        'update frame counter
+                        rdlong  hires_val, frame_cnt_hres_ptr
+                        add     hires_val, #1
+                        wrlong  hires_val, frame_cnt_hres_ptr
+                        
+                        cmp     hires_tmp, #2  wz 'repeat loop while in retroii hires mode
+              if_z      jmp     #hires_start
+                        'start debug
+                        'mov     debug_ptr, hires_tmp
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #hires_start  
+                        'end debug
+                        
+                        
+                        wrlong  hires_not_busy, hires_busy_ptr 'let other applications know we're not busy
+                        jmp     #hires_cmd_start 'jump out of retroii mode and return control                        
+
+mix_mode_start
+'    mem_loc := $650
+                        mov     mem_loc, mem_mix_start   
+'    row := 20
+                        mov     hires_mem_row, #20
+'    repeat 4 '4 rows of text
+                        mov     hires_cntr, #4
+mix_mode_row  
+'        display_retroii_textrow(row, mem_loc, cursor_toggle)
+ '   col := 0
+                        mov     hires_col, #0        
+                        mov     hires_tmp2, mem_loc 'don't want to change mem_loc when iterating the columns
+'    repeat 40 'columns
+                        mov     hires_cntr2, #40
+mix_mode_col
+'        data := read_byte(mem_loc)
+                        mov     ram_address, hires_tmp2
+                        call    #read_byte
+                        mov     hires_val, ram_read
+'        flashing := false                       
+                        mov     mix_flashing, #0
+'        inverse := false                        
+                        mov     mix_inverse, #0
+'        type := $C0 & data                        
+                        mov     hires_tmp, hires_val
+                        and     hires_tmp, #192
+'        if type == $40 'flashing text                        
+                        cmp     hires_tmp, #64  wz 'flashing
+              if_z      jmp     #mix_mode_flashing
+'        elseif type == $00 'inverse
+                        cmp     hires_tmp, #0   wz 'inverse
+              if_z      jmp     #mix_mode_inverse
+'        else
+                        jmp     #mix_mode_normal   'else normal
+mix_mode_flashing
+'           flashing := true
+                        mov     mix_flashing, #1
+'           if data == $60 'cursor
+'                        cmp     hires_val, #96  wz 'cursor
+'                data := $DB
+'              if_z      mov     hires_val, #219
+
+'           else
+'                if data > 95
+                        cmp     hires_val, #96  wc,wz
+'                    data -= $40
+              if_nc     sub     hires_val, #64
+              if_z      mov     hires_val, #219 'cursor
+              
+              'check flash_counter, if 0 then toggle is_flashing and reset counter
+                        sub     flash_counter, #1 wz
+              if_z      andn    is_flashing, is_flashing wz 'invert is_flashing
+              if_z      mov     hires_val, #32 'space
+              if_z      mov     flash_counter, #5 'reset counter          
+                        'mov     hires_tmp, #0
+                        'wrbyte  hires_tmp, draw_reverse_ptr2
+                        jmp     #mix_mode_print
+mix_mode_inverse
+                        mov     mix_inverse, #1
+'           if data < 32
+                        cmp     hires_val, #32  wc
+'                data += $40 
+              if_c      add     hires_val, #64
+              
+              'set reverse ptr flag
+                        'mov     hires_tmp, #255
+                        'wrbyte  hires_tmp, draw_reverse_ptr2
+                        'will need to rethink inverse, since setting this
+                        'flag will also make any other calls to char set inverse.
+                        'will possibly want to pass the inverse param through
+                        'the draw command instead?...
+                        jmp     #mix_mode_print
+mix_mode_normal
+                        'mov     hires_tmp, #0
+                        'wrbyte  hires_tmp, draw_reverse_ptr2
+'        data -= $80    
+                        sub     hires_val, #128
+mix_mode_print              
+'        printxy(col, row,  data)                        
+                        'ideally I could invoke the char method running on the other cog here.
+'        c &= 255                        
+                        and     hires_val, #255
+    '    repeat while draw_command <> 0
+    '        draw_command := c | (cursorx << 8) | (cursory << 17)
+    '        'construct draw_command value first, then wait for draw_command to be available
+                        mov     hires_tmp, hires_col
+                        shl     hires_tmp, #8
+                        or      hires_val, hires_tmp
+                        mov     hires_tmp, hires_mem_row
+                        shl     hires_tmp, #17
+                        or      hires_val, hires_tmp
+                        
+mix_mode_wait           rdlong  hires_tmp, draw_cmnd_ptr2  wz 'wait for draw_command to be free
+              if_nz     jmp     #mix_mode_wait
+                        wrlong  hires_val, draw_cmnd_ptr2
+'        col++
+                        add     hires_col, #1
+'        mem_loc++
+                        add     hires_tmp2, #1
+                        djnz    hires_cntr2, #mix_mode_col wz
+'        row++
+                        add     hires_mem_row, #1
+'        mem_loc += $80                        
+                        add     mem_loc, #128
+                        djnz    hires_cntr, #mix_mode_row wz
+                        jmp     #hires_check_mode
+
+'reads a byte from RAM------------------------------------------------------------------
+'ram_address should have the address you want to read from
+'will place byte read into var ram_read
+read_byte
+                        'lock ram first to prevent other cogs from reading at same time
+'read_byte_wait_lock     
+'                        rdlong  hires_tmp, hires_ram_lock_ptr  wz 'wait for ram to be free
+'              if_nz     jmp     #read_byte_wait_lock   
+'                        wrlong  cog_num, hires_ram_lock_ptr 'lock ram with our unique cog number.      
+'   'to read:   
+'    lsb := address 
+                        mov     ram_lsb, ram_address
+                       
+'    msb := address >> 8
+                        shl     ram_address, #13
+                        
+'    'set we pin high
+'    outa[WE]~~
+                       
+'    'set data pins as input
+'    dira[D0..D7]~
+                       
+                        'updating dira to ram_dira_mask below        
+'    'set address pins
+'    outa[A7..A0] := lsb
+                        shl     ram_lsb, #8 
+                        and     ram_lsb, ram_lsb_mask  
+                       
+                       
+'    outa[A14..A8] := msb
+                        and     ram_address, ram_msb_mask     
+                       
+                        andn    outa, ram_mask
+                        or      outa, ram_lsb
+                        or      outa, ram_address
+'    outa[A15] := msb >> 7
+                       
+'    'wait specified time
+'    'can adjust the amount of nops here to optimize performance a bit
+                        'nop
+                        'nop
+                        'nop
+                        
+'    'read data pins
+'    data_in := ina[D7..D0]
+                        mov     ram_read, ina
+                        and     ram_read, #255 'clean the data
+                        
+'    outa[A0..A7] := %00000000 'lo
+'    outa[A8..A14] := %0000000 'lo
+'    outa[A15]~ 'low                          
+                      
+                        andn    outa, ram_mask 'clear 
+'    return data_in                       
+                        'unlock ram so other cogs can use it
+                        'wrlong  ram_release, hires_ram_lock_ptr
+read_byte_ret           ret  'return to caller
+
+'---- drawa byte of pixels ------------------------------------------------------------------------------
+'  data &= $7F 'get rid of msb
+'  x := (col * 7) '- 7
+hires_pixel_sub         and     hires_val, #127  'get rid of msb since we don't need color info
+                        mov     hires_val2, hires_val
+                        mov     hires_t1, #0
+                                             
+hires_pix0              test    hires_xpos, #255  wz
+              if_nz     sub     hires_xpos, #1
+              if_nz     add     hires_t1, #7
+              if_nz     jmp     #hires_pix0   
+              
+                                   
+'  p := (WIDTH * y) + x
+                        mov     hires_ptr0, hires_t1
+
+'hires_pix1              test    hires_ypos, #255  wz
+'              if_nz     sub     hires_ypos, #1
+'              if_nz     add     hires_ptr0, #WIDTH
+'              if_nz     jmp     #hires_pix1
+                        
+                        'new routine using lut to replace multiply
+                        'rdlong would be more efficient here, but 
+                        'there was a problem reading bytes since they weren't
+                        'long aligned...
+                        
+                        mov     hires_t1, hires_ymulwidth_ptr
+                        shl     hires_ypos, #1
+                        add     hires_t1, hires_ypos  
+                        rdbyte  hires_ptr0, hires_t1 
+                        add     hires_t1, #1
+                        shl     hires_ptr0, #8
+                        rdbyte  hires_t2, hires_t1 
+                        or      hires_ptr0, hires_t2
+                        
+'  x := (p & 7)'find x position in byte
+                        mov     hires_ypos, hires_ptr0
+                        and     hires_ypos, #7
+                        'mov     hires_xpos, #1
+                        'shl     hires_xpos, hires_ypos
+                        mov     hires_t1, hires_ypos
+                        
+'  p := @pixel_bfr + (p >> 3)
+                        shr     hires_ptr0, #3
+                        add     hires_ptr0, par
+                        mov     hires_ptr1, hires_ptr0
+                        add     hires_ptr1, #1
+'  data2 := data << (x)
+                        shl     hires_val, hires_t1
+                        mov     hires_t2, hires_val
+                       
+'  mask := $FF000080 <- x
+'  byte[p] &= mask
+'  'write data to 1st byte
+'  byte[p] |= data2
+                        rdbyte  hires_tmp, hires_ptr0
+                        'start debug
+                        'mov     debug_ptr, hires_tmp
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #hires_start  
+                        'end debug
+                        mov     hires_tmp2, hires_t1
+                        mov     pixel_mask2, pixel_mask
+                        rol     pixel_mask2, hires_tmp2
+                        and     hires_tmp, pixel_mask2
+                        'start debug
+                        'mov     debug_ptr, hires_tmp
+                        'wrlong  debug_ptr, debug_val_ptr
+                        'jmp     #hires_start  
+                        'end debug
+                        or      hires_tmp, hires_t2
+                        wrbyte  hires_tmp, hires_ptr0
+                        
+     
+'  if x > 1
+'    data2 := data >> (8 - x) 'data for right most byte
+'    mask := $FF << (x - 1)
+'    byte[p + 1] &= mask
+'    byte[p + 1] |= data2
+                        mov     hires_t2, hires_t1
+                        shr     hires_t2, #1 wz
+                if_z    jmp     #hires_pixel_sub_ret
+                
+                        mov     hires_t2, #8
+                        sub     hires_t2, hires_t1
+                        shr     hires_val2, hires_t2
+                        
+                        rdbyte  hires_tmp, hires_ptr1
+                        sub     hires_t1, #1
+                        mov     hires_tmp2, #255
+                        shl     hires_tmp2, hires_t1
+                        and     hires_tmp, hires_tmp2
+                        or      hires_tmp, hires_val2
+                        wrbyte  hires_tmp, hires_ptr1                       
+'  if c byte[p] |= x
+'  else byte[p] &= (!x)
+'                        and     hires_val, #1  wz
+'                        rdbyte  hires_tmp, hires_ptr0
+'              if_nz     or      hires_tmp, hires_xpos
+'              if_z      andn    hires_tmp, hires_xpos
+'                        wrbyte  hires_tmp, hires_ptr0
+hires_pixel_sub_ret     ret
+
+hires_pixel             call    #hires_pixel_sub
+                        jmp     #hires_cmd_start
+
+'hires_ram_lock_ptr      long    0
+hires_ymulwidth_ptr     long    0
+draw_cmnd_ptr2          long    0
+hires_cmnd_ptr          long    0
+debug_ptr               long    0
+debug_val_ptr           long    0
+frame_cnt_hres_ptr      long    0
+ss_page2_ptr            long    0
+ss_mix_ptr              long    0
+mode_retroii_ptr        long    0
+pixel_mask              long    $FF_00_00_80
+pixel_mask2             long    0
+ram_we_mask             long    $40_00_00_00
+ram_lsb_mask            long    $00_00_FF_00
+ram_msb_mask            long    $0F_E0_00_00
+ram_mask                long    $0F_E0_FF_00
+ram_a15_mask            long    $80_00_00_00
+ram_dira_mask           long    $8F_E0_FF_00
+ram_address_test        long    $40_00
+hires_page1             long    $20_00'$20_28 '$20_50 '$20_00
+hires_page2             long    $40_00'$40_28 '$40_50 '$40_00
+hires_row_start         long    0'0'64'128
+mem_row_inc             long    $400
+hires_busy_ptr          long    0
+hires_is_busy           long    1
+hires_not_busy          long    0
+mem_box_mix             long    $200
+mem_mix_start           long    $650
+is_flashing             long    $FF
+flash_counter           long    5
+cog_num                 long    1
+ram_release             long    0
+
+text_type               res     1
+mix_flashing            res     1
+mix_inverse             res     1
+hires_xpos              res     1
+hires_ypos              res     1
+hires_ptr0              res     1
+hires_ptr1              res     1
+hires_ptr2              res     1
+hires_t1                res     1
+hires_t2                res     1
+hires_val               res     1
+hires_val2              res     1
+hires_tmp               res     1
+hires_tmp2              res     1
+hires_cntr2             res     1
+hires_cntr3             res     1
+hires_cntr4             res     1
+hires_cntr              res     1
+hires_cmnd              res     1
+mem_loc                 res     1
+mem_start               res     1
+mem_page_start          res     1
+ram_read                res     1
+ram_address             res     1
+ram_lsb                 res     1
+ram_msb                 res     1
+ram_a15                 res     1
+hires_mem_box           res     1
+hires_mem_row           res     1
+hires_col               res     1
+hires_row               res     1    
+
+                        fit
 DAT
 
 '------------------------------------------------------------------------------------------------
 'LUT to map multiplication table for char (y * width)
 '------------------------------------------------------------------------------------------------
-'max y is 30 (height/8) = (240/8) = 30.
 'width is 288
 YMulWidth
                         byte    $00, $00      '0 (0)
@@ -1311,27 +1477,191 @@ YMulWidth
                         byte    $07, $E0      '7 (2016)
                         byte    $09, $00      '8 (2304)
                         byte    $0A, $20      '9 (2592)
-                        byte    $0B, $40      '10(2880)
-                        byte    $0C, $60      '11(3168)
-                        byte    $0D, $80      '12(3456)
-                        byte    $0E, $A0      '13(3744)
-                        byte    $0F, $C0      '14(4032)
-                        byte    $10, $E0      '15(4320)
-                        byte    $12, $00      '16(4608)
-                        BYTE    $13, $20      '17(4896)
-                        BYTE    $14, $40      '18(5184)
-                        BYTE    $15, $60      '19(5472)
-                        BYTE    $16, $80      '20(5760)
-                        BYTE    $17, $A0      '21(6048)
-                        BYTE    $18, $C0      '22(6336)
-                        BYTE    $19, $E0      '23(6624)
-                        BYTE    $1B, $00      '24(6912)
-                        BYTE    $1C, $20      '25(7200)
-                        BYTE    $1D, $40      '26(7488)
-                        BYTE    $1E, $60      '27(7776)
-                        BYTE    $1F, $80      '28(8064)
-                        BYTE    $20, $A0      '29(8352)
-                                            
+                        byte    $0B, $40      '10 (2880)
+                        byte    $0C, $60      '11 (3168)
+                        byte    $0D, $80      '12 (3456)
+                        byte    $0E, $A0      '13 (3744)
+                        byte    $0F, $C0      '14 (4032)
+                        byte    $10, $E0      '15 (4320)
+                        byte    $12, $00      '16 (4608)
+                        byte    $13, $20      '17 (4896)
+                        byte    $14, $40      '18 (5184)
+                        byte    $15, $60      '19 (5472)
+                        byte    $16, $80      '20 (5760)
+                        byte    $17, $A0      '21 (6048)
+                        byte    $18, $C0      '22 (6336)
+                        byte    $19, $E0      '23 (6624)
+                        byte    $1B, $00      '24 (6912)
+                        byte    $1C, $20      '25 (7200)
+                        byte    $1D, $40      '26 (7488)
+                        byte    $1E, $60      '27 (7776)
+                        byte    $1F, $80      '28 (8064)
+                        byte    $20, $A0      '29 (8352)
+                        byte    $21, $C0      '30 (8640)
+                        byte    $22, $E0      '31 (8928)
+                        byte    $24, $00      '32 (9216)
+                        byte    $25, $20      '33 (9504)
+                        byte    $26, $40      '34 (9792)
+                        byte    $27, $60      '35 (10080)
+                        byte    $28, $80      '36 (10368)
+                        byte    $29, $A0      '37 (10656)
+                        byte    $2A, $C0      '38 (10944)
+                        byte    $2B, $E0      '39 (11232)
+                        byte    $2D, $00      '40 (11520)
+                        byte    $2E, $20      '41 (11808)
+                        byte    $2F, $40      '42 (12096)
+                        byte    $30, $60      '43 (12384)
+                        byte    $31, $80      '44 (12672)
+                        byte    $32, $A0      '45 (12960)
+                        byte    $33, $C0      '46 (13248)
+                        byte    $34, $E0      '47 (13536)
+                        byte    $36, $00      '48 (13824)
+                        byte    $37, $20      '49 (14112)
+                        byte    $38, $40      '50 (14400)
+                        byte    $39, $60      '51 (14688)
+                        byte    $3A, $80      '52 (14976)
+                        byte    $3B, $A0      '53 (15264)
+                        byte    $3C, $C0      '54 (15552)
+                        byte    $3D, $E0      '55 (15840)
+                        byte    $3F, $00      '56 (16128)
+                        byte    $40, $20      '57 (16416)
+                        byte    $41, $40      '58 (16704)
+                        byte    $42, $60      '59 (16992)
+                        byte    $43, $80      '60 (17280)
+                        byte    $44, $A0      '61 (17568)
+                        byte    $45, $C0      '62 (17856)
+                        byte    $46, $E0      '63 (18144)
+                        byte    $48, $00      '64 (18432)
+                        byte    $49, $20      '65 (18720)
+                        byte    $4A, $40      '66 (19008)
+                        byte    $4B, $60      '67 (19296)
+                        byte    $4C, $80      '68 (19584)
+                        byte    $4D, $A0      '69 (19872)
+                        byte    $4E, $C0      '70 (20160)
+                        byte    $4F, $E0      '71 (20448)
+                        byte    $51, $00      '72 (20736)
+                        byte    $52, $20      '73 (21024)
+                        byte    $53, $40      '74 (21312)
+                        byte    $54, $60      '75 (21600)
+                        byte    $55, $80      '76 (21888)
+                        byte    $56, $A0      '77 (22176)
+                        byte    $57, $C0      '78 (22464)
+                        byte    $58, $E0      '79 (22752)
+                        byte    $5A, $00      '80 (23040)
+                        byte    $5B, $20      '81 (23328)
+                        byte    $5C, $40      '82 (23616)
+                        byte    $5D, $60      '83 (23904)
+                        byte    $5E, $80      '84 (24192)
+                        byte    $5F, $A0      '85 (24480)
+                        byte    $60, $C0      '86 (24768)
+                        byte    $61, $E0      '87 (25056)
+                        byte    $63, $00      '88 (25344)
+                        byte    $64, $20      '89 (25632)
+                        byte    $65, $40      '90 (25920)
+                        byte    $66, $60      '91 (26208)
+                        byte    $67, $80      '92 (26496)
+                        byte    $68, $A0      '93 (26784)
+                        byte    $69, $C0      '94 (27072)
+                        byte    $6A, $E0      '95 (27360)
+                        byte    $6C, $00      '96 (27648)
+                        byte    $6D, $20      '97 (27936)
+                        byte    $6E, $40      '98 (28224)
+                        byte    $6F, $60      '99 (28512)
+                        byte    $70, $80      '100 (28800)
+                        byte    $71, $A0      '101 (29088)
+                        byte    $72, $C0      '102 (29376)
+                        byte    $73, $E0      '103 (29664)
+                        byte    $75, $00      '104 (29952)
+                        byte    $76, $20      '105 (30240)
+                        byte    $77, $40      '106 (30528)
+                        byte    $78, $60      '107 (30816)
+                        byte    $79, $80      '108 (31104)
+                        byte    $7A, $A0      '109 (31392)
+                        byte    $7B, $C0      '110 (31680)
+                        byte    $7C, $E0      '111 (31968)
+                        byte    $7E, $00      '112 (32256)
+                        byte    $7F, $20      '113 (32544)
+                        byte    $80, $40      '114 (32832)
+                        byte    $81, $60      '115 (33120)
+                        byte    $82, $80      '116 (33408)
+                        byte    $83, $A0      '117 (33696)
+                        byte    $84, $C0      '118 (33984)
+                        byte    $85, $E0      '119 (34272)
+                        byte    $87, $00      '120 (34560)
+                        byte    $88, $20      '121 (34848)
+                        byte    $89, $40      '122 (35136)
+                        byte    $8A, $60      '123 (35424)
+                        byte    $8B, $80      '124 (35712)
+                        byte    $8C, $A0      '125 (36000)
+                        byte    $8D, $C0      '126 (36288)
+                        byte    $8E, $E0      '127 (36576)
+                        byte    $90, $00      '128 (36864)
+                        byte    $91, $20      '129 (37152)
+                        byte    $92, $40      '130 (37440)
+                        byte    $93, $60      '131 (37728)
+                        byte    $94, $80      '132 (38016)
+                        byte    $95, $A0      '133 (38304)
+                        byte    $96, $C0      '134 (38592)
+                        byte    $97, $E0      '135 (38880)
+                        byte    $99, $00      '136 (39168)
+                        byte    $9A, $20      '137 (39456)
+                        byte    $9B, $40      '138 (39744)
+                        byte    $9C, $60      '139 (40032)
+                        byte    $9D, $80      '140 (40320)
+                        byte    $9E, $A0      '141 (40608)
+                        byte    $9F, $C0      '142 (40896)
+                        byte    $A0, $E0      '143 (41184)
+                        byte    $A2, $00      '144 (41472)
+                        byte    $A3, $20      '145 (41760)
+                        byte    $A4, $40      '146 (42048)
+                        byte    $A5, $60      '147 (42336)
+                        byte    $A6, $80      '148 (42624)
+                        byte    $A7, $A0      '149 (42912)
+                        byte    $A8, $C0      '150 (43200)
+                        byte    $A9, $E0      '151 (43488)
+                        byte    $AB, $00      '152 (43776)
+                        byte    $AC, $20      '153 (44064)
+                        byte    $AD, $40      '154 (44352)
+                        byte    $AE, $60      '155 (44640)
+                        byte    $AF, $80      '156 (44928)
+                        byte    $B0, $A0      '157 (45216)
+                        byte    $B1, $C0      '158 (45504)
+                        byte    $B2, $E0      '159 (45792)
+                        byte    $B4, $00      '160 (46080)
+                        byte    $B5, $20      '161 (46368)
+                        byte    $B6, $40      '162 (46656)
+                        byte    $B7, $60      '163 (46944)
+                        byte    $B8, $80      '164 (47232)
+                        byte    $B9, $A0      '165 (47520)
+                        byte    $BA, $C0      '166 (47808)
+                        byte    $BB, $E0      '167 (48096)
+                        byte    $BD, $00      '168 (48384)
+                        byte    $BE, $20      '169 (48672)
+                        byte    $BF, $40      '170 (48960)
+                        byte    $C0, $60      '171 (49248)
+                        byte    $C1, $80      '172 (49536)
+                        byte    $C2, $A0      '173 (49824)
+                        byte    $C3, $C0      '174 (50112)
+                        byte    $C4, $E0      '175 (50400)
+                        byte    $C6, $00      '176 (50688)
+                        byte    $C7, $20      '177 (50976)
+                        byte    $C8, $40      '178 (51264)
+                        byte    $C9, $60      '179 (51552)
+                        byte    $CA, $80      '180 (51840)
+                        byte    $CB, $A0      '181 (52128)
+                        byte    $CC, $C0      '182 (52416)
+                        byte    $CD, $E0      '183 (52704)
+                        byte    $CF, $00      '184 (52992)
+                        byte    $D0, $20      '185 (53280)
+                        byte    $D1, $40      '186 (53568)
+                        byte    $D2, $60      '187 (53856)
+                        byte    $D3, $80      '188 (54144)
+                        byte    $D4, $A0      '189 (54432)
+                        byte    $D5, $C0      '190 (54720)
+                        byte    $D6, $E0      '191 (55008)
+                        byte    $D8, $00      '192 (55296)
+
+                                                       
 '------------------------------------------------------------------------------------------------
 ' LUT To map between 7x8 font tiles and 8x8 graphic tiles ((xpos x 7) / 8)
 '------------------------------------------------------------------------------------------------

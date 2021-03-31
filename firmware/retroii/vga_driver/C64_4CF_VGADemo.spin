@@ -60,21 +60,22 @@ PUB Main | I, J, C, frq
   'repeat J from 0 to 25
   '  C64.Char(156)
   '  C += 1
-  'write_byte($EB, $0000)
-  'write_byte($BA, $0001)
-  'write_byte($CD, $0DDD)
-  'write_byte($AC, $DDDD)
+  write_byte($EB, $0000)
+  write_byte($BA, $0001)
+  write_byte($CD, $0DDD)
+  write_byte($AB, $4000)
   'outa[D0..D7]~
-  'I := read_byte($0DDD)
+  'C64.Pos (0,1)
+  'I := read_byte($4000)
   'dec(I)
   'return
-  'outa[D0..D7]~
+  outa[D0..D7]~
   C64.HiRes
-  return
-  'C64.Pos (0,1)
-  'dec(C64.DebugOutput)
-  'pst.Dec(C64.DebugOutput)
   'return
+  C64.Pos (0,1)
+  dec(C64.DebugOutput)
+  'pst.Dec(C64.DebugOutput)
+  return
   'I := read_byte($0001)
   'dec(I)
   'return
@@ -237,14 +238,14 @@ pri read_byte(address) | data_in, i, msb, lsb
     outa[WE]~~
     'set data pins as input
     dira[D0..D7]~
-    return dira
+    'return dira
     'set address pins
     outa[A7..A0] := lsb
     
     outa[A14..A8] := msb
     outa[A15] := msb >> 7
 
-
+    return outa
     'wait specified time
     'read data pins
     data_in := ina[D7..D0]
