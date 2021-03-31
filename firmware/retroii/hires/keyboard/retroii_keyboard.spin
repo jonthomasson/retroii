@@ -12,8 +12,8 @@ CON
     tx = 30
     NUM        = %100
     RepeatRate = 40
-    SDA_pin = 14
-    SCL_pin = 13
+    SDA_pin = 15
+    SCL_pin = 14
     Bitrate = 400_000
     SLAVE_ID = $42
     MODE_REG = 29
@@ -31,38 +31,38 @@ CON
     CMD_DEBUG = $F1 'command tells video processor to toggle the debug screen
     COLOR_REG = 21
     CMD_CHANGE_COLOR = $B3
-
+    
     {CLOCKS}
+    'Btn_Phi2 = 11
     Prop_Phi2 = 12 'Clock generator output Phi0/Phi2 pin P12 - physical pin 17
-    Prop_Phi1 = 15 'Phi1 to pin P15 - physical pin 20 (originally RDY) - cut trace and wire to H2 pin 5
-    Q3_pin = 13 '2MHz clock signal for peripheral cards slots - used by floppy uController
-
+    Prop_Phi1 = 16 'Phi1 to pin P15 - physical pin 20 (originally RDY) - cut trace and wire to H2 pin 5
+    Prop_Q3 = 13 '2MHz clock signal for peripheral cards slots - used by floppy uController
     MAX_CLOCK = 8 'the maximum frequency in MHz that we'll overclock
     CLOCK_REG = 23 'i2c register to hold clock value
-
+    
     {SOFT SWITCHES}
     SS_LOW = 4
     SS_HIGH = 7
     SS_REG = 30
-
+    
     {RESET}
     RESET_pin = 24
     RESET_PERIOD  = 20_000_000 '1/2 second
-
+    
     {KEYBOARD RETRO][}
     Strobe = 25
     K0 = 17
     K6 = 23
     KEY_REG = 31
-
+    
     {MODES}
     MODE_MONITOR = 1
     MODE_RETROII = 2
     MODE_ASSEMBLER = 3
     MODE_SD_CARD_1 = 4 'disk selection
     MODE_SD_CARD_2 = 5 'program selection
-    MODE_SD_CARD_3 = 6 'program download 
-
+    MODE_SD_CARD_3 = 6 'program download            
+    
     {SD CARD}
     SD_PINS  = 0
     RESULTS_PER_PAGE = 56
@@ -70,24 +70,17 @@ CON
     MAX_FILES = 300 'limiting to 300 for now due to memory limits
     FILE_BUF_SIZE = 256 'size of file buffer. can optimize this later on.
     LINE_BUF_SIZE = 10
-
+    
     {FILE OPTIONS FOR MODE_SD_CARD_3}
     FILE_LOAD = 1
     FILE_RUN = 2  
-
-    {BUTTONS - physical buttons pin assignements}
-    Btn_Load = 8
-    Btn_Save = 9
-    'Btn_Misc1 = 10
-    'Btn_Misc2 = 11
-
 OBJ 
     sd: "fsrw" 
     kb:   "keyboard"  
     ser: "FullDuplexSerial.spin"
     I2C : "I2C PASM driver v1.8od" 'od or open drain method requires pull ups on sda/scl lines. But may use this if I need a speed boost.
     'I2C : "I2C PASM driver v1.8pp" 
-    button: "Button"
+    'button: "Button"
 DAT
 
 
@@ -365,7 +358,8 @@ PUB set_clock(CTR_AB, Pin, Freq) | s, d, ctr, frq
     
   frq := fraction(Freq, CLKFREQ, s)    'Compute FRQA/FRQB value
   ctr |= Pin                           'set PINA to complete CTRA/CTRB value
-
+  'ser.Str (string("frq: "))
+  'ser.Dec (frq) 
   if CTR_AB == "A"
      CTRA := ctr                        'set CTRA
      FRQA := frq                        'set FRQA                   
@@ -376,6 +370,27 @@ PUB set_clock(CTR_AB, Pin, Freq) | s, d, ctr, frq
      FRQB := frq                        'set FRQB                   
      DIRA[Pin]~~                        'make pin output
 
+
+PUB set_clock_simple
+{{Set clock output to 1,0205MHz with differential output and Q3 at double that = 2,041MHz approx}}
+  DIRA[Prop_Phi2]~~  'output
+  OUTA[Prop_Phi2]~   'low
+
+  DIRA[Prop_Phi1]~~
+  OUTA[Prop_Phi1]~
+
+  DIRA[Prop_Q3]~~
+  OUTA[Prop_Q3]~   'low
+
+      '         Mode             Divider        Pin B      Pin A
+  CTRB := (%00011 << 26) + (%001 << 23) + (Prop_Phi1 << 9) + Prop_Phi2
+  FRQB := 219_150_706 'for 1.020.500 Hz
+
+      '         Mode             Divider        Pin B      Pin A
+  CTRA := (%00010 << 26) + (%010 << 23) + (0 << 9) + Prop_Q3
+  FRQA := 219_150_706
+  
+  
 PRI fraction(a, b, shift) : f
 
   if shift > 0                         'if shift, pre-shift a or b left
@@ -390,29 +405,6 @@ PRI fraction(a, b, shift) : f
       f++           
     a <<= 1
 
-PUB set_clock_simple
-{{Set clock output to 1,0205MHz with differential output and Q3 at double that = 2,041MHz approx}}
-
-  DIRA[Prop_Phi0]~~  'output
-  OUTA[Prop_Phi0]~   'low
-
-  DIRA[Prop_Phi1]~~
-  OUTA[Prop_Phi1]~
-
-  DIRA[Q3_pin]~~
-  OUTA[Q3_pin]~   'low
-
-  'PHSA := 0
-  PHSB := CLKFREQ * 109_575_200
-  PHSA := 0
-
-  '         Mode             Divider        Pin B      Pin A
-  CTRB := (%00101 << 26) + (%000 << 23) + (Prop_Phi1 << 9) + Prop_Phi0
-  FRQB := 54_787_600 'for 1.020.500 Hz
-
-  '         Mode             Divider        Pin B      Pin A
-  CTRA := (%00100 << 26) + (%000 << 23) + (0 << 9) + Q3_Pin
-  FRQA := 109_575_200
 
 PRI reset
     'toggle reset line
@@ -487,6 +479,8 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
     ser.Str(string("sending file: "))
     'ser.Str(file_name)
     set_tx_ready
+    
+    'waitcnt(150000 + cnt) 'adding delay for video to catch up
     'i := ascii_2bin(file_idx)
     y := 0
     repeat 30
@@ -495,7 +489,7 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
         ser.Hex (file_name,2)
         tx_byte(file_name)
         
-    waitcnt(50000 + cnt) 'adding delay for video to catch up
+    'waitcnt(50000 + cnt) 'adding delay for video to catch up
     
     'address
     tslist_track := byte[@file_buffer][11 + offset]
@@ -960,7 +954,7 @@ PRI init
     clock_freqs[5]  := 250_000
     clock_freqs[6]  := 500_000
     clock_freqs[7]  := 1_020_500 'original clock speed of the Apple ][. Taken from "Understanding The Apple" page 3-3.
-    clock_freqs[8]  := 2_000_000
+    clock_freqs[8]  := 2_041_000
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000
     
@@ -968,10 +962,12 @@ PRI init
     outa[Prop_Phi2]~   'low 
     dira[Prop_Phi1]~~  'output
     outa[Prop_Phi1]~   'low
+    dira[Prop_Q3]~~  'output
+    outa[Prop_Q3]~   'low
+    
+    set_clock_simple                   
+    
     'set_clock("A",Prop_Phi2,clock_freqs[7])
-    'set_clock("B",Q3_pin,clock_freqs[7]*2) 'set Q2 at 2x original clock
-    set_clock_simple
-
     current_clock := 7 'default to 1MHz
     I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
     
@@ -990,12 +986,12 @@ PRI init
     waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
 
-pri process_phi2
-  dira[Prop_Phi2]~~  'output
-  outa[Prop_Phi2]~   'low
-  repeat
-    '!outa[Prop_Phi2]
-    'Returns true only if button pressed, held for at least 80ms and released.
-    if button.ChkBtnPulse(Btn_Phi2, 1, 80)
-        'ser.Str (string("button pushed"))
-        !outa[Prop_Phi2] 'toggle phi2
+'pri process_phi2
+'  dira[Prop_Phi2]~~  'output
+'  outa[Prop_Phi2]~   'low
+'  repeat
+'    '!outa[Prop_Phi2]
+'    'Returns true only if button pressed, held for at least 80ms and released.
+'    if button.ChkBtnPulse(Btn_Phi2, 1, 80)
+'        'ser.Str (string("button pushed"))
+'        !outa[Prop_Phi2] 'toggle phi2
