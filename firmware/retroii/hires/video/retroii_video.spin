@@ -484,7 +484,9 @@ PRI run_sd_file_download | addr, done, index, i, adr_lsb, adr_msb,address, lengt
         slave.put(CMD_FLAG, $00)'reset flag    
     setPos(0,2)
     str( string("NAME: "))
+    
     is_rx_ready 'setup receiver
+    
     'receive file name
     repeat 30
         index := rx_byte                
