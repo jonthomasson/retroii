@@ -14,7 +14,7 @@ CON
     RepeatRate = 40
     SDA_pin = 15
     SCL_pin = 14
-    Bitrate = 400_000
+    Bitrate = 900_000
     SLAVE_ID = $42
     MODE_REG = 29
     TX_FLAG = 26    'I2C register set when there's a byte being transmitted
@@ -477,10 +477,8 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
     'ser.Dec (index)
     'file_name := sd_get_filename_byindex(index)
     ser.Str(string("sending file: "))
-    'ser.Str(file_name)
     set_tx_ready
     
-    'waitcnt(150000 + cnt) 'adding delay for video to catch up
     'i := ascii_2bin(file_idx)
     y := 0
     repeat 30
@@ -488,8 +486,7 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
         y++
         ser.Hex (file_name,2)
         tx_byte(file_name)
-        
-    'waitcnt(50000 + cnt) 'adding delay for video to catch up
+
     
     'address
     tslist_track := byte[@file_buffer][11 + offset]
@@ -521,12 +518,12 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
             bytes_read := 0
             bytes_read := goto_sector(dsk_name, next_data_track, next_data_sector)  
             
-            ser.Str (string("data track/sector: "))
-            ser.Hex (next_data_track, 2)
-            ser.Hex (next_data_sector, 2)
-            ser.Str (string(" "))
-            ser.Str (string("i="))
-            ser.Dec (i)
+            'ser.Str (string("data track/sector: "))
+            'ser.Hex (next_data_track, 2)
+            'ser.Hex (next_data_sector, 2)
+            'ser.Str (string(" "))
+            'ser.Str (string("i="))
+            'ser.Dec (i)
             y := 0
             'transmit first 4 bytes of data sector (address, length)
             if ran_once == FALSE
@@ -540,18 +537,18 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
                
                     
                     repeat 2
-                        ser.Hex (byte[@file_buffer][y], 2)
+                        'ser.Hex (byte[@file_buffer][y], 2)
                         tx_byte(byte[@file_buffer][y])
                         y++
                 else
                     'bin file
                        
                     repeat 4
-                        ser.Hex (byte[@file_buffer][y], 2)
+                        'ser.Hex (byte[@file_buffer][y], 2)
                         tx_byte(byte[@file_buffer][y])
                         y++  
                 
-                waitcnt(150000 + cnt)      
+                'waitcnt(150000 + cnt)      
                 
             ran_once := TRUE
             'transmit data from this data sector
@@ -576,19 +573,19 @@ PRI sd_send_file(line_size) | ready, ran_once, bytes_read, file_name, y, i, next
     if prog_download_option == FILE_RUN 'if file is being run, wait for command to reset
         repeat while ready <> CMD_RESET
             ready := I2C.readByte(SLAVE_ID,CMD_FLAG)   
-            'ser.Hex (ready, 2)
+            
         reset 'reset computer    
-        ser.Str(string("computer reset"))
+        'ser.Str(string("computer reset"))
         I2C.writeByte(SLAVE_ID,CMD_FLAG, CMD_DONE) 'send ack back to video processor
         
         if is_basic == FALSE
             ready := $00
             repeat while ready <> CMD_RETROII
                 ready := I2C.readByte(SLAVE_ID,CMD_FLAG)   
-                'ser.Hex (ready, 2)
+                
             I2C.writeByte(SLAVE_ID,MODE_REG,MODE_RETROII) 
             current_mode := MODE_RETROII    
-            ser.Str(string("mode set to retroii"))
+            'ser.Str(string("mode set to retroii"))
             'I2C.writeByte(SLAVE_ID,CMD_FLAG, CMD_DONE) 'send ack back to video processor
                                                           
 {{parse the Apple DOS dsk image and send the catalog data for the selected program}}
