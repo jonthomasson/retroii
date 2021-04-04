@@ -928,6 +928,12 @@ PRI kb_write(data_out) | i
     '    kb_write($00)
         
 PRI init 
+    dira[Prop_Phi2]~~  'output
+    outa[Prop_Phi2]~   'low 
+    dira[Prop_Phi1]~~  'output
+    outa[Prop_Phi1]~   'low
+    dira[Prop_Q3]~~  'output
+    outa[Prop_Q3]~   'low
     
     dira[K0..K6]~~ 'set keyboard data pins to output
     dira[Strobe]~~ 'set strobe pin to output
@@ -955,18 +961,7 @@ PRI init
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000
     
-    dira[Prop_Phi2]~~  'output
-    outa[Prop_Phi2]~   'low 
-    dira[Prop_Phi1]~~  'output
-    outa[Prop_Phi1]~   'low
-    dira[Prop_Q3]~~  'output
-    outa[Prop_Q3]~   'low
     
-    set_clock_simple                   
-    reset 'adding reset here trying to fix random init fault of ram/language cards.
-    'set_clock("A",Prop_Phi2,clock_freqs[7])
-    current_clock := 7 'default to 1MHz
-    I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
     
     soft_switches_old := ina[SS_LOW..SS_HIGH] 'populate our soft switch var so we can tell if it changes later
     ss_page2_override := FALSE
@@ -979,8 +974,17 @@ PRI init
     ss_override := FALSE
     prog_download_option := 0
     
+
     
+    waitcnt(clkfreq * 2 + cnt)  'give some time for things to stabilize with periph cards before turning on clocks etc.
+    
+    set_clock_simple  
+    
+    'set_clock("A",Prop_Phi2,clock_freqs[7])
+    current_clock := 7 'default to 1MHz
+    I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
   
+                   
     'waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
 
