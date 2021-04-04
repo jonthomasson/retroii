@@ -963,7 +963,7 @@ PRI init
     outa[Prop_Q3]~   'low
     
     set_clock_simple                   
-    
+    reset 'adding reset here trying to fix random init fault of ram/language cards.
     'set_clock("A",Prop_Phi2,clock_freqs[7])
     current_clock := 7 'default to 1MHz
     I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
@@ -978,9 +978,10 @@ PRI init
     file_count := 0
     ss_override := FALSE
     prog_download_option := 0
-    'cog_phi2 := cognew(process_phi2, @phi2_stack)   
-    'cog_i2c := cognew(process_i2c, @i2c_stack)  
-    waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
+    
+    
+  
+    'waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
 
 'pri process_phi2
