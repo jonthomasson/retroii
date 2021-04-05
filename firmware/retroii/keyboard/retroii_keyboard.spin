@@ -318,14 +318,14 @@ PUB main | soft_switches, i, frq
             if current_clock < 10
                 current_clock++
                 'call set frequency function
-                set_clock("A",Prop_Phi2,clock_freqs[current_clock])
+                set_clock_new(clock_freqs[current_clock])
                 'pass current_clock to video processor for debug screen
                 I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
         elseif  key == 195 'down arrow = decrease prop clock frequency
             if current_clock > 0
                 current_clock--           
                 'call set frequency function 
-                set_clock("A",Prop_Phi2,clock_freqs[current_clock])
+                set_clock_new(clock_freqs[current_clock])
                 'pass current_clock to video processor for debug screen
                 I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock)
                            
@@ -370,6 +370,62 @@ PUB set_clock(CTR_AB, Pin, Freq) | s, d, ctr, frq
      FRQB := frq                        'set FRQB                   
      DIRA[Pin]~~                        'make pin output
 
+
+PUB set_clock_new(Freq) | s, d, ctr, frq, freq_q3, ctr_q3, frq_q3
+  DIRA[Prop_Phi2]~~  'output
+  OUTA[Prop_Phi2]~   'low
+
+  DIRA[Prop_Phi1]~~ 'output
+  OUTA[Prop_Phi1]~   'low
+
+  DIRA[Prop_Q3]~~   'output
+  OUTA[Prop_Q3]~   'low
+  
+  'Prop_Phi2 corresponds to the Phi0 clock of the Apple II
+  'Prop_Phi1 corresponds to the Phi1 clock of the Apple II (inverse of Phi0)
+  'Prop_Q3 corresponds to the Q3 clock of the Apple II - double Phi1
+  
+  freq_q3 := Freq * 2
+  
+  Freq := Freq #> 0 <# 128_000_000     'limit frequency range
+  'setup phi1/2
+  if Freq < 500_000                    'if 0 to 499_999 Hz,
+    ctr := constant(%00101 << 26)      '..set NCO mode w/differential
+    s := 1                             '..shift = 1
+  else                                 'if 500_000 to 128_000_000 Hz,
+    ctr := constant(%00011 << 26)      '..set PLL mode w/differential
+    d := >|((Freq - 1) / 1_000_000)    'determine PLLDIV
+    s := 4 - d                         'determine shift
+    ctr |= d << 23                     'set PLLDIV
+    
+  frq := fraction(Freq, CLKFREQ, s)    'Compute FRQA/FRQB value
+  ctr |= Prop_Phi1 << 9 + Prop_Phi2    'Setup Phi1 as inverted Phi2
+  
+  'ser.Str (string("ctr: "))
+  'ser.Dec (ctr) 
+  'ser.Str (string("ctr: "))
+  'ser.Bin (ctr, 32)
+  'setup q3
+  if freq_q3 < 500_000                    'if 0 to 499_999 Hz,
+    ctr_q3 := constant(%00100 << 26)      '..set NCO mode
+    s := 1                             '..shift = 1
+  else                                 'if 500_000 to 128_000_000 Hz,
+    ctr_q3 := constant(%00010 << 26)      '..set PLL mode
+    d := >|((freq_q3 - 1) / 1_000_000)    'determine PLLDIV
+    s := 4 - d                         'determine shift
+    ctr_q3 |= d << 23                     'set PLLDIV
+    
+  frq_q3 := fraction(freq_q3, CLKFREQ, s)    'Compute FRQA/FRQB value
+  ctr_q3 |= Prop_Q3                    'set Prop_Q3 
+  
+  'start main clock  
+  CTRB := ctr
+  FRQB := frq
+  
+  'start Q3 clock
+  CTRA := ctr_q3
+  FRQA := frq_q3
+    
 
 PUB set_clock_simple
 {{Set clock output to 1,0205MHz with differential output and Q3 at double that = 2,041MHz approx}}
@@ -931,9 +987,9 @@ PRI init
     dira[Prop_Phi2]~~  'output
     outa[Prop_Phi2]~   'low 
     dira[Prop_Phi1]~~  'output
-    outa[Prop_Phi1]~   'low
+    outa[Prop_Phi1]~   'low 
     dira[Prop_Q3]~~  'output
-    outa[Prop_Q3]~   'low
+    outa[Prop_Q3]~   'low 
     
     dira[K0..K6]~~ 'set keyboard data pins to output
     dira[Strobe]~~ 'set strobe pin to output
@@ -957,7 +1013,7 @@ PRI init
     clock_freqs[5]  := 250_000
     clock_freqs[6]  := 500_000
     clock_freqs[7]  := 1_020_500 'original clock speed of the Apple ][. Taken from "Understanding The Apple" page 3-3.
-    clock_freqs[8]  := 2_041_000
+    clock_freqs[8]  := 2_000_000
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000
     
@@ -973,27 +1029,13 @@ PRI init
     file_count := 0
     ss_override := FALSE
     prog_download_option := 0
-    
 
+    waitcnt(((clkfreq * 1)/2) + cnt)  'give some time for things to stabilize with periph cards before turning on clocks etc.
     
-    waitcnt(clkfreq * 2 + cnt)  'give some time for things to stabilize with periph cards before turning on clocks etc.
-    
-    set_clock_simple  
-    
-    'set_clock("A",Prop_Phi2,clock_freqs[7])
     current_clock := 7 'default to 1MHz
     I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
-  
-                   
-    'waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
+    set_clock_new(clock_freqs[7])
+    'set_clock_simple
+       
+    waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
-
-'pri process_phi2
-'  dira[Prop_Phi2]~~  'output
-'  outa[Prop_Phi2]~   'low
-'  repeat
-'    '!outa[Prop_Phi2]
-'    'Returns true only if button pressed, held for at least 80ms and released.
-'    if button.ChkBtnPulse(Btn_Phi2, 1, 80)
-'        'ser.Str (string("button pushed"))
-'        !outa[Prop_Phi2] 'toggle phi2
