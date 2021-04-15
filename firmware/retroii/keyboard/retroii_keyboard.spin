@@ -37,6 +37,7 @@ CON
     Prop_Phi2 = 12 'Clock generator output Phi0/Phi2 pin P12 - physical pin 17
     Prop_Phi1 = 16 'Phi1 to pin P15 - physical pin 20 (originally RDY) - cut trace and wire to H2 pin 5
     Prop_Q3 = 13 '2MHz clock signal for peripheral cards slots - used by floppy uController
+    Prop_Q3_Inv = 11 'inverse Q3 signal
     MAX_CLOCK = 8 'the maximum frequency in MHz that we'll overclock
     CLOCK_REG = 23 'i2c register to hold clock value
     
@@ -318,14 +319,14 @@ PUB main | soft_switches, i, frq
             if current_clock < 10
                 current_clock++
                 'call set frequency function
-                set_clock_new(clock_freqs[current_clock])
+                'set_clock_new(clock_freqs[current_clock])
                 'pass current_clock to video processor for debug screen
                 I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
         elseif  key == 195 'down arrow = decrease prop clock frequency
             if current_clock > 0
                 current_clock--           
                 'call set frequency function 
-                set_clock_new(clock_freqs[current_clock])
+                'set_clock_new(clock_freqs[current_clock])
                 'pass current_clock to video processor for debug screen
                 I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock)
                            
@@ -361,26 +362,29 @@ PUB set_clock(CTR_AB, Pin, Freq) | s, d, ctr, frq
   'ser.Str (string("frq: "))
   'ser.Dec (frq) 
   if CTR_AB == "A"
-     CTRA := ctr                        'set CTRA
+     'CTRA := ctr                        'set CTRA
      FRQA := frq                        'set FRQA                   
      DIRA[Pin]~~                        'make pin output
      
   if CTR_AB == "B"
-     CTRB := ctr                        'set CTRB
+     'CTRB := ctr                        'set CTRB
      FRQB := frq                        'set FRQB                   
      DIRA[Pin]~~                        'make pin output
 
 
 PUB set_clock_new(Freq) | s, d, ctr, frq, freq_q3, ctr_q3, frq_q3
-  DIRA[Prop_Phi2]~~  'output
-  OUTA[Prop_Phi2]~   'low
+  'DIRA[Prop_Phi2]~~  'output
+  'OUTA[Prop_Phi2]~   'low
 
-  DIRA[Prop_Phi1]~~ 'output
-  OUTA[Prop_Phi1]~   'low
+  'DIRA[Prop_Phi1]~~ 'output
+  'OUTA[Prop_Phi1]~   'low
 
-  DIRA[Prop_Q3]~~   'output
-  OUTA[Prop_Q3]~   'low
+  'DIRA[Prop_Q3]~~   'output
+  'OUTA[Prop_Q3]~   'low
   
+  CTRA := 0 'reset counter a
+  CTRB := 0 'reset counter b
+            
   'Prop_Phi2 corresponds to the Phi0 clock of the Apple II
   'Prop_Phi1 corresponds to the Phi1 clock of the Apple II (inverse of Phi0)
   'Prop_Q3 corresponds to the Q3 clock of the Apple II - double Phi1
@@ -389,63 +393,90 @@ PUB set_clock_new(Freq) | s, d, ctr, frq, freq_q3, ctr_q3, frq_q3
   
   Freq := Freq #> 0 <# 128_000_000     'limit frequency range
   'setup phi1/2
-  if Freq < 500_000                    'if 0 to 499_999 Hz,
-    ctr := constant(%00101 << 26)      '..set NCO mode w/differential
-    s := 1                             '..shift = 1
-  else                                 'if 500_000 to 128_000_000 Hz,
-    ctr := constant(%00011 << 26)      '..set PLL mode w/differential
-    d := >|((Freq - 1) / 1_000_000)    'determine PLLDIV
-    s := 4 - d                         'determine shift
-    ctr |= d << 23                     'set PLLDIV
+  'if Freq < 500_000                    'if 0 to 499_999 Hz,
+  'ctr := constant(%00101 << 26)      '..set NCO mode w/differential
+  's := 1                             '..shift = 1
+  'else                                 'if 500_000 to 128_000_000 Hz,
+  ctr := constant(%00011 << 26)      '..set PLL mode w/differential
+  d := >|((Freq - 1) / 1_000_000)    'determine PLLDIV
+  s := 4 - d                         'determine shift
+  ctr |= d << 23                     'set PLLDIV
     
   frq := fraction(Freq, CLKFREQ, s)    'Compute FRQA/FRQB value
   ctr |= Prop_Phi1 << 9 + Prop_Phi2    'Setup Phi1 as inverted Phi2
   
-  'ser.Str (string("ctr: "))
-  'ser.Dec (ctr) 
+  ser.Str (string("frq: "))
+  ser.Dec (frq) 
   'ser.Str (string("ctr: "))
   'ser.Bin (ctr, 32)
   'setup q3
-  if freq_q3 < 500_000                    'if 0 to 499_999 Hz,
-    ctr_q3 := constant(%00100 << 26)      '..set NCO mode
-    s := 1                             '..shift = 1
-  else                                 'if 500_000 to 128_000_000 Hz,
-    ctr_q3 := constant(%00010 << 26)      '..set PLL mode
-    d := >|((freq_q3 - 1) / 1_000_000)    'determine PLLDIV
-    s := 4 - d                         'determine shift
-    ctr_q3 |= d << 23                     'set PLLDIV
+  
+  'if freq_q3 < 500_000                    'if 0 to 499_999 Hz,
+  'ctr_q3 := constant(%00101 << 26)      '..set NCO mode
+  's := 1                             '..shift = 1
+  'else                                 'if 500_000 to 128_000_000 Hz,
+  ctr_q3 := constant(%00011 << 26)      '..set PLL mode
+  d := >|((freq_q3 - 1) / 1_000_000)    'determine PLLDIV
+  s := 4 - d                         'determine shift
+  ctr_q3 |= d << 23                     'set PLLDIV
     
   frq_q3 := fraction(freq_q3, CLKFREQ, s)    'Compute FRQA/FRQB value
-  ctr_q3 |= Prop_Q3                    'set Prop_Q3 
+  ctr_q3 |= Prop_Q3 << 9 + Prop_Q3_Inv                  'set Prop_Q3 
+  
+  'ser.Str (string("frq_q3: "))
+  'ser.Dec (frq_q3) 
   
   'start main clock  
-  CTRB := ctr
+  PHSB := 0
+  PHSA := 0
+  'PHSA := 2147483648 'CLKFREQ * frq_q3
+  
   FRQB := frq
+  CTRB := ctr
+  FRQA := frq_q3
   
   'start Q3 clock
   CTRA := ctr_q3
-  FRQA := frq_q3
+  
+  DIRA[Prop_Phi2]~~  'output
+  'OUTA[Prop_Phi2]~   'low
+
+  DIRA[Prop_Phi1]~~ 'output
+  'OUTA[Prop_Phi1]~   'low
+
+  DIRA[Prop_Q3]~~   'output
+  'OUTA[Prop_Q3]~   'low
+  
+  
+  
     
 
 PUB set_clock_simple
 {{Set clock output to 1,0205MHz with differential output and Q3 at double that = 2,041MHz approx}}
-  DIRA[Prop_Phi2]~~  'output
-  OUTA[Prop_Phi2]~   'low
-
-  DIRA[Prop_Phi1]~~
-  OUTA[Prop_Phi1]~
-
-  DIRA[Prop_Q3]~~
-  OUTA[Prop_Q3]~   'low
-
-      '         Mode             Divider        Pin B      Pin A
-  CTRB := (%00011 << 26) + (%001 << 23) + (Prop_Phi1 << 9) + Prop_Phi2
-  FRQB := 219_150_706 'for 1.020.500 Hz
-
-      '         Mode             Divider        Pin B      Pin A
-  CTRA := (%00010 << 26) + (%010 << 23) + (0 << 9) + Prop_Q3
-  FRQA := 219_150_706
   
+  'resetting counters. Not sure if we need this part, but keeping here for now.
+  CTRB := 0
+  CTRA := 0
+  PHSA := 0
+  PHSB := 0
+  
+  'using counter in PLL 1x mode.  (anything less than 1x mode seems to cause jitter and the clocks won't sync)
+  'With an 80MHz clock We want PHSA[31] to go high once every 40 clocks.
+  ' So $80_00_00_00 (value we want for PHSA) divided by 40 = 53_687_091 for frqa.
+  ' FRQA will be added to PHSA on each clock
+  ' see AN001 - Propeller Counters v1.0 pdf (page 9-10) for more details.
+  
+  FRQA := 53_687_091 
+  
+      '         Mode             Divider        Pin B      Pin A
+  CTRA := (%00011 << 26) + (%011 << 23) + (Prop_Phi2 << 9) + Prop_Phi1
+  FRQB := 53_687_091 '219_150_706
+      '         Mode             Divider        Pin B      Pin A
+  CTRB := (%00011 << 26) + (%100 << 23) + (Prop_Q3_Inv << 9) + Prop_Q3
+  
+  DIRA[Prop_Phi2]~~
+  DIRA[Prop_Phi1]~~
+  DIRA[Prop_Q3]~~
   
 PRI fraction(a, b, shift) : f
 
@@ -984,12 +1015,13 @@ PRI kb_write(data_out) | i
     '    kb_write($00)
         
 PRI init 
-    dira[Prop_Phi2]~~  'output
-    outa[Prop_Phi2]~   'low 
-    dira[Prop_Phi1]~~  'output
-    outa[Prop_Phi1]~   'low 
-    dira[Prop_Q3]~~  'output
-    outa[Prop_Q3]~   'low 
+    'dira[Prop_Phi2]~~  'output
+    'outa[Prop_Phi2]~   'low 
+    'dira[Prop_Phi1]~~  'output
+    'outa[Prop_Phi1]~   'low 
+    'dira[Prop_Q3]~~  'output
+    'outa[Prop_Q3]~   'low 
+    'cognew(@start_clocks, 0)
     
     dira[K0..K6]~~ 'set keyboard data pins to output
     dira[Strobe]~~ 'set strobe pin to output
@@ -1012,7 +1044,7 @@ PRI init
     clock_freqs[4]  := 100_000
     clock_freqs[5]  := 250_000
     clock_freqs[6]  := 500_000
-    clock_freqs[7]  := 1_020_500 'original clock speed of the Apple ][. Taken from "Understanding The Apple" page 3-3.
+    clock_freqs[7]  := 1_000_000 'original clock speed of the Apple ][. Taken from "Understanding The Apple" page 3-3.
     clock_freqs[8]  := 2_000_000
     clock_freqs[9]  := 3_000_000
     clock_freqs[10] := 4_000_000
@@ -1030,12 +1062,50 @@ PRI init
     ss_override := FALSE
     prog_download_option := 0
 
-    waitcnt(((clkfreq * 1)/2) + cnt)  'give some time for things to stabilize with periph cards before turning on clocks etc.
+    'waitcnt(clkfreq * 1 + cnt)  'give some time for things to stabilize with periph cards before turning on clocks etc.
     
+    
+    'set_clock_new(clock_freqs[7])
+    set_clock_simple
     current_clock := 7 'default to 1MHz
     I2C.writeByte(SLAVE_ID,CLOCK_REG,current_clock) 
-    set_clock_new(clock_freqs[7])
+    
+    
     'set_clock_simple
        
-    waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
+    'waitcnt(clkfreq * 1 + cnt)                     'wait 1 second for cogs to start
 
+
+
+
+DAT
+'------------------------------------------------------------------------------------------------
+                        org     0       
+
+start_clocks              
+                        mov ctra, #0
+                        mov ctrb, #0
+                        mov phsa, #0
+                        mov phsb, #0 
+                        
+                        mov phsb, fb
+                        shl phsb, #2
+                        
+                        'mov phsa, fa
+                        'shl phsa, #1
+                        
+                        mov frqa, fa
+                        mov frqb, fb
+        
+                        mov ctra, ctraval
+                        mov ctrb, ctrbval
+
+                        mov DIRA, di
+        :loop           jmp #:loop
+
+ctrbval                 long (%00101 << 26) + (%000 << 23) + (Prop_Q3_Inv << 9) + Prop_Q3
+ctraval                 long (%00101 << 26) + (%000 << 23) + (Prop_Phi1 << 9) + Prop_Phi2
+fb                      long 109_575_200
+fa                      long 54_787_600
+di                      long (|< Prop_Phi1) + (|< Prop_Phi2) + (|< Prop_Q3)
+                        fit
